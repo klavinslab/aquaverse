@@ -17,6 +17,12 @@
     <script src="node_modules/angular-messages/angular-messages.min.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/angular-material/angular-material.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.2/markdown-it.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+
+    <script src="js/highlight.js"></script>
+    <script src="js/definitions.js"></script>
     <script src="js/aquaverse.js"></script>
 
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
@@ -29,9 +35,7 @@
 
     <header class="logo-container">
       <h1 class="logo md-display-4"><span class="aq">Aq</span></h1>
-      <h2 class="tagline md-title">
-        The Laboratory</br>Operating System
-      </h2>
+      <h2 class="tagline md-title" ng-bind-html="tagline"></h2>
     </header>
 
     <md-toolbar flex class="header">
@@ -87,17 +91,19 @@
       <md-content flex class="main-container">
 
         <!-- Content from Aquarium Documtation -->
-        <div flex class="main" ng-if="state.iframe_url">
+        <div flex class="main main-frame" ng-if="state.active_content.type == 'aquarium-doc'">
           <iframe ng-attr-src="{{state.iframe_url}}"
                   ng-if="state.iframe_url"
                   class="content-frame">
           </iframe>
         </div>
 
-        <!-- Local content -->
-        <div class="main"
-             ng-if="state.active_content.local && state.active_content.name == 'About'">
-          ABOUT AQUARIUM HERE
+        <!-- Local html content -->
+        <div id="main-html" class="main" ng-if="state.active_content.type == 'local-html'">
+        </div>
+
+        <!-- Local md content -->
+        <div id="main-md" class="main" ng-if="state.active_content.type == 'local-md'">
         </div>
 
       </md-content>

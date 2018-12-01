@@ -9,83 +9,45 @@
     w.controller('aquaverseCtrl', [ '$scope', '$http', '$sce', '$mdMedia', '$mdSidenav',
                          function (  $scope,   $http,   $sce,   $mdMedia,   $mdSidenav ) {
 
-    let documentation_url = "http://localhost:4000/aquarium";
-
-    $scope.navigation = [
-
-      {
-        category: "Overview",
-        contents: [
-          { name: "About", local: "about.md"},
-          { name: "Licence" }
-        ]
-      },
-
-      {
-        category: "Getting Started",
-        contents: [
-          { name: "Installation", path: "/installation" },
-          { name: "Basic Concepts", path: "/concepts" }
-        ]
-      },
-
-      {
-        category: "Researcher Interface",
-        contents: [
-          { name: "Defining Samples" },
-          { name: "Designing Plans", path: "/designer" }
-        ]
-      },
-
-      {
-        category: "Lab Management",
-        contents: [
-          { name: "Managing Jobs", path: "/manager" },
-          { name: "Running Jobs", path: "/technician" },
-          { name: "Managing Users", path: "/users" },
-          { name: "Budgets and Costs", path: "/budget_manager" },
-          { name: "Inventory Definitions" },
-          { name: "Location Wizards" },
-        ]
-      },
-
-      {
-        category: "Protocols",
-        contents: [
-          { name: "Community Workflows" },
-          { name: "Developer Tools" },
-          { name: "Protocol Tutorial" },
-          { name: "Show Blocks" },
-          { name: "Data Associations" },
-          { name: "Building Tables" },
-          { name: "Detailed API Reference" },
-        ]
-      },
-
-      {
-        category: "Power Users",
-        contents: [
-          { name: "Python and Trident" },
-          { name: "Contributing" }
-        ]
-      }
-
-    ];
+    $scope.navigation = navigation; // Link to navigation var
+    $scope.tagline = $sce.trustAsHtml(tagline); // Link to tagline var
 
     $scope.select = function(section,content) {
+
       $scope.state.section = section;
       $scope.state.active_content = content;
-      if ( content.path ) {
-        $scope.state.iframe_url = $sce.trustAsResourceUrl(
-          documentation_url + content.path
-        );
-        console.log($scope.state.iframe_url)
-      } else {
-        $scope.state.iframe_url = null;
+
+      switch(content.type) {
+        case "local-md":
+          $http.get(content.path)
+               .then(response => {
+                  var md = window.markdownit().set({html: true})
+                  $('#main-md').empty().html(md.render(response.data));
+                  highlight_code();
+                });
+          break;
+        case "local-html":
+          $http.get(content.path)
+               .then(response => {
+                  $('#main-html').empty().html(response.data);
+                });
+          break;
+        case "aquarium-doc":
+          $scope.state.iframe_url = $sce.trustAsResourceUrl(
+            documentation_url + content.path
+          );
+          break;
+        case "local-webpage":
+          $scope.state.iframe_url = $sce.trustAsResourceUrl(
+            content.path
+          );
+          break;
       }
+
       if ( !$mdMedia('gt-sm') ) {
         $mdSidenav('sidenav').close();
       }
+
     }
 
     $scope.link_class = function(section,content) {
@@ -103,14 +65,18 @@
       $mdSidenav('sidenav').open()
     }
 
-    $scope.navigation[0].open = true;
+    for ( var i in $scope.navigation ) {
+      $scope.navigation[i].open = true;
+    }
 
     $scope.state = {
       section: $scope.navigation[0],
       active_content: $scope.navigation[0].contents[0]
     };
 
-    $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
+    $(function() {
+      $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
+    });
 
   }]);
 
