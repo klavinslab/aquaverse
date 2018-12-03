@@ -91,7 +91,7 @@
       <md-content flex class="main-container">
 
         <!-- Content from Aquarium Documtation -->
-        <div flex class="main main-frame" ng-if="state.active_content.type == 'aquarium-doc'">
+        <div flex class="main main-frame" ng-if="state.active_content.type == 'aquarium-doc' || state.active_content.type == 'local-webpage'">
           <iframe ng-attr-src="{{state.iframe_url}}"
                   ng-if="state.iframe_url"
                   class="content-frame">

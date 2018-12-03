@@ -156,6 +156,13 @@ body {
   outline: none;
 }
 
+.code-block {
+  border-left: 8px solid #eee;
+  margin-left: 16px;
+  padding-left: 8px;
+  display: none;
+}
+
 @media only screen and (max-width: 960px) {
   .logo-container {
     display: none;
