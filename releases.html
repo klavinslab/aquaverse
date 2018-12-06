@@ -1,5 +1,3 @@
-<div ng-controller="aquaverseCtrl" >
-
 <h2>Latest Release</h2>
 
 <ul>
@@ -22,10 +20,18 @@
       <b>{{release.tag_name}}:
       {{release.name}}</b>
     </p>
-    <p>{{releases[0].published_at|date}}</p>
+    <p>{{release.published_at|date}}</p>
     <p class="markdown-body" ng-bind-html="release.md"></p>
     <p><a href="{{release.zipball_url}}">[download]</a></p>
   </li>
 </ul>
 
-</div>
+<h2>Historical Versions</h2>
+
+<p>Prior to version 0.9, versions were not tagged because Aquarium was
+  primarily being used in house. To see the commits dating back to
+  2013, visit the
+    <a href="https://github.com/klavinslab/aquarium" target="github">
+      Github Repo
+    </a>.
+</p>

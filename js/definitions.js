@@ -9,7 +9,7 @@ var navigation = [
       { name: "About", type: "local-html", path: "about.html" },
       { name: "Licence", type: "local-md", path: "license.md"  },
       { name: "Releases", type: "local-html", path: "releases.html"  },
-      { name: "Contributors", type: "local-md", path: "contributors.md"  },      
+      { name: "Contributors", type: "local-html", path: "contributors.html"  },
     ]
   },
 
@@ -35,30 +35,28 @@ var navigation = [
       { name: "Managing Jobs", type: "aquarium-doc", path: "/manager" },
       { name: "Running Jobs", type: "aquarium-doc", path: "/technician" },
       { name: "Managing Users", type: "aquarium-doc", path: "/users" },
-      { name: "Budgets and Costs", type: "aquarium-doc", path: "/budget_manager" },
-      { name: "Inventory Definitions" },
-      { name: "Location Wizards" },
+      { name: "Inventory Definitions", type: "aquarium-doc", path: "/protocol_developer/types/"},
+      { name: "Location Wizards", type: "aquarium-doc", path: "/protocol_developer/location/" },
     ]
   },
 
   {
     category: "Protocols",
     contents: [
-      { name: "Community Workflows" },
-      { name: "Developer Tools" },
-      { name: "Protocol Tutorial" },
-      { name: "Show Blocks" },
-      { name: "Data Associations" },
-      { name: "Building Tables" },
-      { name: "Detailed API Reference" },
+      { name: "Community Workflows", type: "local-html", path: "workflows.html" },
+      { name: "Developer Tools", type: "aquarium-doc", path: "/protocol_developer/tools/" },
+      { name: "Protocol Tutorial", type: "aquarium-doc", path: "/protocol_tutorial/" },
+      { name: "Show Blocks", type: "aquarium-doc", path: "/protocol_developer/show/" },
+      { name: "Data Associations", type: "aquarium-doc", path: "/protocol_developer/associations/" },
+      { name: "Building Tables", type: "aquarium-doc", path: "/protocol_developer/table/" },
+      { name: "Detailed API Reference", type: "external-link", path: "http://klavinslab.org/aquarium/api/" },
     ]
   },
 
   {
     category: "Power Users",
     contents: [
-      { name: "Python and Trident" },
-      { name: "Contributing" }
+      { name: "Python and Trident", type: "local-html", path: "trident.html" }
     ]
   }
 

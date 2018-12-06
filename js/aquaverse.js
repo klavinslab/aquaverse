@@ -11,6 +11,7 @@
 
     $scope.navigation = navigation; // Link to navigation var
     $scope.tagline = $sce.trustAsHtml(tagline); // Link to tagline var
+    $scope.state = {};
 
     $scope.select = function(section,content) {
 
@@ -38,8 +39,11 @@
           break;
         case "local-html":
           // Nothing to do here. HTML uses ng-include
-          // highlight_code();
           break;
+        case "external-link":
+          window.location = content.path;
+          break;
+
       }
 
       if ( !$mdMedia('gt-sm') ) {
@@ -66,11 +70,6 @@
     for ( var i in $scope.navigation ) {
       $scope.navigation[i].open = true;
     }
-
-    $scope.state = {
-      section: $scope.navigation[0],
-      active_content: $scope.navigation[0].contents[0]
-    };
 
     $(function() {
       $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
