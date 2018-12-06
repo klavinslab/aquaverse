@@ -21,15 +21,9 @@
         case "local-md":
           $http.get(content.path)
                .then(response => {
-                  var md = window.markdownit().set({html: true})
+                  let md = window.markdownit().set({html: true})
                   $('#main-md').empty().html(md.render(response.data));
                   highlight_code();
-                });
-          break;
-        case "local-html":
-          $http.get(content.path)
-               .then(response => {
-                  $('#main-html').empty().html(response.data);
                 });
           break;
         case "aquarium-doc":
@@ -41,6 +35,10 @@
           $scope.state.iframe_url = $sce.trustAsResourceUrl(
             content.path
           );
+          break;
+        case "local-html":
+          // Nothing to do here. HTML uses ng-include
+          // highlight_code();
           break;
       }
 
@@ -77,6 +75,15 @@
     $(function() {
       $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
     });
+
+    $http.get("https://api.github.com/repos/klavinslab/aquarium/releases")
+         .then(response => {
+           $scope.releases = response.data;
+           for ( var n in $scope.releases ) {
+             let md = window.markdownit().set({html: true});
+             $scope.releases[n].md = $sce.trustAsHtml(md.render($scope.releases[n].body))
+           }
+         });
 
   }]);
 
