@@ -24,11 +24,21 @@
     <script src="js/highlight.js"></script>
     <script src="js/definitions.js"></script>
     <script src="js/aquaverse.js"></script>
+    <script src="js/workflows.js"></script>
 
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="node_modules/github-markdown-css/github-markdown.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/vs.min.css">
     <link rel="stylesheet" href="css/aquaverse.css">
+
+  	<!-- Global site tag (gtag.js) - Google Analytics -->
+  	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130623974-1"></script>
+  	<script>
+  	  window.dataLayer = window.dataLayer || [];
+  	  function gtag(){dataLayer.push(arguments);}
+  	  gtag('js', new Date());
+  	  gtag('config', 'UA-130623974-1');
+  	</script>
 
   </head>
 
@@ -57,6 +67,14 @@
           <span class="location">/ {{state.section.category}} / {{state.active_content.name}}</span>
         </h2>
       </div>
+
+    <a href="https://github.com/klavinslab"
+       ng-if="state.active_content.name == 'Releases'">
+      <img style="position: absolute; top: 0; right: 0; border: 0;"
+           src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
+           alt="Fork me on GitHub"
+           target="github">
+    </a>
 
     </md-toolbar>
 

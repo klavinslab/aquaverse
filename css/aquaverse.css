@@ -7,7 +7,6 @@
   background: white !important;
   color: #333 !important;
   border-bottom: 1pt solid #99f;
-
 }
 
 .aquarium {
@@ -16,14 +15,17 @@
   margin-left: 328px;
 }
 
-body {
+html, body {
   margin: 0;
   background: white;
+  overflow: hidden;
 }
 
 .main {
   padding: 12px 24px 24px 36px;
   background: white;
+  height: calc(100% - 64px);
+  overflow: scroll;
 }
 
 .main-container {
@@ -71,8 +73,8 @@ body {
 }
 
 .sidenav {
-  height: 100%;
-  overflow-y: scroll;
+  height: calc(100% - 228px);
+  overflow: scroll;
   border: none;
   text-align: right;
   margin-top: 160px;
@@ -183,6 +185,7 @@ body {
   }
   .sidenav {
     margin-top: 0px;
+    height: 100%;
   }
 }
 
@@ -191,4 +194,8 @@ body {
   .location {
     display: none;
   }
+}
+
+.workflow-title {
+  margin-bottom: 9px;
 }

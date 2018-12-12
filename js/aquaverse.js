@@ -9,14 +9,17 @@
     w.controller('aquaverseCtrl', [ '$scope', '$http', '$sce', '$mdMedia', '$mdSidenav',
                          function (  $scope,   $http,   $sce,   $mdMedia,   $mdSidenav ) {
 
-    $scope.navigation = navigation; // Link to navigation var
-    $scope.tagline = $sce.trustAsHtml(tagline); // Link to tagline var
+    $scope.navigation = config.navigation; // Link to navigation var
+    $scope.tagline = $sce.trustAsHtml(config.tagline); // Link to tagline var
+    $scope.title = config.title;
     $scope.state = {};
 
     $scope.select = function(section,content) {
 
-      $scope.state.section = section;
-      $scope.state.active_content = content;
+      if ( content.type != "external-link" ) {
+        $scope.state.section = section;
+        $scope.state.active_content = content;
+      }
 
       switch(content.type) {
         case "local-md":
@@ -29,7 +32,7 @@
           break;
         case "aquarium-doc":
           $scope.state.iframe_url = $sce.trustAsResourceUrl(
-            documentation_url + content.path
+            config.documentation_url + content.path
           );
           break;
         case "local-webpage":
@@ -41,7 +44,7 @@
           // Nothing to do here. HTML uses ng-include
           break;
         case "external-link":
-          window.location = content.path;
+          window.open(content.path);
           break;
 
       }
@@ -67,22 +70,26 @@
       $mdSidenav('sidenav').open()
     }
 
-    for ( var i in $scope.navigation ) {
-      $scope.navigation[i].open = true;
-    }
-
     $(function() {
+      $scope.navigation[0].open = true;
       $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
     });
 
-    $http.get("https://api.github.com/repos/klavinslab/aquarium/releases")
-         .then(response => {
-           $scope.releases = response.data;
-           for ( var n in $scope.releases ) {
-             let md = window.markdownit().set({html: true});
-             $scope.releases[n].md = $sce.trustAsHtml(md.render($scope.releases[n].body))
-           }
-         });
+    if ( config.get_releases ) {
+      $http.get("https://api.github.com/repos/klavinslab/aquarium/releases")
+           .then(response => {
+             $scope.releases = response.data;
+             for ( var n in $scope.releases ) {
+               let md = window.markdownit().set({html: true});
+               $scope.releases[n].md = $sce.trustAsHtml(md.render($scope.releases[n].body))
+             }
+           });
+    }
+
+    if ( config.workflows ) {
+      get_workflow_configs($http)
+        .then(configs => $scope.workflows = configs);
+    }
 
   }]);
 

@@ -1,0 +1,18 @@
+<h2>Community Contributed Workflows</h2>
+
+<p>The workflows below have been contributed by Aquarium users. Click on the "Website" link for more information about the workflow, and to download the workflow code, which is stored in a *.aq file.
+To install an workflow into your instance of Aquarium, choose "Import Workflows" from the dropdown menu available in the upper left of the Aquarium tool bar.
+Make sure to read the documentation of the workflow thoroughly before importing a workflow. It is also good practice to make a backup of your database before importing.</p>
+
+<div class="workflow-list-container">
+  <md-list>
+    <md-list-item class="md-3-line" ng-repeat="workflow in workflows track by $index" ng-if="workflow">
+      <div class="md-list-item-text"  layout="column">
+        <h2 class="md-title workflow-title">{{workflow.title}}</h2>
+        <h4 class="md-subtitle">{{workflow.description}}.</h4>
+        <p><b>Keywords:</b> {{workflow.keywords.join(", ")}}</p>
+        <p><b>Website:</b> <a ng-attr-href="{{workflow.url}}" target="workflow.github.repo">{{workflow.github.repo}}</a></p>
+      </div>
+    </md-list-item>
+  </md-list>
+<div>
