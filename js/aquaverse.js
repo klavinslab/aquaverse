@@ -73,6 +73,7 @@
     $(function() {
       $scope.navigation[0].open = true;
       $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
+      $scope.$apply();
     });
 
     if ( config.get_releases ) {

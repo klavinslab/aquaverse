@@ -120,12 +120,12 @@
 
         <!-- Local md content -->
         <div id="main-md"
-             class="main"
+             class="main markdown-body"
              ng-if="state.active_content.type == 'local-md'">
         </div>
 
         <!-- Local html content -->
-        <div id="main-html"
+        <div id="main-html markdown-body"
              class="main"
              ng-if="state.active_content.type == 'local-html'"
              ng-include="state.active_content.path">

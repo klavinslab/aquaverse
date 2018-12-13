@@ -21,10 +21,10 @@ html, body {
   overflow: hidden;
 }
 
-.main {
-  padding: 12px 24px 24px 36px;
+.main, .main-html {
+  padding: 12px 24px 36px 36px;
   background: white;
-  height: calc(100% - 64px);
+  height: calc(100% - 84px);
   overflow: scroll;
 }
 
