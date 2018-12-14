@@ -14,7 +14,22 @@
     $scope.title = config.title;
     $scope.state = {};
 
+    $scope.easy_select = function(category, name) {
+      for ( var i=0; i<$scope.navigation.length; i++ ) {
+        if ( $scope.navigation[i].category == category ) {
+          for ( var j=0; j<$scope.navigation[i].contents.length; j++ ) {
+            if ( $scope.navigation[i].contents[j].name == name ) {
+              $scope.select($scope.navigation[i], $scope.navigation[i].contents[j]);
+              return;
+            }
+          }
+        }
+      }
+    }
+
     $scope.select = function(section,content) {
+
+      console.log(section, content)
 
       if ( content.type != "external-link" ) {
         $scope.state.section = section;

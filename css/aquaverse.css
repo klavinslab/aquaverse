@@ -199,3 +199,11 @@ html, body {
 .workflow-title {
   margin-bottom: 9px;
 }
+
+.about-row {
+}
+
+.about-image {
+  width: 300px;
+  margin: 20px;
+}
