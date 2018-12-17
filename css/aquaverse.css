@@ -1,6 +1,19 @@
-
 .main-toolbar {
+}
 
+h2, h3, h4 {
+  color: rgb(0, 51, 153);
+}
+
+.headline-container {
+  margin-top: 14px;
+  background: linear-gradient(80deg, #eff, #cff);
+  padding-left: 45px;
+}
+
+.headline {
+  color: #333;
+  font-weight: bold;
 }
 
 .header {
@@ -26,6 +39,7 @@ html, body {
   background: white;
   height: calc(100% - 84px);
   overflow: scroll;
+  max-width: 900px;
 }
 
 .main-container {
@@ -56,7 +70,7 @@ html, body {
 }
 
 .aq {
-  background: linear-gradient(120deg, #eff, #aff);
+  background: linear-gradient(120deg, #eff, #cff);
   padding: 0px 5px 10px 9px;
   border-radius: 5px;
   border: 1pt solid #99f;
@@ -165,6 +179,20 @@ html, body {
   display: none;
 }
 
+.about-image {
+  width: 300px;
+  margin: 20px;
+}
+
+.small-device {
+  display: inline-block;
+}
+
+.big-device {
+  display: none;
+}
+
+
 @media only screen and (max-width: 960px) {
   .logo-container {
     display: none;
@@ -187,12 +215,34 @@ html, body {
     margin-top: 0px;
     height: 100%;
   }
+  /* .big-device {
+    display: none;
+  }
+  .small-device {
+    display: inline-block;
+  } */
+  .about-image {
+    margin-top: 16px;
+  }
 }
 
 
 @media only screen and (max-width: 600px) {
   .location {
     display: none;
+  }
+  .headline {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+  .headline-container {
+    padding-left: 15px;
+    margin-left: -8px;
+  }
+  .about-image {
+    margin: 2px;
+    margin-top: 16px;
+    width: 95%;
   }
 }
 
@@ -201,9 +251,4 @@ html, body {
 }
 
 .about-row {
-}
-
-.about-image {
-  width: 300px;
-  margin: 20px;
 }

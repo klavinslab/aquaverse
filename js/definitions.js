@@ -3,8 +3,7 @@ var config = {
   documentation_url: "http://localhost:4000/aquarium",
   get_releases: true,
   workflows: [
-    "/klavinslab/manager-workflow",
-    "/klavinslab/another-manager-workflow"
+    "/klavinslab/test-workflow"
   ],
   navigation: [
 

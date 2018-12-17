@@ -29,8 +29,6 @@
 
     $scope.select = function(section,content) {
 
-      console.log(section, content)
-
       if ( content.type != "external-link" ) {
         $scope.state.section = section;
         $scope.state.active_content = content;
@@ -110,3 +108,11 @@
   }]);
 
 })();
+
+function easy_select(x,y) {
+  let el = angular.element($('#aquaverseCtrl'));
+  if (el) {
+    el.scope().easy_select(x,y);
+    el.scope().$apply();
+  }
+}

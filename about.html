@@ -1,109 +1,102 @@
 <div layout="column">
 
-  <h2 class="md-display4">Executable Protocols</h2>
+  <div class="headline-container">
+    <h1 class="md-display-3 headline">
+      Build<br>reproducible<br>experimental<br>protocols<br>and workflows.
+    </h1>
+  </div>
+
+  <h2 class="md-headline">Executable Protocols</h2>
   <md-divider></md-divider>
 
-  <div layout="row" class="about-row">
-    <div>
-      <p>In Aquarium, protocols are expressed as executable code. Every formula,
-        every inventory interaction, and every step is computed on the fly, yielding
-        easy to follow instructions for your laboratory technicians. As a result,
-        Protocols built in Aquarium are easy to reproduce and share, and they
-        generate chain of custory information for every item and datum in your lab.
-        To learn more about authoring your own protocols, see the
-        <a href="#" ng-click="easy_select('Protocols', 'Protocol Tutorial')">
-          protocol tutorial
-        </a>.
-       </p>
-    </div>
+  <div layout="row" layout-xs="column" class="about-row">
     <div>
       <img class="about-image" src="images/protocol.png">
     </div>
+    <div>
+      <p>With Aquarium, your lab's protocols are expressed as executable code. Every formula,
+        every inventory interaction, and every step is computed on the fly, yielding
+        easy to follow instructions for your laboratory technicians. As a result,
+        Protocols built in Aquarium are easy to repeat and share, and they
+        generate chain of custory information for every item and datum in your lab.
+        Furthermore, it is straightforward to completely automate protocols for which you
+        happen to have a robot, so can migrate to a 100% human-in-the-loop automated lab.
+        To learn more about authoring your own protocols, see the
+        <a href="#" ng-click="easy_select('Protocols', 'Protocol Tutorial')">
+          protocol tutorial</a>.
+       </p>
+    </div>
   </div>
 
-  <h2 class="md-display4">Experimental Workflow Designer</h2>
+  <h2 class="md-headline">Workflow Designer</h2>
   <md-divider></md-divider>
 
-  <div layout="row" class="about-row">
-    <div>
-      <p>
-        In Aquarium, every protocol is wrapped in a Unit Operation that has a
-        formally specified set of input and output sample types. By stringing together
-        operations, you can build very complex experimental worlflows. These workflows
-        are executable as well and you can monitor their progress, see the data they
-        produce, watch as inventory items are created and stored, and get detailed logs
-        that describe every step of your workflow. To learn more about how to build
-        workflows, see the
-        <a href="#" ng-click="easy_select('Researchers', "Designing Plans")">
-          Designer documentation
-        </a>.
-      </p>
-    </div>
+  <div layout="row" layout-xs="column" class="about-row">
     <div>
       <img class="about-image" src="images/workflow.png">
     </div>
+    <div>
+      <p>
+        Every Aquarium protocol is wrapped in a Unit Operation having a
+        formally specified set of input and output sample types. By chaining
+        operations, you can build complex experimental worlflows, create modules and templates
+        for common tasks, and edit your workflows as they are running. These workflows
+        are executable. You can estimate and track their costs, monitor their progress,
+        view the data they
+        produce, watch as inventory items are created and stored, and get detailed logs
+        that describe every step of your workflow. To learn more about how to build
+        workflows, see the
+        <a href="#" ng-click="easy_select('Researchers', 'Designing Plans')">
+          Designer documentation</a>.
+      </p>
+    </div>
   </div>
 
 
-  <h2 class="md-display4">Laboratory Information System</h2>
+  <h2 class="md-headline">Inventory and Data Management</h2>
   <md-divider></md-divider>
 
-  <div layout="row" class="about-row">
-    <div>
-      <p>In Aquarium, protocols are expressed as executable code. Every formula,
-        every inventory interaction, and every step is computed on the fly, yielding
-        easy to follow instructions for your laboratory technicians. </p>
-    </div>
+  <div layout="row" layout-xs="column" class="about-row">
     <div>
       <img class="about-image" src="images/lims.png">
     </div>
+    <div>
+      <p>
+        At the core of Aquarium is a sophisticated Laboratory Information Management System,
+        or
+        <a href="#" ng-click="easy_select('Researchers', 'Defining Samples')">
+          LIMS</a>. Whether your lab handles plasmid DNA or hamsters, you can define whatever information
+        ought to be associated with your samples. Once you have built our your lab's sample type
+        and container definitions, you can start populating the inventory. Aquarium's programmable
+        <a href="#" ng-click="easy_select('Lab Management', 'Location Wizards')">
+          Location Wizards</a> manage your freezers, incubators, and instruments -- associating IDs
+        and locations to every item. As workflows operate on your inventory, all the data your
+        lab produced is assocatied with your samples and stored in AWS S3, making it easy to find
+        when it is time to write that paper.
+      </p>
+    </div>
   </div>
 
-  <h2 class="md-display4">Community Workflows</h2>
+  <h2 class="md-headline">Community Workflows</h2>
   <md-divider></md-divider>
 
-  <div layout="row" class="about-row">
-    <div>
-
-      <p>In Aquarium, protocols are expressed as executable code. Every formula,
-        every inventory interaction, and every step is computed on the fly, yielding
-        easy to follow instructions for your laboratory technicians. </p>
-    </div>
+  <div layout="row" layout-xs="column" class="about-row">
     <div>
       <img class="about-image" src="images/community.png">
     </div>
+    <div>
+      <p>
+        Have you ever wished your lab could jump into a using a new organism, a new method,
+        or a new piece of equipment without worrying that it will take months to learn all of the
+        associated lore and superstitions associated? With Aquarium's
+        <a href="#" ng-click="easy_select('Community', 'Workflows')">
+          community generated workflows</a>.
+        you can import the protocols you need and start using them immediately. Importing an
+        Aquarium workflow adds new inventory definitions, unit operation types, and protocols to your
+        instance. Plus, when you start building your own workflows, Aquarium can help you publish them,
+        automatically building documentation for your workflow and creating a new web page
+        and Github repo for you to use advertise it.
+      </p>
+    </div>
   </div>
-
-
 <div>
-
-
-
-
-
-<p><b>Aquarium</b> allows a researcher to specify precisely how to perform an
-experimental protocol so that lab personnel will run the protocol the same way,
-every time.</p>
-
-<p>Protocols encode how to manipulate <b>Aquarium</b>'s inventory system (LIMS),
-compute formulae such as volumes, molarities, temperatures, and timing, as well
-as present lab technicians with images and detailed instructions.</p>
-
-<p>Protocols also define formal unit operations with typed inputs and outputs –
-allowing the researcher to construct a complex workflow by linking an output
-sample of one protocol to an input of another using the <b>Aquarium</b> graphical
-workflow designer.</p>
-
-<p>In the lab, protocols and processes are scheduled and presented to
-technicians on touchscreen monitors placed throughout. Every step is logged: who
-performed the step, which items were used, what data was gathered by which
-instruments, and how long it took – data that can be used to debug and improve
-the experiment. More importantly, Aquarium provides a complete, executable
-description of the results obtained – one that could be used by another lab
-running Aquarium to reproduce the result.</p>
-
-<p>Aquarium was created in the
-<a href="http://klavinslab.org" target="klavinslab">Klavins Lab</a>
-and is the operating system of the
-<a href="http://www.uwbiofab.org" target="biofab">UW BIOFAB</a>
-at the University of Washington.</p>
