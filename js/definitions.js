@@ -20,8 +20,8 @@ var config = {
     {
       category: "Getting Started",
       contents: [
-        { name: "Installation", type: "aquarium-doc", path: "/installation" },
-        { name: "Basic Concepts", type: "aquarium-doc", path: "/concepts" }
+        { name: "Installation", type: "local-md", path: "docs/installation/index.md" },
+        { name: "Basic Concepts", type: "local-md", path: "docs//concepts/index.md" }
       ]
     },
 
@@ -29,37 +29,37 @@ var config = {
       category: "Community",
       contents: [
         { name: "Workflows", type: "local-html", path: "workflows.html" },
-        { name: "Sharing", type: "aquarium-doc", path: "/sharing" }
+        { name: "Sharing", type: "local-md", path: "docs/sharing/index.md" }
       ]
     },
 
     {
       category: "Researchers",
       contents: [
-        { name: "Defining Samples", type: "aquarium-doc", path: "/lims" },
-        { name: "Designing Plans", type: "aquarium-doc", path: "/designer" }
+        { name: "Defining Samples", type: "local-md", path: "docs/lims/index.md" },
+        { name: "Designing Plans", type: "local-md", path: "docs/designer/index.md" }
       ]
     },
 
     {
       category: "Lab Management",
       contents: [
-        { name: "Managing Jobs", type: "aquarium-doc", path: "/manager" },
-        { name: "Running Jobs", type: "aquarium-doc", path: "/technician" },
-        { name: "Managing Users", type: "aquarium-doc", path: "/users" },
-        { name: "Inventory Definitions", type: "aquarium-doc", path: "/protocol_developer/types/"},
-        { name: "Location Wizards", type: "aquarium-doc", path: "/protocol_developer/location/" },
+        { name: "Managing Jobs", type: "local-md", path: "docs/manager/index.md" },
+        { name: "Running Jobs", type: "local-md", path: "docs/technician/index.md" },
+        { name: "Managing Users", type: "local-md", path: "docs/users/index.md" },
+        { name: "Inventory Definitions", type: "local-md", path: "docs/protocol_developer/types.md"},
+        { name: "Location Wizards", type: "local-md", path: "docs/protocol_developer/location.md" },
       ]
     },
 
     {
       category: "Protocols",
       contents: [
-        { name: "Developer Tools", type: "aquarium-doc", path: "/protocol_developer/tools/" },
-        { name: "Protocol Tutorial", type: "aquarium-doc", path: "/protocol_tutorial/" },
-        { name: "Show Blocks", type: "aquarium-doc", path: "/protocol_developer/show/" },
-        { name: "Data Associations", type: "aquarium-doc", path: "/protocol_developer/associations/" },
-        { name: "Building Tables", type: "aquarium-doc", path: "/protocol_developer/table/" },
+        { name: "Developer Tools", type: "local-md", path: "docs/protocol_developer/tools.md" },
+        { name: "Protocol Tutorial", type: "local-md", path: "docs/protocol_developer/protocol_tutorial.md" },
+        { name: "Show Blocks", type: "local-md", path: "docs/protocol_developer/show.md" },
+        { name: "Data Associations", type: "local-md", path: "docs/protocol_developer/associations.md" },
+        { name: "Building Tables", type: "local-md", path: "docs/protocol_developer/table.md" },
         { name: "Detailed API Reference", type: "external-link", path: "http://klavinslab.org/aquarium/api/" },
       ]
     },

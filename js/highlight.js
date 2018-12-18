@@ -1,5 +1,5 @@
 function highlight_code() {
-  $('pre').each(function(i, block) {
+  $('code').each(function(i, block) {
     hljs.highlightBlock(block);
     $(block).addClass("code-block");
   });

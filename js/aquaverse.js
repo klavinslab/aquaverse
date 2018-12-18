@@ -16,6 +16,8 @@ var stack = [];
     $scope.title = config.title;
     $scope.state = {};
 
+    let conv = new showdown.Converter({tables:true});
+
     $scope.easy_select = function(category, name) {
       for ( var i=0; i<$scope.navigation.length; i++ ) {
         if ( $scope.navigation[i].category == category ) {
@@ -40,15 +42,10 @@ var stack = [];
         case "local-md":
           $http.get(content.path)
                .then(response => {
-                  let md = window.markdownit().set({html: true})
-                  $('#main-md').empty().html(md.render(response.data));
+                  $('#main-md').empty().html(conv.makeHtml(response.data));
                   highlight_code();
+                  $('#main-md').scrollTop(0);
                 });
-          break;
-        case "aquarium-doc":
-          $scope.state.iframe_url = $sce.trustAsResourceUrl(
-            config.documentation_url + content.path
-          );
           break;
         case "local-webpage":
           $scope.state.iframe_url = $sce.trustAsResourceUrl(
@@ -96,8 +93,8 @@ var stack = [];
            .then(response => {
              $scope.releases = response.data;
              for ( var n in $scope.releases ) {
-               let md = window.markdownit().set({html: true});
-               $scope.releases[n].md = $sce.trustAsHtml(md.render($scope.releases[n].body))
+               $scope.releases[n].md = $sce.trustAsHtml(conv.makeHtml($scope.releases[n].body));
+               highlight_code();
              }
            })
            .catch(error => console.log("Github did not return release array. Probably too many requests."))
