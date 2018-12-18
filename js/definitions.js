@@ -1,6 +1,5 @@
 var config = {
   tagline: "The Laboratory</br>Operating System",
-  documentation_url: "http://localhost:4000/aquarium",
   get_releases: true,
   workflows: [
     "/klavinslab/test-workflow"

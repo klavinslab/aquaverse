@@ -1,8 +1,3 @@
----
-title: Workflow Designer
-layout: docs
-permalink: /designer/
----
 
 <!--
   Written by Eric Klavins, July 2018

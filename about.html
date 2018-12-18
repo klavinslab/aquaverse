@@ -2,101 +2,115 @@
 
   <div class="headline-container">
     <h1 class="md-display-3 headline">
-      Build<br>reproducible<br>experimental<br>protocols<br>and workflows.
+      Build reproducible experimental workflows and protocols
     </h1>
   </div>
-
-  <h2 class="md-headline">Executable Protocols</h2>
-  <md-divider></md-divider>
-
-  <div layout="row" layout-xs="column" class="about-row">
-    <div>
-      <img class="about-image" src="images/protocol.png">
-    </div>
-    <div>
-      <p>With Aquarium, your lab's protocols are expressed as executable code. Every formula,
-        every inventory interaction, and every step is computed on the fly, yielding
-        easy to follow instructions for your laboratory technicians. As a result,
-        Protocols built in Aquarium are easy to repeat and share, and they
-        generate chain of custory information for every item and datum in your lab.
-        Furthermore, it is straightforward to completely automate protocols for which you
-        happen to have a robot, so can migrate to a 100% human-in-the-loop automated lab.
-        To learn more about authoring your own protocols, see the
-        <a href="#" ng-click="easy_select('Protocols', 'Protocol Tutorial')">
-          protocol tutorial</a>.
-       </p>
-    </div>
-  </div>
-
-  <h2 class="md-headline">Workflow Designer</h2>
-  <md-divider></md-divider>
-
-  <div layout="row" layout-xs="column" class="about-row">
-    <div>
-      <img class="about-image" src="images/workflow.png">
-    </div>
-    <div>
-      <p>
-        Every Aquarium protocol is wrapped in a Unit Operation having a
-        formally specified set of input and output sample types. By chaining
-        operations, you can build complex experimental worlflows, create modules and templates
-        for common tasks, and edit your workflows as they are running. These workflows
-        are executable. You can estimate and track their costs, monitor their progress,
-        view the data they
-        produce, watch as inventory items are created and stored, and get detailed logs
-        that describe every step of your workflow. To learn more about how to build
-        workflows, see the
-        <a href="#" ng-click="easy_select('Researchers', 'Designing Plans')">
-          Designer documentation</a>.
-      </p>
-    </div>
-  </div>
-
-
-  <h2 class="md-headline">Inventory and Data Management</h2>
-  <md-divider></md-divider>
-
-  <div layout="row" layout-xs="column" class="about-row">
-    <div>
-      <img class="about-image" src="images/lims.png">
-    </div>
-    <div>
-      <p>
-        At the core of Aquarium is a sophisticated Laboratory Information Management System,
-        or
-        <a href="#" ng-click="easy_select('Researchers', 'Defining Samples')">
-          LIMS</a>. Whether your lab handles plasmid DNA or hamsters, you can define whatever information
-        ought to be associated with your samples. Once you have built our your lab's sample type
-        and container definitions, you can start populating the inventory. Aquarium's programmable
-        <a href="#" ng-click="easy_select('Lab Management', 'Location Wizards')">
-          Location Wizards</a> manage your freezers, incubators, and instruments -- associating IDs
-        and locations to every item. As workflows operate on your inventory, all the data your
-        lab produced is assocatied with your samples and stored in AWS S3, making it easy to find
-        when it is time to write that paper.
-      </p>
-    </div>
-  </div>
-
-  <h2 class="md-headline">Community Workflows</h2>
-  <md-divider></md-divider>
 
   <div layout="row" layout-xs="column" class="about-row">
     <div>
       <img class="about-image" src="images/community.png">
     </div>
     <div>
+      <h2 class="md-headline">Community Content</h2>
+      <md-divider></md-divider>
       <p>
         Have you ever wished your lab could jump into a using a new organism, a new method,
         or a new piece of equipment without worrying that it will take months to learn all of the
-        associated lore and superstitions associated? With Aquarium's
-        <a href="#" ng-click="easy_select('Community', 'Workflows')">
-          community generated workflows</a>.
+        associated lore and superstitions associated?
+        <span ng-if="more.community">
+        With Aquarium's <a href="#" ng-click="easy_select('Community', 'Workflows')">
+        community generated workflows</a>.
         you can import the protocols you need and start using them immediately. Importing an
         Aquarium workflow adds new inventory definitions, unit operation types, and protocols to your
         instance. Plus, when you start building your own workflows, Aquarium can help you publish them,
         automatically building documentation for your workflow and creating a new web page
-        and Github repo for you to use advertise it.
+        and Github repo for you to use advertise it.</span>
+        <a href="#" ng-click="more.community = !more.community">
+          [{{more.community ? 'less' : 'more'}}]
+        </a>
       </p>
     </div>
   </div>
+
+  <div layout="row" layout-xs="column" class="about-row">
+    <div>
+      <img class="about-image" src="images/protocol.png">
+    </div>
+    <div>
+      <h2 class="md-headline">Executable Protocols</h2>
+      <md-divider></md-divider>
+      <p>With Aquarium, your lab's protocols are expressed as executable code. Every formula,
+        every inventory interaction, and every step is computed on the fly, yielding
+        easy to follow instructions for your laboratory technicians.
+        <span ng-if="more.protocols">
+        As a result,
+        Protocols built in Aquarium are easy to repeat and share, and they
+        generate chain of custory information for every item and datum in your lab.
+        Furthermore, it is straightforward to completely automate protocols for which you
+        happen to have a robot, so can migrate to a 100% human-in-the-loop automated lab.
+        To learn more about authoring your own protocols, see the
+        <a href="#" ng-click="easy_select('Protocols', 'Protocol Tutorial')">
+          protocol tutorial</a>.</span>
+        <a href="#" ng-click="more.protocols = !more.protocols">
+          [{{more.protocols ? 'less' : 'more'}}]
+        </a>
+       </p>
+    </div>
+  </div>
+
+
+  <div layout="row" layout-xs="column" class="about-row">
+    <div>
+      <img class="about-image" src="images/lims.png">
+    </div>
+    <div>
+      <h2 class="md-headline">Inventory and Data Management</h2>
+      <md-divider></md-divider>
+      <p>
+        At the core of Aquarium is a sophisticated Laboratory Information Management System,
+        or
+        <a href="#" ng-click="easy_select('Researchers', 'Defining Samples')">
+          LIMS</a>. Whether your lab handles plasmid DNA or hamsters, you can define whatever information
+        ought to be associated with your samples.
+        <span ng-if="more.lims">
+        Once you have built our your lab's sample type
+        and container definitions, you can start populating the inventory. Aquarium's programmable
+        <a href="#" ng-click="easy_select('Lab Management', 'Location Wizards')">
+          Location Wizards</a> manage your freezers, incubators, and instruments -- associating IDs
+        and locations to every item. As workflows operate on your inventory, all the data your
+        lab produced is assocatied with your samples and stored in AWS S3, making it easy to find
+        when it is time to write that paper.</span>
+        <a href="#" ng-click="more.lims = !more.lims">
+          [{{more.lims ? 'less' : 'more'}}]
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div layout="row" layout-xs="column" class="about-row">
+    <div>
+      <img class="about-image" src="images/workflow.png">
+    </div>
+    <div>
+      <h2 class="md-headline">Workflow Designer</h2>
+      <md-divider></md-divider>
+      <p>
+        Every Aquarium protocol is wrapped in a Unit Operation having a
+        formally specified set of input and output sample types. By chaining
+        operations, you can build complex experimental worlflows, create modules and templates
+        for common tasks, and edit your workflows as they are running.
+        <span ng-if="more.workflow">
+        These workflows are executable. You can estimate and track their costs, monitor their progress,
+        view the data they produce, watch as inventory items are created and stored, and get detailed logs
+        that describe every step of your workflow. To learn more about how to build
+        workflows, see the
+        <a href="#" ng-click="easy_select('Researchers', 'Designing Plans')">
+          Designer documentation</a>.</span>
+        <a href="#" ng-click="more.workflow = !more.workflow">
+          [{{more.workflow ? 'less' : 'more'}}]
+        </a>
+      </p>
+    </div>
+  </div>
+
 <div>
