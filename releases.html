@@ -1,37 +1,45 @@
-<h2>Latest Release</h2>
+<div ng-if="releases">
 
-<ul>
-  <li>
-    <p>
-      <b>{{releases[0].tag_name}}:
-      {{releases[0].name}}</b>
-    </p>
-    <p>{{releases[0].published_at|date}}</p>
-    <p class="markdown-body" ng-bind-html="releases[0].md"></p>
-    <p><a href="{{releases[0].zipball_url}}">[download]</a></p>
-  </li>
-</ul>
+  <h2>Latest Release</h2>
 
-<h2>Previous Releases</h2>
+  <ul>
+    <li>
+      <p>
+        <b>{{releases[0].tag_name}}:
+        {{releases[0].name}}</b>
+      </p>
+      <p>{{releases[0].published_at|date}}</p>
+      <p class="markdown-body" ng-bind-html="releases[0].md"></p>
+      <p><a href="{{releases[0].zipball_url}}">[download]</a></p>
+    </li>
+  </ul>
 
-<ul>
-  <li ng-repeat="release in releases" ng-if="$index != 0">
-    <p>
-      <b>{{release.tag_name}}:
-      {{release.name}}</b>
-    </p>
-    <p>{{release.published_at|date}}</p>
-    <p class="markdown-body" ng-bind-html="release.md"></p>
-    <p><a href="{{release.zipball_url}}">[download]</a></p>
-  </li>
-</ul>
+  <h2>Previous Releases</h2>
 
-<h2>Historical Versions</h2>
+  <ul>
+    <li ng-repeat="release in releases" ng-if="$index != 0">
+      <p>
+        <b>{{release.tag_name}}:
+        {{release.name}}</b>
+      </p>
+      <p>{{release.published_at|date}}</p>
+      <p class="markdown-body" ng-bind-html="release.md"></p>
+      <p><a href="{{release.zipball_url}}">[download]</a></p>
+    </li>
+  </ul>
 
-<p>Prior to version 0.9, versions were not tagged because Aquarium was
-  primarily being used in house. To see the commits dating back to
-  2013, visit the
-    <a href="https://github.com/klavinslab/aquarium" target="github">
-      Github Repo
-    </a>.
-</p>
+  <h2>Historical Versions</h2>
+
+  <p>Prior to version 0.9, versions were not tagged because Aquarium was
+    primarily being used in house. To see the commits dating back to
+    2013, visit the
+      <a href="https://github.com/klavinslab/aquarium" target="github">
+        Github Repo
+      </a>.
+  </p>
+
+</div>
+
+<div ng-if="!releases">
+  <p>Release information temporarily unavailable.</p>
+</div>

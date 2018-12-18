@@ -1,3 +1,5 @@
+var stack = [];
+
 (function() {
 
   let w = angular.module(
@@ -97,7 +99,8 @@
                let md = window.markdownit().set({html: true});
                $scope.releases[n].md = $sce.trustAsHtml(md.render($scope.releases[n].body))
              }
-           });
+           })
+           .catch(error => console.log("Github did not return release array. Probably too many requests."))
     }
 
     if ( config.workflows ) {
