@@ -1,9 +1,8 @@
 # Aquarium Concepts
 
-This document introduces the basic concepts of Aquarium.
-More details are given in relevant sections of the documentation.
+Aquarium data structures are intended to capture every aspect of a lab's structure. At the lowest level is the LIMS, which defines the types of samples and containers your lab users, as well as helps you manage the data associations and the locations of all of your items. On top of that are unit operations, which specify how a set of input items are transformed into a set of output items, as well as how exactly to perform that transformation. Finally, Aquarium's execution environment manages how operations are batched together and how technicians are instructed to do the individual steps or the operation's protocol. Here, we describe each of these aspects of Aquarium in a bit more detail to give you a flavor of what Aquarium does. More details can be found in the rest of the documentation, index by the sidebar to this page.
 
-## Items
+## Inventory System
 
 Aquarium protocols manipulate items in the LIMS inventory.
 An _item_ represents a physical entity in the lab.
@@ -28,7 +27,7 @@ For instance, the UW BIOFAB location `M20.1.5.49` is a location in a box in a -2
 
 <img src="docs/concepts/images/location.png" width="75%">
 
-## Operations
+## Unit Operations and Plans
 
 A protocol performed in Aquarium is represented as an _operation_.
 Concretely, an operation is defined by an _operation type_ that indicates how the operation will be performed, and is defined by a protocol script that takes inputs and produces outputs.
@@ -48,7 +47,7 @@ This is illustrated in this diagram, which shows the bacterial transformation op
 An operation occurs in a _plan_, which is a set of operations with linked inputs and outputs.
 The diagram shows the output of the bacterial transformation operation linked to an input of a colony PCR operation.
 
-## Jobs
+## Execution Environment
 
 When plans are executed in Aquarium, similar operations are batched together as a _job_.
 These operations may come from different plans of different researchers as illustrated here where three distinct plans have shared operations.

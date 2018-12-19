@@ -35,7 +35,7 @@ var config = {
     {
       category: "Researchers",
       contents: [
-        { name: "Defining Samples", type: "local-md", path: "docs/lims/index.md" },
+        { name: "Managing Inventory", type: "local-md", path: "docs/lims/index.md" },
         { name: "Designing Plans", type: "local-md", path: "docs/designer/index.md" }
       ]
     },

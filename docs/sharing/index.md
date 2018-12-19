@@ -1,6 +1,8 @@
 Importing Workflows
 ===
 
+_New in v2.5.0!_
+
 Importing workflows allows you to add capabilities to your instance of Aquarium.
 A workflow consists of a set of Operation Types, Protocols, Code Libraries, Sample Type definitions and Container definitions.
 Workflows are stored in files ending with .aq.
