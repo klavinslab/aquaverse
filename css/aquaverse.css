@@ -93,13 +93,15 @@ html, body {
   overflow: hidden;
 }
 
-.main, .main-html {
+.main, .main-html, .main-md {
   padding: 12px 24px 36px 36px;
   background: white;
   height: calc(100% - 84px);
   overflow: scroll;
   max-width: 900px;
-  position: absolute;
+}
+
+.main-row {
 }
 
 .main-frame {
@@ -109,6 +111,14 @@ html, body {
 .main-container {
   background: white;
   padding-right: 100px;
+}
+
+.footer {
+  color: #643;
+  font-size: 9pt;
+  height: 28px;
+  position: absolute;
+  bottom: 0
 }
 
 ::-webkit-scrollbar {

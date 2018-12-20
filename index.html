@@ -40,6 +40,13 @@
   	  gtag('config', 'UA-130623974-1');
   	</script>
 
+    <script type="text/ng-template" id="copyright">
+      <div layout="row" class="footer" layout-align="center center">
+        <p>This webpage and the Aquarium Documentation
+          Copyright (c) 2018 University of Washington.</p>
+      </div>
+    </script>
+
   </head>
 
   <body style="position: relative">
@@ -72,17 +79,17 @@
         </h2>
       </div>
 
-    <a href="https://github.com/klavinslab"
-       ng-if="state.active_content.name == 'Releases'">
-      <img style="position: absolute; top: 0; right: 0; border: 0;"
-           src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
-           alt="Fork me on GitHub"
-           target="github">
-    </a>
+      <a href="https://github.com/klavinslab"
+         ng-if="state.active_content.name == 'Releases'">
+        <img style="position: absolute; top: 0; right: 0; border: 0;"
+             src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
+             alt="Fork me on GitHub"
+             target="github">
+      </a>
 
     </md-toolbar>
 
-    <div layout="row">
+    <div layout="row" class="main-row">
 
       <md-sidenav
         class="md-sidenav-left sidenav"
@@ -111,16 +118,7 @@
 
       </md-sidenav>
 
-      <md-content flex class="main-container">
-
-        <!-- Content from Aquarium Documtation -->
-        <div flex class="main main-frame"
-             ng-if="state.active_content.type == 'aquarium-doc' || state.active_content.type == 'local-webpage'">
-          <iframe ng-attr-src="{{state.iframe_url}}"
-                  ng-if="state.iframe_url"
-                  class="content-frame">
-          </iframe>
-        </div>
+      <md-content flex class="main-container" layout="column">
 
         <!-- Local md content -->
         <div id="main-md"

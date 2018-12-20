@@ -28,7 +28,8 @@ var config = {
       category: "Community",
       contents: [
         { name: "Workflows", type: "local-html", path: "workflows.html" },
-        { name: "Sharing", type: "local-md", path: "docs/sharing/index.md" }
+        { name: "Importing", type: "local-md", path: "docs/sharing/import.md" },
+        { name: "Exporting", type: "local-md", path: "docs/sharing/export.md" }
       ]
     },
 
