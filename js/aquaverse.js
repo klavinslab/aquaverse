@@ -11,7 +11,7 @@ var stack = [];
     w.controller('aquaverseCtrl', [ '$scope', '$http', '$sce', '$mdMedia', '$mdSidenav',
                          function (  $scope,   $http,   $sce,   $mdMedia,   $mdSidenav ) {
 
-    $scope.copyright = config.copyright;
+    $scope.copyright = $sce.trustAsHtml(config.copyright);
     $scope.navigation = config.navigation; // Link to navigation var
     $scope.tagline = $sce.trustAsHtml(config.tagline); // Link to tagline var
     $scope.title = config.title;

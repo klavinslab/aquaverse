@@ -4,7 +4,7 @@ var config = {
   workflows: [
     "/klavinslab/test-workflow"
   ],
-  copyright: "Aquarium Web page and Documentation Copyright &copy; 2018 University of Washington",
+  copyright: "Aquarium Web page and Documentation Copyright © 2018 University of Washington",
   navigation: [
 
     {
