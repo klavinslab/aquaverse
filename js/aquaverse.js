@@ -119,3 +119,5 @@ function easy_select(x,y) {
     el.scope().$apply();
   }
 }
+
+select = easy_select;

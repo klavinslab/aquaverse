@@ -1,7 +1,7 @@
 
 # Manager
 
-_This document assumes that you have read the <a href="#" onclick="easy_select('Getting Started', 'Basic Concepts')">Aquarium Concepts</a> document_.
+_This document assumes that you have read the <a href="#" onclick="select('Getting Started', 'Basic Concepts')">Aquarium Concepts</a> document_.
 
 A manager uses Aquarium to determine which operations are run together as a job; to monitor and control jobs; and to help users with problematic plans.
 
@@ -67,7 +67,7 @@ This example shows one operation type with an operation that is **pending**, whi
 
 ![selected category](docs/manager/images/selected-category.png)
 
-The operation states are explained in the <a href="#" onclick="easy_select('Getting Started', 'Basic Concepts')">Aquarium Concepts</a> document.
+The operation states are explained in the <a href="#" onclick="select('Getting Started', 'Basic Concepts')">Aquarium Concepts</a> document.
 
 ## Scenario: Starting a job
 

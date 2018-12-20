@@ -11,7 +11,7 @@ var config = {
       category: "Overview",
       contents: [
         { name: "About", type: "local-html", path: "about.html" },
-        { name: "Licence", type: "local-md", path: "license.md"  },
+        { name: "License", type: "local-md", path: "license.md"  },
         { name: "Releases", type: "local-html", path: "releases.html"  },
         { name: "Contributors", type: "local-md", path: "contributors.md"  },
       ]

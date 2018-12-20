@@ -89,7 +89,7 @@ The most commonly used `ShowBlock` methods are the following:
 - `warning`- accepts a String and appends it as a new line on the slide, bold and highlighted in yellow
 - `image` - accepts a filepath to a valid image, and displays it on the slide
 - `table` - accepts either a 2d array or a `Table` object, and displays it on the slide. See the
-   <a href="#" onclick="easy_select('Protocols', 'Building Tables')">Table Documentation</a>
+   <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>
    for more details on how to generate and display `Tables` to the technician.
 - `get` - ask the technician for input which will be usable throughout the rest of the protocol.
 
@@ -209,4 +209,4 @@ The `ShowResponse` also can give the timestamp of when the `ShowBlock` was shown
 responses.timestamp #=> <current time in seconds since 1970>
 ```
 
-Another convenient way to collect information relating to each `Operation` in an `OperationList` is to accept technician responses through a input `Table` on the `OperationsList`. See the <a href="#" onclick="easy_select('Protocols', 'Building Tables')">Table Documentation</a>Table Documentation</a> on getting User for more details.
+Another convenient way to collect information relating to each `Operation` in an `OperationList` is to accept technician responses through a input `Table` on the `OperationsList`. See the <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>Table Documentation</a> on getting User for more details.

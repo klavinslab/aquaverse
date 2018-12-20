@@ -7,7 +7,7 @@ Aquarium does track which users runs which jobs as a technician, so technicians 
 
 ## Running a Job
 
-A job is scheduled from the <a href='#' onclick="easy_select('Lab Management', 'Managing Jobs')">manager interface</a>,
+A job is scheduled from the <a href='#' onclick="select('Lab Management', 'Managing Jobs')">manager interface</a>,
 and results in a screen like this on the **Manager Tab**:
 
 ![jobs](docs/technician/images/scheduled-job.png)

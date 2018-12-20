@@ -218,7 +218,7 @@ We can also retrieve the table input data as a simple array of input values, in 
 responses.get_response(:plasmid_volume) #=> [1, 2, 3, 4, 5]
 ```
 
-See the <a href="#" onclick="easy_select('Protocols', 'Show Blocks')">Show Block Documentation</a> for more details on how interact with `ShowBlock` input data.
+See the <a href="#" onclick="select('Protocols', 'Show Blocks')">Show Block Documentation</a> for more details on how interact with `ShowBlock` input data.
 
 When accepting any technician input, it can be useful to validate the input and make sure it is of an expected form. Most likely the workers of your own lab will not attempt to do a SQL injection attack from within a protocol, but ensuring the input is valid before storing it or using it for calculations can resolve many potential errors caused by technician typos.
 
