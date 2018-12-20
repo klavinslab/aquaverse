@@ -2,6 +2,8 @@
 Exporting / Publishing Workflows
 ===
 
+_New in v2.5.0!_
+
 Exporting workflows allows you to package up a set of Operation Types, Protocols, Code Libraries, Sample Type definitions and Container definitions that can be later imported by someone else. You can either generate a workflow file (with a .aq extension), or you can generate an entire Github repository and webpage for your workflow that allows users to read through all the documentation for your workflow before importing it, and to, for example, post issues and questions about the workflow.
 
 Github Parameters or Direct Export

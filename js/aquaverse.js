@@ -11,6 +11,7 @@ var stack = [];
     w.controller('aquaverseCtrl', [ '$scope', '$http', '$sce', '$mdMedia', '$mdSidenav',
                          function (  $scope,   $http,   $sce,   $mdMedia,   $mdSidenav ) {
 
+    $scope.copyright = config.copyright;
     $scope.navigation = config.navigation; // Link to navigation var
     $scope.tagline = $sce.trustAsHtml(config.tagline); // Link to tagline var
     $scope.title = config.title;
@@ -43,6 +44,9 @@ var stack = [];
           $http.get(content.path)
                .then(response => {
                   $('#main-md').empty().html(conv.makeHtml(response.data));
+                  if ( config.copyright ) {
+                    $('#main-md').append(`<div class='copyright'>${config.copyright}</div>`);
+                  }
                   highlight_code();
                   $('#main-md').scrollTop(0);
                 });
@@ -53,7 +57,6 @@ var stack = [];
           );
           break;
         case "local-html":
-          // Nothing to do here. HTML uses ng-include
           break;
         case "external-link":
           window.open(content.path);
