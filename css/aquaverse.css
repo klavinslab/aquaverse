@@ -237,6 +237,10 @@ html, body {
   color: var(--active-content);
 }
 
+.workflow-title {
+  margin-bottom: 9px;
+}
+
 @media only screen and (max-width: 960px) {
   .logo-container {
     display: none;
@@ -267,7 +271,6 @@ html, body {
   }
 }
 
-
 @media only screen and (max-width: 600px) {
   .location {
     display: none;
@@ -289,8 +292,4 @@ html, body {
     margin-top: 16px;
     width: 95%;
   }
-}
-
-.workflow-title {
-  margin-bottom: 9px;
 }
