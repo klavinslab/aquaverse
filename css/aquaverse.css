@@ -13,6 +13,10 @@ h1, h2, h3, h4 {
   color: var(--heading-color);
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .headline-container {
   margin-top: 14px;
   margin-bottom: 14px;

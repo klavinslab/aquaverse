@@ -19,12 +19,12 @@ var stack = [];
 
     let conv = new showdown.Converter({tables:true});
 
-    $scope.easy_select = function(category, name) {
+    $scope.easy_select = function(category, name, push=true) {
       for ( var i=0; i<$scope.navigation.length; i++ ) {
         if ( $scope.navigation[i].category == category ) {
           for ( var j=0; j<$scope.navigation[i].contents.length; j++ ) {
             if ( $scope.navigation[i].contents[j].name == name ) {
-              $scope.select($scope.navigation[i], $scope.navigation[i].contents[j]);
+              $scope.select($scope.navigation[i], $scope.navigation[i].contents[j],push);
               return;
             }
           }
@@ -32,35 +32,43 @@ var stack = [];
       }
     }
 
-    $scope.select = function(section,content) {
+    $scope.select = function(section,content,push=true) {
 
-      if ( content.type != "external-link" ) {
-        $scope.state.section = section;
-        $scope.state.active_content = content;
-      }
+      if ( $scope.state.section != section || $scope.state.active_content != content ) {
 
-      switch(content.type) {
-        case "local-md":
-          $http.get(content.path)
-               .then(response => {
-                  $('#main-md').empty().html(conv.makeHtml(response.data));
-                  if ( config.copyright ) {
-                    $('#main-md').append(`<div class='copyright'>${config.copyright}</div>`);
-                  }
-                  highlight_code();
-                  $('#main-md').scrollTop(0);
-                });
-          break;
-        case "local-webpage":
-          $scope.state.iframe_url = $sce.trustAsResourceUrl(
-            content.path
-          );
-          break;
-        case "local-html":
-          break;
-        case "external-link":
-          window.open(content.path);
-          break;
+        if ( content.type != "external-link" ) {
+          $scope.state.section = section;
+          $scope.state.active_content = content;
+          if ( push ) {
+            history.pushState($scope.state, "State", "");
+            console.log("Pushed", $scope.state.section.category, $scope.state.active_content.name )
+          }
+        }
+
+        switch(content.type) {
+          case "local-md":
+            $http.get(content.path)
+                 .then(response => {
+                    $('#main-md').empty().html(conv.makeHtml(response.data));
+                    if ( config.copyright ) {
+                      $('#main-md').append(`<div class='copyright'>${config.copyright}</div>`);
+                    }
+                    highlight_code();
+                    $('#main-md').scrollTop(0);
+                  });
+            break;
+          case "local-webpage":
+            $scope.state.iframe_url = $sce.trustAsResourceUrl(
+              content.path
+            );
+            break;
+          case "local-html":
+            break;
+          case "external-link":
+            window.open(content.path);
+            break;
+
+        }
 
       }
 
@@ -88,8 +96,17 @@ var stack = [];
     $(function() {
       $scope.navigation[0].open = true;
       $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
+      history.replaceState($scope.state, "State", "");
       $scope.$apply();
     });
+
+    window.onpopstate = function(event) {
+      if ( event.state ) {
+        $scope.easy_select(event.state.section.category, event.state.active_content.name, false);
+        event.preventDefault;
+        $scope.$apply();
+      }
+    };
 
     if ( config.get_releases ) {
       $http.get("https://api.github.com/repos/klavinslab/aquarium/releases")
