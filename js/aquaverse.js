@@ -95,7 +95,7 @@ var stack = [];
 
     $(function() {
       $scope.navigation[0].open = true;
-      $scope.select($scope.navigation[0],$scope.navigation[0].contents[0]);
+      $scope.select($scope.navigation[0],$scope.navigation[0].contents[0],false);
       history.replaceState($scope.state, "State", "");
       $scope.$apply();
     });
