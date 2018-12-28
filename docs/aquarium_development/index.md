@@ -11,6 +11,10 @@ These guidelines are intended for those working directly on Aquarium, though som
     - [Running Aquarium](#running-aquarium)
         - [Initial steps](#initial-steps)
         - [Commands](#commands)
+    - [Switching databases](#switching-databases)
+        - [Switching from Production to Development](#switching-from-production-to-development)
+        - [Switching from Development to Production](#switching-from-development-to-production)
+        - [Restoring the default database dump](#restoring-the-default-database-dump)
     - [Testing Aquarium](#testing-aquarium)
     - [Editing Aquarium](#editing-aquarium)
         - [Documenting changes](#documenting-changes)
@@ -19,8 +23,9 @@ These guidelines are intended for those working directly on Aquarium, though som
     - [Making an Aquarium Release](#making-an-aquarium-release)
     - [Docker configuration](#docker-configuration)
         - [Images](#images)
-        - [Database](#database)
         - [Compose files](#compose-files)
+        - [Database](#database)
+        - [Local S3 server](#local-s3-server)
         - [Local web server](#local-web-server)
 
 <!-- /TOC -->
@@ -35,14 +40,7 @@ To run Aquarium in development mode using the Docker configuration in a Unix&tra
 
 ### Initial steps
 
-1. If you have previously run Aquarium in production mode, run
-
-   ```bash
-   rm -rf docker/db/*
-   ```
-
-   _WARNING_: this will destroy any changes you have made to the database in production mode.
-   If you want to save these, you will have to create a database dump.
+1. If you have run Aquarium in production, [switch databases](#switching-from-production-to-development)
 
 2. Make the `develop-compose.sh` script executable
 
@@ -82,7 +80,7 @@ To run Aquarium in development mode using the Docker configuration in a Unix&tra
    ```
 
    This command starts services for Aquarium, Krill, MySQL, minio and nginx, which are needed to run Aquarium.
-   
+
    To stop the services, type `ctrl-c` followed by
 
    ```bash
@@ -101,15 +99,83 @@ To run Aquarium in development mode using the Docker configuration in a Unix&tra
    ./develop-compose.sh run --rm app /bin/sh
    ```
 
-   where you can run `rake` or even the rails console.
+   where you can run `rake` or even the Rails console.
 
-4. To create a database dump, you'll need to start Aquarium, determine the container name for the `db` service using `docker ps`, copy the root database password from `docker-compose.override.yml`, and then run the command 
+## Switching databases
 
-   ```bash
-   docker exec <container-name> sh -c 'exec mysqldump --all-databases -uroot -p"<root-password>"' > /some/path/on/your/host/all-databases.sql
-   ```
+The configuration for Docker uses the MySQL Docker image, which is capable of automatically importing a database dump the first time it is started.
+This is convenient in some ways, but it is not setup to easily switch to another database.
+This means that to switch between production and development environments you need to do some manual steps.
 
-   replacing `<container-name>` and `<root-password>` with your values.
+### Switching from Production to Development
+
+Switching from production to development will destroy any changes you have made to the production database.
+If you want to save these, you will have to create the database dump.
+
+Using the values of `MYSQL_USER` and `MYSQL_PASSWORD` from `docker-compose.override.yml` do the following
+
+```bash
+MYSQL_USER=<username>
+MYSQL_PASSWORD=<password>
+docker-compose up
+docker-compose exec db mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD production > production_dump.sql
+```
+
+after which you can stop Aquarium as described in [Commands](#commands).
+
+If you had previously made a dump of the development database, copy this file to the default location:
+
+```bash
+cp development_dump.sql docker/mysql_init/dump.sql
+```
+
+You can then safely remove the MySQL files to allow the switch by running
+
+```bash
+rm -rf docker/db/*
+```
+
+### Switching from Development to Production
+
+Switching from development to production will destroy any changes you have made to the development database.
+If you want to save these, you will have to create the database dump.
+
+Using the values of `MYSQL_USER` and `MYSQL_PASSWORD` from `docker-compose.dev.yml` do the following
+
+```bash
+MYSQL_USER=<username>
+MYSQL_PASSWORD=<password>
+./develop-compose.sh up
+./develop-compose.sh exec db mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD development > development_dump.sql
+```
+
+after which you can stop Aquarium as described in [Commands](#commands).
+
+If you had previously made a dump of the production database, copy this file to the default location:
+
+```bash
+cp production_dump.sql docker/mysql_init/dump.sql
+```
+
+You can then safely remove the MySQL files to allow the switch by running
+
+```bash
+rm -rf docker/db/*
+```
+
+### Restoring the default database dump
+
+If you want to restart from an empty database, you can run
+
+```bash
+cp docker/mysql_init/default.sql docker/mysql_init/dump.sql
+```
+
+Before restarting Aquarium, remove the MySQL files with
+
+```bash
+rm -rf docker/db/*
+```
 
 ## Testing Aquarium
 
@@ -225,24 +291,27 @@ aquarium
 
 ### Images
 
-The `Dockerfile` configures Aquarium images `basebuilder`, `devbuilder` and `prodbuilder`.
-The `devbuilder` and `prodbuilder` images are configured to allow Aquarium to be run as a local instance in the development and production environments, while the `basebuilder` image contains the configuration common to both.
+The `Dockerfile` configures the `basebuilder` Aquarium image that contains the configuration needed by development or production environments.
 
-The `basebuilder` configuration copies rails configuration files from the `docker/aquarium` directory into the correct place in the image; and adds the `docker/aquarium-entrypoint.sh` and `docker/krill-entrypoint.sh` scripts for starting the Aquarium services.
+The `basebuilder` image is based on the Ruby Alpine linux Docker image that includes Rails.
+In addition the image includes:
+
+1. Development tools needed to configure and run Aquarium.
+2. Javascript components used by Aquarium webpages.
+3. Gems used by Aquarium.
+4. The `aquarium` application (minus the files in `.dockerignore`).
+5. The entrypoint scripts for running Aquarium and Krill from Docker.
+
+Note that this base configuration includes the configuration files in `config`, though the docker-compose configurations override these.
+
+copies rails configuration files from the `docker/aquarium` directory into the correct place in the image; and adds the `docker/aquarium-entrypoint.sh` and `docker/krill-entrypoint.sh` scripts for starting the Aquarium services.
 The configuration also ensures that the `docker/db` and `docker/s3` directories needed for the database and [minio](https://minio.io) S3 server are created on the host as required by the compose files.
 The `devbuilder` and `prodbuilder` configurations build an image with environment specific files.
-
-### Database
-
-The `docker/mysql_init` directory contains the database dump that is used to initialize the database when it is run the first time.
-The MySQL service is configured to use the `docker/db` directory to store its files, and removing the contents of this directory (`rm -rf docker/db/*`) will cause the database to initialize the next time the service is started.
-
-The contents of the `docker/db` directory also need to be removed when changing between running in production and development environments.
-If you want to save the contents of the database, you will have to perform a database dump from within the `app` container.
 
 ### Compose files
 
 The docker-compose files are defined to allow Aquarium to be run locally in production or development modes and on Windows.
+
 Specifically, the files are meant to be combined as follows:
 
 - `docker-compose.yml` and `docker-compose.override.yml` runs production,
@@ -263,27 +332,30 @@ is equivalent to the simpler command
 docker-compose up
 ```
 
-Running in production is the default configuration, because the most common usage of a local installation is by someone doing protocol development who will want to mirror the production server of the lab.
+The compose files are designed so that running in production is the default configuration to support users who are doing protocol development on a local instance.
+To support this, the `docker-compose.yml` file contains the common configuration for both environments, including identifying the entrypoints for Aquarium and Krill, mounting host directories used by Aquarium, MySQL and minio for persistent storage.
+The file `docker-compose.override.yml` is run by default and adds production environment files to the base configuration, while `docker-compose.dev.yml` adds the configurations for the development environment.
 
-The `docker-compose build` command needs to be run with the same file arguments as you are intending to run Aquarium.
+Much of the key differences between environments are handled by mounting different files with the different configurations.
+For instance, the Rails configuration files are replaced by files from `docker/aquarium` that are mounted over the counterparts in `config`.
+In the case of configuring MySQL and nginx, the mount points for the configuration files are particular to the image used for these services, some of which are not terribly well documented.
+Using volumes in this way is convenient, but can also be the source of great mystery when a mounted volume overrides the files in the image.
+Tweak the volumes with care.
 
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml build
-```
+### Database
 
-This is the same for running a command within the service with `docker-compose run`, such as
+The `docker/mysql_init` directory contains the database dump that is used to initialize the database when it is run the first time.
+The MySQL service is configured to use the `docker/db` directory to store its files, and removing the contents of this directory (`rm -rf docker/db/*`) will cause the database to initialize the next time the service is started.
 
-```bash
-docker-compose -f docker-compose.yml -f docker-compose.dev.yml run --rm app /bin/sh
-```
+### Local S3 server
 
-which runs a shell within the container running Aquarium in the development environment.
+A [minio](minio.io) service `s3` is used to manage files uploaded to Aquarium in the local configuration.
+The `s3` service is configured so that these files are stored in `docker/s3`.
+The current configuration does not allow the pre-signed URLs returned by Aquarium to be used because the host is configured to be the hostname of the service, which is only accessible from within Docker.
+However, the files are also be accessible through the minio webclient at `localhost:9000`.
 
 ### Local web server
 
-Access to the servers run by docker-compose is handled by nginx.
-
-Note that Aquarium allows files to be downloaded by returning a pre-authenticated link to the S3 server.
-It is currently expected that the host for these URLs will be inaccessible.
-This can, in principle, be resolved by redirecting the S3 host internally, but this still needs to be done.
-For the desperate, it should also be possible to create a local DNS with the internal name defined.
+Access to Aquarium and the S3 webclient is handled by nginx.
+For development, all requests to port 3000 are forwarded to Aquarium, while for production, static files are served by nginx and other requests are handled by puma via a socket. 
+See the nginx configuration files in the `docker` directory.
