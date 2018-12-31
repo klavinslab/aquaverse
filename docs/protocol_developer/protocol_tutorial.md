@@ -1,4 +1,3 @@
-
 # Protocol Tutorial
 
 This is an introduction to writing protocols for Aquarium in the Krill domain specific language.
@@ -11,338 +10,448 @@ See the [API documentation]({{ site.baseurl }}{% link /api/index.html %}) for mo
 
 <!-- TOC -->
 
-- [Protocol Tutorial](#protocoltutorial)
-    - [Table of Contents](#tableofcontents)
-    - [An Aquarium Protocol](#anaquariumprotocol)
-    - [The Basic Protocol](#thebasicprotocol)
-    - [Running a Protocol](#runningaprotocol)
-        - [Creating a Protocol](#creatingaprotocol)
-        - [Running a Protocol from the Developer Test Tab](#runningaprotocolfromthedevelopertesttab)
-        - [Running a Deployed Protocol](#runningadeployedprotocol)
-    - [Creating Technician Instructions](#creatingtechnicianinstructions)
-    - [Working with Samples](#workingwithsamples)
-        - [Practicing Queries](#practicingqueries)
-        - [Creating Items and Samples](#creatingitemsandsamples)
-        - [Creating Collections](#creatingcollections)
-        - [Provisioning Items](#provisioningitems)
-    - [Working With Items in Operations](#workingwithitemsinoperations)
-    - [Managing Operations](#managingoperations)
-    - [Protocol Patterns](#protocolpatterns)
-        - [Protocols that Create New Items](#protocolsthatcreatenewitems)
-        - [Protocols that Measure Items](#protocolsthatmeasureitems)
-        - [Protocols that Modify Items](#protocolsthatmodifyitems)
-    - [Writing a Protocol](#writingaprotocol)
-    - [Building Libraries](#buildinglibraries)
+- [Protocol Tutorial](#protocol-tutorial)
+    - [Table of Contents](#table-of-contents)
+    - [An Aquarium Protocol](#an-aquarium-protocol)
+    - [An Initial Protocol](#an-initial-protocol)
+    - [Running the Protocol](#running-the-protocol)
+        - [Creating a Protocol](#creating-a-protocol)
+        - [Running a Protocol from the Developer Test Tab](#running-a-protocol-from-the-developer-test-tab)
+        - [Running a Deployed Protocol](#running-a-deployed-protocol)
+    - [Refining the protocol](#refining-the-protocol)
+    - [How Aquarium Works: The Basics](#how-aquarium-works-the-basics)
+    - [A Protocol that can be used](#a-protocol-that-can-be-used)
+        - [Handling Operations](#handling-operations)
+        - [Declaring Inputs and Outputs](#declaring-inputs-and-outputs)
+        - [Using Inputs and Outputs](#using-inputs-and-outputs)
+        - [Adding Types and Items](#adding-types-and-items)
+    - [Provisioning](#provisioning)
+        - [Gathering and Storing Items](#gathering-and-storing-items)
+        - [Provisioning New Items](#provisioning-new-items)
+    - [Factoring out common work](#factoring-out-common-work)
+    - [Locations](#locations)
+    - [Old Text](#old-text)
+        - [Provisioning Items](#provisioning-items)
+    - [Working With Items in Operations](#working-with-items-in-operations)
+    - [Managing Operations](#managing-operations)
+    - [Protocol Patterns](#protocol-patterns)
+        - [Protocols that Create New Items](#protocols-that-create-new-items)
+        - [Protocols that Measure Items](#protocols-that-measure-items)
+        - [Protocols that Modify Items](#protocols-that-modify-items)
+    - [Writing a Protocol](#writing-a-protocol)
+    - [Building Libraries](#building-libraries)
 
 <!-- /TOC -->
 
 ## An Aquarium Protocol
 
-Each protocol is specified as part of an operation type, which also includes a declaration of the input/output of the protocol, pre-conditions for the protocol, a cost-model for the protocol, documentation and scheduling details for running the protocol in the lab.
+A protocol in Aquarium defines an action that can be planned by a researcher designing an experiment.
+In the lab, the protocol translates to a series of steps that are to be performed to complete the action.
 
-## The Basic Protocol
+If you are coming from a background where you have written or worked from a typical paper protocol, an Aquarium protocol is more detailed.
+The protocol may correspond to a single step of a paper protocol – such as streaking an agar plate with e. coli – but elaborates the details needed to ensure the protocol is performed as consistently as possible.
+When deciding what protocols to make, a rule of thumb is that a protocol should be something that can be done in one session at the bench though see **BLAH** for more detailed discussion.
 
-An Aquarium protocol is a Ruby class named `Protocol` with a `main` method that includes code that defines what happens in the protocol.
-A simple example is
+## An Initial Protocol
+
+Let's look more closely at streaking a plate.
+Most protocols first provision what is needed, perform the action of the protocol, and finally store or discard the items used or created.
+From this perspective, our protocol for streaking plate has the top-level steps:
+
+1. Get the glycerol stock and a fresh agar plate.
+2. Streak the plate
+3. Store the glycerol stock and the streaked plate.
+
+For our initial protocol, we will just have a series of screens with these steps as titles:
 
 ```ruby
+# A simple Aquarium protocol for streaking an agar plate from an
+# e. coli glycerol stock
 class Protocol
   def main
-    show { title 'Getting Started' }
+    # Display provisioning instructions
+    show do
+      title 'Get the glycerol stock and a fresh agar plate'
+    end
+
+    # Display instructions for streaking the plate
+    show do
+      title 'Streak the plate'
+    end
+
+    # Display instructions for storing items when done
+    show do
+      title 'Store the glycerol stock and the streaked plate'
+    end
   end
 end
 ```
 
-where the body of `main` displays a single page titled 'Getting Started'.
-When the protocol is started, Aquarium extends the Protocol class with the Krill methods described below.
+Some of this is just Ruby boilerplate (code that is always used) including the Ruby class named `Protocol` with the method `main` method, but the `show` blocks define the screens that are displayed.
 
-## Running a Protocol
+Let's try running this protocol in Aquarium to understand better how this works.
 
-To follow along with the examples as you go through this tutorial, first decide on a category name for your operation types.
-For our example, we use `tutorial_neptune` where 'neptune' is the user name.
-You'll also want to decide whether you will use the same operation type to try the examples as you go, or make a new one.
+## Running the Protocol
 
-And, in case the admonition hasn't yet settled in, **don't** use a production server for testing.
+To understand better what is happening, you should [set up an Aquarium instance on your personal machine](link-to-installation) to follow along.
+Our advice is that you **not** use your lab's server to learn.
 
 ### Creating a Protocol
 
 1.  Starting from the developer tab, click the **New** button in the upper right corner.
 
-    ![the aquarium developer tab](docs/protocol_developer/images/tutorial_images/1_developer_tab.png)
+2.  Change the operation type name to `StreakPlate`, the category to `tutorial`, and click the **Save** button.
 
-    This will create a new operation type in the current category.
-
-    ![a new operation type](docs/protocol_developer/images/tutorial_images/2_new_operation_type.png)
-
-2.  Change the operation type name and category and click the **Save** button.
-
-    ![renamed new operation type](docs/protocol_developer/images/tutorial_images/3_new_operation_type2.png)
-
-    For this example, we use the name `BasicProtocol` and category `tutorial_neptune`.
-
-3.  Click **Protocol**, replace the body of the main method with the code `show { title 'Getting Started' }` like in our example, and click the **Save** button at the bottom right.
-
-    ![the protocol of the new operation type](docs/protocol_developer/images/tutorial_images/4_basic_protocol.png)
+3.  Click **Protocol**, replace the template code in our example, and click the **Save** button at the bottom right.
 
 ### Running a Protocol from the Developer Test Tab
 
-The simplest way to run a protocol is by using testing in the Developer Tab.
+The simplest way to run our protocol is by using testing in the Developer Tab.
 
 1.  Click **Test**
 
-    ![the test view](docs/protocol_developer/images/tutorial_images/5_basic_protocol_test.png)
-
-2.  Click the **Generate Operations** button to generate instances of the operation type with random inputs
-
-    ![the test with operations](docs/protocol_developer/images/tutorial_images/6_basic_protocol_test2.png)
+2.  Click the **Generate Operations** button to generate instances of the operation type with random inputs.
 
 3.  Click the **Test** button to run the operation(s) with the inputs and show the trace with any output
 
-    ![the test results](docs/protocol_developer/images/tutorial_images/7_basic_protocol_test3.png)
-
-In this case, we see the page title 'Getting Started' as output.
+When the test finishes, you should see a backtrace with each of the page titles displayed.
 
 ### Running a Deployed Protocol
 
-You can run the protocol so that it will show you the screens as the technician will see them, but this is more involved.
+To run the protocol so that it will show you the screens as the technician will see them:
 
 1.  In the Developer **Def** view, click the **Deployed** checkbox
 
-    ![click the deploy box](docs/protocol_developer/images/tutorial_images/8_deployed_basic_protocol.png)
-
 2.  Click the **Designer** tab at the top of the page, click _Design_, and then choose your category under _Operation Types_
 
-    ![choosing operation for a plan](docs/protocol_developer/images/tutorial_images/9_plan_design_view.png)
-
-3.  Click the operation type name `BasicProtocol` to add the operation to the plan
-
-    ![the basic protocol plan](docs/protocol_developer/images/tutorial_images/10_basic_protocol_plan.png)
+3.  Click the operation type name `StreakPlate` to add the operation to the plan
 
 4.  Save the plan, and then click **Launch**. You'll have to select and confirm your budget, and click _Submit_
 
-    ![confirm the budget for the plan](docs/protocol_developer/images/tutorial_images/11_launch_basic_protocol_plan.png)
-
 5.  Select the **Manager** tab, and click your category in the list on the left.
 
-    ![Selecting the job](docs/protocol_developer/images/tutorial_images/12_pending_plan.png)
-
-6.  Click the pending job for `BasicProtocol`, click the _All_ button and click _Schedule_
-
-    ![Scheduling the job](docs/protocol_developer/images/tutorial_images/13_selecting_basic_protocol_job.png)
+6.  Click the pending job for `StreakPlate`, click the _All_ button and click _Schedule_
 
 7.  Click the pending ID under **Jobs**
 
-    ![Selecting job](docs/protocol_developer/images/tutorial_images/14_scheduling_basic_protocol_job.png)
-
 8.  Click _Start_
-
-    ![Starting job](docs/protocol_developer/images/tutorial_images/15_scheduled_basic_protocol_job.png)
 
 9.  Use the buttons in the Technician view to move through the protocol.
 
-    ![Basic Protocol in the Technician View](docs/protocol_developer/images/tutorial_images/16_running_basic_protocol.png)
+    Click **OK** will move to the next slide.
+    After the last page, the protocol will end.
 
-    Ordinarily, clicking **OK** will move to the next slide, but since there is only one there, the protocol will end.
+## Refining the protocol
 
-This process is involved, but under normal operation, there are at least three people involved in these steps: the plan designer, a manager, and a technician.
+The initial protocol is not very detailed, but it shows the basic framework of what the protocol should ultimately do.
+To build the protocol, we can refine each of the steps individually, by adding detail.
+Refining the steps that _get_ and _store_ items requires that we make (or have made) decisions about how things are stored in the lab, so let's postpone those decisions.
+Instead, let's elaborate what we mean to streak the plate to these steps:
 
-## Creating Technician Instructions
+1. Spot the plate from the glycerol stock
+2. Allow the spots on the plate to dry
+3. Streak-out the spotted plate with the pipette
 
-The primary goal of a protocol is to display the instructions that technicians follow.
-Each screen is created by a show-block that indicates what is to be displayed.
-For instance, the following show block provides instructions to clean up after using a scale in a protocol:
+Eventually, we will want to add even more detail about how to do each of these steps, but for now we can add these to `Streak the plate` show block:
 
 ```ruby
-show do
-  title 'Clean up'
+# A simple Aquarium protocol for streaking a plate from an e. coli
+# glycerol stock
+class Protocol
+  def main
+    # Display provisioning instructions
+    show do
+      title 'Get the glycerol stock and a fresh agar plate'
+    end
 
-  note 'Discard all weighing paper, weighing boats and plastic spatulas into the non-biohazard waste'
-  note 'Wash spatulas with tap water. Dry and return to beaker next to scale'
-  note 'Use a damp kimwipe to wipe scale till there is no solid powder left anywhere on it'
+    # Display instructions for streaking the plate
+    show do
+      title 'Streak the plate'
+      check 'Spot the plate from the glycerol stock'
+      check 'Allow the spots on the plate to dry'
+      check 'Streak-out the spotted plate with the pipette'
+    end
+
+    # Display instructions for storing/disposing of items
+    show do
+      title 'Store the glycerol stock and the streaked plate'
+    end
+  end
 end
 ```
 
-The words `title` and `note` are functions that determine the appearance of the text on the constructed page.
-This example renders as
+Because the new steps occur in the second show block preceded by `check`, the second page of the protocol now shows a check-list containing the new steps.
+For this page, the technician must check each box in order to be able to click **OK** to indicate they are done with the page.
 
-![Using note displays text](docs/protocol_developer/images/tutorial_images/17_clean-up-note.png)
+When creating a new protocol, we wont just refine individual steps that we had added before, but may realize that we've left out steps, or that what we've done only works in special cases and needs to be changed.
+For instance, we probably want to give instructions to setup and clean-up the workspace.
+However, we can postpone decisions until we absolutely need to make them, and should try to add or change one thing at a time to avoid mistakes.
+So, we can postpone making decisions about setup/clean-up until we know more about how the protocol will be performed and what resources are required.
 
-(To see this in action, add the show-block to the main method of the `BasicProtocol`.)
+## How Aquarium Works: The Basics
 
-We could also use `bullet` here instead of `note` for the list of tasks.
-However, we want to have the technician confirm each step, and so use `check` instead:
+The idea behind Aquarium is that a researcher can create a plan consisting of operations, each of which is carried out in the lab using the protocol for that operation.
+Each operation takes some inputs and generates outputs, and the plan links operations so that an input of one operation is an output of another.
+
+When a plan is run, operations for which inputs are available (and whose preconditions are true) can be run, and are shown as *pending* on the manager screen.
+The manager then selects a set of operations to be scheduled together as a *job*, and a technician follows the protocol to handle that batch of operations.
+
+## A Protocol that can be used
+
+So, our protocol is not really using Aquarium the way that it is intended:
+
+1. there are no explicit inputs and outputs, and
+2. it is not organized around servicing operations.
+
+Let's deal with each of these, starting with operations.
+
+### Handling Operations
+
+The way that a protocol accesses the operations in the job is to use the name `operations`.
+This identifier refers to a list of operations that can be visited one at a time like this
 
 ```ruby
-show do
-  title 'Clean up'
-
-  check 'Discard all weighing paper, weighing boats and plastic spatulas into the non-biohazard waste'
-  check 'Wash spatulas with tap water. Dry and return to beaker next to scale'
-  check 'Use a damp kimwipe to wipe scale till there is no solid powder left anywhere on it'
+operations.each do |operation|
+  operation_task(operation)
 end
 ```
 
-which gives the output
-
-![Using check displays a checkbox](docs/protocol_developer/images/tutorial_images/18_clean-up-check.png)
-
-where the technicians must tap each checkbox before they can move to the next page.
-
-There are several other style functions that can be used in a show-block that are covered later.
-
-## Working with Samples
-
-In addition to displaying technician instructions, we also want a protocol to manage the samples that the protocol uses or creates.
-For this, an Aquarium protocol manipulates _items_, where each item is a unique instance of a sample in a container.
-The item is the physical object that is manipulated.
-
-Concretely, an item is represented by an `Item` object, which consists of a `Sample` object, an `ObjectType` representing the container, as well as a `location`.
-An example of an item would be a pMOD8 plasmid streaked onto an agar plate that is sitting on a lab bench.
-This plate would be represented as an `Item`, where the `Sample` is `'pMOD8'`, the `ObjectType` is `'E. coli Plate of Plasmid'`, with a location `'Bench'`.
-To access this item, we can query the Aquarium inventory.
-
-To find our plate in the inventory, we first need the `Sample` and `ObjectType`.
-We get the sample with the query
+So, let's refactor our code so that the `main` method does exactly this, and the `operation_task` method consists of the show blocks from before
 
 ```ruby
-Sample.find_by_name('pMOD8')
+class Protocol
+  def main
+    operations.each do |operation|
+      operation_task(operation)
+    end
+  end
+
+  # Perform the Streak Plate protocol for a single operation
+  #
+  # @param operation [Operation] the operation to be executed
+  def operation_task(operation)
+    # Display provisioning instructions
+    show do
+      title 'Get the glycerol stock and a fresh agar plate'
+    end
+
+    # Display instructions for streaking the plate
+    show do
+      title 'Streak the plate'
+      check 'Spot the plate from the glycerol stock'
+      check 'Allow the spots on the plate to dry'
+      check 'Streak-out the spotted plate with the pipette'
+    end
+
+    # Display instructions for storing/disposing of items
+    show do
+      title 'Store the glycerol stock and the streaked plate'
+    end
+  end
+end
 ```
 
-that returns the `Sample` object with name `pMOD8`.
-We do a similar query for the container using
+Now, if you run a plan with a single operation, it should behave as before.
+(But, what happens if you add two or more operations?)
+
+### Declaring Inputs and Outputs
+
+We are going to add an input named `glycerol_stock` and an output named `plate`.
+
+1. Select the **Def** (definition) tab on the Aquarium Developer page for the `StreakPlate` protocol.
+
+2. Click the **Add Input** button, and then type `glycerol_stock` in the name field and `plasmid` in the routing ID field.
+
+3. Click the **Add Output** button, and type `plate` in the name field and `plasmid` in the routing ID field.
+
+
+### Using Inputs and Outputs
+
+Now that we have reorganized the protocol to access the operations, and the inputs and outputs are declared, we can refer to the `glycerol_stock` input as `operation.input('glycerol_stock').item`.
+Output objects are created by calling `operations.make`, and so we add this call to the `main` method.
+Once that is done, the output object can be accessed as `operation.output('plate').item`.
+Because these are long expressions, we can assign the references of these objects to variables `input_stock` and `output_plate`, and use them to refer to the item in the code.
+For now, the protocol uses the IDs for each item in the show blocks to make the instructions more specific.
 
 ```ruby
-ObjectType.find_by_name('E. coli Plate of Plasmid')
+class Protocol
+  def main
+    operations.make
+    operations.retrieve
+    operations.each do |operation|
+      operation_task(operation)
+    end
+    operations.store
+  end
+
+  # Perform the Streak Plate protocol for a single operation
+  #
+  # @param operation [Operation] the operation to be executed
+  def operation_task(operation)
+    # Declare references to input/output objects
+    input_stock = operation.input('glycerol_stock').item
+    output_plate = operation.output('plate').item
+    # Display provisioning instructions
+    show do
+      title 'Get the glycerol stock and a fresh agar plate'
+      check "Get the glycerol stock  #{input_stock.id}"
+      check "Get a fresh agar plate and label it #{output_plate.id}"
+    end
+
+    # Display instructions for streaking the plate
+    show do
+      title 'Streak the plate'
+      check "Spot the plate #{output_plate.id} from the glycerol stock #{input_stock.id}"
+      check 'Allow the spots on the plate to dry'
+      check "Streak-out the spotted plate #{output_plate.id} with the pipette"
+    end
+
+    # Display instructions for storing/disposing of items
+    show do
+      title 'Store the glycerol stock and the streaked plate'
+      check "Return the glycerol stock #{input_stock.id}"
+      check "Store the streaked plate #{output_plate.id}"
+    end
+  end
+end
 ```
 
-And, then use these queries to find the item for the plate
+A couple of details were changed here.
+One is that we expanded the first and final blocks to include separate steps that refer to the input and output objects.
+And, the other is that we use Ruby string interpolation to include the object-specific information, as in
 
 ```ruby
-plate_list = Item.where(
-  sample_id: Sample.find_by_name('pMOD8').id,
-  object_type_id: ObjectType.find_by_name('E. coli Plate of Plasmid').id
-  location: 'Bench'
-  )
+check "Get the glycerol stock  #{input_stock.id}"
 ```
 
-This query returns a list of `Item` objects matching the query, which will be empty if there is no matching item in the inventory.
-Alternatively, we can make the query
+Double-quotes are required for Ruby String interpolation. 
+But, we use single-quotes unless String interpolation is used, which is a Ruby convention.
+
+### Adding Types and Items
+
+Unfortunately, the protocol is now broken – you will get an error if you try to test it because the type of the input is not defined (this is the `sample type` on the definition tab).
+
+1. Click the "hamburger" menu at the top left, and select **Sample Type Definitions**.
+   Click the **New** button to create a new sample type.
+   Type `Plasmid` into the name field, `dummy sample type` in the description field, and click the **Save** button.
+
+2. Under **Containers** on the Plasmid sample type page, click the **Add** button to create a new object type.
+   Type `Plasmid Glycerol Stock` in the name field, `dummy object type` in the description field, `Plasmid` in the Unit field and then click **Create Object Type**.
+   (The unit field links the object type to the sample type.)
+
+3. Repeat step 2, except name the object type `Plasmid Plate`.
+
+Return to the definition tab for the `StreakPlate` protocol, and add the types to the input and output.
+For both, set the sample type to `Plasmid`.
+For the input `glycerol_stock` set the "container" to the object type `Plasmid Glycerol Stock`.
+For the output `plate`, set the "container" to the object type `Plasmid Plate`.
+
+We still need an example `Plasmid` sample to run our protocol.
+
+1. If we look at the page for the `Plasmid` sample type, there is a line that says `There are 0 Plasmids in the inventory`.
+   Click on the `Plasmids` link to open the **Samples** page.
+   Click **New**, click `Plasmid`.
+   Then set the sample name to `dummy_plasmid`, the description to `dummy plasmid sample`, and project to `tutorial`.
+   Finally, click **Save**.
+
+2. At the right of the newly created sample type, click **Actions**.
+   Choose **New Item** and **Plasmid Glycerol Stock**.
+
+Now you should be able to run/test the protocol, and the input and output items are identified by a LIMS ID.
+
+## Provisioning
+
+************here************
+
+Provisioning is the task of gathering the resources that are needed for a protocol.
+
+### Gathering and Storing Items
 
 ```ruby
-plate_list = Sample.find_by_name('pMOD8').in('E. coli Plate of Plasmid')
+def main
+  operations.make
+  operations.retrieve
+  operations.each do |operation|
+    operation_task(operation)
+  end
+  operations.store
+end
 ```
 
-which returns the list of `Item`s with `Sample` `'pMOD8'` in a container of type `'E. coli Plate of Plasmid'`.
-In either case, we expect at least one item that we can extract with the command
+### Provisioning New Items
+
+agar plates may exist or may need to request they be built.
+either way plate needs to be given the item number assigned for output.
+
+## Factoring out common work
+
+If you run a plan with more than one `StreakPlate` operation, you'll see that the way that we have written our protocol repeats some common work that doesn't have to be repeated.
+Provisioning and storing items are the primary example, but we could even interleave the steps of the second show block where plates are streaked because there is a delay as the plates dry.
 
 ```ruby
-plate = plate_list.first
+class Protocol
+  def main
+    operations.make
+    operations.retrieve
+    get_plates(operations.length)
+    operations.each do |operation|
+      operation_task(operation)
+    end
+    store_plates(operations)
+    operations.store
+  end
+
+  # Provision a fresh agar plate for each operation in the given list.
+  #
+  # @param operations [OperationList] the list of operations
+  def get_plates(operations)
+    count = operations.length
+    id_list = operations.map { |operation| operation.output("Plate").item.id }
+    show do
+      title "Get fresh agar plates"
+      check "Please get #{count} agar plates"
+    end
+  end
+
+  def return_and_store(operations)
+    # Display instructions for storing/disposing of items
+    show do
+      title 'Store the glycerol stock and the streaked plate'
+      check "Return the glycerol stock #{input_stock.id}"
+      check "Store the streaked plate #{output_plate.id}"
+    end
+  end
+
+  # Perform the Streak Plate protocol for a single operation
+  #
+  # @param operation [Operation] the operation to be executed
+  def operation_task(operation)
+    # Declare references to input/output objects
+    input_stock = operation.input('glycerol_stock').item
+    output_plate = operation.output('plate').item
+    # Display provisioning instructions
+    show do
+      title 'Get the glycerol stock'
+      check "Get the glycerol stock  #{input_stock.id}"
+    end
+
+    # Display instructions for streaking the plate
+    show do
+      title 'Streak the plate'
+      check "Spot the plate #{output_plate.id} from the glycerol stock #{input_stock.id}"
+      check 'Allow the spots on the plate to dry'
+      check "Streak-out the spotted plate #{output_plate.id} with the pipette"
+    end
+  end
+end
 ```
 
-This call to `plate_list.first` will return `nil` if `plate_list` is empty, and you should always check for this situation before using `plate` for another purpose.
+## Locations
 
-See [Here](http://klavinslab.org/aquarium/api/Item.html) for more details about Items.
 
-A special type of `Item`, called `Collection` is used to keep track of multiple `Samples`. While an `Item` has one `Sample` object, a `Collection` has an arbitrary amount of `Samples` associated with it. We refer to the slots for `Samples` in a `Collection` as `Parts`. `Collections` have additional methods which allow protocols to smoothly interact with containers that can hold many things at once, like stripwells. A full stripwell can be represented as a `Collection`, while each individual well in the physical stripwell is represented as a `Part` of that `Collection`.
 
-To perform an _E. coli_ transformation you need a _batch_ of competent cell aliquots. We represent the entire batch as a `Collection`, and each aliquot as one `Part` of that `Collection`.
 
-To retrieve a batch of DH5&alpha;-competent cells from the -80C freezer at UW BIOFAB make this query:
-
-```ruby
-batch = Item.where(
-  sample_id: Sample.find_by_name('DH5alpha').id,
-  location: 'M80C.2.0.21'
-  ).first
-```
-
-This assigns a single item with object type `'E. coli Comp Cell Batch'` to the variable `batch`.
-The location `'M80C.2.0.21'` is a location in the -80C freezer at UW BIOFAB.
-(See the [location wizard](docs/protocol_developer/location.md) documentation for details on locations.)
-
-The return from the above query will be an ordinary `Item`. To be able to use the object as a `Collection` we call
-
-```ruby
-batch = collection_from batch
-```
-
-and then can use the `Collection` methods on the object.
-
-See [Here](http://klavinslab.org/aquarium/api/Collection.html) for more details about Collections.
-
-### Practicing Queries
-
-It can be helpful to use the Rails console for Aquarium to try queries such as those above during protocol development.
-From the command line, run
-
-```bash
-docker-compose run web rails c
-```
-
-in the `aquarium` directory to start the Rails console.
-(If you have Aquarium setup to run on your machine without docker you can also just use the command `rails c`)
-
-The allowable queries are standard with Ruby on Rails `ActiveRecord` models.
-
-See [here for details](http://guides.rubyonrails.org/v3.2.21/active_record_querying.html).
-
-### Creating Items and Samples
-
-The function `new_object` and `new_sample` make a new `Item` based on the name of an object type or sample type.
-When given to the `produce` function this item is added to the database with new unique ids, and provisioned (e.g., 'taken').
-
-- `new_object name` - This function takes the name of an object type and makes a new item with that object type.
-  An object type with that name must exist in the database.
-  For example, you might do the following, which would return a new item in the variable `i`.
-
-  ```ruby
-  i = produce new_object '1 L Bottle'
-  ```
-
-- `new_sample(sample_name, of: sample_type_name, as: object_type_name)` - This function takes a sample name and an object type name and makes a new item with that name.
-  For example, you might do the following, which returns a new item in the variable `i` whose object type is 'Plasmid Stock', whose corresponding sample is 'pLAB1' and whose sample type is 'Plasmid'.
-
-  ```ruby
-  j = produce new_sample('pLAB1', of: 'Plasmid', as: 'Plasmid Stock')
-  ```
-
-  When a protocol is done with a an item, it should release it.
-  This is done with the release function.
-
-- `release item_list, opts={} //optional block//` -- release an item.
-  This function has many forms.
-  Suppose `i` and `j` are items currently ''taken'' by the protocol.
-
-  ```ruby
-  release([i,j])
-  ```
-
-  - ^ This version of release simply release the items i and j (i.e. it marks them as not taken by the job running the protocol).
-
-```ruby
-release([i,j], interactive: true)
-```
-
-- ^ This version calls `show` and tells the user to put the items away, or dispose of them, etc.
-  Once the user clicks "Next", the items in the list are marked as not taken.
-
-```ruby
-release([i,j], interactive: true) {
-  warning 'Be careful with these items.'
-}
-```
-
-- ^ This version also calls `show`, like the previous version, but also adds the `show` code block to the `show` that release does, so that you can add various notes, warnings, images, etc. to the page shown to the user.
-
-### Creating Collections
-
-Collections can be made manually by making a new item with a collection-friendly object type as above, and promoting it to a collection.
-You can also use the following static Collection methods for convienence
-
-- `Collection.new_collection 'collection_type_name'` - Creates a new collection of type "collection_type_name" with a matrix of size defined by the rows and columns in the collection type.
-
-- `Collection.spread sample_list, 'collection_type_name'` - Creates an appropriate number of collections of "collection_type_name" and fills collections with the sample_list.
-  The sample list can be Samples, Items, or integers.
+## Old Text
 
 ### Provisioning Items
 
