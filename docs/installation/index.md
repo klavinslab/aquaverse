@@ -1,15 +1,14 @@
 # Installing and Running Aquarium
 
-We recommend that labs doing protocol development run at least two instances:
-the first, a nursery server that is shared within the lab for the purposes of trying out protocols under development, while the second is the production server that controls the lab.
+We recommend that labs doing protocol development run at least two instances: a nursery server and a production server.
+The nursery server is shared within the lab for the purposes of trying out protocols under development, while the second is the server that controls the lab.
 We use this arrangement in the Klavins lab to run the UW BIOFAB so that protocols can be evaluated without affecting the actual lab inventory.
-In addition, each protocol developer should run a local instance, which can be done easily with Docker.
+In addition to these lab servers, each protocol developer should run a local instance.
 
-We strongly encourage protocol developers to use the Docker version, because it eliminates several of the manual configuration details.
-Once a protocol runs well on a local instance, you can port it to your production instance using import on the developer tab.
-
-We understand that it might seem simpler to set up a single instance of Aquarium and use it as the production server and for protocol development.
-However, protocol testing _should not_ be done on a production server, because protocol errors can affect system performance, and protocols that create database entries can pollute your production database.
+The reason for using different instances of Aquarium is that protocol testing can be disruptive to the lab.
+First, protocols may change the underlying database, which depending on the effects, could change the status of items that are in use in the lab.
+And, second, errors in protocols being tested can affect lab system performance and disrupt protocols underway.
+So, our strong recommendation is that protocol testing _should not_ be done on a production server.
 
 ## Table of Contents
 
@@ -17,35 +16,21 @@ However, protocol testing _should not_ be done on a production server, because p
 
 - [Installing and Running Aquarium](#installing-and-running-aquarium)
     - [Table of Contents](#table-of-contents)
-    - [Choosing your Approach](#choosing-your-approach)
     - [Getting Aquarium](#getting-aquarium)
-    - [Manual Installation Instructions](#manual-installation-instructions)
+    - [Choosing your Approach](#choosing-your-approach)
     - [Docker Installation Instructions](#docker-installation-instructions)
         - [Running Aquarium with Docker](#running-aquarium-with-docker)
         - [Stopping Aquarium in Docker](#stopping-aquarium-in-docker)
         - [Updating Aquarium](#updating-aquarium)
         - [Changing the Database](#changing-the-database)
         - [Notes](#notes)
+    - [Manual Installation Instructions](#manual-installation-instructions)
 
 <!-- /TOC -->
 
-## Choosing your Approach
-
-If your goal is to run Aquarium in production mode with many users, you should install and run Aquarium manually.
-This requires first installing Ruby, Rails, MySQL, and, depending on the deployment, a web server.
-The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org) and the MySQL database running on a separate RDBMS instance.
-
-We discuss some of the considerations for running Aquarium below, but your deployment may require fine-tuning beyond what we describe.
-
-[Jump to manual installation instructions](#manual-installation-instructions).
-
-If your goal is instead to run Aquarium on your laptop to evaluate it, develop new code, we have provided Docker configuration scripts to run Aquarium with nearly all of the supporting services.
-
-[Jump to docker installation instructions](#docker-installation-instructions).
-
 ## Getting Aquarium
 
-For both manual and Docker installations you will need to obtain the Aquarium source.
+Regardless of how you choose to install and run Aquarium you will need to obtain the Aquarium source.
 If you use a non-Windows system, do this by using [git](https://git-scm.com) with the command
 
 ```bash
@@ -58,99 +43,36 @@ On Windows use
 git clone https://github.com/klavinslab/aquarium.git --config core.autocrlf=input
 ```
 
-By default, this will give you the repository containing the bleeding edge version of Aquarium, and you will want to choose the Aquarium version you will use.
-The most definitive way to find the latest release is to visit the [latest Aquarium release](https://github.com/klavinslab/aquarium/releases/latest) page at Github, take note of the tag number (e.g., v2.4.2), and then checkout that version.
-For instance, if the tag is `v2.4.2` use the command
+By default, this gives you the repository containing the bleeding edge version of Aquarium, and you will want to choose the Aquarium version you will use.
+The most definitive way to find the latest release is to visit the [latest Aquarium release](https://github.com/klavinslab/aquarium/releases/latest) page at Github, take note of the tag number (e.g., v2.5.0), and then checkout that version.
+For instance, if the tag is `v2.5.0` use the command
+
 ```bash
 cd aquarium
-git checkout v2.4.2
+git checkout v2.5.0
 ```
 
-(Don't use this command if you are doing development.
-See the [git tagging documentation](https://git-scm.com/book/en/v2/Git-Basics-Tagging) for details.)
+(Don't do this if you are doing Aquarium development. See the [git tagging documentation](https://git-scm.com/book/en/v2/Git-Basics-Tagging) for details.)
 
-## Manual Installation Instructions
+## Choosing your Approach
 
-To manually install Aquarium in a production environment:
+If your goal is to run Aquarium on your laptop to evaluate it, develop new code, we have provided Docker configuration scripts to run Aquarium with all of the supporting services except for email notifications.
 
-1.  Ensure you have a Unix&trade;-like environment on your machine and have installed
+Note we assume a Unix&trade;-like environment though our experience is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
 
-    - [Ruby](https://www.ruby-lang.org/en/) version 2.3.7
-    - [npm](https://www.npmjs.com/get-npm)
-      <br>
+[Jump to docker installation instructions](#docker-installation-instructions).
 
-2.  Also, make sure that you have a [MySQL](https://www.mysql.com) server installed.
+If your goal is to run Aquarium in production mode with many users, you should install and run Aquarium manually.
+This requires first installing Ruby, Rails, MySQL, and, depending on the deployment, a web server.
+The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org) and the MySQL database running on a separate RDBMS instance.
 
-    When installing Aquarium on AWS use RDS, or, for another cloud service, use the database services available there.
+We discuss some of the considerations for running Aquarium below, but your deployment may require fine-tuning beyond what we describe.
 
-3.  [Get the aquarium source](#get-aquarium).
-
-4.  Configure Aquarium by first creating the `aquarium/config/initializers/aquarium.rb` file
-
-    ```bash
-    cd aquarium/config/initializers
-    cp aquarium_template.notrb aquarium.rb
-    ```
-
-    and then editing `aquarium.rb` to set the URLs and email address.
-
-5.  Configure the Aquarium database settings.
-    First, create the `aquarium/config/database.yml` file with
-
-    ```bash
-    cd ..  # aquarium/config
-    cp database_template.yml database.yml
-    ```
-
-    You should change the _production_ mode configuration to point to your database server.
-    And, in this case, you don't need to worry about the remainder of the `database.yml` file.
-
-6.  Install the Ruby gems required by Aquarium with
-
-    ```bash
-    gem install bundler
-    bundle install
-    ```
-
-    Note: if the MySQL database is not installed or not properly installed/configured, you may get errors during this step.
-
-7.  Install Javascript libraries used by Aquarium with the command
-
-    ```bash
-    npm install -g bower
-    bower install
-    ```
-
-8.  Initialize the production database with
-
-    ```bash
-    RAILS_ENV=production rake db:schema:load
-    ```
-
-9.  For the production server, precompile the assets:
-
-    ```bash
-    RAILS_ENV=production bundle exec rake assets:precompile
-    ```
-
-10. [THIS SHOULD REFER TO PUMA/NGINX CONFIG]
-To start Aquarium, run
-
-    ```bash
-    RAILS_ENV=production rails s
-    ```
-
-    and then go do `http://localhost:3000/` to find the login page.
-
-    Also, start the Krill server
-
-    ```bash
-    rails runner "Krill::Server.new.run(3500)"
-    ```
+[Jump to manual installation instructions](#manual-installation-instructions).
 
 ## Docker Installation Instructions
 
-_These instructions are for setting up a local Aquarium and are not meant for production instances._
+_These instructions are for setting up a local Aquarium and have not been tested with Docker-based deployments in a cloud service._
 
 ### Running Aquarium with Docker
 
@@ -158,12 +80,7 @@ To run Aquarium in production with Docker on your computer:
 
 1.  Install [Docker](https://docs.docker.com/install/) on your computer.
 
-    Note that our setup scripts are written for a Unix&trade; environment.
-    They will work on OSX, Linux, or inside the Docker Toolbox VM on Windows.
-    To run Aquarium on Windows your system either needs to meet the requirements of
-    [Docker for Windows](https://www.docker.com/docker-windows),
-    or you have to use the older
-    [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/).
+    Note: to run Aquarium on Windows your system either needs to meet the requirements of [Docker for Windows](https://www.docker.com/docker-windows), or you have to use the older [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/).
 
 2.  [Get the Aquarium source](#getting-aquarium).
 
@@ -244,7 +161,7 @@ and restarting Aquarium with `docker-compose` as before.
 
 > **Important**: If you swap in a large database dump, the database has to be reinitialized.
 > And the larger the database, the longer the initialization will take.
-> *Let the initialization finish.*
+> _Let the initialization finish._
 
 ### Notes
 
@@ -258,7 +175,89 @@ and restarting Aquarium with `docker-compose` as before.
     Bioturk::Application.config.instance_name = 'LOCAL'
     ```
 
-3.  The current configuration does not allow files uploaded to Aquarium to be accessed through the links on the Aquarium pages.
-    The files are directly accessible in the directory `docker/s3`, or for a development server via the minio console at `http:localhost:9000` (using the credentials from the `docker-compose.yml` file).
+3.  Files uploaded to Aquarium are directly accessible in the directory `docker/s3`, and the minio console at `http:localhost:9000` using the minio credentials from the `docker-compose.yml` file.
 
-4.  The Docker configuration also does not provide an email server container, meaning that email notifications will not work.
+4.  The Docker configuration also does not provide an email server container, meaning that email notifications will not work unless explicitly configured.
+    See the comments in the files `docker/aquarium/development.rb` and `docker/aquarium/production.rb` for more information.
+
+## Manual Installation Instructions
+
+To manually install Aquarium in a production environment:
+
+1.  Ensure you have a Unix&trade;-like environment on your machine and have installed
+
+    - [Ruby](https://www.ruby-lang.org/en/) version 2.3.7
+    - [npm](https://www.npmjs.com/get-npm)
+      <br>
+
+2.  Also, make sure that you have a [MySQL](https://www.mysql.com) server installed.
+
+    When installing Aquarium on AWS use RDS, or, for another cloud service, use the database services available there.
+
+3.  [Get the aquarium source](#get-aquarium).
+
+4.  Configure Aquarium by first creating the `aquarium/config/initializers/aquarium.rb` file
+
+    ```bash
+    cd aquarium/config/initializers
+    cp aquarium_template.notrb aquarium.rb
+    ```
+
+    and then editing `aquarium.rb` to set the URLs and email address.
+
+5.  Configure the Aquarium database settings.
+    First, create the `aquarium/config/database.yml` file with
+
+    ```bash
+    cd ..  # aquarium/config
+    cp database_template.yml database.yml
+    ```
+
+    You should change the _production_ mode configuration to point to your database server.
+    And, in this case, you don't need to worry about the remainder of the `database.yml` file.
+
+6.  To install on a machine other than your computer, copy the `aquarium` directory to the server.
+
+7.  Install the Ruby gems required by Aquarium with
+
+    ```bash
+    gem update --system
+    gem install bundler && bundle install --jobs 20 --retry 5
+    ```
+
+    Note: if the MySQL database is not installed or not properly installed/configured, you may get errors during this step.
+
+8.  Install Javascript libraries used by Aquarium with the command
+
+    ```bash
+    npm install -g bower@latest
+    echo '{ "directory": "public/components", "allow_root": true }' > ./.bowerrc
+    bower install --config.interactive=false --force
+    ```
+
+9.  Initialize the production database with
+
+    ```bash
+    RAILS_ENV=production rake db:schema:load
+    ```
+
+10.  For the production server, precompile the assets:
+
+     ```bash
+     RAILS_ENV=production bundle exec rake assets:precompile
+     ```
+
+11. [THIS SHOULD REFER TO PUMA/NGINX CONFIG]
+    To start Aquarium, run
+
+        ```bash
+        RAILS_ENV=production rails s
+        ```
+
+        and then go do `http://localhost:3000/` to find the login page.
+
+        Also, start the Krill server
+
+        ```bash
+        rails runner "Krill::Server.new.run(3500)"
+        ```
