@@ -71,15 +71,15 @@ For a comprehensive list of methods that are available for use in show blocks, s
 
 The most commonly used show block methods are the following:
 
-- `title` – accepts a String, which is used as the header for this slide
-- `note` – accepts a String and appends it as a new line on the slide
-- `check` – accepts a String and appends it as a new line on the slide with a checkbox next to it
-- `warning`– accepts a String and appends it as a new line on the slide, bold and highlighted in yellow
-- `image` – accepts a filepath to a valid image, and displays it on the slide
-- `table` – accepts either a 2d array or a `Table` object, and displays it on the slide. See the
+- `title` to display the header for a slide
+- `note` to display a line of text on the slide
+- `check` to display a checkbox with a line of text
+- `warning` to display a bold line of text that is highlighted yellow
+- `image` to display an image
+- `table` to display the contents of a 2d array or a `Table` object as a table
    <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>
    for more details on how to generate and display `Tables` to the technician.
-- `get` – ask the technician for input which will be usable throughout the rest of the protocol.
+- `get` displays a field that allows the technician to provide a value. 
 
 ## Dynamic Show Blocks
 
