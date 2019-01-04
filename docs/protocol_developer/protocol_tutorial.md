@@ -193,8 +193,8 @@ So, we can postpone making decisions about setup/clean-up until we know more abo
 The idea behind Aquarium is that a researcher can create a plan consisting of operations, each of which is carried out in the lab using the protocol for that operation.
 Each operation takes some inputs and generates outputs, and the plan links operations so that an input of one operation is an output of another.
 
-When a plan is run, operations for which inputs are available (and whose preconditions are true) can be run, and are shown as *pending* on the manager screen.
-The manager then selects a set of operations to be scheduled together as a *job*, and a technician follows the protocol to handle that batch of operations.
+When a plan is run, operations for which inputs are available (and whose preconditions are true) can be run, and are shown as _pending_ on the manager screen.
+The manager then selects a set of operations to be scheduled together as a _job_, and a technician follows the protocol to handle that batch of operations.
 
 ## A Protocol that can be used
 
@@ -264,7 +264,6 @@ We are going to add an input named `glycerol_stock` and an output named `plate`.
 
 3. Click the **Add Output** button, and type `plate` in the name field and `plasmid` in the routing ID field.
 
-
 ### Using Inputs and Outputs
 
 Now that we have reorganized the protocol to access the operations, and the inputs and outputs are declared, we can refer to the `glycerol_stock` input as `operation.input('glycerol_stock').item`.
@@ -324,7 +323,7 @@ And, the other is that we use Ruby string interpolation to include the object-sp
 check "Get the glycerol stock  #{input_stock.id}"
 ```
 
-Double-quotes are required for Ruby String interpolation. 
+Double-quotes are required for Ruby String interpolation.
 But, we use single-quotes unless String interpolation is used, which is a Ruby convention.
 
 ### Adding Types and Items
@@ -361,7 +360,7 @@ Now you should be able to run/test the protocol, and the input and output items 
 
 ## Provisioning
 
-************here************
+****\*\*\*\*****here****\*\*\*\*****
 
 Provisioning is the task of gathering the resources that are needed for a protocol.
 
@@ -447,9 +446,6 @@ end
 ```
 
 ## Locations
-
-
-
 
 ## Old Text
 
