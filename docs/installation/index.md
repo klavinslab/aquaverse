@@ -241,17 +241,17 @@ To manually install Aquarium in a production environment:
     RAILS_ENV=production rake db:schema:load
     ```
 
-10.  Pre-compile the assets:
+10. Pre-compile the assets:
 
-     ```bash
-     RAILS_ENV=production bundle exec rake assets:precompile
-     ```
+    ```bash
+    RAILS_ENV=production bundle exec rake assets:precompile
+    ```
 
 11. If you have installed Aquarium on your local computer, you should now be able to start Aquarium by running
 
-        ```bash
-        RAILS_ENV=production rails s
-        ```
+    ```bash
+    RAILS_ENV=production rails s
+    ```
 
     and then go to `http://localhost:3000/` to find the login page.
 
