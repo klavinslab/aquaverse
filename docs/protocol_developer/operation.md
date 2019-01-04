@@ -12,22 +12,6 @@ See the [API documentation]({{ site.baseurl }}{% link /api/index.html %}) for mo
 
 ---
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Operation Documentation](#operation-documentation)
-    - [Table of Contents](#table-of-contents)
-    - [The Operation Interface](#the-operation-interface)
-    - [Iterating Through Operatons](#iterating-through-operatons)
-    - [Checking and Changing Operation Status](#checking-and-changing-operation-status)
-    - [Inputs and Outputs](#inputs-and-outputs)
-    - [Adding Inputs After the Protocol has Started](#adding-inputs-after-the-protocol-has-started)
-
-<!-- /TOC -->
-
----
-
 ## The Operation Interface
 
 Operations are created by the user in the Aquarium planner and then batched together by the lab manager in the Aquarium manager to be sent to a protocol.

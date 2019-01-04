@@ -7,20 +7,6 @@ This page will give examples and instructions on how to get started interacting 
 
 ---
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Location Wizard Documentation](#locationwizarddocumentation)
-    - [Table of Contents](#tableofcontents)
-    - [Location Wizards](#locationwizards)
-    - [Defining a New Wizard](#defininganewwizard)
-    - [Associating a Wizard with an Object Type](#associatingawizardwithanobjecttype)
-    - [Moving Items](#movingitems)
-    - [Krill Interface](#krillinterface)
-
-<!-- /TOC -->
-
 ## Location Wizards
 
 A `LocationWizard` is a bit of code that uses a schema to store new items.

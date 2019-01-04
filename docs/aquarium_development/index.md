@@ -1,24 +1,8 @@
-
 # Aquarium Development Guide
 
 These guidelines are intended for those working directly on Aquarium, though some details are shared with protocol development.
 
 ---
-
-<!-- TOC -->
-
-- [Aquarium Development Guide](#aquarium-development-guide)
-    - [Getting Started](#getting-started)
-    - [Running Aquarium](#running-aquarium)
-    - [Testing Aquarium](#testing-aquarium)
-    - [Editing Aquarium](#editing-aquarium)
-        - [Documenting changes](#documenting-changes)
-        - [Formatting Aquarium code](#formatting-aquarium-code)
-        - [Documenting Aquarium Ruby Code](#documenting-aquarium-ruby-code)
-    - [Modifying the Site](#modifying-the-site)
-    - [Making an Aquarium Release](#making-an-aquarium-release)
-
-<!-- /TOC -->
 
 ## Getting Started
 
@@ -26,25 +10,145 @@ Follow the Aquarium [installation]({{ site.baseurl }}{% link _docs/installation/
 
 ## Running Aquarium
 
-As explained in the installation instructions, you can run Aquarium with
+To run Aquarium in development mode using the Docker configuration in a Unix&trade;-like environment, do the following.
+
+### Initial steps
+
+1. If you have run Aquarium in production, [switch databases](#switching-from-production-to-development)
+
+2. Make the `develop-compose.sh` script executable
+
+   ```bash
+   chmod u+x develop-compose.sh
+   ```
+
+   This script helps shorten the command you have to write.
+   Instead of starting each command with
+
+   ```bash
+   docker-compose -f docker-compose.yml -f docker-compose.dev.yml
+   ```
+
+   you only have to start with the script name
+
+   ```bash
+   ./develop-compose.sh
+   ```
+
+### Commands
+
+1. Build the docker images with
+
+   ```bash
+   ./develop-compose.sh build
+   ```
+
+   This should only be necessary the first time you run Aquarium in development mode.
+   However, it may be needed any time you change the Aquarium configuration.
+   In situations where dependencies change, you will also want to run `build` with the `--no-cache` option.
+
+2. Start Aquarium with
+
+   ```bash
+   ./develop-compose.sh up
+   ```
+
+   This command starts services for Aquarium, Krill, MySQL, minio and nginx, which are needed to run Aquarium.
+   In development mode, Aquarium is available at `localhost:3000` instead of `localhost`.
+
+   To stop the services, type `ctrl-c` followed by
+
+   ```bash
+   ./develop-compose down
+   ```
+
+3. To run commands inside the Aquarium Ruby environment, precede each with
+
+   ```bash
+   ./develop-compose.sh run --rm app
+   ```
+
+   Specifically, you can run a shell within the Aquarium container with the command
+
+   ```bash
+   ./develop-compose.sh run --rm app /bin/sh
+   ```
+
+   where you can run `rake` or even the Rails console.
+
+## Switching databases
+
+The configuration for Docker uses the MySQL Docker image, which is capable of automatically importing a database dump the first time it is started.
+This is convenient in some ways, but it is not setup to easily switch to another database.
+This means that to switch between production and development environments you need to do some manual steps.
+
+### Switching from Production to Development
+
+Switching from production to development will destroy any changes you have made to the production database.
+If you want to save these, you will have to create the database dump.
+
+Using the values of `MYSQL_USER` and `MYSQL_PASSWORD` from `docker-compose.override.yml` do the following
 
 ```bash
-docker-compose up
+MYSQL_USER=<username>
+MYSQL_PASSWORD=<password>
+docker-compose up -d
+docker-compose exec db mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD production > production_dump.sql
+./develop-compose.sh down
 ```
 
-and stop it with
+If you had previously made a dump of the development database, copy this file to the default location:
 
 ```bash
-docker-compose down
+cp development_dump.sql docker/mysql_init/dump.sql
 ```
 
-As you work on Aquarium, you will want to run commands that need the Aquarium Ruby environment (e.g., `rails` commands).
-To avoid having to do the manual installation steps,  you can simply precede each command with
+You can then safely remove the MySQL files to allow the switch by running
 
 ```bash
-docker-compose run -rm web
+rm -rf docker/db/*
 ```
 
+### Switching from Development to Production
+
+Switching from development to production will destroy any changes you have made to the development database.
+If you want to save these, you will have to create the database dump.
+
+Using the values of `MYSQL_USER` and `MYSQL_PASSWORD` from `docker-compose.dev.yml` do the following
+
+```bash
+MYSQL_USER=<username>
+MYSQL_PASSWORD=<password>
+./develop-compose.sh up -d
+./develop-compose.sh exec db mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD development > development_dump.sql
+./develop-compose.sh down
+```
+
+If you had previously made a dump of the production database, copy this file to the default location:
+
+```bash
+cp production_dump.sql docker/mysql_init/dump.sql
+```
+
+You can then safely remove the MySQL files to allow the switch by running
+
+```bash
+rm -rf docker/db/*
+```
+
+### Restoring the default database dump
+
+If you want to restart from an empty database, you can run
+
+```bash
+cp docker/mysql_init/default.sql docker/mysql_init/dump.sql
+```
+
+Before restarting Aquarium, remove the MySQL files with
+
+```bash
+rm -rf docker/db/*
+```
 
 ## Testing Aquarium
 
@@ -82,8 +186,7 @@ def copy_associations(args)
 end
 ```
 
-Note that an argument with a default value is *not* an option, and should just be listed using the `@param` tag.
-
+Note that an argument with a default value is _not_ an option, and should just be listed using the `@param` tag.
 
 Here are some ([borrowed](http://blog.joda.org/2012/11/javadoc-coding-standards.html)) style guidelines for documentation:
 
@@ -117,36 +220,115 @@ will generate the documentation and write it to the directory `docs/api`.
 This location is determined by the file `.yardopts` in the project repository.
 This file also limits the API to code used in Krill the protocol development language.
 
-## Modifying the Site
-
-The Aquarium project pages settings display the files in the `docs` directory of the `master` branch as the project site [http://klavinslab.org/aquarium](http://klavinslab.org/aquarium).
-
-The site is built from the [kramdown](https://kramdown.gettalong.org) flavor of Markdown using GitHub flavored [Jekyll](https://jekyllrb.com).
-It riffs off of the [Cayman theme](https://github.com/pages-themes/cayman), set through the project pages settings for the Aquarium project.
-The files in `docs/_layouts`, `docs/_includes`, `docs/_sass`, and `docs/assets/css` define changes that override the theme defaults.
-
-The content of the site is located in the files in `docs/_docs` with each subdirectory having a `index.md` file that is loaded when the directory name is used (e.g., `klavinslab.org/aquarium/manager` maps to the file `docs/_docs/manager/index.md`).
-These Markdown files have a `permalink` that determines this mapping.
-Because of the way that general permalinks are defined in `docs/_config.yml`, other markdown documents correspond to a URL with the file name.
-For instance, `klavingslab.org/aquarium/protocol_developer/table/` maps to the file `docs/_docs/protocol_developer/table.md`.
-
-To avoid issues creating links using standard Markdown hyperlinks, use the Liquid `link` tag that will do the mapping from the file path.
-This tag takes the absolute path relative to the `docs` directory, so use `{% link _docs/installation/index.md %}` to get the link for the file `docs/_docs/installation/index.md`.
-However, this link will be relative to the `docs` directory, and to get the complete mapping we have to add the base URL for the site.
-So use `{{ site.baseurl }}{% link _docs/installation/index.md %}` to get the correct link on the generated page.
-Using the link tag to reference image files in the `images` subdirectory for each topic will avoid discrepancies between a local preview and how the site is displayed on GitHub.
-
-Unfortunately, images linked this way will actually not be rendered in a local preview.
-To see the pages rendered properly, install the `github-pages` gem, run `jekyll serve` from the `docs` directory, and visit `localhost:4000` with a browser.
-For more detail, see the [instructions](https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/) from GitHub.
-
 ## Making an Aquarium Release
 
-_this is a draft list_
-
 1.  (make sure Rails tests pass)
-2.  Run rubocop, fix anything broken. Once done run `rubocop --auto-gen-config`.
-3.  Update API by running `yard`
+2.  Run `rubocop`, fix anything broken. Once done run `rubocop --auto-gen-config`.
+3.  Update API documentation by running `yard`
 4.  (make sure JS tests pass)
 5.  Make sure JS linting passes
-6.  Update change log
+6.  Update the version number in `config/initializers/version.rb` to the new version number.
+7.  (Update change log)
+8.  Create a tag for the new version:
+    ```bash
+    git tag -a v$NEWVERSION -m "Aquarium version $NEWVERSION"
+    git push --tags
+    ```
+9.  [Create a release on github](https://help.github.com/articles/creating-releases/).
+    Visit the [Aquarium releases page](https://github.com/klavinslab/aquarium/releases).
+    Click "Tags".
+    Click "add release notes" for the new tag, use the change log as the release notes.
+    Click "publish release".
+
+## Docker configuration
+
+The Aquarium Docker configuration is determined by these files:
+
+```bash
+aquarium
+|-- Dockerfile                  # defines the image for Aquarium
+|-- docker
+|   |-- aquarium                # Aquarium configuration files
+|   |-- aquarium-entrypoint.sh  # entrypoint for running Aquarium
+|   |-- db                      # directory to store database files
+|   |-- krill-entrypoint.sh     # entrypoint for running Krill
+|   |-- mysql_init              # database dump to initialize database
+|   |-- nginx.development.conf  # nginx configuration for development server
+|   |-- nginx.production.conf   # nginx configuration for production server
+|   `-- s3                      # directory for minio files
+|-- docker-compose.dev.yml      # development compose file
+|-- docker-compose.override.yml # production compose file
+|-- docker-compose.windows.yml  # windows compose file
+`-- docker-compose.yml          # base compose file
+```
+
+### Images
+
+The `Dockerfile` configures the `basebuilder` Aquarium image that contains the configuration needed by development or production environments.
+
+The `basebuilder` image is based on the Ruby Alpine linux Docker image that includes Rails.
+In addition the image includes:
+
+1. Development tools needed to configure and run Aquarium.
+2. Javascript components used by Aquarium webpages.
+3. Gems used by Aquarium.
+4. The `aquarium` application (minus the files in `.dockerignore`).
+5. The entrypoint scripts for running Aquarium and Krill from Docker.
+
+Note that this base configuration includes the configuration files in `config`, though the docker-compose configurations override these.
+
+copies rails configuration files from the `docker/aquarium` directory into the correct place in the image; and adds the `docker/aquarium-entrypoint.sh` and `docker/krill-entrypoint.sh` scripts for starting the Aquarium services.
+The configuration also ensures that the `docker/db` and `docker/s3` directories needed for the database and [minio](https://minio.io) S3 server are created on the host as required by the compose files.
+The `devbuilder` and `prodbuilder` configurations build an image with environment specific files.
+
+### Compose files
+
+The docker-compose files are defined to allow Aquarium to be run locally in production or development modes and on Windows.
+
+Specifically, the files are meant to be combined as follows:
+
+- `docker-compose.yml` and `docker-compose.override.yml` runs production,
+- `docker-compose.yml` and `docker-compose.dev.yml` runs development, and
+- adding `docker-compose.windows.yml` allows MySQL to run on Windows.
+
+The order of the files is significant since the later files add or replace definitions from the base file.
+
+Note that the command for the first combination
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.override.yml up
+```
+
+is equivalent to the simpler command
+
+```bash
+docker-compose up
+```
+
+The compose files are designed so that running in production is the default configuration to support users who are doing protocol development on a local instance.
+To support this, the `docker-compose.yml` file contains the common configuration for both environments, including identifying the entrypoints for Aquarium and Krill, mounting host directories used by Aquarium, MySQL and minio for persistent storage.
+The file `docker-compose.override.yml` is run by default and adds production environment files to the base configuration, while `docker-compose.dev.yml` adds the configurations for the development environment.
+
+Much of the key differences between environments are handled by mounting different files with the different configurations.
+For instance, the Rails configuration files are replaced by files from `docker/aquarium` that are mounted over the counterparts in `config`.
+In the case of configuring MySQL and nginx, the mount points for the configuration files are particular to the image used for these services, some of which are not terribly well documented.
+Using volumes in this way is convenient, but can also be the source of great mystery when a mounted volume overrides the files in the image.
+Tweak the volumes with care.
+
+### Database
+
+The `docker/mysql_init` directory contains the database dump that is used to initialize the database when it is run the first time.
+The MySQL service is configured to use the `docker/db` directory to store its files, and removing the contents of this directory (`rm -rf docker/db/*`) will cause the database to initialize the next time the service is started.
+
+### Local S3 server
+
+A [minio](minio.io) service `s3` is used to manage files uploaded to Aquarium in the local configuration.
+The `s3` service is configured so that these files are stored in `docker/s3`.
+The current configuration does not allow the pre-signed URLs returned by Aquarium to be used because the host is configured to be the hostname of the service, which is only accessible from within Docker.
+However, the files are also be accessible through the minio webclient at `localhost:9000`.
+
+### Local web server
+
+Access to Aquarium and the S3 webclient is handled by nginx.
+For development, all requests to port 3000 are forwarded to Aquarium, while for production, static files are served by nginx and other requests are handled by puma via a socket. 
+See the nginx configuration files in the `docker` directory.

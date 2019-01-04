@@ -1,20 +1,6 @@
 
 # User Management
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [User Management](#usermanagement)
-    - [Table of Contents](#tableofcontents)
-    - [Create an Aquarium Account](#createanaquariumaccount)
-    - [Adding users in Aquarium](#addingusersinaquarium)
-    - [Creating Groups](#creatinggroups)
-    - [Changing Passwords](#changingpasswords)
-    - [Retiring Users](#retiringusers)
-
-<!-- /TOC -->
-
 ## Create an Aquarium Account
 
 The dockerized development server already has an adminstrative user with login `neptune` and password `aquarium`.

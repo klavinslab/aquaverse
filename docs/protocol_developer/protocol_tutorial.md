@@ -2,46 +2,9 @@
 
 This is an introduction to writing protocols for Aquarium in the Krill domain specific language.
 We try to introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
-See the [API documentation]({{ site.baseurl }}{% link /api/index.html %}) for more details on the functions that Krill provides.
+See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
 
 ---
-
-## Table of Contents
-
-<!-- TOC -->
-
-- [Protocol Tutorial](#protocol-tutorial)
-    - [Table of Contents](#table-of-contents)
-    - [An Aquarium Protocol](#an-aquarium-protocol)
-    - [An Initial Protocol](#an-initial-protocol)
-    - [Running the Protocol](#running-the-protocol)
-        - [Creating a Protocol](#creating-a-protocol)
-        - [Running a Protocol from the Developer Test Tab](#running-a-protocol-from-the-developer-test-tab)
-        - [Running a Deployed Protocol](#running-a-deployed-protocol)
-    - [Refining the protocol](#refining-the-protocol)
-    - [How Aquarium Works: The Basics](#how-aquarium-works-the-basics)
-    - [A Protocol that can be used](#a-protocol-that-can-be-used)
-        - [Handling Operations](#handling-operations)
-        - [Declaring Inputs and Outputs](#declaring-inputs-and-outputs)
-        - [Using Inputs and Outputs](#using-inputs-and-outputs)
-        - [Adding Types and Items](#adding-types-and-items)
-    - [Provisioning](#provisioning)
-        - [Gathering and Storing Items](#gathering-and-storing-items)
-        - [Provisioning New Items](#provisioning-new-items)
-    - [Factoring out common work](#factoring-out-common-work)
-    - [Locations](#locations)
-    - [Old Text](#old-text)
-        - [Provisioning Items](#provisioning-items)
-    - [Working With Items in Operations](#working-with-items-in-operations)
-    - [Managing Operations](#managing-operations)
-    - [Protocol Patterns](#protocol-patterns)
-        - [Protocols that Create New Items](#protocols-that-create-new-items)
-        - [Protocols that Measure Items](#protocols-that-measure-items)
-        - [Protocols that Modify Items](#protocols-that-modify-items)
-    - [Writing a Protocol](#writing-a-protocol)
-    - [Building Libraries](#building-libraries)
-
-<!-- /TOC -->
 
 ## An Aquarium Protocol
 

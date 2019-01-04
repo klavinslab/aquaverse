@@ -13,24 +13,6 @@ Once you add your own operation types (using the Developer), you should be able 
 Besides the existence of the Cloning workflow in the designer, this document assumes you have populated the inventory with samples and items that can be used for the inputs of plans.
 If not, you will need to add such inventory and reload the Designer.
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Plan Designer](#plandesigner)
-    - [Table of Contents](#tableofcontents)
-    - [The Designer View](#thedesignerview)
-        - [Manipulating plans](#manipulatingplans)
-        - [Building new plans](#buildingnewplans)
-            - [Using modules](#usingmodules)
-            - [Using templates](#usingtemplates)
-        - [Editing plans](#editingplans)
-    - [Launching plans](#launchingplans)
-    - [Viewing progress](#viewingprogress)
-    - [Accessing Data Associated with a Plan](#accessingdataassociatedwithaplan)
-
-<!-- /TOC -->
-
 ## The Designer View
 
 **Click on "Designer" on the main menu bar**:
