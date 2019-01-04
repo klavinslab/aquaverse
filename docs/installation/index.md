@@ -192,7 +192,7 @@ To manually install Aquarium in a production environment:
 
 2.  Also, make sure that you have a [MySQL](https://www.mysql.com) server installed.
 
-    When installing Aquarium on AWS use RDS, or, for another cloud service, use the database services available there.
+    When installing Aquarium on AWS you can use RDS, and, similarly, for another cloud service, you should be able to use the database service available there.
 
 3.  [Get the aquarium source](#get-aquarium).
 
@@ -216,13 +216,14 @@ To manually install Aquarium in a production environment:
     You should change the _production_ mode configuration to point to your database server.
     And, in this case, you don't need to worry about the remainder of the `database.yml` file.
 
-6.  To install on a machine other than your computer, copy the `aquarium` directory to the server.
+6.  If you are installing on a server, e.g., other than your computer, copy the `aquarium` directory to the server, and open a command-line shell in that directory.
 
-7.  Install the Ruby gems required by Aquarium with
+7.  In the `aquarium` directory, install the Ruby gems required by Aquarium with
 
     ```bash
     gem update --system
-    gem install bundler && bundle install --jobs 20 --retry 5
+    gem install bundler
+    bundle install --jobs 20 --retry 5
     ```
 
     Note: if the MySQL database is not installed or not properly installed/configured, you may get errors during this step.
@@ -231,7 +232,6 @@ To manually install Aquarium in a production environment:
 
     ```bash
     npm install -g bower@latest
-    echo '{ "directory": "public/components", "allow_root": true }' > ./.bowerrc
     bower install --config.interactive=false --force
     ```
 
@@ -241,23 +241,26 @@ To manually install Aquarium in a production environment:
     RAILS_ENV=production rake db:schema:load
     ```
 
-10.  For the production server, precompile the assets:
+10.  Pre-compile the assets:
 
      ```bash
      RAILS_ENV=production bundle exec rake assets:precompile
      ```
 
-11. [THIS SHOULD REFER TO PUMA/NGINX CONFIG]
-    To start Aquarium, run
+11. If you have installed Aquarium on your local computer, you should now be able to start Aquarium by running
 
         ```bash
         RAILS_ENV=production rails s
         ```
 
-        and then go do `http://localhost:3000/` to find the login page.
+    and then go to `http://localhost:3000/` to find the login page.
 
-        Also, start the Krill server
+    But, for Aquarium to work properly, you will also need to start the Krill server
 
-        ```bash
-        rails runner "Krill::Server.new.run(3500)"
-        ```
+    ```bash
+    rails runner "Krill::Server.new.run(3500)"
+    ```
+
+12. Running on a server requires additional configuration that is not covered here.
+    The Docker configuration, in the `docker` directory, for the production environment illustrates these details, but is specific to running all the necessary services from `docker-compose`.
+    Specifically, see the Aquarium and Krill entrypoint scripts; as well as the [puma](http://puma.io) and [nginx](http://nginx.com) configuration files.
