@@ -1,40 +1,10 @@
-
 # Protocol Tutorial
 
 This is an introduction to writing protocols for Aquarium in the Krill domain specific language.
 We try to introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
-See the [API documentation]({{ site.baseurl }}{% link /api/index.html %}) for more details on the functions that Krill provides.
+See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
 
 ---
-
-## Table of Contents
-
-<!-- TOC -->
-
-- [Protocol Tutorial](#protocoltutorial)
-    - [Table of Contents](#tableofcontents)
-    - [An Aquarium Protocol](#anaquariumprotocol)
-    - [The Basic Protocol](#thebasicprotocol)
-    - [Running a Protocol](#runningaprotocol)
-        - [Creating a Protocol](#creatingaprotocol)
-        - [Running a Protocol from the Developer Test Tab](#runningaprotocolfromthedevelopertesttab)
-        - [Running a Deployed Protocol](#runningadeployedprotocol)
-    - [Creating Technician Instructions](#creatingtechnicianinstructions)
-    - [Working with Samples](#workingwithsamples)
-        - [Practicing Queries](#practicingqueries)
-        - [Creating Items and Samples](#creatingitemsandsamples)
-        - [Creating Collections](#creatingcollections)
-        - [Provisioning Items](#provisioningitems)
-    - [Working With Items in Operations](#workingwithitemsinoperations)
-    - [Managing Operations](#managingoperations)
-    - [Protocol Patterns](#protocolpatterns)
-        - [Protocols that Create New Items](#protocolsthatcreatenewitems)
-        - [Protocols that Measure Items](#protocolsthatmeasureitems)
-        - [Protocols that Modify Items](#protocolsthatmodifyitems)
-    - [Writing a Protocol](#writingaprotocol)
-    - [Building Libraries](#buildinglibraries)
-
-<!-- /TOC -->
 
 ## An Aquarium Protocol
 

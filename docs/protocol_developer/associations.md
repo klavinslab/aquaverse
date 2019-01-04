@@ -7,21 +7,6 @@ See the [API documentation](http://klavinslab.org/aquarium/api/) for more detail
 
 ---
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Data Association Documentation](#dataassociationdocumentation)
-    - [Table of Contents](#tableofcontents)
-    - [Data Associations](#dataassociations)
-        - [Setting data](#settingdata)
-        - [Getting data](#gettingdata)
-        - [Example](#example)
-
-<!-- /TOC -->
-
----
-
 ## Data Associations
 
 Data may be associated with `Item`, `Operation` and `Plan` objects.

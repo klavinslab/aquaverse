@@ -5,23 +5,6 @@ _This document assumes that you have read the <a href="#" onclick="select('Getti
 
 A manager uses Aquarium to determine which operations are run together as a job; to monitor and control jobs; and to help users with problematic plans.
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Manager](#manager)
-    - [Table of Contents](#tableofcontents)
-    - [Relevant Views](#relevantviews)
-        - [The Manager Tab](#themanagertab)
-        - [The Plan Tab](#theplantab)
-        - [The Designer Tab](#thedesignertab)
-    - [Scenario: Monitoring lab activity](#scenariomonitoringlabactivity)
-    - [Scenario: Starting a job](#scenariostartingajob)
-    - [Scenario: Correcting a bad plan](#scenariocorrectingabadplan)
-    - [other scenarios?](#otherscenarios)
-
-<!-- /TOC -->
-
 ## Relevant Views
 
 ### The Manager Tab

@@ -5,17 +5,6 @@ Aquarium has a Developer tab that supports creating and editing new protocols, t
 
 Developers actually create an _operation type_, which includes the protocol as code along with several other components that are described below.
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Developer Tools](#developertools)
-    - [Table of Contents](#tableofcontents)
-    - [Working in Aquarium](#workinginaquarium)
-    - [Working with External Tools](#workingwithexternaltools)
-
-<!-- /TOC -->
-
 ## Working in Aquarium
 
 The Developer tab is the interface for working with operation types in Aquarium.

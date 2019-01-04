@@ -4,32 +4,6 @@ These guidelines are intended for those working directly on Aquarium, though som
 
 ---
 
-<!-- TOC -->
-
-- [Aquarium Development Guide](#aquarium-development-guide)
-    - [Getting Started](#getting-started)
-    - [Running Aquarium](#running-aquarium)
-        - [Initial steps](#initial-steps)
-        - [Commands](#commands)
-    - [Switching databases](#switching-databases)
-        - [Switching from Production to Development](#switching-from-production-to-development)
-        - [Switching from Development to Production](#switching-from-development-to-production)
-        - [Restoring the default database dump](#restoring-the-default-database-dump)
-    - [Testing Aquarium](#testing-aquarium)
-    - [Editing Aquarium](#editing-aquarium)
-        - [Documenting changes](#documenting-changes)
-        - [Formatting Aquarium code](#formatting-aquarium-code)
-        - [Documenting Aquarium Ruby Code](#documenting-aquarium-ruby-code)
-    - [Making an Aquarium Release](#making-an-aquarium-release)
-    - [Docker configuration](#docker-configuration)
-        - [Images](#images)
-        - [Compose files](#compose-files)
-        - [Database](#database)
-        - [Local S3 server](#local-s3-server)
-        - [Local web server](#local-web-server)
-
-<!-- /TOC -->
-
 ## Getting Started
 
 Follow the Aquarium [installation]({{ site.baseurl }}{% link _docs/installation/index.md %}) instructions to get a local copy of the Aquarium git repository.
@@ -80,11 +54,12 @@ To run Aquarium in development mode using the Docker configuration in a Unix&tra
    ```
 
    This command starts services for Aquarium, Krill, MySQL, minio and nginx, which are needed to run Aquarium.
+   In development mode, Aquarium is available at `localhost:3000` instead of `localhost`.
 
    To stop the services, type `ctrl-c` followed by
 
    ```bash
-   docker-compose down
+   ./develop-compose down
    ```
 
 3. To run commands inside the Aquarium Ruby environment, precede each with
@@ -117,11 +92,10 @@ Using the values of `MYSQL_USER` and `MYSQL_PASSWORD` from `docker-compose.overr
 ```bash
 MYSQL_USER=<username>
 MYSQL_PASSWORD=<password>
-docker-compose up
+docker-compose up -d
 docker-compose exec db mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD production > production_dump.sql
+./develop-compose.sh down
 ```
-
-after which you can stop Aquarium as described in [Commands](#commands).
 
 If you had previously made a dump of the development database, copy this file to the default location:
 
@@ -145,11 +119,10 @@ Using the values of `MYSQL_USER` and `MYSQL_PASSWORD` from `docker-compose.dev.y
 ```bash
 MYSQL_USER=<username>
 MYSQL_PASSWORD=<password>
-./develop-compose.sh up
+./develop-compose.sh up -d
 ./develop-compose.sh exec db mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD development > development_dump.sql
+./develop-compose.sh down
 ```
-
-after which you can stop Aquarium as described in [Commands](#commands).
 
 If you had previously made a dump of the production database, copy this file to the default location:
 

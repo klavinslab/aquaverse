@@ -8,19 +8,6 @@ See the [API documentation](https://klavibslab.org/aquarium/api/index.html) for 
 
 ---
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [ShowBlock Documentation](#showblockdocumentation)
-    - [Table of Contents](#tableofcontents)
-    - ["Hello Technician"](#hellotechnician)
-    - [ShowBlock Methods](#showblockmethods)
-    - [Dynamic ShowBlocks](#dynamicshowblocks)
-    - [Getting Technician Input](#gettingtechnicianinput)
-
-<!-- /TOC -->
-
 ## "Hello Technician"
 
 `ShowBlocks` are the object that facilitates interaction between protocol code and an Aquarium technician who is running the protocol. `ShowBlocks` are created and displayed in the technician view with the `show` method. `show` takes a single argument: a code block. This code block contains the contents that are intended to be shown to the technician. This might take the form of instructions with how to proceed with a protocol, or of user input fields to collect sample measurements for storing in the lab database. Each call to `show` constitutes a new slide in the technician view that will be shown while running the protocol. Lets create a simple protocol with a `ShowBlock` that says "Hello World"

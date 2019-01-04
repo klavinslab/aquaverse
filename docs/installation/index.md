@@ -10,24 +10,6 @@ First, protocols may change the underlying database, which depending on the effe
 And, second, errors in protocols being tested can affect lab system performance and disrupt protocols underway.
 So, our strong recommendation is that protocol testing _should not_ be done on a production server.
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Installing and Running Aquarium](#installing-and-running-aquarium)
-    - [Table of Contents](#table-of-contents)
-    - [Getting Aquarium](#getting-aquarium)
-    - [Choosing your Approach](#choosing-your-approach)
-    - [Docker Installation Instructions](#docker-installation-instructions)
-        - [Running Aquarium with Docker](#running-aquarium-with-docker)
-        - [Stopping Aquarium in Docker](#stopping-aquarium-in-docker)
-        - [Updating Aquarium](#updating-aquarium)
-        - [Changing the Database](#changing-the-database)
-        - [Notes](#notes)
-    - [Manual Installation Instructions](#manual-installation-instructions)
-
-<!-- /TOC -->
-
 ## Getting Aquarium
 
 Regardless of how you choose to install and run Aquarium you will need to obtain the Aquarium source.
@@ -110,8 +92,8 @@ To run Aquarium in production with Docker on your computer:
     docker-compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.windows.yml up
     ```
 
-    Once all of the services for Aquarium have started, visit `localhost:3000` with the Chrome browser to find the Aquarium login page.
-    If running Aquarium inside the Docker toolbox VM, the address will be instead be `192.168.99.100:3000`.
+    Once all of the services for Aquarium have started, visit `localhost` with the Chrome browser to find the Aquarium login page.
+    If running Aquarium inside the Docker toolbox VM, the address will be instead be `192.168.99.100`.
     When started using the default database, aquarium has a single user with login `neptune` and password `aquarium`.
 
 ### Stopping Aquarium in Docker

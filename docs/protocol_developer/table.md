@@ -8,21 +8,6 @@ See the [API documentation](http://klavinslab.org/aquarium/api/)  for more detai
 
 ---
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Table Documentation](#tabledocumentation)
-    - [Table of Contents](#tableofcontents)
-    - [Tables for Showcasing Data](#tablesforshowcasingdata)
-    - [Tables on OperationList](#tablesonoperationlist)
-        - [Mapping Operations to Respective Inputs or Outputs](#mappingoperationstorespectiveinputsoroutputs)
-        - [Mapping Operations to Arbitrary Attributes](#mappingoperationstoarbitraryattributes)
-        - [Accepting Technician Input through Tables](#acceptingtechnicianinputthroughtables)
-    - [Standalone Tables](#standalonetables)
-
-<!-- /TOC -->
-
 ## Tables for Showcasing Data
 
 Often in a protocol it is useful to show a summarizing visualization of a lot of data at once. In Krill, `Tables` are an easy to use object that can accomplish this. Here is an example of a `Table` as seen from the technician view during a restriction digest protocol, which instructs the technician to add the appropriate enzymes to the correct well of the correct stripwell. A table is particularly useful here, where each operation can be parameterized with a different set of enzymes. Here is an example of a `Table` shown to the technician.

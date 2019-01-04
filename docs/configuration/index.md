@@ -1,25 +1,6 @@
 
 # Aquarium Configuration
 
-## Table of Contents
-
-<!-- TOC -->
-
-- [Aquarium Configuration](#aquarium-configuration)
-    - [Table of Contents](#table-of-contents)
-    - [Building the Inventory](#building-the-inventory)
-    - [Mapping the Lab](#mapping-the-lab)
-        - [Bench Locations](#bench-locations)
-        - [Sample Locations](#sample-locations)
-        - [Location Wizards](#location-wizards)
-            - [Defining a New Wizard](#defining-a-new-wizard)
-            - [Associating a Wizard with an Object Type](#associating-a-wizard-with-an-object-type)
-            - [Moving Items](#moving-items)
-
-<!-- /TOC -->
-
-
-
 ## Building the Inventory
 
 ## Mapping the Lab
