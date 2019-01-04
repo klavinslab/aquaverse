@@ -40,7 +40,7 @@ var stack = [];
           $scope.state.section = section;
           $scope.state.active_content = content;
           if ( push ) {
-            history.pushState($scope.state, "State", "");
+            history.pushState({section: $scope.state.section, active_content: $scope.active_content }, "State", "");
             console.log("Pushed", $scope.state.section.category, $scope.state.active_content.name )
           }
         }
@@ -138,3 +138,9 @@ function easy_select(x,y) {
 }
 
 select = easy_select;
+
+// This function undoes the body scroll resulting from a local href link event
+$(function() {
+  let b = $("body")
+  b.click(event => setTimeout(() => b.scrollTop(0), 10));
+});
