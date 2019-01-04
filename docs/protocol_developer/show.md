@@ -1,16 +1,16 @@
 
-# ShowBlock Documentation
+# Show Blocks
 
-This is the documentation for using `ShowBlocks` to display instructions on the technician view, for use in writing effective Aquarium protocols.
+A show block is used to display instructions for the technician.
 
-This page will give examples and instructions on how to get started using `ShowBlocks`, but it is not a comprehensive reference for all `ShowBlock` related methods.
-See the [API documentation](https://klavibslab.org/aquarium/api/index.html) for more details on the functions that Krill provides.
+This document discusses the features of show blocks, but you should see the [API documentation](http://klavinslab.org/aquarium/api/Krill/ShowBlock.html) for more details on their use.
 
 ---
 
 ## "Hello Technician"
 
-`ShowBlocks` are the object that facilitates interaction between protocol code and an Aquarium technician who is running the protocol. `ShowBlocks` are created and displayed in the technician view with the `show` method. `show` takes a single argument: a code block. This code block contains the contents that are intended to be shown to the technician. This might take the form of instructions with how to proceed with a protocol, or of user input fields to collect sample measurements for storing in the lab database. Each call to `show` constitutes a new slide in the technician view that will be shown while running the protocol. Lets create a simple protocol with a `ShowBlock` that says "Hello World"
+A show blocks is how a protocol gives instructions to the Aquarium technician who is running the protocol.
+Show blocks are created and displayed in the technician view with the `show` method. `show` takes a single argument: a code block. This code block contains the contents that are intended to be shown to the technician. This might take the form of instructions with how to proceed with a protocol, or of user input fields to collect sample measurements for storing in the lab database. Each call to `show` constitutes a new slide in the technician view that will be shown while running the protocol. Lets create a simple protocol with a show block that says "Hello World"
 
 ```ruby
 class Protocol
@@ -46,11 +46,12 @@ The above code produces a protocol with two steps
 ![Hello World](docs/protocol_developer/images/show_images/2_hello_world-2.png)
 ![Hello World](docs/protocol_developer/images/show_images/3_hello_world-3.png)
 
-You may have noticed that naked Strings cannot be placed directly into `ShowBlocks`. Any object intended for display to the technician must be in the block as an argument of a `ShowBlock` instance method.
+You may have noticed that naked strings cannot be placed directly into show blocks.
+Any object intended for display to the technician must be in the block as an argument of a show block instance method.
 `note` is such an instance method. It takes a String and displays it directly on the technician view slide as a single line.
 `title` is another which does the same thing, except the String will be displayed as a header.
 
-Many Show blocks are composed mostly of a single `title` call, and one or more `note` calls that liberally use string insertion. For instance, here is a show block that asks the technician to grab some amount of 1.5mL tubes
+Many show blocks are composed mostly of a single `title` call, and one or more `note` calls that liberally use string insertion. For instance, here is a show block that asks the technician to grab some amount of 1.5mL tubes
 
 ```ruby
     show do
@@ -63,27 +64,27 @@ When run in a protocol with 5 operations, the technician would see the following
 
 ![Serious Protocol](docs/protocol_developer/images/show_images/4_serious_example.png)
 
-## ShowBlock Methods
+## Show Block Methods
 
-For a comprehensive list of methods that are available for use in `ShowBlocks`, see the
-[API documentation on ShowBlocks](https://klavinslab.org/aquarium/api/Krill/ShowBlock.html)
+For a comprehensive list of methods that are available for use in show blocks, see the
+[API documentation on show blocks](https://klavinslab.org/aquarium/api/Krill/ShowBlock.html)
 
-The most commonly used `ShowBlock` methods are the following:
+The most commonly used show block methods are the following:
 
-- `title` - accepts a String, which is used as the header for this slide
-- `note` - accepts a String and appends it as a new line on the slide
-- `check` - accepts a String and appends it as a new line on the slide with a checkbox next to it
-- `warning`- accepts a String and appends it as a new line on the slide, bold and highlighted in yellow
-- `image` - accepts a filepath to a valid image, and displays it on the slide
-- `table` - accepts either a 2d array or a `Table` object, and displays it on the slide. See the
+- `title` – accepts a String, which is used as the header for this slide
+- `note` – accepts a String and appends it as a new line on the slide
+- `check` – accepts a String and appends it as a new line on the slide with a checkbox next to it
+- `warning`– accepts a String and appends it as a new line on the slide, bold and highlighted in yellow
+- `image` – accepts a filepath to a valid image, and displays it on the slide
+- `table` – accepts either a 2d array or a `Table` object, and displays it on the slide. See the
    <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>
    for more details on how to generate and display `Tables` to the technician.
-- `get` - ask the technician for input which will be usable throughout the rest of the protocol.
+- `get` – ask the technician for input which will be usable throughout the rest of the protocol.
 
-## Dynamic ShowBlocks
+## Dynamic Show Blocks
 
-As already mentioned, we can achieve somewhat dynamic `ShowBlocks` by inserting ruby expressions into the Strings displayed by `note` using the ruby String insertion `#{}`.
-It is also possible to use complex ruby code within the code blocks of the `show` method to programmatically decide how `ShowBlock` methods will be executed.
+As already mentioned, we can achieve somewhat dynamic show blocks by inserting ruby expressions into the Strings displayed by `note` using the ruby String insertion `#{}`.
+It is also possible to use complex ruby code within the code blocks of the `show` method to programmatically decide how show block methods will be executed.
 
 For instance, we could modify our earlier show block to give different instructions depending on the amount of `Operations` the protocol is run with
 
@@ -99,7 +100,7 @@ For instance, we could modify our earlier show block to give different instructi
 
 Running this on the technician view, we would see an additional line of instruction being offered when the protocol is run with 51 or more `Operations`
 
-We can achieve powerful emergent behaviour by using ruby code inside `ShowBlocks`. Another example, using loops
+We can achieve powerful emergent behavior by using ruby code inside show blocks. Another example, using loops
 
 ```ruby
     show do
@@ -116,9 +117,9 @@ Here is the output on the Technician view for the latter example with 5 `Operati
 
 ## Getting Technician Input
 
-There are two `ShowBlock` methods that are used to retrieve input from the technician: `get` and `select`. They work in the same way, except that `get` allows the technician to enter a String response, and `select` has the technician select an item from a dropdown menu.
+There are two show block methods that are used to retrieve input from the technician: `get` and `select`. They work in the same way, except that `get` allows the technician to enter a String response, and `select` has the technician select an item from a dropdown menu.
 
-`get` provides a textbox for the technician to enter a String. Its first parameter is the type of input, as "number", or "text", and it also requires the `var:` option to hold a valid keyname, as the key that will be later used to access the inputted data. Here is the code for a simple show block that prompts the technician for a response
+`get` provides a textbox for the technician to enter a String. Its first parameter is the type of input, as "number", or "text", and it also requires the `var:` option to hold a valid key name, as the key that will be later used to access the inputted data. Here is the code for a simple show block that prompts the technician for a response
 
 ```ruby
 show do
@@ -146,7 +147,7 @@ Now our textbox is a bit more informative
 
 ![User Input Example](docs/protocol_developer/images/show_images/7_input_block-2.png)
 
-Any input data from a `ShowBlock` is returned by the call to `show` that created the block as a `ShowResponse` object. The name that we entered as the option for `:var` will be what we use to request that piece of data from the ShowResponse.
+Any input data from a show block is returned by the call to `show` that created the block as a `ShowResponse` object. The name that we entered as the option for `:var` will be what we use to request that piece of data from the ShowResponse.
 
 In order to access the name entered by the technician, we capture ShowResponse in a variable called `responses`, and then request data for the key `:tech_name`
 
@@ -190,10 +191,11 @@ operations.each do |op|
 end
 ```
 
-The `ShowResponse` also can give the timestamp of when the `ShowBlock` was shown and responded to by the tech with the `timestamp` method. This returns a Unix time value.
+The `ShowResponse` also can give the timestamp of when the show block was shown and responded to by the tech with the `timestamp` method. This returns a Unix time value.
 
 ```ruby
 responses.timestamp #=> <current time in seconds since 1970>
 ```
 
-Another convenient way to collect information relating to each `Operation` in an `OperationList` is to accept technician responses through a input `Table` on the `OperationsList`. See the <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>Table Documentation</a> on getting User for more details.
+Another convenient way to collect information relating to each `Operation` in an `OperationList` is to accept technician responses through a input `Table` on the `OperationsList`.
+See the <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>Table Documentation</a> on getting User for more details.
