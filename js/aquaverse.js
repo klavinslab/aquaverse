@@ -138,3 +138,9 @@ function easy_select(x,y) {
 }
 
 select = easy_select;
+
+// This function undoes the body scroll resulting from a local href link event
+$(function() {
+  let b = $("body")
+  b.click(event => setTimeout(() => b.scrollTop(0), 10));
+});
