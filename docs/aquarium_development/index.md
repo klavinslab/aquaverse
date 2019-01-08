@@ -94,7 +94,7 @@ MYSQL_USER=<username>
 MYSQL_PASSWORD=<password>
 docker-compose up -d
 docker-compose exec db mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD production > production_dump.sql
-./develop-compose.sh down
+docker-compose down
 ```
 
 If you had previously made a dump of the development database, copy this file to the default location:
