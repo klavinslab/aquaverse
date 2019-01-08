@@ -42,7 +42,7 @@ If your goal is to run Aquarium on your laptop to evaluate it, develop new code,
 
 Note we assume a Unix&trade;-like environment though our experience is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
 
-[Jump to docker installation instructions](#docker-installation-instructions).
+[Jump to docker installation instructions](#dockerinstallationinstructions).
 
 If your goal is to run Aquarium in production mode with many users, you should install and run Aquarium manually.
 This requires first installing Ruby, Rails, MySQL, and, depending on the deployment, a web server.
@@ -50,7 +50,7 @@ The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance
 
 We discuss some of the considerations for running Aquarium below, but your deployment may require fine-tuning beyond what we describe.
 
-[Jump to manual installation instructions](#manual-installation-instructions).
+[Jump to manual installation instructions](#manualinstallationinstructions).
 
 ## Docker Installation Instructions
 
@@ -60,11 +60,9 @@ _These instructions are for setting up a local Aquarium and have not been tested
 
 To run Aquarium in production with Docker on your computer:
 
-1.  Install [Docker](https://docs.docker.com/install/) on your computer.
+1.  Install [Docker](https://www.docker.com/get-started) on your computer.
 
-    Note: to run Aquarium on Windows your system either needs to meet the requirements of [Docker for Windows](https://www.docker.com/docker-windows), or you have to use the older [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/).
-
-2.  [Get the Aquarium source](#getting-aquarium).
+2.  [Get the Aquarium source](#gettingaquarium).
 
 3.  To build the docker images, run the command
 
@@ -176,7 +174,7 @@ To manually install Aquarium in a production environment:
 
     When installing Aquarium on AWS you can use RDS, and, similarly, for another cloud service, you should be able to use the database service available there.
 
-3.  [Get the aquarium source](#get-aquarium).
+3.  [Get the aquarium source](#getaquarium).
 
 4.  Configure Aquarium by first creating the `aquarium/config/initializers/aquarium.rb` file
 
