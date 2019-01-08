@@ -111,18 +111,29 @@ git pull
 docker-compose build
 ```
 
-to get and build the new version, and then run
+to get and build the new version.
+And if there are any necessary `rake` tasks run
 
 ```bash
 docker-compose up -d
 docker-compose exec app /bin/sh
+```
+
+to start Aquarium and the database, and then run the rake tasks.
+For instance, migrating the database:
+
+```bash
 rake db:migrate RAILS_ENV=production
+```
+
+Then exit from the connection and shutdown Aquarium with
+
+```bash
 exit
 docker-compose down
 ```
 
-to migrate the database.
-Finally, restart Aquarium with `docker-compose up` as before.
+And, finally, restart Aquarium with `docker-compose up` as before.
 
 ### Changing the Database
 
