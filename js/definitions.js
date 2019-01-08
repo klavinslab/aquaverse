@@ -14,6 +14,7 @@ var config = {
         { name: "License", type: "local-md", path: "license.md"  },
         { name: "Releases", type: "local-html", path: "releases.html"  },
         { name: "Contributors", type: "local-md", path: "contributors.md"  },
+        { name: "How to cite", type: "local-md", path: "cite.md"  },
       ]
     },
 

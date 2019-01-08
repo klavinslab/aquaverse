@@ -1,13 +1,10 @@
-
 # Manager
 
 _This document assumes that you have read the <a href="#" onclick="select('Getting Started', 'Basic Concepts')">Aquarium Concepts</a> document_.
 
 A manager uses Aquarium to determine which operations are run together as a job; to monitor and control jobs; and to help users with problematic plans.
 
-## Relevant Views
-
-### The Manager Tab
+## The Manager Tab
 
 The manager tab provides the information needed to manage lab operations as illustrated by this (redacted) screenshot of the manager tab for the UW BIOFAB production server.
 
@@ -29,10 +26,6 @@ The middle panel shows the operation status for the currently selected category.
 Clicking on a number for a particular operation type and operation state shows the operations in the operations list panel to the right.
 
 It is also possible to display completed operations by clicking the slider at the top of the operation status panel.
-
-### The Plan Tab
-
-### The Designer Tab
 
 ## Scenario: Monitoring lab activity
 
@@ -70,7 +63,3 @@ Clicking the job id in this window will open the technician view that shows the 
 And, once the technician has started the job, the status will update in the operation status panel.
 
 ![changed status](docs/manager/images/updated-status.png)
-
-## Scenario: Correcting a bad plan
-
-## other scenarios?

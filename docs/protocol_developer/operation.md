@@ -23,11 +23,11 @@ From within a protocol, it is easy to get a list of the operations that were sen
 
 which returns something like an array of operations.
 Actually, it is a Rails [ActiveRecord::Relation](http://api.rubyonrails.org/classes/ActiveRecord/Relation.html) object extended with a number of Aquarium specific methods, discussed here.
-Just remember that in addition to what you see here, there are also all the standard array methods (like **`each`**, **`collect`**, **`select`**, **`reject`**, ...) and of course the Rails operations (which you probably won't need).
+Just remember that in addition to what you see here, there are also all the standard array methods (like `each`, `collect`, `select`, `reject`, ...) and of course the Rails operations (which you probably won't need).
 
-## Iterating Through Operatons
+## Iterating Through Operations
 
-To iterate through all operations, simply use the standard Ruby array method **`each`**, as in the following.
+To iterate through all operations, simply use the standard Ruby array method `each`, as in the following.
 
 ```ruby
 operations.each do |op|
@@ -35,8 +35,8 @@ operations.each do |op|
 end
 ```
 
-You can also specify whether to iterate over running or errored operations, and use select, reject, and collect operations.
-For example, to collect all running operations whose "Template" input has a concentration greater than 100 nM, do the following.
+You can also iterate over `operations.running` or `operations.errored`, and use `Array` methods to select, reject, and collect operations.
+For example, to collect all running operations whose `"Template"` input has a concentration greater than 100 nM, do the following.
 
 ```ruby
 my_ops = operations.running.select do |op|
@@ -64,7 +64,7 @@ end
 
 ## Checking and Changing Operation Status
 
-Each operation **`op`** has a status, **`op.status`**.
+Each operation `op` has a status, `op.status`.
 When a protocol first starts, the status should be "running".
 When the protocol completes, Aquarium automatically sets the status to "done".
 If for some reason an operation has a problem, your protocol can set the status to "error" as in
@@ -74,8 +74,8 @@ op.change_status "error"
 ```
 
 which sets the status and saves the operation.
-Subsequent calls to **`operations`** can be filtered by doing **`operations.running`** or **`operations.errored`**.
-Note that table operations **`operations.start_table...`** described below default to running operations.
+Subsequent calls to `operations` can be filtered by doing `operations.running` or `operations.errored`.
+Note that table operations `operations.start_table...` described below default to running operations.
 
 It is common to provide the owner of the operation some information about why you are setting their operation's status to "error".
 You can do this with something like
@@ -139,7 +139,7 @@ op.input("X").val
 
 The `val` method will return a value of the defined type for the parameter.
 
-Paramters can be numbers, strings, or JSON.
+Parameters can be numbers, strings, or JSON.
 If the parameter is of type JSON then
 
 ```ruby
@@ -185,5 +185,5 @@ end
 ```
 
 Here, we know we want the protocol to always use the specified primer (a contrived example), so it is hard coded.
-But which item is used is determied by `op.add_input`.
+But which item is used is determined by `op.add_input`.
 The chosen item is the return value and should be checked for non-`nil`, meaning the method found an item.
