@@ -114,11 +114,15 @@ docker-compose build
 to get and build the new version, and then run
 
 ```bash
-docker-compose run --rm app rails db:migrate RAILS_ENV=production
+docker-compose up -d
+docker-compose exec app /bin/sh
+rake db:migrate RAILS_ENV=production
+exit
+docker-compose down
 ```
 
 to migrate the database.
-Finally, restart Aquarium with `docker-compose` as before.
+Finally, restart Aquarium with `docker-compose up` as before.
 
 ### Changing the Database
 
