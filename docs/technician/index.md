@@ -3,7 +3,7 @@
 
 When using Aquarium, a technicians primarily interacts with protocols, each of which will have their own details.
 
-Aquarium does track which users runs which jobs as a technician, so technicians should login separately rather than using someone else's login.
+Aquarium does track which users runs which jobs as a technician, so technicians should login separately to use this feature.
 
 ## Running a Job
 

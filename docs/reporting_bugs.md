@@ -1,3 +1,3 @@
 # Bug Reports and Feature Requests
 
-We welcome bug reports to all our software using the issues for the [Aquarium-bugs repository](https://github.com/klavinslab/aquarium-bugs).
+We welcome bug reports to the [Aquarium repository](https://github.com/klavinslab/aquarium).
