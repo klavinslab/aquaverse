@@ -1,4 +1,3 @@
-
 # Location Wizard Documentation
 
 This is the documentation for interacting with the `location` of `Items` and `Collections`, to facilitate effective retrieval and storage in Aquarium protocols
