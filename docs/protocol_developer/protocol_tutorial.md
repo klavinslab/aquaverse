@@ -56,7 +56,11 @@ Let's try running this protocol in Aquarium to understand better how this works.
 
 ## Running the Protocol
 
-To understand better what is happening, you should [set up an Aquarium instance on your personal machine](link-to-installation) to follow along.
+To understand better what is happening, you should 
+<a href="#" onclick="select('Getting Started','Installation')">
+set up an Aquarium instance on your personal machine
+</a>
+to follow along.
 Our advice is that you **not** use your lab's server to learn.
 
 ### Creating a Protocol
