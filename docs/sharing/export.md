@@ -74,6 +74,10 @@ Set up Gihub Pages
 
 Go to your repository and choose Settings and then choose Github Pages &gt; Source &gt; master branch. Do not choose a theme, as Aquarium does not require one (it does not use jekyll). Then click Save. Wait a little while and eventually the link to your newly published Aquarium workflow will go live. Note that Github takes its own time when publishing to Github pages. Usually it will do so after a commit and push, but not always.
 
+Get a DOI
+---
+You can get a DOI for your workflow by integrating (Zenodo)[https://zenodo.org/]. Read the documentation about Github integration before you tag your first release so Zenodo can pick it up.
+
 Tell Us About Your Workflow
 ---
 
