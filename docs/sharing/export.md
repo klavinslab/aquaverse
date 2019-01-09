@@ -2,8 +2,11 @@
 
 _New in v2.5.0!_
 
-Exporting workflows allows you to package up a set of Operation Types, Protocols, Libraries, Sample Type definitions and Container definitions that can be later imported by someone else.
-You can either generate a workflow file (with a .aq extension), or you can generate an entire Github repository and webpage for your workflow that allows users to read through all the documentation for your workflow before importing it, and to, for example, post issues and questions about the workflow.
+Exporting workflows allows you to package a set of Operation Types, Protocols, Libraries, Sample Type definitions and Container definitions that can be shared and imported by someone else.
+Aquarium supports two ways to share a workflow.
+One is by generating a workflow file that can be shared to someone else.
+Using Aquarium, you can generate an entire Github repository and webpage for your workflow
+that allows users to read the workflow documentation before importing it, and to, for example, post issues and questions about the workflow.
 
 ## Github Parameters or Direct Export
 
@@ -38,28 +41,35 @@ Click **GO BACK** if you would like to change something. Select or deselect comp
 Click **PUBLISH** to complete the process. Aquarium will create a new Github repository for you, compile all the documentation, and push it to the repository.
 Once Aquarium is finished, it will show you a link to your repository, which will look something like the following:
 
-      js
-        + definitions.js
-      libraries
-        + Lib1.html
-        + Lib1.rb
-        ...
-      object_types
-        + ObjectType1.md
-        ....
-      operations_types
-        + OperationType1.md
-        ...
-      sample_types
-        + SampleType1.md
-        ...
-      .nojekyll
-      ABOUT.md
-      LICENSE.md
-      README.md
-      config.json
-      index.html
-      your-workflow.aq
+```
+your-workflow
+|-- ABOUT.md
+|-- LICENSE.md
+|-- README.md
+|-- config.json
+|-- index.html
+|-- js
+|   `-- definitions.js
+|-- libraries
+|   |-- Lib_1.html
+|   |-- Lib_1.rb
+|   |   ...
+|   |-- Lib_k.html
+|   `-- Lib_k.rb
+|-- object_types
+|   |-- ObjectType_1.md
+|   |   ...
+|   `-- ObjectType_k.md
+|-- operation_types
+|   |-- OperationType_1.md
+|   |   ...
+|   `-- OperationType_k.md
+|-- sample_types
+|   |-- SampleType_1.md
+|   |   ...
+|   `-- SampleType_k.md
+`-- your-workflow.aq
+```
 
 Note that if you update your workflow by going through the above steps with an existing, Aquarium generated repository, then Aquarium will regenerate all of these files except README.md and LICENSE.md.
 Thus, changes you make to those two files will be preserved.
