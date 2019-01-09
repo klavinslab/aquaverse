@@ -1,6 +1,10 @@
 # Aquarium Concepts
 
-Aquarium data structures are intended to capture every aspect of a lab's structure. At the lowest level is the LIMS, which defines the types of samples and containers your lab users, as well as helps you manage the data associations and the locations of all of your items. On top of that are unit operations, which specify how a set of input items are transformed into a set of output items, as well as how exactly to perform that transformation. Finally, Aquarium's execution environment manages how operations are batched together and how technicians are instructed to do the individual steps or the operation's protocol. Here, we describe each of these aspects of Aquarium in a bit more detail to give you a flavor of what Aquarium does. More details can be found in the rest of the documentation, index by the sidebar to this page.
+Aquarium data structures are intended to capture every aspect of a lab's structure. At the lowest level is the LIMS, which defines the types of samples and containers your lab users, as well as helps you manage the data associations and the locations of all of your items.
+On top of that are operations, which specify how a set of input items are transformed into a set of output items, as well as how exactly to perform that transformation.
+Finally, Aquarium's execution environment manages how operations are batched together and how technicians are instructed to do the individual steps or the operation's protocol.
+Here, we describe each of these aspects of Aquarium in a bit more detail to give you a flavor of what Aquarium does.
+More details can be found in the rest of the documentation, index by the sidebar to this page.
 
 ## Inventory System
 
@@ -14,8 +18,8 @@ Each item has three components representing these details: the sample, the objec
 For the example in the diagram, these are
 
 - the plasmid puc19-GFP (the sample),
-- in a glycerol stock in an eppendorf tube (the object type), and
-- stored in a freezer (the location).
+- a glycerol stock in an eppendorf tube (the object type), and
+- a freezer (the location).
 
 A _sample_ is effectively the class of entity for which the item is an instance, and has a _sample type_.
 Here the sample is puc19-GFP, which has sample type of plasmid.
@@ -27,7 +31,7 @@ For instance, the UW BIOFAB location `M20.1.5.49` is a location in a box in a -2
 
 <img src="docs/concepts/images/location.png" width="75%">
 
-## Unit Operations and Plans
+## Operations and Plans
 
 A protocol performed in Aquarium is represented as an _operation_.
 Concretely, an operation is defined by an _operation type_ that indicates how the operation will be performed, and is defined by a protocol script that takes inputs and produces outputs.
@@ -75,7 +79,8 @@ After a plan is launched, the operations in the plan move through several states
 - _complete_ – the jot of the operation has finished without error
 
 In addition, operations may have other states depending on the definition of the operation type.
-The most common relates to evaluation of the precondition of an operation. Each operation type has a precondition that must be true before an operation of that type can transition into pending.
+The most common relates to evaluation of the precondition of an operation.
+Each operation type has a precondition that must be true before an operation of that type can transition into pending.
 Most preconditions are trivially true, meaning they can always be run, but some have more complex preconditions that may fail.
 If the precondition of an operation fails, then the operation is put into the _delayed_ state.
 
