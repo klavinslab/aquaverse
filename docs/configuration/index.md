@@ -1,11 +1,8 @@
-
 # Aquarium Configuration
-
-## Building the Inventory
 
 ## Mapping the Lab
 
-Aquarium uses locations
+Aquarium uses hierarchical location descriptors `A.B.C.D`
 
 ### Bench Locations
 
@@ -18,9 +15,9 @@ There are stickers that should guide you to the exact spot.
 
 ### Sample Locations
 
-Samples are stored using various prefixes, which are handled by the Location Wizard, a piece of software that determines the next available location for a newly minted sample.
+Samples are stored using various prefixes, which are handled by the Location Wizard, software that determines the next available location for a newly minted sample.
 Any ObjectType can be associated with a prefix which then determines the behavior of the Location Wizard.
-The association of ObjectType to prefix can be made on either the 'New ObjectType' or 'Edit ObjectType' page.
+The association of ObjectType to prefix can be made on either the **New ObjectType** or **Edit ObjectType** page.
 
 All sample locations have the form PR.x.y.z where PR is one of the prefixes described below, and x, y and z are location identifiers that have specific meanings according to the prefix.
 As an example, if a sample has the location M20.4.5.87, then it is stored in a -20C freezer in hotel 4, box 5, slot 87.
@@ -46,7 +43,7 @@ The currently recognized prefixes and their behaviors are as follows.
 
 A location wizard is a bit of code that uses a schema to store new items.
 For example, Primers might be stored in a -20C freezer in 81 slot freezer boxes stored on shelves that contain 16 boxes.
-A location wizard for this scheme would have locations of the form M20.x.y.z where x is the shelf (or hotel as we call them in the Klavins lab), y is the box, and z is the slot in the box.
+A location wizard for this scheme would have locations of the form M20.x.y.z where x is the shelf, y is the box, and z is the slot in the box.
 
 A wizard works by setting up a table of all locations with the specified form that have ever been used.
 When a new item is made, the wizard finds the lowest available location for that item.
@@ -55,7 +52,7 @@ If all available locations are taken, then wizard computes the next new location
 
 #### Defining a New Wizard
 
-The interface for creating a new location wizard can be found under the Inventory menu.
+The interface for creating a new location wizard can be found on the **Samples** tab.
 There you can click "New Wizard".
 The wizard name should be short, such as "M20" as it will be used as the first part of the location.
 The description can be a sentence or so.

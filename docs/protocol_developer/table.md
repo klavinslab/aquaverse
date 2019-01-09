@@ -1,10 +1,9 @@
-
 # Table Documentation
 
 This is the documentation for generating and showing formatted `Tables`, for use in writing effective Aquarium protocols.
 
 This page will give examples and instructions on how to get started using `Tables`, but it is not a comprehensive reference for all `Table` related methods.
-See the [API documentation](http://klavinslab.org/aquarium/api/)  for more details on the functions that Krill provides.
+See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
 
 ---
 
@@ -33,7 +32,7 @@ The rest of this documentation will be focused on how to generate these table ob
 
 Aquarium protocols are designed to work on arbitrarily large batches of `Operations` at once, so it is often the case that you will want to design a `Table` where some information about each `Operation` is represented by a row of the table. The `Table` shown in the example picture above uses this paradigm.
 
-`OperationList` has many instance methods which make generating row-per-`Operation` style `Tables` a simpler process. Creating a `Table` from an `OperationsList` relies on _method chaining_ these instance methods. To begin the table generation process, `start_table` is called on an `OperationsList`, returing a intermediary Table-like object which is initially has one row for every `Operation` in the list, and zero columns. Further methods may be called on this intermediary object to add columns to the `Table`. When all desired columns have been added, `end_table` is called to finish the method chain and return a usable `Table` object which is ready to show to the technician.
+`OperationList` has many instance methods which make generating row-per-`Operation` style `Tables` a simpler process. Creating a `Table` from an `OperationsList` relies on _method chaining_ these instance methods. To begin the table generation process, `start_table` is called on an `OperationsList`, returning a intermediary Table-like object which is initially has one row for every `Operation` in the list, and zero columns. Further methods may be called on this intermediary object to add columns to the `Table`. When all desired columns have been added, `end_table` is called to finish the method chain and return a usable `Table` object which is ready to show to the technician.
 
 To create a `Table` with one column, called `simple_tab`,
 
@@ -105,7 +104,7 @@ Two other important tabling methods are `input_collection` and `output_collectio
 
 ### Mapping Operations to Arbitrary Attributes
 
-`input_item` and `output_item` are convienent for displaying the inputs and outputs of each `Operation` in an `OperationsList`, but what if we want to display other information about an `Operation` besides the `Item ids` of its inputs and outputs?
+`input_item` and `output_item` are convenient for displaying the inputs and outputs of each `Operation` in an `OperationsList`, but what if we want to display other information about an `Operation` besides the `Item ids` of its inputs and outputs?
 
 `custom_column` is a valuable method that we can call as part of the table generation method chain from an `OperationsList`. Like `input_item`, `custom_column` will add a column to the table, and the contents of each cell of this new column will be a function of the `Operation` that is associated to the row of the table the cell appears.
 

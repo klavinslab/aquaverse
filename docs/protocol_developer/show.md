@@ -1,4 +1,3 @@
-
 # Show Blocks
 
 A show block is used to display instructions for the technician.
@@ -77,9 +76,9 @@ The most commonly used show block methods are the following:
 - `warning` to display a bold line of text that is highlighted yellow
 - `image` to display an image
 - `table` to display the contents of a 2d array or a `Table` object as a table
-   <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>
-   for more details on how to generate and display `Tables` to the technician.
-- `get` displays a field that allows the technician to provide a value. 
+  <a href="#" onclick="select('Protocols', 'Building Tables')">Table Documentation</a>
+  for more details on how to generate and display `Tables` to the technician.
+- `get` displays a field that allows the technician to provide a value.
 
 ## Dynamic Show Blocks
 

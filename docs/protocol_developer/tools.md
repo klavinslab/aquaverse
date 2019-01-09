@@ -1,4 +1,3 @@
-
 # Developer Tools
 
 Aquarium has a Developer tab that supports creating and editing new protocols, though it is also possible to work on protocols outside of Aquarium.
@@ -22,8 +21,6 @@ Clicking on the name of the library or operation type will open the definition i
 Clicking on `New` creates a new operation type (`New Lib` creates a new library), and opens the definition view.
 
 This allows you to set the operation type and category type names.
-
-[details]
 
 ![definition tab](docs/protocol_developer/images/definition_tab.png)
 

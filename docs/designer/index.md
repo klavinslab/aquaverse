@@ -1,4 +1,3 @@
-
 <!--
   Written by Eric Klavins, July 2018
   -->
@@ -145,7 +144,7 @@ First, a list of all "Sample Type / Container Type" pairs will appear.
 If there are more than one (as defined in the Developer for the operation type), you can choose which one to use.
 The autocomplete for the sample name will respect the choice.
 Second, a list of inventory items associated with the chosen Sample Type / Container type will appear, along with their locations.
-When you assign a sample to an unwired input to an operation, the designer automatically chooses the first item in this list to associate with the input.
+When you assign a sample to an input to an operation, the designer automatically chooses the first item in this list to associate with the input.
 You can choose a different one by clicking on the checkbox next to the item ID.
 You can click the item ID itself to view more information associated with the item.
 Inventory for wired inputs and outputs is displayed, but you cannot change it.
@@ -160,7 +159,7 @@ Try adding such an operation and changing the Sample Type / Container Type for t
 The inputs to some operations are defined to be parts of larger collections of parts.
 For example, a lane in a gel or a well in a 96 well plate.
 Here, you can select not only which collection to use from the inventory, but also which element of the collection.
-For example, add a "Transform Cells" operation to your plan and set the "Comp Cells" input to "DH5apha".
+For example, add a "Transform Cells" operation to your plan and set the "Comp Cells" input to "DH5alpha".
 If you have any inventory, you will see a list of collections on the left.
 Next to each collection is a matrix of squares that are light blue if they have a matching sample in them.
 Click on one of them to select which element (or part) of the collection you would like to use.
@@ -211,13 +210,13 @@ You can also use images associated with plans via
 #### Using modules
 
 Modules are a way to visually group together operations (and other modules) to reduce clutter and to encapsulate common functions.
-For example, if a particular set of five operations is almost always used together, you can make them into a module whos inputs are the inputs to the first operation in the set, and whose outputs are the outputs of the last operation in the set.
-Then yu can make it into a template (see below) and use it over and over again.
+For example, if a particular set of five operations is almost always used together, you can make them into a module whose inputs are the inputs to the first operation in the set, and whose outputs are the outputs of the last operation in the set.
+Once you have a module, you can make it into a template (see below) and use it over and over again.
 
 **Creating a module:** To create a new module, click the `Module` icon.
 A selected box will appear, representing the module.
 You can open it by right clicking on it or by clicking the `Expand` icon.
-Opeing the module will replace the workspace with the contents of the module (which is empty for a newly created module).
+Opening the module will replace the workspace with the contents of the module (which is empty for a newly created module).
 You can close the module by clicking the &times; symbol on the upper right of the workspace.
 
 **Editing the name and documentation for a module**:
@@ -273,7 +272,7 @@ Thus, the items originally associated with the operation are noted as a data ass
 **Modifying a plan's connectivity**:
 At any time while a plan is running, you can disconnect wires from a plan, and add new wires.
 Doing so will change what operations run next once other operations complete, so be careful.
-A common thing to do is to disconnect an subplan that was incorrect and place it to the side, and then insert a correct subplan in its place.
+A common thing to do is to disconnect an sub-plan that was incorrect and place it to the side, and then insert a correct sub-plan in its place.
 
 **Adding new operations**:
 You can add new operations to a running plan just as you would a plan that is under construction.
@@ -288,7 +287,7 @@ This will put the operation into an error state and add a message to the operati
 **Modifying which items are used by an operation**:
 You cannot change which sample or container type an operation uses for its input once it has been launched.
 However, you can tell Aquarium to use a different item the next time it is run.
-To do so, clikc the input and look for a list of available inventory items on the left sidebar.
+To do so, click the input and look for a list of available inventory items on the left sidebar.
 Choose the item you wish to use.
 Note that if you are re-running an operation that used a different input the first time it ran, that information will be overwritten by the new choice the next time the operation is run.
 
@@ -363,7 +362,7 @@ The transitions from state to state are triggered as follows:
 
 **Reloading plans**:
 When you are viewing an active plan in the designer and the state of some of the operations changes, those changes will not be reflected in the designer automatically.
-To see what is happening with the plan without reloading the entire page and navigating back to your plan, click the `Reload` icon.
+To see what is happening with the plan without reloading the entire page and navigating back to your plan, click the reload icon.
 
 ## Accessing Data Associated with a Plan
 
