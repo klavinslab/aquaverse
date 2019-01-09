@@ -1,7 +1,7 @@
 # Installing and Running Aquarium
 
 We recommend that labs doing protocol development run at least two instances: a nursery server and a production server.
-The nursery server is shared within the lab for the purposes of trying out protocols under development, while the second is the server that controls the lab.
+A _nursery_ server is shared within the lab for the purposes of trying out protocols under development, while the _production_ server actually controls the lab.
 We use this arrangement in the Klavins lab to run the UW BIOFAB so that protocols can be evaluated without affecting the actual lab inventory.
 In addition to these lab servers, each protocol developer should run a local instance.
 
@@ -34,27 +34,17 @@ cd aquarium
 git checkout v2.5.0
 ```
 
-(Don't do this if you are doing Aquarium development. See the [git tagging documentation](https://git-scm.com/book/en/v2/Git-Basics-Tagging) for details.)
+(If you are doing Aquarium development, see the [git tagging documentation](https://git-scm.com/book/en/v2/Git-Basics-Tagging) for details on working with git tags.)
 
-## Choosing your Approach
+## Docker Installation
 
-If your goal is to run Aquarium on your laptop to evaluate it, develop new code, we have provided Docker configuration scripts to run Aquarium with all of the supporting services except for email notifications.
+We have provided Docker configuration scripts to run a self-contained instance of Aquarium.
+This configuration is intended to support protocol development or evaluation, and is nearly complete, though it does not have the services needed for email notifications.
 
-Note we assume a Unix&trade;-like environment though our experience is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
+Note we assume a Unix&trade;-like environment, though our experience is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
 
-[Jump to docker installation instructions](#dockerinstallationinstructions).
-
-If your goal is to run Aquarium in production mode with many users, you should install and run Aquarium manually.
-This requires first installing Ruby, Rails, MySQL, and, depending on the deployment, a web server.
-The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org) and the MySQL database running on a separate RDBMS instance.
-
-We discuss some of the considerations for running Aquarium below, but your deployment may require fine-tuning beyond what we describe.
-
-[Jump to manual installation instructions](#manualinstallationinstructions).
-
-## Docker Installation Instructions
-
-_These instructions are for setting up a local Aquarium and have not been tested with Docker-based deployments in a cloud service._
+Just to be clear: _this configuration was developed for use by a single user on a single machine such as a laptop, and was not developed for deployments on a local server or the cloud_.
+We currently suggest a [manual installation](#manualinstallationinstructions) for cloud deployments.
 
 ### Running Aquarium with Docker
 
@@ -64,13 +54,17 @@ To run Aquarium in production with Docker on your computer:
 
 2.  [Get the Aquarium source](#gettingaquarium).
 
-3.  To build the docker images, run the command
+3.  To build the docker images, change into the `aquarium` directory
+
+    ```bash
+    cd aquarium
+    ```
+
+    and run the command
 
     ```bash
     docker-compose build
     ```
-
-    This should only be necessary before running Aquarium for the first time after cloning or pulling the repository.
 
 4.  To start aquarium on non-Windows platforms, run the command
 
@@ -126,7 +120,7 @@ For instance, migrating the database:
 rake db:migrate RAILS_ENV=production
 ```
 
-Then exit from the connection and shutdown Aquarium with
+After you've run all of the rake tasks, exit from the connection and shutdown Aquarium with
 
 ```bash
 exit
@@ -134,6 +128,56 @@ docker-compose down
 ```
 
 And, finally, restart Aquarium with `docker-compose up` as before.
+
+### Configuring the Instance
+
+The Aquarium Docker image uses configuration files located in `docker/aquarium` instead of the corresponding files in the `config` directory.
+So, if you want to tweak the configuration of your Aquarium Docker installation, change these files.
+
+Specific configuration:
+
+1.  An Aquarium instance has a name, which you see on the login page and the upper left-hand corner of each page.
+    By default, the name is **Your Lab**.
+    You can change this to something you prefer by replacing the string assigned to the `instance_name` in `docker/aquarium/aquarium.rb`.
+    For instance, for a local instance on your laptop, you might change the instance name to **LOCAL** by changing the string at the end of the line:
+
+    ```ruby
+    Bioturk::Application.config.instance_name = 'LOCAL'
+    ```
+
+2.  The **Aq** logo that is on the Aquarium landing page can also be replaced.
+    Do this by adding your logo file to `app/assets/images` and change the line setting `logo_path`
+
+    ```ruby
+    Bioturk::Application.config.logo_path = 'aquarium-logo.png'
+    ```
+
+    to use your file name.
+    Run `docker-compose build` after making this change to ensure the file is included in the Docker image.
+
+3.  Aquarium uses a minio S3 service as configured in the `docker-compose` files, and files uploaded to Aquarium are directly accessible in the directory `docker/s3`.
+    In addition, the minio console is available at `http:localhost:9000` using the minio credentials from the `docker-compose.yml` file.
+    You can modify which S3 service is used by changing the paperclip settings in `docker/aquarium/production.rb`.
+    For instance, to use AWS S3 change the assignment to `config.paperclip_defaults` to
+
+    ```ruby
+    config.paperclip_defaults = {
+      storage: :s3,
+      s3_host_name: "s3-#{ENV['AWS_REGION']}.amazonaws.com",
+      s3_permissions: :private,
+      s3_credentials: {
+        bucket: ENV.fetch('S3_BUCKET_NAME'),
+        access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+        secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+        s3_region: ENV.fetch('AWS_REGION')
+      }
+    }
+    ```
+
+    To use this configuration, set the used environment variables in the `environment` clause of the `app` service in `docker-compose.override.yml`.
+
+4.  The Docker configuration does _not_ provide an email server container, meaning that email notifications will not work unless explicitly configured.
+    See the comments in `docker/aquarium/production.rb` for more information.
 
 ### Changing the Database
 
@@ -158,28 +202,20 @@ and restarting Aquarium with `docker-compose` as before.
 > And the larger the database, the longer the initialization will take.
 > _Let the initialization finish._
 
-### Notes
+## Manual Installation
 
-1.  The Aquarium Docker image uses configuration files located in `docker/aquarium` instead of the corresponding files in the `config` directory.
-    So, if you want to tweak the configuration of your Aquarium Docker installation, change these files.
+If your goal is to run Aquarium in production mode with many users, you should install and run Aquarium manually.
+This requires first installing Ruby, Rails, MySQL, and, depending on the deployment, a web server.
+The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org) and the MySQL database running on a separate RDBMS instance.
+Of course, you can also install a personal instance manually if you prefer.
 
-2.  When running Aquarium, you may notice a prominent **LOCAL** in the upper left-hand corner.
-    You can change this to something you prefer by replacing the string at the end of the first line in `docker/aquarium/aquarium.rb`, which is currently
+We discuss some of the considerations for running Aquarium below, but your deployment may require fine-tuning beyond what we describe.
 
-    ```ruby
-    Bioturk::Application.config.instance_name = 'LOCAL'
-    ```
+### Installing Aquarium
 
-3.  Files uploaded to Aquarium are directly accessible in the directory `docker/s3`, and the minio console at `http:localhost:9000` using the minio credentials from the `docker-compose.yml` file.
+Aquarium can be installed manually on a machine with a Unix&trade;-like environment with the following steps.
 
-4.  The Docker configuration also does not provide an email server container, meaning that email notifications will not work unless explicitly configured.
-    See the comments in the files `docker/aquarium/development.rb` and `docker/aquarium/production.rb` for more information.
-
-## Manual Installation Instructions
-
-To manually install Aquarium in a production environment:
-
-1.  Ensure you have a Unix&trade;-like environment on your machine and have installed
+1.  Ensure you have  on your machine and have installed
 
     - [Ruby](https://www.ruby-lang.org/en/) version 2.3.7
     - [npm](https://www.npmjs.com/get-npm)
@@ -242,20 +278,40 @@ To manually install Aquarium in a production environment:
     RAILS_ENV=production bundle exec rake assets:precompile
     ```
 
-11. If you have installed Aquarium on your local computer, you should now be able to start Aquarium by running
+### Running Aquarium Locally
 
-    ```bash
-    RAILS_ENV=production rails s
-    ```
+If you have installed Aquarium on your local computer, start Aquarium by running
 
-    and then go to `http://localhost:3000/` to find the login page.
+```bash
+RAILS_ENV=production rails s
+```
 
-    But, for Aquarium to work properly, you will also need to start the Krill server
+and start the Krill server with the command
 
-    ```bash
-    rails runner "Krill::Server.new.run(3500)"
-    ```
+```bash
+rails runner "Krill::Server.new.run(3500)"
+```
 
-12. Running on a server requires additional configuration that is not covered here.
-    The Docker configuration, in the `docker` directory, for the production environment illustrates these details, but is specific to running all the necessary services from `docker-compose`.
-    Specifically, see the Aquarium and Krill entrypoint scripts; as well as the [puma](http://puma.io) and [nginx](http://nginx.com) configuration files.
+then go to `http://localhost:3000/` to find the login page.
+
+### Running Aquarium on a Server
+
+Running on a server requires additional configuration that is not covered here, since there are many reasonable alternatives.
+
+As mentioned above, the UW BIOFAB runs Aquarium on an Amazon Web Services EC2 instance and uses AWS S3, RDS and SES services.
+Relevant configuration files to these details are `config/database.yml`, `config/initializers/aquarium.rb` and `config/environments/production.rb`.
+
+In addition, Aquarium is run using [puma](http://puma.io), but the web pages are served by [nginx](http://nginx.org) acting as a reverse proxy server that also serves static pages.
+These details are similar to the Docker production environment, and you may find it useful to refer to the files
+
+- `docker/aquarium/production_puma.rb`
+- `docker/nginx.production.conf`
+
+for puma and nginx configuration.
+Additionally, the entrypoint files
+
+- `docker/aquarium-entrypoint.sh`
+- `docker/krill-entrypoint.sh`
+
+illustrate how Aquarium and Krill are started.
+
