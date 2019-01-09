@@ -49,7 +49,6 @@ var config = {
         { name: "Managing Jobs", type: "local-md", path: "docs/manager/index.md" },
         { name: "Running Jobs", type: "local-md", path: "docs/technician/index.md" },
         { name: "Managing Users", type: "local-md", path: "docs/users/index.md" },
-        { name: "Inventory Definitions", type: "local-md", path: "docs/protocol_developer/types.md"},
         { name: "Location Wizards", type: "local-md", path: "docs/protocol_developer/location.md" },
       ]
     },
