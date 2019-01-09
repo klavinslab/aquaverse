@@ -1,7 +1,9 @@
 function highlight_code() {
   $('code').each(function(i, block) {
-    hljs.highlightBlock(block);
-    $(block).addClass("code-block");
+    if ( $(block).attr("class") ) { // inline code has no class
+       hljs.highlightBlock(block);
+       $(block).addClass("code-block");
+    }
   });
   $("#precondition").click(function() {
     if ( $(this).html() == "[show]" ) {
