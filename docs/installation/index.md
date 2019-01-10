@@ -24,6 +24,6 @@ Installation topics:
 - <a href="#" onclick="select('Getting Started','Manual Installation')">
     Manual Installation
   </a>
-- <a href="#" onclick="select('Getting Started','Configuring Your Instance')">
+- <a href="#" onclick="select('Getting Started','Configuration')">
     Configuration
   </a>
