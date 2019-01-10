@@ -6,7 +6,11 @@ This configuration is intended to support protocol development or evaluation, an
 Note we assume a Unix&trade;-like environment, though our experience is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
 
 Just to be clear: _this configuration was developed for use by a single user on a single machine such as a laptop, and was not developed for deployments on a local server or the cloud_.
-We currently suggest a [manual installation](#manualinstallationinstructions) for cloud deployments.
+We currently suggest a
+<a href="#" onclick="select('Getting Started','Manual Installation')">
+manual installation
+</a>
+for cloud deployments.
 
 ## Running Aquarium with Docker
 
@@ -14,7 +18,9 @@ To run Aquarium in production with Docker on your computer:
 
 1.  Install [Docker](https://www.docker.com/get-started) on your computer.
 
-2.  [Get the Aquarium source](#gettingaquarium).
+2.  <a href="#" onclick="select('Getting Started','Getting Aquarium')">
+    Get the Aquarium source
+    </a>
 
 3.  To build the docker images, change into the `aquarium` directory
 

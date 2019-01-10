@@ -22,7 +22,7 @@ Installation topics:
     Docker Installation
   </a>
 - <a href="#" onclick="select('Getting Started','Manual Installation')">
-    Docker Installation
+    Manual Installation
   </a>
 - <a href="#" onclick="select('Getting Started','Configuring Your Instance')">
     Configuration
