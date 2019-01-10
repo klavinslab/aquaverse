@@ -2,7 +2,8 @@ var config = {
   tagline: "The Laboratory</br>Operating System",
   get_releases: true,
   workflows: [
-    "/klavinslab/test-workflow"
+    "/klavinslab/test-workflow",
+    "/klavinslab/simple-plasmid-construction"
   ],
   copyright: "Aquarium Web Page and Documentation Copyright © 2018 University of Washington",
   navigation: [
