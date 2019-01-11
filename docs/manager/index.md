@@ -39,7 +39,8 @@ This example shows three categories _cloning_, _manager_ and _tutorial_neptune_ 
 (These are the categories from the protocol development tutorial; in practice, there will be many more.)
 
 <div style="width:20%">
-  <img src="docs/manager/images/category-list.png"
+  <img style="float:left"
+       src="docs/manager/images/category-list.png"
        alt="manager controls allow selecting the category to display">
 </div>
 
