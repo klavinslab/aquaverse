@@ -30,7 +30,8 @@ end
 When run from the technician view this protocol has a single step:
 
 <div style="width:75%">
-  <img src="docs/protocol_developer/images/show_images/1_hello_world-1.png" alt="the show block displays Hello World">
+  <img src="docs/protocol_developer/images/show_images/1_hello_world-1.png"
+       alt="the show block displays Hello World">
 </div>
 
 Making a protocol with multiple steps is as simple as calling `show` multiple times
@@ -41,6 +42,7 @@ class Protocol
     show do
         note "Hello"
     end
+
     show do
         note "World"
     end
@@ -52,13 +54,15 @@ The above code produces a protocol with two steps.
 The first displays "Hello":
 
 <div style="width:75%">
-  <img src="docs/protocol_developer/images/show_images/2_hello_world-2.png" alt="the show block displays Hello">
+  <img src="docs/protocol_developer/images/show_images/2_hello_world-2.png"
+       alt="the show block displays Hello">
 </div>
 
 And, the second displays "World":
 
 <div style="width:75%">
-  <img src="docs/protocol_developer/images/show_images/3_hello_world-3.png" alt="the show block displays World">
+  <img src="docs/protocol_developer/images/show_images/3_hello_world-3.png"
+       alt="the show block displays World">
 </div>
 
 You may have noticed that naked strings cannot be placed directly into show blocks.
