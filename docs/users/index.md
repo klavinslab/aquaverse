@@ -1,9 +1,8 @@
-
 # User Management
 
 ## Create an Administrative Account
 
-If you are running Aquarium with Docker, the user `neptune`  (password `aquarium`) has administrative privilege and can be used to create other accounts.
+If you are running Aquarium with Docker, the user `neptune` (password `aquarium`) has administrative privilege and can be used to create other accounts.
 
 Otherwise, you will need to create an administrative user with the commands
 
@@ -46,7 +45,7 @@ This will open the new group and allow you to add existing users as members by c
 
 ## Changing Password
 
-To change your password, select **Users** from the settings menu, click the  name of the user whose password you want to change, and then click **Change Password** in the list on the left.
+To change your password, select **Users** from the settings menu, click the name of the user whose password you want to change, and then click **Change Password** in the list on the left.
 Then enter the new password and click **ALL**.
 
 Only administrative users are able to change the password of other users.
@@ -57,4 +56,3 @@ To be able to retire users, you first need to create a group named `retired`.
 
 Open **Users** from the settings menu, then click the **retire** link to the right of the user name, and confirm that you want to retire the user.
 The user will now be listed in the `retired` group.
-
