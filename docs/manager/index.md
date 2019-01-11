@@ -38,7 +38,7 @@ At the bottom are buttons that control which categories of jobs are displayed in
 This example shows three categories _cloning_, _manager_ and _tutorial_neptune_ with the tutorial selected.
 (These are the categories from the protocol development tutorial; in practice, there will be many more.)
 
-<div style="width:33%">
+<div style="width:20%">
   <img src="docs/manager/images/category-list.png"
        alt="manager controls allow selecting the category to display">
 </div>
@@ -73,15 +73,14 @@ Selecting the operations to be part of a job, and then clicking **run** starts t
 
 Clicking the job id in this window will open the technician view that shows the job ready to start:
 
-<div style="width:50%">
+<div style="width:33%">
   <img src="docs/manager/images/technician-start.png"
        alt="technician view showing button to start a job">
 </div>
-![technician-start]()
 
 And, once the technician has started the job, the status will update in the operation status panel.
 
-<div style="width:50%">
+<div style="width:33%">
   <img src="docs/manager/images/updated-status.png"
        alt="manager view showing job running after technician started job">
 </div>
