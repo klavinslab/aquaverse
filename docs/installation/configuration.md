@@ -82,8 +82,8 @@ Alternatively, for a minio server set `config.paperclip_defaults` in `production
 This assumes the environment variables used are set.
 
 For Docker configuration, modify `docker/aquarium/production.rb`, and set the environment variables in the `environment` clause of the `app` service in `docker-compose.override.yml`.
-See [Environment Variables in Compose](https://docs.docker.com/compose/environment-variables/)
-For manual configuration, modify `config/environments/production.rb` and the environment variables have to be set in the environmennt where Aquarium is run.
+See [Environment Variables in Compose](https://docs.docker.com/compose/environment-variables/) for more.
+For manual configuration, modify `config/environments/production.rb` and the environment variables have to be set in the environment where Aquarium is run.
 
 ## Configuring the email service
 
@@ -105,11 +105,3 @@ which requires most of the same environment variables for AWS S3.
 
 The Docker configuration does _not_ provide an email server container, meaning that email notifications will not work unless explicitly configured in `docker/aquarium/production.rb`.
 For manual configuration, modify `config/environments/production.rb`.
-
-## Configuring the database
-
-The database used in the included configuration files is MySQL.
-Changing to a different database management system requires changes to the `database.yml` and `Gemfile`, but is standard Rails configuration.
-
-For a manual configuration modify `config/database.yml`.
-Changing the Docker configuration is more complex, and we'll just say that it would require changing the `docker-compose` files and leave it as an exercise for the persistent.

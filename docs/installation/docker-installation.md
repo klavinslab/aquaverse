@@ -1,16 +1,14 @@
 # Docker Installation
 
 We have provided Docker configuration scripts to run a self-contained instance of Aquarium.
-This configuration is intended to support protocol development or evaluation, and is nearly complete, though it does not have the services needed for email notifications.
-
-Note we assume a Unix&trade;-like environment, though our experience is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
+This configuration is intended to support protocol development or evaluation, and supports all Aquarium services except for email notifications.
 
 Just to be clear: _this configuration was developed for use by a single user on a single machine such as a laptop, and was not developed for deployments on a local server or the cloud_.
 We currently suggest a
 <a href="#" onclick="select('Getting Started','Manual Installation')">
 manual installation
 </a>
-for cloud deployments.
+for production lab deployments.
 
 ## Running Aquarium with Docker
 

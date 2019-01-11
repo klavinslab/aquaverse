@@ -10,7 +10,7 @@ First, protocols may change the underlying database, which depending on the effe
 And, second, errors in protocols being tested can affect lab system performance and disrupt protocols underway.
 So, our strong recommendation is that protocol testing _should not_ be done on a production server.
 
-Aquarium has been built to be used on a Unix&trade;-like environment.
+Aquarium has been built to be used in a Unix&trade; environment.
 The experience of some of our lab mates is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
 
 Installation topics:
