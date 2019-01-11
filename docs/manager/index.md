@@ -8,7 +8,10 @@ A manager uses Aquarium to determine which operations are run together as a job;
 
 The manager tab provides the information needed to manage lab operations as illustrated by this (redacted) screenshot of the manager tab for the UW BIOFAB production server.
 
-![manager tab](docs/manager/images/manager-view.png)
+<div style="width:75%">
+  <img src="docs/manager/images/manager-view.png"
+       alt="the manager view showing jobs">
+</div>
 
 This screenshot shows that there are five `Run Gel` operations (in the `Cloning` category) that are **pending**, or ready to execute.
 (See [Starting a job](#scenariostartingajob) below for details on how run a job using these five operations.)
@@ -18,7 +21,7 @@ At the top left are display controls that include:
 
 - **Switch User** – filter operations by user,
 - **Active Jobs** – filter operations by jobs that are active, and
-- **Activity Reports** – display job activity by date (in version X.X.X)
+- **Activity Reports** – display job activity by date
 
 At the bottom left are the categories of the operation types available on this Aquarium instance.
 The categories that currently have operations appear in black, and the rest are greyed-out.
@@ -35,13 +38,19 @@ At the bottom are buttons that control which categories of jobs are displayed in
 This example shows three categories _cloning_, _manager_ and _tutorial_neptune_ with the tutorial selected.
 (These are the categories from the protocol development tutorial; in practice, there will be many more.)
 
-![categories](docs/manager/images/category-list.png)
+<div style="width:33%">
+  <img src="docs/manager/images/category-list.png"
+       alt="manager controls allow selecting the category to display">
+</div>
 
 Once the category is selected, operation types will be displayed in the panel to the right of the buttons.
 Unless the **Completed** slider is clicked, these will be operation types with currently active operations, otherwise those with completed operations will also be shown.
 This example shows one operation type with an operation that is **pending**, which is the state of an operation that is ready to be performed by a technician.
 
-![selected category](docs/manager/images/selected-category.png)
+<div style="width:75%">
+  <img src="docs/manager/images/selected-category.png"
+       alt="manager view of selected category">
+</div>
 
 The operation states are explained in the <a href="#" onclick="select('Getting Started', 'Basic Concepts')">Aquarium Concepts</a> document.
 
@@ -50,16 +59,29 @@ The operation states are explained in the <a href="#" onclick="select('Getting S
 From the Manager Tab, clicking the number in the pending spot will display all of the operations of the selected type and state.
 These represent all of the jobs that can be selected and run as a job.
 
-![selected operation](docs/manager/images/selected-operation.png)
+<div style="width:75%">
+  <img src="docs/manager/images/selected-operation.png"
+       alt="manager view of selected operation">
+</div>
 
 Selecting the operations to be part of a job, and then clicking **run** starts the job
 
-![jobs](docs/manager/images/scheduled-job.png)
+<div style="width:65%">
+  <img src="docs/manager/images/scheduled-job.png"
+       alt="manager view of selected operation">
+</div>
 
 Clicking the job id in this window will open the technician view that shows the job ready to start:
 
-![technician-start](docs/manager/images/technician-start.png)
+<div style="width:50%">
+  <img src="docs/manager/images/technician-start.png"
+       alt="technician view showing button to start a job">
+</div>
+![technician-start]()
 
 And, once the technician has started the job, the status will update in the operation status panel.
 
-![changed status](docs/manager/images/updated-status.png)
+<div style="width:50%">
+  <img src="docs/manager/images/updated-status.png"
+       alt="manager view showing job running after technician started job">
+</div>
