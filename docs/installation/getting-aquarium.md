@@ -23,5 +23,3 @@ git checkout v2.5.0
 
 (If you are doing Aquarium development, you'll want to work slightly differently.
 See the [git tagging documentation](https://git-scm.com/book/en/v2/Git-Basics-Tagging) for details on working with git tags.)
-
-
