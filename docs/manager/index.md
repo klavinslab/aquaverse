@@ -32,17 +32,18 @@ It is also possible to display completed operations by clicking the slider at th
 
 ## Scenario: Monitoring lab activity
 
+<div style="width:20%">
+  <img style="float:left"
+       src="docs/manager/images/category-list.png"
+       alt="manager controls allow selecting the category to display"
+       hspace=20>
+</div>
+
 The left panel of the manager tab has two parts.
 At the top are buttons that allows the manager to do common tasks they perform: switching to another user, displaying active jobs, and generating reports of activity.
 At the bottom are buttons that control which categories of jobs are displayed in the right panel.
 This example shows three categories _cloning_, _manager_ and _tutorial_neptune_ with the tutorial selected.
 (These are the categories from the protocol development tutorial; in practice, there will be many more.)
-
-<div style="width:20%">
-  <img style="float:left"
-       src="docs/manager/images/category-list.png"
-       alt="manager controls allow selecting the category to display">
-</div>
 
 Once the category is selected, operation types will be displayed in the panel to the right of the buttons.
 Unless the **Completed** slider is clicked, these will be operation types with currently active operations, otherwise those with completed operations will also be shown.
