@@ -2,14 +2,20 @@
 
 A show block is used to display instructions for the technician.
 
-This document discusses the features of show blocks, but you should see the [API documentation](http://klavinslab.org/aquarium/api/Krill/ShowBlock.html) for more details on their use.
+This document discusses the basic features of show blocks.
+Refer to the [API documentation](http://klavinslab.org/aquarium/api/Krill/ShowBlock.html) for more details.
 
 ---
 
 ## "Hello Technician"
 
-A show blocks is how a protocol gives instructions to the Aquarium technician who is running the protocol.
-Show blocks are created and displayed in the technician view with the `show` method. `show` takes a single argument: a code block. This code block contains the contents that are intended to be shown to the technician. This might take the form of instructions with how to proceed with a protocol, or of user input fields to collect sample measurements for storing in the lab database. Each call to `show` constitutes a new slide in the technician view that will be shown while running the protocol. Lets create a simple protocol with a show block that says "Hello World"
+A show block is used to give instructions to the technician running the protocol.
+Show blocks are created and displayed in the technician view with the `show` method.
+`show` takes a single argument: a code block.
+This code block contains the contents that are intended to be shown to the technician.
+This might take the form of instructions with how to proceed with a protocol, or of user input fields to collect sample measurements for storing in the lab database.
+Each call to `show` constitutes a new slide in the technician view that will be shown while running the protocol.
+Lets create a simple protocol with a show block that says "Hello World"
 
 ```ruby
 class Protocol
@@ -23,7 +29,7 @@ end
 
 When run from the technician view this protocol has a single step:
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/1_hello_world-1.png" alt="the show block displays Hello World">
 </div>
 
@@ -45,13 +51,13 @@ end
 The above code produces a protocol with two steps.
 The first displays "Hello":
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/2_hello_world-2.png" alt="the show block displays Hello">
 </div>
 
 And, the second displays "World":
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/3_hello_world-3.png" alt="the show block displays World">
 </div>
 
@@ -71,7 +77,7 @@ Many show blocks are composed mostly of a single `title` call, and one or more `
 
 When run in a protocol with 5 operations, the technician would see the following instruction
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/4_serious_example.png"
        alt="the show block displays instructions to grab five tubes">
 </div>
@@ -125,7 +131,7 @@ We can achieve powerful emergent behavior by using ruby code inside show blocks.
 
 Here is the output on the Technician view for the latter example with 5 `Operations`
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/5_dynamic_example.png"
        alt="the show block displays instructions to grab five specific tubes">
 </div>
@@ -146,7 +152,7 @@ end
 
 This would display the following slide to the technician
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/6_input_block-1.png"
        alt="the show block asks for technician input">
 </div>
@@ -163,7 +169,7 @@ end
 
 Now our textbox is a bit more informative
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/7_input_block-2.png"
        alt="the show block asks for technician input">
 </div>
@@ -201,7 +207,7 @@ Notice that this time we are storing data for each `Operation`, so we must param
 
 Here is what the slide would appear to the technician as
 
-<div style="width:60%">
+<div style="width:75%">
   <img src="docs/protocol_developer/images/show_images/8_input_block-3.png"
        alt="the show block asks for technician input for each operation">
 </div>
