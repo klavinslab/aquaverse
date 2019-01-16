@@ -4,6 +4,8 @@ This is an introduction to writing protocols for Aquarium in the Krill domain sp
 We try to introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
 See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
 
+_This document is a working draft._
+
 ---
 
 ## An Aquarium Protocol
@@ -12,8 +14,8 @@ A protocol in Aquarium defines an action that can be planned by a researcher des
 In the lab, the protocol translates to a series of steps that are to be performed to complete the action.
 
 If you are coming from a background where you have written or worked from a typical paper protocol, an Aquarium protocol is more detailed.
-The protocol may correspond to a single step of a paper protocol – such as streaking an agar plate with e. coli – but elaborates the details needed to ensure the protocol is performed as consistently as possible.
-When deciding what protocols to make, a rule of thumb is that a protocol should be something that can be done in one session at the bench though see **BLAH** for more detailed discussion.
+The protocol may correspond to a single step of a paper protocol – such as streaking an agar plate with E. coli – but elaborates the details needed to ensure the protocol is performed as consistently as possible.
+When deciding what protocols to make, a rule of thumb is that a protocol should be something that can be done in one session at the bench.
 
 ## An Initial Protocol
 
@@ -21,9 +23,9 @@ Let's look more closely at streaking a plate.
 Most protocols first provision what is needed, perform the action of the protocol, and finally store or discard the items used or created.
 From this perspective, our protocol for streaking plate has the top-level steps:
 
-1. Get the glycerol stock and a fresh agar plate.
-2. Streak the plate
-3. Store the glycerol stock and the streaked plate.
+    1. Get the glycerol stock and a fresh agar plate.
+    2. Streak the plate
+    3. Store the glycerol stock and the streaked plate.
 
 For our initial protocol, we will just have a series of screens with these steps as titles:
 
@@ -56,7 +58,7 @@ Let's try running this protocol in Aquarium to understand better how this works.
 
 ## Running the Protocol
 
-To understand better what is happening, you should 
+To understand better what is happening, you should
 <a href="#" onclick="select('Getting Started','Installation')">
 set up an Aquarium instance on your personal machine
 </a>
@@ -64,6 +66,8 @@ to follow along.
 Our advice is that you **not** use your lab's server to learn.
 
 ### Creating a Protocol
+
+Start by using the <a href="#" onclick="select('Protocols', 'Developer Tools')>Aquarium developer tools</a> to create our protocol:
 
 1.  Starting from the developer tab, click the **New** button in the upper right corner.
 
@@ -74,6 +78,7 @@ Our advice is that you **not** use your lab's server to learn.
 ### Running a Protocol from the Developer Test Tab
 
 The simplest way to run our protocol is by using testing in the Developer Tab.
+(See the <a href="#" onclick="select('Protocols', 'Developer Tools')>Aquarium developer tools page</a> for more details.)
 
 1.  Click **Test**
 
@@ -81,7 +86,7 @@ The simplest way to run our protocol is by using testing in the Developer Tab.
 
 3.  Click the **Test** button to run the operation(s) with the inputs and show the trace with any output
 
-When the test finishes, you should see a backtrace with each of the page titles displayed.
+When the test finishes, you should see a backtrace – the execution history – with each of the page titles displayed.
 
 ### Running a Deployed Protocol
 
@@ -107,6 +112,13 @@ To run the protocol so that it will show you the screens as the technician will 
 
     Click **OK** will move to the next slide.
     After the last page, the protocol will end.
+
+Relevant documentation:
+
+- <a href="#" onclick="select('Protocols', 'Developer Tools')>Aquarium developer tools</a>
+- <a href="#" onclick="select('Researchers', 'Designing Plans')>Managing Jobs</a>
+- <a href="#" onclick="select('Lab Management', 'Managing Jobs')>Managing Jobs</a>
+- <a href="#" onclick="select('Lab Management', 'Running Jobs')>Running Jobs</a>
 
 ## Refining the protocol
 
@@ -231,6 +243,8 @@ We are going to add an input named `glycerol_stock` and an output named `plate`.
 
 3. Click the **Add Output** button, and type `plate` in the name field and `plasmid` in the routing ID field.
 
+4. Click the **Update** button to save these changes.
+
 ### Using Inputs and Outputs
 
 Now that we have reorganized the protocol to access the operations, and the inputs and outputs are declared, we can refer to the `glycerol_stock` input as `operation.input('glycerol_stock').item`.
@@ -242,12 +256,13 @@ For now, the protocol uses the IDs for each item in the show blocks to make the 
 ```ruby
 class Protocol
   def main
-    operations.make
-    operations.retrieve
+    operations.retrieve  # locate required items and display instructions to get them
+    operations.make      # create items for the outputs
+
     operations.each do |operation|
       operation_task(operation)
     end
-    operations.store
+    operations.store    # put everything away
   end
 
   # Perform the Streak Plate protocol for a single operation
@@ -301,9 +316,9 @@ Unfortunately, the protocol is now broken – you will get an error if you try t
    Click the **New** button to create a new sample type.
    Type `Plasmid` into the name field, `dummy sample type` in the description field, and click the **Save** button.
 
-2. Under **Containers** on the Plasmid sample type page, click the **Add** button to create a new object type.
-   Type `Plasmid Glycerol Stock` in the name field, `dummy object type` in the description field, `Plasmid` in the Unit field and then click **Create Object Type**.
-   (The unit field links the object type to the sample type.)
+2. Go back to the **Sample Type Definitions** page, and if necessary select **Plasmid** on the left.
+   Under **Containers** on the Plasmid sample type page, click the **Add** button to create a new object type.
+   Type `Plasmid Glycerol Stock` in the name field, `dummy object type` in the description field, select `Plasmid` in the as the sample type and then click **Create Object Type**.
 
 3. Repeat step 2, except name the object type `Plasmid Plate`.
 
@@ -311,6 +326,7 @@ Return to the definition tab for the `StreakPlate` protocol, and add the types t
 For both, set the sample type to `Plasmid`.
 For the input `glycerol_stock` set the "container" to the object type `Plasmid Glycerol Stock`.
 For the output `plate`, set the "container" to the object type `Plasmid Plate`.
+Then click the **Update** button to make sure the changes are saved.
 
 We still need an example `Plasmid` sample to run our protocol.
 
@@ -323,69 +339,67 @@ We still need an example `Plasmid` sample to run our protocol.
 2. At the right of the newly created sample type, click **Actions**.
    Choose **New Item** and **Plasmid Glycerol Stock**.
 
-Now you should be able to run/test the protocol, and the input and output items are identified by a LIMS ID.
+Now you should be able to run/test the protocol, and the input and output items should identified by a LIMS ID.
 
-## Provisioning
-
-**here**
+## Provisioning and storing
 
 Provisioning is the task of gathering the resources that are needed for a protocol.
 
-### Gathering and Storing Items
+Aquarium is able to generate instructions for provisioning without you having to write special instructions.
+You may have noticed that we snuck some code into the previous example without explaining it:
 
 ```ruby
 def main
-  operations.make
-  operations.retrieve
-  operations.each do |operation|
-    operation_task(operation)
-  end
-  operations.store
+    operations.retrieve  # locate required items and display instructions to get them
+    operations.make      # create items for the outputs
+
+    operations.each do |operation|
+      operation_task(operation)
+    end
+    operations.store    # put everything away
 end
 ```
 
-### Provisioning New Items
+The command `operations.make` creates the items for outputs of the operations, and must be run for a protocol that creates new items.
+But, The other two commands `operations.retrieve` and `operations.store` manage the tasks of getting and storing items that are used.
 
-agar plates may exist or may need to request they be built.
-either way plate needs to be given the item number assigned for output.
+If you generate and run a test for the protocol, the first two screens in the backtrace should show instructions to gather inputs.
+The first, which displays the text
 
-## Factoring out common work
+> **Gather the Following Additional Item(s)**<br>
+> Item 2 at Bench
 
-If you run a plan with more than one `StreakPlate` operation, you'll see that the way that we have written our protocol repeats some common work that doesn't have to be repeated.
-Provisioning and storing items are the primary example, but we could even interleave the steps of the second show block where plates are streaked because there is a delay as the plates dry.
+(you may have a different item number) is generated by the `operations.retrieve` command.
+And, the second, which shows the text
+
+> **Get the glycerol stock and a fresh agar plate**<br>
+> Get the glycerol stock 2<br>
+> Get a fresh agar plate and label it 3
+
+is generated by the first show block in `operation_task`.
+
+There is duplicated information displayed here, but `operations.retrieve` also marks the items as in use, which helps avoid conflicts over resources in the lab.
+We want to use Aquarium item management where possible, so we will drop the instruction to get the glycerol stock from the show block.
+
+The `operations.store` command is similar, but here we actually have an omission in our protocol, because it is not clear what it means to "put back" an item that was created by the protocol.
+The glycerol stock should go back to its original location (another detail we need to determine later), but we actually want to put the plate into an incubator.
+So, for the output plate, we add a line `output_plate.move('incubator')` to the end of `operation_task` where `'incubator'` is a location that we need to add to Aquarium.
+Now, when `operations.store` is run, Aquarium will instruct the technician to move the plate to the incubator.
+As a result, we can remove the last show block with the title `Store the glycerol stock and the streaked plate`.
+
+All of these changes give the protocol
 
 ```ruby
 class Protocol
   def main
-    operations.make
-    operations.retrieve
-    get_plates(operations.length)
+    operations.retrieve  # locate required items and display instructions to get them
+    operations.make      # create items for the outputs
+
     operations.each do |operation|
       operation_task(operation)
     end
-    store_plates(operations)
-    operations.store
-  end
 
-  # Provision a fresh agar plate for each operation in the given list.
-  #
-  # @param operations [OperationList] the list of operations
-  def get_plates(operations)
-    count = operations.length
-    id_list = operations.map { |operation| operation.output("Plate").item.id }
-    show do
-      title "Get fresh agar plates"
-      check "Please get #{count} agar plates"
-    end
-  end
-
-  def return_and_store(operations)
-    # Display instructions for storing/disposing of items
-    show do
-      title 'Store the glycerol stock and the streaked plate'
-      check "Return the glycerol stock #{input_stock.id}"
-      check "Store the streaked plate #{output_plate.id}"
-    end
+    operations.store    # move everything where it belongs
   end
 
   # Perform the Streak Plate protocol for a single operation
@@ -397,8 +411,8 @@ class Protocol
     output_plate = operation.output('plate').item
     # Display provisioning instructions
     show do
-      title 'Get the glycerol stock'
-      check "Get the glycerol stock  #{input_stock.id}"
+      title 'Get a fresh agar plate'
+      check "Get a fresh agar plate and label it #{output_plate.id}"
     end
 
     # Display instructions for streaking the plate
@@ -408,10 +422,618 @@ class Protocol
       check 'Allow the spots on the plate to dry'
       check "Streak-out the spotted plate #{output_plate.id} with the pipette"
     end
+
+    # Move the plate to the incubator
+    output_plate.move('incubator')
   end
 end
 ```
 
-## Locations
+## Redesigning the protocol
 
-BLAH
+If you run a plan with more than one `StreakPlate` operation, you'll see that the way that we have written our protocol repeats some common work that doesn't have to be.
+The protocol we have now is essentially
+
+    For each operation:
+
+       1. Get the glycerol stock and a fresh agar plate.
+       2. Streak the plate
+       3. Store the glycerol stock and the streaked plate.
+
+Imagine running this for several operations using the same glycerol stock.
+The protocol would tell the technician to go get the glycerol stock, streak the plate, put the glycerol stock back, and then go get the glycerol stock again to do the next operation.
+The technician is going to very quickly start optimizing the steps, and not follow the protocol, which is something we want to avoid.
+
+The strategy to deal with this would be to group the operations by glycerol stock, so that the technician can get each glycerol stock and then streak all the plates requested for that stock.
+Another optimization would be to get all of the necessary plates before starting to avoid getting a single plate for each iteration.
+
+    1. Get one fresh agar plate for each operation
+    2. For each glycerol stock
+       1. Get glycerol stock
+       2. For each operation using the glycerol stock, label a plate and spot from glycerol stock
+       3. Allow plates to dry
+       4. Streak each plate
+       5. Store glycerol stock
+    3. Store the plates
+
+Now that we have a sketch of our revised protocol, we can gradually transform the existing protocol code to match the new design.
+
+### Reorganizing the protocol code
+
+Step 2 of the protocol operates on batches of operations in a way that is a revision of the current `main` method.
+So, before we change the `main` method, let's start by moving the body of the `main` method to a new `streak_from_glycerol_stock` method.
+
+```ruby
+# Performs the streak plate protocol for a list of operations that all use the
+# given glycerol stock.
+#
+# @param glycerol_stock [Item] the glycerol stock
+# @param operations     [OperationList] the list of operations
+def streak_from_glycerol_stock(glycerol_stock, operations)
+  operations.retrieve  # locate required items and display instructions to get them
+  operations.make      # create items for the outputs
+
+  operations.each do |operation|
+    operation_task(operation)
+  end
+
+  operations.store    # move everything where it belongs
+end
+```
+
+The main method is now empty, add comments for the top-level steps of our new protocol, so that we have placeholders to refine the protocol:
+
+```ruby
+def main
+# 1. Get agar plate for each operation
+# 2. For each glycerol stock, streak plates
+# 3. Store the plates
+end
+```
+
+We can define any of these in whatever order we want.
+
+Most the work is done in step 2, so let's start by figuring out how the protocol will use the new `streak_from_glycerol_stock` method.
+The method takes a glycerol stock and a list of operations that take the glycerol stock as an input.
+This means we need to reorganize the operations by the `glycerol_stock` input, which we can do with a call to `operations.group_by`:
+
+```ruby
+operations.group_by {|operation| operation.input('glycerol_stock').item }
+```
+
+This call to the `group_by` method will produce a Ruby hash map that organizes the operations by the glycerol stock item they take as input.
+The useful part is that the hash map allows us to visit each of the groups separately.
+However, the details of the method call involve some Ruby cleverness that is a little unclear unless you know what is going on, so to make the code a little more readable, we can wrap this method call in a method named to say what is happening:
+
+```ruby
+# Group the operations in the list by the `glycerol_stock` input.
+# Returns a hash map with the glycerol stock items as keys and lists of
+# operations as values
+#
+# @param operations [OperationList]  the list of operations
+# @return [Hash]  a map from glycerol stock item to list of operations
+def group_by_glycerol_stock(operations)
+  operations.group_by {|operation| operation.input('glycerol_stock').item }
+end
+```
+
+Now, we can do something like this
+
+```ruby
+ops_by_stock = group_by_glycerol_stock(operations)
+ops_by_stock.each do |glycerol_stock, group|
+  # do something with the operations in the group
+end
+```
+
+where, for this protocol, we want to call the `streak_from_glycerol_stock` method.
+
+The `main` method now looks like
+
+```ruby
+def main
+  # 1. Get one agar plate for each operation
+  # 2. For each glycerol stock, streak plates
+  ops_by_stock = group_by_glycerol_stock(operations)
+  ops_by_stock.each do |glycerol_stock, group|
+    streak_from_glycerol_stock(glycerol_stock, group)
+  end
+  # 3. Store the plates
+end
+```
+
+For step 1, the technician just needs to get enough plates to complete all of the operations.
+We can do this with a simple show block, but we'll wrap it in a method like this
+
+```ruby
+# Provision a fresh agar plate for each operation in the given list.
+  #
+  # @param operations [OperationList] the list of operations
+  def get_plates(count)
+    show do
+      title "Get fresh agar plates"
+      check "Please get #{count} agar plates"
+    end
+  end
+```
+
+and add the call to the main method
+
+```ruby
+def main
+  # 1. Get one agar plate for each operation
+  get_plates(operations.length)
+
+  # 2. For each glycerol stock, streak plates
+  ops_by_stock = group_by_glycerol_stock(operations)
+  ops_by_stock.each do |glycerol_stock, group|
+    streak_from_glycerol_stock(glycerol_stock, group)
+  end
+
+  # 3. Store the plates
+end
+```
+
+So, we only have step 3 that we haven't considered.
+We could do this with a call to `operations.store`, but let's try it and see if it is necessary.
+All of the changes so far give us the protocol
+
+```ruby
+class Protocol
+  def main
+    # 1. Get one agar plate for each operation
+    get_plates(operations.length)
+
+    # 2. For each glycerol stock, streak plates
+    ops_by_stock = group_by_glycerol_stock(operations)
+    ops_by_stock.each do |glycerol_stock, group|
+      streak_from_glycerol_stock(glycerol_stock, group)
+    end
+
+    # 3. Store the plates
+  end
+
+  # Provision a fresh agar plate for each operation in the given list.
+  #
+  # @param operations [OperationList] the list of operations
+  def get_plates(count)
+    show do
+      title "Get fresh agar plates"
+      check "Please get #{count} agar plates"
+    end
+  end
+
+  # Group the operations in the list by the `glycerol_stock` input.
+  # Returns a hash map with the glycerol stock items as keys and lists of
+  # operations as values
+  #
+  # @param operations [OperationList]  the list of operations
+  # @return [Hash]  a map from glycerol stock item to list of operations
+  def group_by_glycerol_stock(operations)
+    operations.group_by {|operation| operation.input('glycerol_stock').item }
+  end
+
+  # Performs the streak plate protocol for a list of operations that all use the
+  # given glycerol stock.
+  #
+  # @param glycerol_stock [Item] the glycerol stock
+  # @param operations     [OperationList] the list of operations
+  def streak_from_glycerol_stock(glycerol_stock, operations)
+    operations.retrieve  # locate required items and display instructions to get them
+    operations.make      # create items for the outputs
+
+    operations.each do |operation|
+      operation_task(operation)
+    end
+
+    operations.store    # move everything where it belongs
+  end
+
+  # Perform the Streak Plate protocol for a single operation
+  #
+  # @param operation [Operation] the operation to be executed
+  def operation_task(operation)
+    # Declare references to input/output objects
+    input_stock = operation.input('glycerol_stock').item
+    output_plate = operation.output('plate').item
+    # Display provisioning instructions
+    show do
+      title 'Get a fresh agar plate'
+      check "Get a fresh agar plate and label it #{output_plate.id}"
+    end
+
+    # Display instructions for streaking the plate
+    show do
+      title 'Streak the plate'
+      check "Spot the plate #{output_plate.id} from the glycerol stock #{input_stock.id}"
+      check 'Allow the spots on the plate to dry'
+      check "Streak-out the spotted plate #{output_plate.id} with the pipette"
+    end
+
+    # Move the plate to the incubator
+    output_plate.move('incubator')
+  end
+end
+```
+
+Add `operations.store` on the line after the step 3 comment in `main` and then run the protocol on the test tab.
+This gives two screens with the text
+
+> **Return the Following Additional Item(s)**<br>
+> Item 23 at Bench<br>
+> Item 24 at incubator
+
+The first screen comes from the `operations.store` in `streak_from_glycerol_stock` and the second from the one in `main`.
+We definitely don't need both to move both items – let's have `streak_from_glycerol_stock` return the glycerol stock, and then move all of the plates to the incubator when the protocol ends.
+To do this change the calls to `operations.store`.
+In `streak_from_glycerol_stock`, change `operations.store` to
+
+```ruby
+operations.store(interactive: true, io: 'input', method: 'boxes')
+```
+
+which will print instructions to return the glycerol stock.
+And, in `main`, change `operations.store` to
+
+```ruby
+operations.store(interactive:true, io: 'output', method: 'boxes')
+```
+
+which will print instructions to move all of the plates to the incubator.
+
+So, finally, our protocol code is this
+
+```ruby
+class Protocol
+  def main
+    # 1. Get one agar plate for each operation
+    get_plates(operations.length)
+
+    # 2. For each glycerol stock, streak plates
+    ops_by_stock = group_by_glycerol_stock(operations)
+    ops_by_stock.each do |glycerol_stock, group|
+      streak_from_glycerol_stock(glycerol_stock, group)
+    end
+
+    # 3. Store the plates
+    operations.store(interactive:true, io: 'output', method: 'boxes')
+  end
+
+  # Provision a fresh agar plate for each operation in the given list.
+  #
+  # @param operations [OperationList] the list of operations
+  def get_plates(count)
+    show do
+      title "Get fresh agar plates"
+      check "Please get #{count} agar plates"
+    end
+  end
+
+  # Group the operations in the list by the `glycerol_stock` input.
+  # Returns a hash map with the glycerol stock items as keys and lists of
+  # operations as values
+  #
+  # @param operations [OperationList]  the list of operations
+  # @return [Hash]  a map from glycerol stock item to list of operations
+  def group_by_glycerol_stock(operations)
+    operations.group_by {|operation| operation.input('glycerol_stock').item }
+  end
+
+  # Performs the streak plate protocol for a list of operations that all use the
+  # given glycerol stock.
+  #
+  # @param glycerol_stock [Item] the glycerol stock
+  # @param operations     [OperationList] the list of operations
+  def streak_from_glycerol_stock(glycerol_stock, operations)
+    operations.retrieve  # locate required items and display instructions to get them
+    operations.make      # create items for the outputs
+
+    operations.each do |operation|
+      operation_task(operation)
+    end
+
+    # return the glycerol stock
+    operations.store(interactive: true, io: 'input', method: 'boxes')
+  end
+
+  # Perform the Streak Plate protocol for a single operation
+  #
+  # @param operation [Operation] the operation to be executed
+  def operation_task(operation)
+    # Declare references to input/output objects
+    input_stock = operation.input('glycerol_stock').item
+    output_plate = operation.output('plate').item
+    # Display provisioning instructions
+    show do
+      title 'Get a fresh agar plate'
+      check "Get a fresh agar plate and label it #{output_plate.id}"
+    end
+
+    # Display instructions for streaking the plate
+    show do
+      title 'Streak the plate'
+      check "Spot the plate #{output_plate.id} from the glycerol stock #{input_stock.id}"
+      check 'Allow the spots on the plate to dry'
+      check "Streak-out the spotted plate #{output_plate.id} with the pipette"
+    end
+
+    # Move the plate to the incubator
+    output_plate.move('incubator')
+  end
+end
+```
+
+**ACTIVE CONSTRUCTION BELOW**
+
+### Interleaving operations
+
+We now have our protocol code structured in the same way as our new protocol
+
+    1. Get one fresh agar plate for each operation
+    2. For each glycerol stock
+       1. Get glycerol stock
+       2. For each operation using the glycerol stock, label a plate and spot from glycerol stock
+       3. Allow plates to dry
+       4. Streak each plate
+       5. Store glycerol stock
+    3. Store the plates
+
+However, the `operation_task` method that does steps 2.2-2.4 is organized differently; it deals with each operation one by one instead of interleaving the steps.
+
+Let's start by changing `streak_from_glycerol_stock` to remove the `each` that visits each operation one-at-a-time, and replace it by comments with the steps from our new protocol:
+
+```ruby
+# Performs the streak plate protocol for a list of operations that all use the
+  # given glycerol stock.
+  #
+  # @param glycerol_stock [Item] the glycerol stock
+  # @param operations     [OperationList] the list of operations
+  def streak_from_glycerol_stock(glycerol_stock, operations)
+    operations.retrieve  # locate required items and display instructions to get them
+    operations.make      # create items for the outputs
+
+    # 2. Label a plate and spot from glycerol stock
+    # 3. Allow plates to dry
+    # 4. Streak each plate
+
+    # return the glycerol stock
+    operations.store(interactive: true, io: 'input', method: 'boxes')
+  end
+```
+
+To figure out what we need to do to refine these new, let's look at the `operation_task` method.
+
+```ruby
+# Perform the Streak Plate protocol for a single operation
+#
+# @param operation [Operation] the operation to be executed
+def operation_task(operation)
+  # Declare references to input/output objects
+  input_stock = operation.input('glycerol_stock').item
+  output_plate = operation.output('plate').item
+  # Display provisioning instructions
+  show do
+    title 'Get a fresh agar plate'
+    check "Get a fresh agar plate and label it #{output_plate.id}"
+  end
+
+  # Display instructions for streaking the plate
+  show do
+    title 'Streak the plate'
+    check "Spot the plate #{output_plate.id} from the glycerol stock #{input_stock.id}"
+    check 'Allow the spots on the plate to dry'
+    check "Streak-out the spotted plate #{output_plate.id} with the pipette"
+  end
+
+  # Move the plate to the incubator
+  output_plate.move('incubator')
+end
+```
+
+Our goal is to reorganize these steps so that they are performed all of the operations before moving on to the next step.
+We can do this by making new methods that deal with each of these new steps – we need to make sure that each `check` directive ends up in the show blocks that we add.
+
+The first new step we are adding will grab an agar plate, label it, and spot it from the glycerol stock.
+This pulls the step from the first show block, and the first step of the second in the `operation_task` method into one place:
+
+```ruby
+# Spots the plate from the glycerol stock.
+#
+# Gets an agar plate and labels it as the given plate, and then spots the plate
+# from the glycerol stock.
+#
+# @param plate [Item] the item for the plasmid plate
+# @param glycerol_stock [Item] the item for the glycerol stock
+def spot_plate(plate, glycerol_stock)
+  show do
+    title "Spot a plate from #{glycerol_stock}"
+    check "Get a fresh agar plate and label it #{plate.id}"
+    check "Spot the plate #{plate.id} from the glycerol stock #{glycerol_stock.id}"
+  end
+end
+
+# Spots all of the output plates with the glycerol stocks.
+#
+# Gets new agar plates, labels and spots them from the glycerol stock.
+#
+# @param operations [OperationsList] the operations
+# @param glycerol_stock [Item] the glycerol stock
+def spot_plates(operations, glycerol_stock)
+  operations.each do |operation|
+    spot_plate(operation.output('plate').item, glycerol_stock)
+  end
+end
+```
+
+The second new step just let's the plates dry:
+
+```ruby
+def dry_plates(operations)
+  show do
+    title 'Dry Plates'
+    check 'Allow the spots on the plates to dry'
+  end
+end
+```
+
+And, the third streaks out each spotted plate:
+
+```ruby
+def streak_plates(operations)
+  operations.each do |operation|
+    plate = operation.output('plate').item
+    show do
+      title 'Streak the plate'
+      check "Streak-out the spotted plate #{plate.id} with the pipette"
+    end
+  end
+end
+```
+
+Let's check that we haven't lost anything.
+We had four different `check`-directives before, and each occurs in the new code.
+However, we neglected the `output_plate.move('incubator')` command, which we can put into its own method:
+
+```ruby
+def move_plates(operations)
+  operations.each do |operation|
+    plate = operation.output('plate').item
+    plate.move('incubator')
+  end
+end
+```
+
+And, then we call it at the end of `streak_from_glycerol_stock`.
+
+All of these changes give us the new protocol below
+
+```ruby
+class Protocol
+  def main
+    # 1. Get one agar plate for each operation
+    get_plates(operations.length)
+
+    # 2. For each glycerol stock, streak plates
+    ops_by_stock = group_by_glycerol_stock(operations)
+    ops_by_stock.each do |glycerol_stock, group|
+      streak_from_glycerol_stock(glycerol_stock, group)
+    end
+
+    # 3. Store the plates
+    operations.store(interactive:true, io: 'output', method: 'boxes')
+  end
+
+  # Provision a fresh agar plate for each operation in the given list.
+  #
+  # @param operations [OperationList] the list of operations
+  def get_plates(count)
+    show do
+      title "Get fresh agar plates"
+      check "Please get #{count} agar plates"
+    end
+  end
+
+  # Group the operations in the list by the `glycerol_stock` input.
+  # Returns a hash map with the glycerol stock items as keys and lists of
+  # operations as values
+  #
+  # @param operations [OperationList]  the list of operations
+  # @return [Hash]  a map from glycerol stock item to list of operations
+  def group_by_glycerol_stock(operations)
+    operations.group_by {|operation| operation.input('glycerol_stock').item }
+  end
+
+  # Performs the streak plate protocol for a list of operations that all use the
+  # given glycerol stock.
+  #
+  # @param glycerol_stock [Item] the glycerol stock
+  # @param operations     [OperationList] the list of operations
+  def streak_from_glycerol_stock(glycerol_stock, operations)
+    operations.retrieve  # locate required items and display instructions to get them
+    operations.make      # create items for the outputs
+
+    # 2. Label a plate and spot from glycerol stock
+    spot_plates(operations, glycerol_stock)
+
+    # 3. Allow plates to dry
+    dry_plates(operations)
+
+    # 4. Streak each plate
+    streak_plates(operations)
+
+    # return the glycerol stock
+    operations.store(interactive: true, io: 'input', method: 'boxes')
+
+    # Move the plate to the incubator
+    move_plates(operations)
+  end
+
+  # Spots the plate from the glycerol stock.
+  #
+  # Gets an agar plate and labels it as the given plate, and then spots the plate
+  # from the glycerol stock.
+  #
+  # @param plate [Item] the item for the plasmid plate
+  # @param glycerol_stock [Item] the item for the glycerol stock
+  def spot_plate(plate, glycerol_stock)
+    show do
+      title "Spot a plate from #{glycerol_stock}"
+      check "Get a fresh agar plate and label it #{plate.id}"
+      check "Spot the plate #{plate.id} from the glycerol stock #{glycerol_stock.id}"
+    end
+  end
+
+  # Spots all of the output plates with the glycerol stocks.
+  #
+  # Gets new agar plates, labels and spots them from the glycerol stock.
+  #
+  # @param operations [OperationsList] the operations
+  # @param glycerol_stock [Item] the glycerol stock
+  def spot_plates(operations, glycerol_stock)
+    operations.each do |operation|
+      spot_plate(operation.output('plate').item, glycerol_stock)
+    end
+  end
+
+  # Dries spotted plates
+  #
+  # @param operations [OperationList] the operations to create plates
+  def dry_plates(operations)
+    show do
+      title 'Dry Plates'
+      check 'Allow the spots on the plates to dry'
+    end
+  end
+
+  # Streaks-out spotted plates
+  #
+  # @param operations [OperationList] the operations creating plates
+  def streak_plates(operations)
+    operations.each do |operation|
+      plate = operation.output('plate').item
+      show do
+        title 'Streak the plate'
+        check "Streak-out the spotted plate #{plate.id} with the pipette"
+      end
+    end
+  end
+
+  # Move all of the plates for the operations to the incubator.
+  #
+  # @param operations [OperationList] the list of operations
+  def move_plates(operations)
+    operations.each do |operation|
+      plate = operation.output('plate').item
+      plate.move('incubator')
+    end
+  end
+end
+```
+
+## Refining the Interactions
+
+
+
+## Wrap-up
+
+More to come.
