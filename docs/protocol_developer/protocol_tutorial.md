@@ -4,7 +4,7 @@ This is an introduction to writing protocols for Aquarium in the Krill domain sp
 We try to introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
 See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
 
-_This document is a working draft._
+_This document is a working draft, but we welcome feedback._
 
 ---
 
