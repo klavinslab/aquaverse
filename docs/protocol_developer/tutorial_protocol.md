@@ -440,5 +440,5 @@ which demonstrates how we would modify the StreakPlate protocol to interleave op
 You can also go deeper into topics covered in this tutorial with these pages:
 
 - <a href="#" onclick="select('Protocols', 'Show Blocks')">Show blocks</a>
-- <a href="#" onclick="select('Lab Management', 'Location Wizards')">Locations</a>
+- <a href="#" onclick="select('Protocols', 'Locations')">Locations</a>
 - <a href="#" onclick="select('Protocols', 'Operations')">Working with operations</a>

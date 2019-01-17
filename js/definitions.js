@@ -53,7 +53,7 @@ var config = {
         { name: "Managing Jobs", type: "local-md", path: "docs/manager/index.md" },
         { name: "Running Jobs", type: "local-md", path: "docs/technician/index.md" },
         { name: "Managing Users", type: "local-md", path: "docs/users/index.md" },
-        { name: "Location Wizards", type: "local-md", path: "docs/protocol_developer/location.md" },
+        { name: "Location Wizards", type: "local-md", path: "docs/manager/location_wizards.md" },
       ]
     },
 
@@ -66,6 +66,7 @@ var config = {
         { name: "Improving a Protocol", type: "local-md", path: "docs/protocol_developer/tutorial_operations.md" },
         { name: "Show Blocks", type: "local-md", path: "docs/protocol_developer/show.md" },
         { name: "Data Associations", type: "local-md", path: "docs/protocol_developer/associations.md" },
+        { name: "Locations", type: "local-md", path: "docs/protocol_developer/location.md" },
         { name: "Operations", type: "local-md", path: "docs/protocol_developer/operation.md" },
         { name: "Tables", type: "local-md", path: "docs/protocol_developer/table.md" },
         { name: "Detailed API Reference", type: "external-link", path: "http://klavinslab.org/aquarium/api/" },
