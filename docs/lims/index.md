@@ -75,9 +75,26 @@ This does not remove its information from the database and the item can be later
 
 ## Managing Collections
 
-To create a new collection, click the **NEW COLLECTION** button and choose the type of collection to make.
+Under most circumstances, you will likely only have collections that are constructed by protocols, or external scripts.
+However, it may not be worthwhile writing code to create a collection in some situations, and in this case you will want to manually create one as an input for a plan.
+
+To create a new collection, you must already have an object type defined for a collection.
+To do this, set the handler of the object type to `collection`.
+
+Once you have at least one collection type, click the **NEW COLLECTION** button on the **Samples** tab, and choose the type of collection to make.
 Doing so will take you to the Collection editor page where you can add sample type information, associated data, and upload files using a spreadsheet like interface.
 
 <img src="docs/lims/images/collection-data.png"
      alt="an example 96 well plate of widget items showing concentration values"
      width="100%">
+
+Click on each entry to set the sample for the collection part.
+Each part of a collection is a separate item with it's own item ID.
+
+You can also use the editor to define associations with each part, though you should only do this after you have assigned all of the samples.
+To add an association, click **Data > New Key**, then indicate the key for the data association.
+This will update the view of the collection, and allow you to edit the value for the key that you just added by typing into the entry for the part.
+Click **Save** to save the values you've added.
+
+You can also switch between the samples view and the views for whatever data associations you have added.
+Be sure to click **Save** before switching views or leaving the page.
