@@ -1,32 +1,54 @@
 var config = {
   tagline: "The Laboratory</br>Operating System",
   get_releases: true,
-  workflows: [
-    "/klavinslab/test-workflow"
-  ],
-  copyright: "Aquarium Web Page and Documentation Copyright © 2018 University of Washington",
+  workflows: ["/klavinslab/test-workflow"],
+  copyright:
+    "Aquarium Web Page and Documentation Copyright © 2018 University of Washington",
   navigation: [
-
     {
       category: "Overview",
       contents: [
         { name: "About", type: "local-html", path: "about.html" },
-        { name: "License", type: "local-md", path: "license.md"  },
-        { name: "Releases", type: "local-html", path: "releases.html"  },
-        { name: "Contributors", type: "local-md", path: "contributors.md"  },
-        { name: "How to cite", type: "local-md", path: "cite.md"  },
+        { name: "License", type: "local-md", path: "license.md" },
+        { name: "Releases", type: "local-html", path: "releases.html" },
+        { name: "Contributors", type: "local-md", path: "contributors.md" },
+        { name: "How to cite", type: "local-md", path: "cite.md" }
       ]
     },
 
     {
       category: "Getting Started",
       contents: [
-        { name: "Installation", type: "local-md", path: "docs/installation/index.md" },
-        { name: "Getting Aquarium", type: "local-md", path: "docs/installation/getting-aquarium.md" },
-        { name: "Docker Installation", type: "local-md", path: "docs/installation/docker-installation.md" },
-        { name: "Manual Installation", type: "local-md", path: "docs/installation/manual-installation.md" },
-        { name: "Configuration", type: "local-md", path: "docs/installation/configuration.md" },
-        { name: "Basic Concepts", type: "local-md", path: "docs//concepts/index.md" }
+        {
+          name: "Installation",
+          type: "local-md",
+          path: "docs/installation/index.md"
+        },
+        {
+          name: "Getting Aquarium",
+          type: "local-md",
+          path: "docs/installation/getting-aquarium.md"
+        },
+        {
+          name: "Docker Installation",
+          type: "local-md",
+          path: "docs/installation/docker-installation.md"
+        },
+        {
+          name: "Manual Installation",
+          type: "local-md",
+          path: "docs/installation/manual-installation.md"
+        },
+        {
+          name: "Configuration",
+          type: "local-md",
+          path: "docs/installation/configuration.md"
+        },
+        {
+          name: "Basic Concepts",
+          type: "local-md",
+          path: "docs//concepts/index.md"
+        }
       ]
     },
 
@@ -42,34 +64,103 @@ var config = {
     {
       category: "Researchers",
       contents: [
-        { name: "Managing Inventory", type: "local-md", path: "docs/lims/index.md" },
-        { name: "Designing Plans", type: "local-md", path: "docs/designer/index.md" }
+        {
+          name: "Managing Inventory",
+          type: "local-md",
+          path: "docs/lims/index.md"
+        },
+        {
+          name: "Designing Plans",
+          type: "local-md",
+          path: "docs/designer/index.md"
+        }
       ]
     },
 
     {
       category: "Lab Management",
       contents: [
-        { name: "Managing Jobs", type: "local-md", path: "docs/manager/index.md" },
-        { name: "Running Jobs", type: "local-md", path: "docs/technician/index.md" },
-        { name: "Managing Users", type: "local-md", path: "docs/users/index.md" },
-        { name: "Location Wizards", type: "local-md", path: "docs/manager/location_wizards.md" },
+        {
+          name: "Managing Jobs",
+          type: "local-md",
+          path: "docs/manager/index.md"
+        },
+        {
+          name: "Running Jobs",
+          type: "local-md",
+          path: "docs/technician/index.md"
+        },
+        {
+          name: "Managing Users",
+          type: "local-md",
+          path: "docs/users/index.md"
+        },
+        {
+          name: "Inventory Definitions",
+          type: "local-md",
+          path: "docs/manager/inventory-definitions.md"
+        },
+        {
+          name: "Location Wizards",
+          type: "local-md",
+          path: "docs/manager/location_wizards.md"
+        }
       ]
     },
 
     {
       category: "Protocols",
       contents: [
-        { name: "Getting Started", type: "local-md", path: "docs/protocol_developer/index.md"},
-        { name: "Developer Tools", type: "local-md", path: "docs/protocol_developer/tools.md" },
-        { name: "Creating a Protocol", type: "local-md", path: "docs/protocol_developer/tutorial_protocol.md" },
-        { name: "Improving a Protocol", type: "local-md", path: "docs/protocol_developer/tutorial_operations.md" },
-        { name: "Show Blocks", type: "local-md", path: "docs/protocol_developer/show.md" },
-        { name: "Data Associations", type: "local-md", path: "docs/protocol_developer/associations.md" },
-        { name: "Locations", type: "local-md", path: "docs/protocol_developer/location.md" },
-        { name: "Operations", type: "local-md", path: "docs/protocol_developer/operation.md" },
-        { name: "Tables", type: "local-md", path: "docs/protocol_developer/table.md" },
-        { name: "Detailed API Reference", type: "external-link", path: "http://klavinslab.org/aquarium/api/" },
+        {
+          name: "Getting Started",
+          type: "local-md",
+          path: "docs/protocol_developer/index.md"
+        },
+        {
+          name: "Developer Tools",
+          type: "local-md",
+          path: "docs/protocol_developer/tools.md"
+        },
+        {
+          name: "Creating a Protocol",
+          type: "local-md",
+          path: "docs/protocol_developer/tutorial_protocol.md"
+        },
+        {
+          name: "Improving a Protocol",
+          type: "local-md",
+          path: "docs/protocol_developer/tutorial_operations.md"
+        },
+        {
+          name: "Show Blocks",
+          type: "local-md",
+          path: "docs/protocol_developer/show.md"
+        },
+        {
+          name: "Data Associations",
+          type: "local-md",
+          path: "docs/protocol_developer/associations.md"
+        },
+        {
+          name: "Locations",
+          type: "local-md",
+          path: "docs/protocol_developer/location.md"
+        },
+        {
+          name: "Operations",
+          type: "local-md",
+          path: "docs/protocol_developer/operation.md"
+        },
+        {
+          name: "Tables",
+          type: "local-md",
+          path: "docs/protocol_developer/table.md"
+        },
+        {
+          name: "Detailed API Reference",
+          type: "external-link",
+          path: "http://klavinslab.org/aquarium/api/"
+        }
       ]
     },
 
@@ -79,7 +170,5 @@ var config = {
         { name: "Python and Trident", type: "local-html", path: "trident.html" }
       ]
     }
-
   ]
-
 };
