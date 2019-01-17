@@ -1,7 +1,9 @@
 # The Aquarium LIMS
 
 This document describes how to use the Aquarium LIMS as a researcher.
-To learn how to set up the LIMS with your lab's sample and container types, see the <a href="#" onclick="select('Lab Management','Inventory Definitions')">Inventory Definitions</a> page.
+To learn how to set up the LIMS with your lab's sample and container types, see the
+<a href="#" onclick="select('Lab Management','Inventory Definitions')">Inventory Definitions</a>
+page.
 The examples below use the Widget sample type definition, which is available in the `test-workflow.aq` within the _Test Workflow_, found on the
 <a href="#" onclick="select('Community','Workflows')">Workflows</a> page.
 
