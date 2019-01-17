@@ -98,7 +98,7 @@ var config = {
         {
           name: "Inventory Definitions",
           type: "local-md",
-          path: "docs/manager/inventory-definitions.md"
+          path: "docs/manager/inventory_definitions.md"
         },
         {
           name: "Location Wizards",
