@@ -1,4 +1,4 @@
-# Table Documentation
+# Protocol Concepts: Table
 
 This is the documentation for generating and showing formatted `Tables`, for use in writing effective Aquarium protocols.
 

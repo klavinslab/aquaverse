@@ -1,4 +1,4 @@
-# Show Blocks
+# Protocol Concepts: Show Blocks
 
 A show block is used to display instructions for the technician.
 

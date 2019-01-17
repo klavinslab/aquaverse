@@ -1,9 +1,4 @@
----
-title: Operation Documentation
-layout: docs
----
-
-# Operation Documentation
+# Protocol Concepts: Operations
 
 This is the documentation for how to successfully use the `Operation` and `Job` paradigms from within Aquarium protocols, with explanation of commonly used `Operation` methods.
 
