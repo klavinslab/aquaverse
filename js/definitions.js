@@ -67,7 +67,7 @@ var config = {
         { name: "Show Blocks", type: "local-md", path: "docs/protocol_developer/show.md" },
         { name: "Data Associations", type: "local-md", path: "docs/protocol_developer/associations.md" },
         { name: "Operations", type: "local-md", path: "docs/protocol_developer/operation.md" },
-        { name: "Building Tables", type: "local-md", path: "docs/protocol_developer/table.md" },
+        { name: "Tables", type: "local-md", path: "docs/protocol_developer/table.md" },
         { name: "Detailed API Reference", type: "external-link", path: "http://klavinslab.org/aquarium/api/" },
       ]
     },
