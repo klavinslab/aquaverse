@@ -1,6 +1,6 @@
-# Protocol Tutorial: Improving a Protocol
+# Tutorial: Improving a Protocol
 
-This is an extension of <a href="#" onclick="select('Protocols', 'Tutorial: Creating a Protocol')">the tutorial on writing protocols</a>.
+This is an extension of <a href="#" onclick="select('Protocols', 'Creating a Protocol')">the tutorial on writing protocols</a>.
 If you haven't gone through that tutorial, you may want to start there.
 
 _This document is evolving, please share feedback._

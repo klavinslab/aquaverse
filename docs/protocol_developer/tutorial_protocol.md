@@ -1,4 +1,4 @@
-# Protocol Tutorial: Creating A Protocol
+# Tutorial: Creating A Protocol
 
 This is an introduction to writing protocols for Aquarium in the Krill domain specific language.
 We try to introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
@@ -434,7 +434,7 @@ end
 The StreakPlate protocol we've constructed in this tutorial is pretty basic in that it follows the naive task list that we started with.
 But, Aquarium allows us to build protocols that help determine how efficiently the lab performs certain tasks, and we haven't yet considered how the protocol is used in the lab.
 To learn more, move on to the
-<a href="#" onclick="select('Protocols', 'Tutorial: Improving a Protocol')">tutorial on improving protocols</a>,
+<a href="#" onclick="select('Protocols', 'Improving a Protocol')">tutorial on improving protocols</a>,
 which demonstrates how we would modify the StreakPlate protocol to interleave operations.
 
 You can also go deeper into topics covered in this tutorial with these pages:
