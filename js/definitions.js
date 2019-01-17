@@ -63,7 +63,7 @@ var config = {
         { name: "Getting Started", type: "local-md", path: "docs/protocol_developer/index.md"},
         { name: "Developer Tools", type: "local-md", path: "docs/protocol_developer/tools.md" },
         { name: "Tutorial: Creating a Protocol", type: "local-md", path: "docs/protocol_developer/tutorial_protocol.md" },
-        { name: "Tutorial: Controlling Lab Operations", type: "local-md", path: "docs/protocol_developer/tutorial_operations.md" },
+        { name: "Tutorial: Improving a Protocol", type: "local-md", path: "docs/protocol_developer/tutorial_operations.md" },
         { name: "Show Blocks", type: "local-md", path: "docs/protocol_developer/show.md" },
         { name: "Data Associations", type: "local-md", path: "docs/protocol_developer/associations.md" },
         { name: "Operations", type: "local-md", path: "docs/protocol_developer/operation.md" },

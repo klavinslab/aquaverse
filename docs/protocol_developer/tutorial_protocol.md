@@ -433,7 +433,9 @@ end
 
 The StreakPlate protocol we've constructed in this tutorial is pretty basic in that it follows the naive task list that we started with.
 But, Aquarium allows us to build protocols that help determine how efficiently the lab performs certain tasks, and we haven't yet considered how the protocol is used in the lab.
-To learn more, move on to the <a href="#" onclick="select('Protocols', 'Tutorial: Controlling Lab Operations')">lab operations tutorial</a>, which demonstrates how we would modify the StreakPlate protocol to interleave operations.
+To learn more, move on to the
+<a href="#" onclick="select('Protocols', 'Tutorial: Improving a Protocol')">tutorial on improving protocols</a>,
+which demonstrates how we would modify the StreakPlate protocol to interleave operations.
 
 You can also go deeper into topics covered in this tutorial with these pages:
 

@@ -5,7 +5,7 @@
 - Tutorials:
 
   - <a href="#" onclick="select('Protocols', 'Tutorial: Creating a Protocol')">Creating a protocol</a>
-  - <a href="#" onclick="select('Protocols', 'Tutorial: Controlling Lab Operations')">Controlling lab operations</a>
+  - <a href="#" onclick="select('Protocols', 'Tutorial: Improving a Protocol')">Improving a protocol</a>
 
 - Protocol Concepts:
 
