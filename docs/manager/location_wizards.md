@@ -30,8 +30,8 @@ The first field is always assumed to have infinite capacity (meaning you can go 
 
 ## Associating a Wizard with an Object Type
 
-Go to the object type's edit page, or new page if you are creating a new object type, and enter the name of the wizard in the **Location Prefix** field.
-All new items with that object type will use the wizard associated with that name, if there is one defined.
+A location wizard can be added to either an existing object type or a new object type, by entering the name of the wizard in the **Location Prefix** field on the object type page.
+All new items with that object type will use the wizard with that name, if there is one defined.
 Note that multiple object types can use the same wizard.
 For example, we store _Primer Aliquots_, _Primer Stocks_, _Plasmid Stocks_, etc. in the same type of freezer box.
 
