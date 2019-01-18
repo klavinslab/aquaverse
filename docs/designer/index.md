@@ -7,7 +7,7 @@
 The plan designer allows you to string together operations to be applied to your samples.
 You can create complex experimental workflows, a.k.a. plans, with dozens of steps, associate specific samples and items from the inventory with their inputs, send the output of one operation to the input of another, estimate how much your plan will cost, monitor the progress of your plan as it is executed, and more.
 This document describes how to use every feature of the plan designer.
-It uses the operation types in Cloning workflow, which is included in the distribution of Aquarium, as examples.
+It uses the operation types the BIOFAB's Cloning workflow, a version of which will be released soon, as examples.
 Once you add your own operation types (using the Developer), you should be able manipulate them the same way.
 Besides the existence of the Cloning workflow in the designer, this document assumes you have populated the inventory with samples and items that can be used for the inputs of plans.
 If not, you will need to add such inventory and reload the Designer.
@@ -37,7 +37,7 @@ At this point, the plan exists only in your browser, and has not been saved.
 Navigating away from it before saving it will discard your work.
 
 **Rename a plan**:
-The name of the plan appears at the top of designer in an editable input box.
+The name of the plan appears at the top of the designer in an editable input box.
 You can change the name to whatever you want.
 The new name will not be saved unless you click the `Save` icon.
 
@@ -89,7 +89,7 @@ The operations will be placed in the plan workspace in somewhat arbitrary positi
 Move them so that "Rehydrate Primer" is above "Order Primer".
 
 > Note: The flow of information in an Aquarium plan is from the bottom of the screen to the top.
-> Thus, the goal of your plan should be put at the top of the workspace and then first operations to be performed should be put at the bottom of the workspace.
+> Thus, the goal of your plan should be put at the top of the workspace and the first operations to be performed should be put at the bottom of the workspace.
 
 Selected operations will appear light blue.
 When you select an operation, information about the operation and how to use it will be shown in the left sidebar when the "Node" tab is selected.
@@ -146,7 +146,7 @@ First, a list of all "Sample Type / Container Type" pairs will appear.
 If there are more than one (as defined in the Developer for the operation type), you can choose which one to use.
 The autocomplete for the sample name will respect the choice.
 Second, a list of inventory items associated with the chosen Sample Type / Container type will appear, along with their locations.
-When you assign a sample to an input to an operation, the designer automatically chooses the first item in this list to associate with the input.
+When you assign a sample to an input of an operation, the designer automatically chooses the first item in this list to associate with the input.
 You can choose a different one by clicking on the checkbox next to the item ID.
 You can click the item ID itself to view more information associated with the item.
 Inventory for wired inputs and outputs is displayed, but you cannot change it.
@@ -154,7 +154,7 @@ Typically, the an operation will create new items for its outputs.
 
 The "Rehydrate Primer" input is of type Primer with container type set to Lyophilized Primer, so cannot be changed.
 Furthermore, lyophilized primers are turned into primer stocks by the operation, so typically there will be no inventory for this input (which is why it is wired to "Order Primer").
-An example of an operation operation with multiple input types is the "Template" input of the "Make PCR Fragment" operation.
+An example of an operation with multiple input types is the "Template" input of the "Make PCR Fragment" operation.
 Try adding such an operation and changing the Sample Type / Container Type for the "Template" input to "Fragment / Fragment Stock" and seeing which samples are available in the autocomplete.
 
 **Associate parts of collections**:
@@ -228,17 +228,17 @@ You can change the name and edit markdown in the editor and save or discard your
 > Note: The "Save" button for the name and documentation for a module does not save the plan. you will also need to click the `Save` icon on the upper right to do that.
 
 **Adding operations, inputs and outputs to a module:** With a module open, you can add operations and wires just as described above.
-In addition, you by clicking on the `Input` and `Output` icons you can add inputs and outputs to the module and connect then to the outputs and inputs of operations within the module.
+In addition, by clicking on the `Input` and `Output` icons you can add inputs and outputs to the module and connect then to the outputs and inputs of operations within the module.
 With the module closed, inputs and outputs will appear as colored circles, just as they do with operations.
 You can also add modules to modules, creating a hierarchy of sub-plans as it were.
 
 **Turning a selection into a module**:
-You can quickly create a module by selecting any number or operations and modules and clicking the `Module` icon.
+You can quickly create a module by selecting any number of operations and modules and clicking the `Module` icon.
 Doing so will add the operations with the same connectivity to the module.
 Any operations in the selection that had unwired inputs will become inputs to the module, and any operations in the selection that had unwired outputs will become outputs of the module.
 
 **Deleting modules**:
-To delete a module, selecting and click the `Delete` icon or press the Delete Key on your keyboard.
+To delete a module, select and click the `Delete` icon or press the Delete Key on your keyboard.
 Modules can not be deleted if they or any of their sub modules contain active operations.
 
 #### Using templates
@@ -267,7 +267,7 @@ In both cases, and especially in the latter case, you may want to retry the oper
 To do this, click on the status underneath the operation and choose the desired new status.
 Which new status you choose depends on how much you are trying to redo.
 If you are simply retrying a single operation, then choose "pending".
-If you are retrying a whole string of operations, you should set the first one in the string to "pending" and the rest to "waiting", since the rest cannot start until the first complete successfully.
+If you are retrying a whole string of operations, you should set the first one in the string to "pending" and the rest to "waiting", since the rest cannot start until the first completes successfully.
 Note that if you re-run an operation, it might use different inventory items and produce different inventory items.
 Thus, the items originally associated with the operation are noted as a data associations when you change an operation's status, and likely overwritten when the operation is run again.
 
@@ -283,7 +283,7 @@ Once you add new operations and connect them, you need to (a) save your plan and
 If there are no validation errors (orange I/O or wires) then click "Plan Info" and click the "EXTEND" button.
 
 **Canceling an operation**:
-An operation that is still pending or waiting can be canceled by clicking the status and choosing "Cancel".
+An operation that is still pending or waiting can be canceled by clicking its status and choosing "Cancel".
 This will put the operation into an error state and add a message to the operation saying it was canceled.
 
 **Modifying which items are used by an operation**:
@@ -295,8 +295,8 @@ Note that if you are re-running an operation that used a different input the fir
 
 **Stepping (i.e. updating) a plan**:
 Sometimes the statuses of operations in a plan get stuck, in waiting for example.
-Or you changed the operation statuses and did need to make check preconditions.
-To force an update to any operations that need to be updated, go to the "Plan Info" tab on the lect sidebar and click the blue "STEP" button.
+Or you changed the operation statuses and need to make them check their preconditions.
+To force an update to any operations that need to be updated, go to the "Plan Info" tab on the left sidebar and click the blue "STEP" button.
 
 ## Launching plans
 
@@ -313,14 +313,14 @@ The following rules are used to determine validity:
 - An output, wired or not, is valid if it has a sample associated with it.
 
 - An input parameter is valid if it has a value associated with it.
-  Note that JSON inputs are no validated for syntax errors, the operation type code must do that.
+  Note that JSON inputs are currently not validated for syntax errors, the operation type code must do that.
 
 **Calculating costs**:
 Once a plan is valid, click the "Launch" tab on the left sidebar.
 Aquarium will respond by computing the costs of all the operations in your plan, which will be shown next to the operation's box in the workspace.
 The total cost will be shown in the sidebar.
-Note that this plan is an estimate.
-If the plan is canceled, or if operations are redone, then the total cost will change.
+Note that this cost is an estimate.
+If the plan is canceled, or if operations are redone, then the actual cost will be different.
 
 **Choosing a budget**:
 Under the data associations for the plan should be listed budgets available to you.

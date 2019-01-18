@@ -86,7 +86,6 @@ var stack = [];
       $("#main-container").hide();
       setTimeout(() => {
         $("#main-container").show();
-        console.log('redrew');
       }, 1);
     }
 

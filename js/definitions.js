@@ -113,11 +113,6 @@ var config = {
       category: "Protocols",
       contents: [
         {
-          name: "Getting Started",
-          type: "local-md",
-          path: "docs/protocol_developer/index.md"
-        },
-        {
           name: "Developer Tools",
           type: "local-md",
           path: "docs/protocol_developer/tools.md"
@@ -168,7 +163,7 @@ var config = {
     {
       category: "Power Users",
       contents: [
-        { name: "Python and Trident", type: "local-html", path: "trident.html" }
+        { name: "Python API", type: "local-html", path: "trident.html" }
       ]
     }
   ]
