@@ -34,8 +34,11 @@ To insert an image in a document, use either an md image tag like the following
 
 or an html image tag, as in
 
-```
-    <img style="max-width: 300px" src="docs/designer/images/designer-overview.png">
+```html
+<img src="docs/designer/images/designer-overview.png"
+     alt="Plan Designer"
+     style="max-width: 400px"
+     width="100%">
 ```
 
 which allows you to add css styling to the tag.
@@ -49,7 +52,7 @@ if you have a subsection specified with
 
 you would refer to it with
 
-```html
+```markdown
 [My Section](#mysection)
 ```
 

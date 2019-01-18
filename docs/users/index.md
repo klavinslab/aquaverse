@@ -17,15 +17,23 @@ make_user "Your Name", "your login", "your password", admin: true
 
 Once you have an account you can create other users by choosing `Users` in the menu at the top left of the Aquarium page:
 
-![choosing users](docs/users/images/settings-menu.png)
+<img src="docs/users/images/settings-menu.png"
+    alt="choosing users"
+    style="max-width: 200px"
+    width="100%">
 
 Then enter the user information and click **New User**
 
-![creating user](docs/users/images/new-user.png)
+<img src="docs/users/images/new-user.png"
+    alt="creating user"
+    style="max-width: 200px"
+    width="100%">
 
 This will bring you to the user information page where user contact information should be entered:
 
-![new user page](docs/users/images/new-user-page.png)
+<img src="docs/users/images/new-user-page.png"
+    alt="new user page"
+    width="100%">
 
 The exclamation points on this page indicate that the user hasn't provided contact information, and has not agreed to usage terms.
 The user will need to login separately to agree to the usage terms.
@@ -33,7 +41,9 @@ The user will need to login separately to agree to the usage terms.
 A user must have administrative privilege to access the protocol development tools.
 For this, choose **Groups** from the settings menu, choose the group, and then click add:
 
-![add user to group](docs/users/images/add-to-group.png)
+<img src="docs/users/images/add-to-group.png"
+    alt="add user to group"
+    width="100%">
 
 Also, a user must have an associated budget to run any workflows.
 
