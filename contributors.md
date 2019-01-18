@@ -89,4 +89,15 @@ Sofia Shirley,
 Madeleine Strain,
 Marielle Summers,
 and
-Aria Tornabene
+Aria Tornabene.
+
+## Funding
+
+The development of Aquarium was funded in part by the
+[NSF](https://www.nsf.gov),
+[DARPA](https://www.darpa.mil/),
+[CoMotion](https://comotion.uw.edu/),
+the [UW ISTC](https://istc-pc.washington.edu/) on pervasive computing,
+the [Amazon Catalyst](https://catalyst.amazon.com/uw/) program,
+and a
+[UW Innovation award](https://www.washington.edu/research/resources/funding-opportunities/the-university-of-washington-innovation-awards/).
