@@ -7,7 +7,6 @@ Sample types define fields that samples of the type will have, and can refer to 
 An object type represents the form in which an item of a sample is handled.
 For instance, it may be a container (e.g., a 1L bottle), or the state of a sample (e.g., Plasmid Glycerol Stock).
 
-
 We suggest first checking the
 <a href="#" onclick="select('Community','Workflows')">community workflows</a>
 for workflows using sample types that you will use in your lab.
