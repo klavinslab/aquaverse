@@ -100,9 +100,13 @@ var stack = [];
     }
 
     function nav_indices() {
-       let i = section_index($scope.state.section.category),
-           j = content_index($scope.navigation[i].contents,$scope.state.active_content.name);
-       return [i,j];
+       if ( $scope.state.section && $scope.state.active_content ) {
+         let i = section_index($scope.state.section.category),
+             j = content_index($scope.navigation[i].contents,$scope.state.active_content.name);
+         return [i,j];
+       } else {
+         return [0,0];
+       }
     }
 
     $scope.next = function() {
