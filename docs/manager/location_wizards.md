@@ -20,10 +20,12 @@ The interface for creating a new `LocationWizard` can be found under the navigat
 
 <img src="docs/manager/images/location_images/1_nav_menu-1.png"
      style="max-width: 300px"
+     width="100%"
      alt="Open the system menu">
 
 <img src="docs/manager/images/location_images/2_nav_menu-2.png"
      style="max-width: 200px"
+     width="100%"
      alt="Select Locations Wizards in the system menu">
 
 There, at the bottom of the page, you can click **New Wizard**.
