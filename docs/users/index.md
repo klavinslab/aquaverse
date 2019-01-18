@@ -19,14 +19,14 @@ Once you have an account you can create other users by choosing `Users` in the m
 
 <img src="docs/users/images/settings-menu.png"
     alt="choosing users"
-    style="max-width: 150px"
+    style="max-width: 200px"
     width="100%">
 
 Then enter the user information and click **New User**
 
 <img src="docs/users/images/new-user.png"
     alt="creating user"
-    style="max-width: 150px"
+    style="max-width: 200px"
     width="100%">
 
 This will bring you to the user information page where user contact information should be entered:

@@ -14,7 +14,7 @@ For instance, this diagram represents a GFP-tagged plasmid in a glycerol stock i
 
 <img src="docs/concepts/images/items.png"
      alt="an item is a sample in a container at a location"
-     style="max-width: 150px"
+     style="max-width: 200px"
      width="100%">
 
 Each item has three components representing these details: the sample, the object type, and the location.
@@ -29,7 +29,7 @@ Here the sample is puc19-GFP, which has sample type of plasmid.
 
 <img src="docs/concepts/images/samples.png"
      alt="the sample for plasmid puc-19GFP is an instance of the plasmid sample type"
-     style="max-width: 300px"
+     style="max-width: 350px"
      width="100%">
 
 An item _location_ in Aquarium is a hierarchical description of where the item can be found.
@@ -37,7 +37,7 @@ For instance, the UW BIOFAB location `M20.1.5.49` is a location in a box in a -2
 
 <img src="docs/concepts/images/location.png"
      alt="Locations are hierarchical"
-     style="max-width: 300px"
+     style="max-width: 350px"
      width="100%">
 
 ## Operations and Plans
