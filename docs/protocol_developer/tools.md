@@ -20,6 +20,7 @@ Clicking on the name of the library or operation type will open the definition i
 
 <img src="docs/protocol_developer/images/category_list.png"
      alt="category list"
+    style="max-width: 150px"
       width="100%">
 
 Clicking on `New` creates a new operation type (`New Lib` creates a new library), and opens the definition view.
@@ -45,6 +46,7 @@ A default precondition that always returns `true` is created for new operation t
 
 <img src="docs/protocol_developer/images/pre_tab.png"
      alt="precondition tab"
+     style="max-width: 400px"
      width="100%">
 
 The **Cost** tab shows the cost model for the operation type, which is function on an `Operation`.
@@ -53,18 +55,21 @@ The default function added for new operation types returns zero for both.
 
 <img src="docs/protocol_developer/images/cost_tab.png"
      alt="cost tab"
+     style="max-width: 400px"
      width="100%">
 
 The **Docs** tab shows another editor, but this time for Markdown documentation for the operation type.
 
 <img src="docs/protocol_developer/images/doc_tab.png"
      alt="docs tab"
+     style="max-width: 400px"
      width="100%">
 
 The **Timing** tab indicates when the operation type should be run in the lab.
 
 <img src="docs/protocol_developer/images/timing_tab.png"
      alt="timing tab"
+    style="max-width: 400px"
      width="100%">
 
 The **Test** tab provides a way to run a quick test with the protocol.
@@ -73,6 +78,7 @@ This will generate random inputs for the operations and run the protocol.
 
 <img src="docs/protocol_developer/images/test_tab.png"
      alt="test tab"
+     style="max-width: 300px"
      width="100%">
 
 Note that running tests this way doesn't allow testing assertions.
