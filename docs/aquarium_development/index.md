@@ -1,12 +1,14 @@
 # Aquarium Development Guide
 
-These guidelines are intended for those working directly on Aquarium, though some details are shared with protocol development.
+These guidelines are intended for those working directly on Aquarium.
 
 ---
 
 ## Getting Started
 
-Follow the Aquarium [installation]({{ site.baseurl }}{% link _docs/installation/index.md %}) instructions to get a local copy of the Aquarium git repository.
+Follow the Aquarium
+<a href="#" onclick="select('Getting Started','Installation')">installation</a>
+instructions to get a local copy of the Aquarium git repository.
 
 ## Running Aquarium
 
@@ -14,25 +16,12 @@ To run Aquarium in development mode using the Docker configuration in a Unix&tra
 
 ### Initial steps
 
-1. If you have run Aquarium in production, [switch databases](#switching-from-production-to-development)
+1. If you have run Aquarium in production, [switch databases](#switchingfromproductiontodevelopment)
 
 2. Make the `develop-compose.sh` script executable
 
    ```bash
    chmod u+x develop-compose.sh
-   ```
-
-   This script helps shorten the command you have to write.
-   Instead of starting each command with
-
-   ```bash
-   docker-compose -f docker-compose.yml -f docker-compose.dev.yml
-   ```
-
-   you only have to start with the script name
-
-   ```bash
-   ./develop-compose.sh
    ```
 
 ### Commands
@@ -76,11 +65,19 @@ To run Aquarium in development mode using the Docker configuration in a Unix&tra
 
    where you can run `rake` or even the Rails console.
 
+Note: The `develop-compose.sh` script helps shorten each command.
+Without the script, each command would start with
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml
+```
+
+instead of the script name.
+
 ## Switching databases
 
 The configuration for Docker uses the MySQL Docker image, which is capable of automatically importing a database dump the first time it is started.
-This is convenient in some ways, but it is not setup to easily switch to another database.
-This means that to switch between production and development environments you need to do some manual steps.
+This is convenient for standard usage, but it makes it harder to switch to another database.
 
 ### Switching from Production to Development
 
@@ -97,17 +94,20 @@ docker-compose exec db mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD production > p
 docker-compose down
 ```
 
-If you had previously made a dump of the development database, copy this file to the default location:
-
-```bash
-cp development_dump.sql docker/mysql_init/dump.sql
-```
-
 You can then safely remove the MySQL files to allow the switch by running
 
 ```bash
 rm -rf docker/db/*
 ```
+
+If you had previously made a dump of the development database that you want to use, copy this file to the default location:
+
+```bash
+cp development_dump.sql docker/mysql_init/dump.sql
+```
+
+It may be necessary to run migrations on any prior database dump.
+See the <a href="#" onclick="select('Getting Started','Docker Installation')">Docker installation</a> instructions for details.
 
 ### Switching from Development to Production
 
@@ -124,17 +124,20 @@ MYSQL_PASSWORD=<password>
 ./develop-compose.sh down
 ```
 
-If you had previously made a dump of the production database, copy this file to the default location:
-
-```bash
-cp production_dump.sql docker/mysql_init/dump.sql
-```
-
 You can then safely remove the MySQL files to allow the switch by running
 
 ```bash
 rm -rf docker/db/*
 ```
+
+If you had previously made a dump of the production database that you want to use, copy this file to the default location:
+
+```bash
+cp production_dump.sql docker/mysql_init/dump.sql
+```
+
+It may be necessary to run migrations on any prior database dump.
+See the <a href="#" onclick="select('Getting Started','Docker Installation')">Docker installation</a> instructions for details.
 
 ### Restoring the default database dump
 
@@ -330,5 +333,5 @@ However, the files are also be accessible through the minio webclient at `localh
 ### Local web server
 
 Access to Aquarium and the S3 webclient is handled by nginx.
-For development, all requests to port 3000 are forwarded to Aquarium, while for production, static files are served by nginx and other requests are handled by puma via a socket. 
+For development, all requests to port 3000 are forwarded to Aquarium, while for production, static files are served by nginx and other requests are handled by puma via a socket.
 See the nginx configuration files in the `docker` directory.
