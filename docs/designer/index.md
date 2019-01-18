@@ -22,7 +22,9 @@ In the Plans view, open a plan, click on the menu on the upper right of the open
 This should bring up the designer view with the plan you chose already open.
 The "Plans" tab should be highlighted, the folder containing the plan should be open, and the plan id and number of the plan should be highlighted in orange.
 
-![Plan Designer](docs/designer/images/designer-overview.png)
+<img src="docs/designer/images/designer-overview.png"
+     alt="Plan Designer"
+     width="100%">
 
 ### Manipulating plans
 
@@ -338,7 +340,10 @@ All operations in the plan will be listed in the manager.
 When a plan is being constructed, the status of each of its operations are set to `planning` and they are not seen by the manager.
 When a plan is launched, the status of all its operations are changed according to the finite state machine below.
 
-![Plan Status](docs/designer/images/operation-status.png)
+<img src="docs/designer/images/operation-status.png"
+     alt="Plan Status"
+     style="max-width: 400px"
+     width="100%">
 
 The transitions from state to state are triggered as follows:
 
