@@ -35,13 +35,14 @@ var stack = [];
     $scope.select = function(section,content,push=true) {
 
       section.open = true;
+
       if ( $scope.state.section != section || $scope.state.active_content != content ) {
 
         if ( content.type != "external-link" ) {
           $scope.state.section = section;
           $scope.state.active_content = content;
           if ( push ) {
-            history.pushState({section: $scope.state.section, active_content: $scope.active_content }, "State", "");
+            history.pushState({section: $scope.state.section, active_content: $scope.state.active_content }, "State", "");
           }
         }
 
