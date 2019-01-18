@@ -62,16 +62,16 @@
 
       <div class="md-toolbar-tools main-toolbar">
 
-          <svg xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24" width="30" height="30"
-               class="md-toolbar-item menu-icon"
-               ng-click="open_sidenav()">
-            <path d="M3 18h18v-2H3v2z"></path>
-            <path d="M3 13h18v-2H3v2z"></path>
-            <path d="M3 6v2h18V6H3z"></path>
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24" width="30" height="30"
+             class="md-toolbar-item menu-icon"
+             ng-click="open_sidenav()">
+          <path d="M3 18h18v-2H3v2z"></path>
+          <path d="M3 13h18v-2H3v2z"></path>
+          <path d="M3 6v2h18V6H3z"></path>
+        </svg>
 
-        <h2 class="md-toolbar-item md-headline">
+        <h2 flex class="md-toolbar-item md-headline">
           <span class="aquarium">
             <a href="#" ng-click="easy_select('Overview', 'About')">
               AQUARIUM
@@ -79,15 +79,13 @@
           </span>
           <span class="location">/ {{state.section.category}} / {{state.active_content.name}}</span>
         </h2>
-      </div>
 
-      <a href="https://github.com/klavinslab"
-         ng-if="state.active_content.name == 'Releases'">
-        <img style="position: absolute; top: 0; right: 0; border: 0;"
-             src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"
-             alt="Fork me on GitHub"
-             target="github">
-      </a>
+       <div id="toolbar-prev-next">
+         <md-button class="md-icon-button toobar-button" ng-disabled="!has_prev()" ng-click="prev()">&#9664;</md-button>
+         <md-button class="md-icon-button toobar-button" ng-disabled="!has_next()" ng-click="next()">&#9654;</md-button>
+       </div>
+
+      </div>
 
     </md-toolbar>
 

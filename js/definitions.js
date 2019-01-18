@@ -4,6 +4,7 @@ var config = {
   workflows: ["/klavinslab/test-workflow"],
   copyright:
     "Aquarium Web Page and Documentation Copyright © 2018 University of Washington",
+  nextprev: true,
   navigation: [
     {
       category: "Overview",
@@ -158,8 +159,8 @@ var config = {
         },
         {
           name: "Detailed API Reference",
-          type: "external-link",
-          path: "http://klavinslab.org/aquarium/api/"
+          type: "local-md",
+          path: "api.md"
         }
       ]
     },
