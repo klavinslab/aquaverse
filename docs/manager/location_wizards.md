@@ -18,11 +18,6 @@ If all available locations are taken, the wizard computes the next new location 
 
 The interface for creating a new `LocationWizard` can be found under the navigation menu in the upper left of Aquarium.
 
-<img src="docs/manager/images/location_images/1_nav_menu-1.png"
-     style="max-width: 300px"
-     width="100%"
-     alt="Open the system menu">
-
 <img src="docs/manager/images/location_images/2_nav_menu-2.png"
      style="max-width: 200px"
      width="100%"
