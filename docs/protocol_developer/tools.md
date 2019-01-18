@@ -20,8 +20,8 @@ Clicking on the name of the library or operation type will open the definition i
 
 <img src="docs/protocol_developer/images/category_list.png"
      alt="category list"
-    style="max-width: 150px"
-      width="100%">
+     style="max-width: 150px"
+     width="100%">
 
 Clicking on `New` creates a new operation type (`New Lib` creates a new library), and opens the definition view.
 
