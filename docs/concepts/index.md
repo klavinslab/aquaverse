@@ -1,10 +1,10 @@
 # Aquarium Concepts
 
-Aquarium data structures are intended to capture every aspect of a lab's structure. At the lowest level is the LIMS, which defines the types of samples and containers your lab users, as well as helps you manage the data associations and the locations of all of your items.
+Aquarium data structures are intended to capture every aspect of a lab's structure. At the lowest level is the LIMS, which defines the types of samples and containers your lab uses, as well as helps you manage the data associations and the locations of all of your items.
 On top of that are operations, which specify how a set of input items are transformed into a set of output items, as well as how exactly to perform that transformation.
 Finally, Aquarium's execution environment manages how operations are batched together and how technicians are instructed to do the individual steps or the operation's protocol.
 Here, we describe each of these aspects of Aquarium in a bit more detail to give you a flavor of what Aquarium does.
-More details can be found in the rest of the documentation, index by the sidebar to this page.
+More details can be found in the rest of the documentation, indexed by the sidebar menu on this page.
 
 ## Inventory System
 
@@ -42,8 +42,8 @@ For instance, the UW BIOFAB location `M20.1.5.49` is a location in a box in a -2
 
 ## Operations and Plans
 
-A protocol performed in Aquarium is represented as an _operation_.
-Concretely, an operation is defined by an _operation type_ that indicates how the operation will be performed, and is defined by a protocol script that takes inputs and produces outputs.
+A protocol performed in Aquarium is contained within an _operation_.
+Concretely, an operation is defined by an _operation type_ that indicates how the operation will be performed, and includes a protocol script that takes inputs and produces outputs.
 This diagram illustrates an operation type for bacterial transformation, which takes DNA and competent cells as inputs and performs a transformation to produce transformed cells.
 
 <img src="docs/concepts/images/operation-type.png"
@@ -68,16 +68,16 @@ The diagram shows the output of the bacterial transformation operation linked to
 
 ## Execution Environment
 
-When plans are executed in Aquarium, similar operations are batched together as a _job_.
-These operations may come from different plans of different researchers as illustrated here where three distinct plans have shared operations.
+When plans are executed in Aquarium, similar operations are batched together into a _job_.
+These operations may come from different plans owned by different researchers, as illustrated here where three distinct plans have shared operations.
 
 <img src="docs/concepts/images/planned-operations.png"
      alt=""
      style="max-width: 300px"
      width="100%">
 
-Operations that are ready at the same time can be grouped into jobs by the manager.
-The operations are batched into four jobs.
+Operations that are ready at the same time can be batched into jobs by the manager.
+In the figure, the operations are batched into four jobs.
 The manager can batch operations in to jobs as needed – in this case, the manager chose to create jobs 2 and 3 separately even though the operations have the same operation type.
 
 <img src="docs/concepts/images/batched-jobs.png"
@@ -113,4 +113,4 @@ This arises when an operation has a predecessor operation that has an _on-the-fl
 An operation type is marked as being _on-the-fly_ if the number of operations of that type is used to determine the number of operations of a dependent operation type.
 An example is running a gel: to run a gel, you need to pour a gel.
 The operation type `Pour Gel` must be on-the-fly because it is not clear how many gels to pour until a job is formed of corresponding `Run Gel` operations.
-Because of this relationship, the `Run Gel` operations must be batched before the `Pour Gel` operations can start, and will be _deferred_ until the `Pour Gel` operations complete.
+Because of this relationship, the `Run Gel` operations must be batched before the `Pour Gel` operations can start, and will be _deferred_ until the `Pour Gel` job completes.
