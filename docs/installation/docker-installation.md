@@ -113,6 +113,7 @@ rm -rf docker/db/*
 ```
 
 and restarting Aquarium with `docker-compose` as before.
+If Aquarium has been updated since the database dump was generated, it is a good idea to run database migrations as described above.
 
 > **Important**: If you swap in a large database dump, the database has to be reinitialized.
 > And the larger the database, the longer the initialization will take.

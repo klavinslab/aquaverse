@@ -22,7 +22,7 @@ Aquarium can be installed manually on a machine with a Unix&trade;-like environm
 
 3.  <a href="#" onclick="select('Getting Started','Getting Aquarium')">
     Get the Aquarium source
-    </a>.
+    </a>
 
 4.  Configure Aquarium by first creating the `aquarium/config/initializers/aquarium.rb` file
 

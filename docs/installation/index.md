@@ -11,7 +11,8 @@ And, second, errors in protocols being tested can affect lab system performance 
 So, our strong recommendation is that protocol testing _should not_ be done on a production server.
 
 Aquarium has been built to be used in a Unix&trade; environment.
-The experience of some of our lab mates is that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
+We have done just enough experimentation to know that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
+We include instructions and scripts based on that limited experience.
 
 Installation topics:
 
