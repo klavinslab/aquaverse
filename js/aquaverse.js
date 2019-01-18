@@ -82,6 +82,14 @@ var stack = [];
 
     }
 
+    $scope.redraw = function() {
+      $("#main-container").hide();
+      setTimeout(() => {
+        $("#main-container").show();
+        console.log('redrew');
+      }, 1);
+    }
+
     function section_index(sec) {
       for ( var i=0; i<$scope.navigation.length; i++ ) {
         if ( $scope.navigation[i].category == sec ) {

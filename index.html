@@ -118,7 +118,7 @@
 
       </md-sidenav>
 
-      <md-content flex class="main-container" layout="column">
+      <md-content flex id="main-container" class="main-container" layout="column">
 
         <!-- Local md content -->
         <div id="main-md"
@@ -127,10 +127,11 @@
         </div>
 
         <!-- Local html content -->
-        <div id="main-html markdown-body"
+        <div id="main-html"
              class="main"
              ng-if="state.active_content.type == 'local-html'"
-             ng-include="state.active_content.path">
+             ng-include="state.active_content.path"
+             onload="redraw()">
         </div>
 
       </md-content>
