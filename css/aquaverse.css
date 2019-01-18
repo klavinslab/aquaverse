@@ -244,6 +244,15 @@ html, body {
   margin-bottom: 9px;
 }
 
+.bottom-button {
+  /* font-size: 24pt; */
+  color: #222;
+}
+
+#toolbar-prev-next {
+  padding-right: 100px;
+}
+
 @media only screen and (max-width: 960px) {
   .logo-container {
     display: none;
@@ -272,6 +281,9 @@ html, body {
   .main {
     position: relative;
   }
+  #toolbar-prev-next {
+    padding-right: 0;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -294,5 +306,8 @@ html, body {
     margin: 2px;
     margin-top: 16px;
     width: 95%;
+  }
+  #toolbar-prev-next {
+    padding-right: 0;
   }
 }

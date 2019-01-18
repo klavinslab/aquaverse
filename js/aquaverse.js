@@ -8,8 +8,8 @@ var stack = [];
           [ '$rootScopeProvider', function($rootScopeProvider) {
          }]);
 
-    w.controller('aquaverseCtrl', [ '$scope', '$http', '$sce', '$mdMedia', '$mdSidenav',
-                         function (  $scope,   $http,   $sce,   $mdMedia,   $mdSidenav ) {
+    w.controller('aquaverseCtrl', [ '$scope', '$http', '$sce', '$mdMedia', '$mdSidenav', '$compile',
+                         function (  $scope,   $http,   $sce,   $mdMedia,   $mdSidenav,   $compile ) {
 
     $scope.copyright = $sce.trustAsHtml(config.copyright);
     $scope.navigation = config.navigation; // Link to navigation var
@@ -34,6 +34,7 @@ var stack = [];
 
     $scope.select = function(section,content,push=true) {
 
+      section.open = true;
       if ( $scope.state.section != section || $scope.state.active_content != content ) {
 
         if ( content.type != "external-link" ) {
@@ -41,7 +42,6 @@ var stack = [];
           $scope.state.active_content = content;
           if ( push ) {
             history.pushState({section: $scope.state.section, active_content: $scope.active_content }, "State", "");
-            console.log("Pushed", $scope.state.section.category, $scope.state.active_content.name )
           }
         }
 
@@ -50,6 +50,9 @@ var stack = [];
             $http.get(content.path)
                  .then(response => {
                     $('#main-md').empty().html(conv.makeHtml(response.data));
+                    if ( config.nextprev ) {
+                      $('#main-md').append($compile(`<div ng-include="'prevnext.html'"></div>`)($scope));
+                    }
                     if ( config.copyright ) {
                       $('#main-md').append(`<div class='copyright'>${config.copyright}</div>`);
                     }
@@ -76,6 +79,62 @@ var stack = [];
         $mdSidenav('sidenav').close();
       }
 
+    }
+
+    function section_index(sec) {
+      for ( var i=0; i<$scope.navigation.length; i++ ) {
+        if ( $scope.navigation[i].category == sec ) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function content_index(contents, name) {
+      for ( var i=0; i<contents.length; i++ ) {
+        if ( contents[i].name == name ) {
+          return i;
+        }
+      }
+      return -1;
+    }
+
+    function nav_indices() {
+       let i = section_index($scope.state.section.category),
+           j = content_index($scope.navigation[i].contents,$scope.state.active_content.name);
+       return [i,j];
+    }
+
+    $scope.next = function() {
+       let ni = nav_indices(), i = ni[0], j = ni[1];
+       if ( j < $scope.navigation[i].contents.length - 1 ) {
+         j++;
+       } else {
+         j = 0;
+         i++;
+       }
+       $scope.select($scope.navigation[i], $scope.navigation[i].contents[j])
+    }
+
+    $scope.prev = function() {
+       let ni = nav_indices(), i = ni[0], j = ni[1];
+       if ( j > 0 ) {
+         j--;
+       } else {
+         i--;
+         j = $scope.navigation[i].contents.length - 1;
+       }
+       $scope.select($scope.navigation[i], $scope.navigation[i].contents[j])
+    }
+
+    $scope.has_prev = function() {
+       let ni = nav_indices(), i = ni[0], j = ni[1];
+       return i > 0 || j > 0;
+    }
+
+    $scope.has_next = function() {
+       let ni = nav_indices(), i = ni[0], j = ni[1];
+       return i < $scope.navigation.length - 1 || j < $scope.navigation[i].contents.length - 1;
     }
 
     $scope.link_class = function(section,content) {
