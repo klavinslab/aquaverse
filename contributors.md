@@ -1,4 +1,4 @@
-## Software Engineering
+# Software Engineering
 
 The core Aquarium code was written and is maintained by Eric Klavins.
 Benjamin Keller, Justin Vrana, Abraham Miller, and Garrett Newman contributed
@@ -6,7 +6,7 @@ new features, bug fixes, and documentation.
 Eric Klavins, Justin Vrana, and Benjamin Keller developed and maintained the
 Trident API.
 
-## Protocol Development
+# Protocol Development
 
 The UW BIOFAB protocols, only a fraction of which have yet been published,
 represent the work of dozens of people. They started as handwritten protocols,
@@ -34,7 +34,7 @@ Yaoyu Yang,
 and
 David Younger.
 
-## Laboratory Processes
+# Laboratory Processes
 
 Aquarium is used everyday in the UW BIOFAB, a cost center serving the University
 of Washington synthetic biology community. The Aquarium software
@@ -91,7 +91,7 @@ Marielle Summers,
 and
 Aria Tornabene.
 
-## Funding
+# Funding
 
 The development of Aquarium was funded in part by the
 [NSF](https://www.nsf.gov),

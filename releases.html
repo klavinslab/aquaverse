@@ -1,6 +1,6 @@
 <div ng-if="releases">
 
-  <h2>Latest Release</h2>
+  <h1 class="first-heading heading">Latest Release</h1>
 
   <ul>
     <li>
@@ -14,7 +14,7 @@
     </li>
   </ul>
 
-  <h2>Previous Releases</h2>
+  <h1 class="heading">Previous Releases</h1>
 
   <ul>
     <li ng-repeat="release in releases" ng-if="$index != 0">
@@ -28,7 +28,7 @@
     </li>
   </ul>
 
-  <h2>Historical Versions</h2>
+  <h1 class="heading">Historical Versions</h1>
 
   <p>Prior to version 0.9, versions were not tagged because Aquarium was
     primarily being used in house. To see the commits dating back to
