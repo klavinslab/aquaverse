@@ -2,7 +2,7 @@
 
 A Location Wizard manages the locations of items within the lab.
 For example, primers might be stored in a -20C freezer in 81 slot freezer boxes stored on shelves that contain 16 boxes.
-A wizard for this scheme would have locations of the form M20.x.y.z where x is the shelf (or hotel as we call them in the Klavins lab), y is the box, and z is the slot in the box.
+A wizard for this scheme would have locations of the form M20.x.y.z where x is the shelf (or hotel as we call them in the UW BIOFAB), y is the box, and z is the slot in the box.
 
 <img src="docs/concepts/images/location.png"
      style="max-width: 300px"
