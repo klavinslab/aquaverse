@@ -3,9 +3,11 @@
 This is the documentation for how to successfully use the `Operation` and `Job` paradigms from within Aquarium protocols, with explanation of commonly used `Operation` methods.
 
 This page will give examples and instructions on how to get started using `Operation` methods, but it is not a comprehensive reference for all `Operation` related methods.
-See the [API documentation]({{ site.baseurl }}{% link /api/index.html %}) for more details on the functions that Krill provides.
-
----
+See the
+<a href="#" onclick="select('Protocols', 'Detailed API Reference')">
+  API documentation
+</a>
+for more details on the functions that Krill provides.
 
 ## The Operation Interface
 
@@ -18,7 +20,7 @@ From within a protocol, it is easy to get a list of the operations that were sen
 
 which returns something like an array of operations.
 Actually, it is a Rails [ActiveRecord::Relation](http://api.rubyonrails.org/classes/ActiveRecord/Relation.html) object extended with a number of Aquarium specific methods, discussed here.
-Just remember that in addition to what you see here, there are also all the standard array methods (like `each`, `collect`, `select`, `reject`, ...) and of course the Rails operations (which you probably won't need).
+Just remember that in addition to what you see here, there are also all the standard array methods (like `each`, `collect`, `select`, `reject`, ...) and of course the Rails ActiveRecord::Relation methods (which you probably won't need).
 
 ## Iterating Through Operations
 
@@ -70,7 +72,7 @@ op.change_status "error"
 
 which sets the status and saves the operation.
 Subsequent calls to `operations` can be filtered by doing `operations.running` or `operations.errored`.
-Note that table operations `operations.start_table...` described below default to running operations.
+Note that table operations `operations.start_table...` described below defaults to running operations.
 
 It is common to provide the owner of the operation some information about why you are setting their operation's status to "error".
 You can do this with something like
@@ -141,14 +143,14 @@ If the parameter is of type JSON then
   op.input(“x”).val
 ```
 
-will return a Ruby object with the same structure as the JSON, and with symbols (not strings) for keys.
+will return a Ruby hash object with the same structure as the JSON, and with symbols (not strings) for keys.
 Note that if the JSON does not parse, you will get an object of the form.
 
 { error: “JSON parse error description”, original_value: “whatever you put as the input” }.
 
 ## Adding Inputs After the Protocol has Started
 
-Note that for the items associated with an operation to be tracked, they have to be inputs or outputs.
+For the items associated with an operation to be tracked, they have to be inputs or outputs.
 Sometimes, however, you don't know what items a protocol will use ahead of time, or do not need the user to specify them in the planner.
 In this case, you can add an input online using op.add_input as in the following code:
 
@@ -180,5 +182,5 @@ end
 ```
 
 Here, we know we want the protocol to always use the specified primer (a contrived example), so it is hard coded.
-But which item is used is determined by `op.add_input`.
+Which item is used is determined by `op.add_input`.
 The chosen item is the return value and should be checked for non-`nil`, meaning the method found an item.

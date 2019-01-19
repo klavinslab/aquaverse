@@ -1,11 +1,8 @@
 # Protocol Concepts: Show Blocks
 
 A show block is used to display instructions for the technician.
-
 This document discusses the basic features of show blocks.
 Refer to the [API documentation](http://klavinslab.org/aquarium/api/Krill/ShowBlock.html) for more details.
-
----
 
 ## "Hello Technician"
 
@@ -13,7 +10,7 @@ A show block is used to give instructions to the technician running the protocol
 Show blocks are created and displayed in the technician view with the `show` method.
 `show` takes a single argument: a code block.
 This code block contains the contents that are intended to be shown to the technician.
-This might take the form of instructions with how to proceed with a protocol, or of user input fields to collect sample measurements for storing in the lab database.
+This might take the form of instructions with how to proceed with a protocol, or of user input fields to collect sample measurements to store in the lab database.
 Each call to `show` constitutes a new slide in the technician view that will be shown while running the protocol.
 Lets create a simple protocol with a show block that says "Hello World"
 
@@ -89,7 +86,7 @@ When run in a protocol with 5 operations, the technician would see the following
 ## Show Block Methods
 
 For a comprehensive list of methods that are available for use in show blocks, see the
-[API documentation on show blocks](https://klavinslab.org/aquarium/api/Krill/ShowBlock.html)
+[API documentation on show blocks](https://klavinslab.org/aquarium/api/Krill/ShowBlock.html).
 
 The most commonly used show block methods are the following:
 
@@ -105,8 +102,8 @@ The most commonly used show block methods are the following:
 
 ## Dynamic Show Blocks
 
-As already mentioned, we can achieve somewhat dynamic show blocks by inserting ruby expressions into the Strings displayed by `note` using the ruby String insertion `#{}`.
-It is also possible to use complex ruby code within the code blocks of the `show` method to programmatically decide how show block methods will be executed.
+As already mentioned, we can achieve somewhat dynamic show blocks by inserting Ruby expressions into the strings displayed by `note` using the ruby String interpolation operator `#{}`.
+It is also possible to use complex Ruby code within the code blocks of the `show` method to programmatically decide how show block methods will be executed.
 
 For instance, we could modify our earlier show block to give different instructions depending on the amount of `Operations` the protocol is run with
 
@@ -122,7 +119,7 @@ For instance, we could modify our earlier show block to give different instructi
 
 Running this on the technician view, we would see an additional line of instruction being offered when the protocol is run with 51 or more `Operations`
 
-We can achieve powerful emergent behavior by using ruby code inside show blocks. Another example, using loops
+We can achieve quite customized behavior by using Ruby code inside show blocks. Another example, using loops
 
 ```ruby
     show do

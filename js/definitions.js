@@ -113,11 +113,6 @@ var config = {
       category: "Protocols",
       contents: [
         {
-          name: "Developer Tools",
-          type: "local-md",
-          path: "docs/protocol_developer/tools.md"
-        },
-        {
           name: "Creating a Protocol",
           type: "local-md",
           path: "docs/protocol_developer/tutorial_protocol.md"
@@ -152,6 +147,11 @@ var config = {
           type: "local-md",
           path: "docs/protocol_developer/table.md"
         },
+        {
+          name: "Developer Tools",
+          type: "local-md",
+          path: "docs/protocol_developer/tools.md"
+        },        
         {
           name: "Detailed API Reference",
           type: "local-md",
