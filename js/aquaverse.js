@@ -38,7 +38,7 @@ var stack = [];
 
       if ( $scope.state.section != section || $scope.state.active_content != content ) {
 
-        if ( gtag ) {
+        if ( typeof gtag != undefined ) {
           gtag('event', 'select', {
             'category': section.category,
             'content': content.name
