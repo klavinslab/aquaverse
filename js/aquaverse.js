@@ -38,10 +38,12 @@ var stack = [];
 
       if ( $scope.state.section != section || $scope.state.active_content != content ) {
 
-        gtag('event', 'select', {
-          'category': section.category,
-          'content': content.name
-        });
+        if ( gtag ) {
+          gtag('event', 'select', {
+            'category': section.category,
+            'content': content.name
+          });
+        }
 
         if ( content.type != "external-link" ) {
           $scope.state.section = section;
