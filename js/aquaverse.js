@@ -40,8 +40,8 @@ var stack = [];
 
         if ( typeof(gtag) != "undefined" ) {
           gtag('event', 'select', {
-            'event_category': section.category,
-            'event_label': content.name,
+            'event_category': content.name,
+            'event_label': section.category,
             'event_value': 1
           });
         }
