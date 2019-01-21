@@ -21,6 +21,11 @@ var config = {
       category: "Getting Started",
       contents: [
         {
+          name: "Basic Concepts",
+          type: "local-md",
+          path: "docs//concepts/index.md"
+        },
+        {
           name: "Installation",
           type: "local-md",
           path: "docs/installation/index.md"
@@ -44,11 +49,6 @@ var config = {
           name: "Configuration",
           type: "local-md",
           path: "docs/installation/configuration.md"
-        },
-        {
-          name: "Basic Concepts",
-          type: "local-md",
-          path: "docs//concepts/index.md"
         }
       ]
     },
@@ -151,7 +151,7 @@ var config = {
           name: "Developer Tools",
           type: "local-md",
           path: "docs/protocol_developer/tools.md"
-        },        
+        },
         {
           name: "Detailed API Reference",
           type: "local-md",
