@@ -54,6 +54,15 @@ To run Aquarium in production with Docker on your computer:
     If running Aquarium inside the Docker toolbox VM, the address will be instead be `192.168.99.100`.
     When started using the default database, aquarium has a single user with login `neptune` and password `aquarium`.
 
+    If you get errors during startup after doing a build, you may need to run
+
+    ```bash
+    docker-compose pull --ignore-pull-failures
+    docker-compose build --no-cache
+    ```
+
+    And, if that doesn't work, let us know.
+
 ## Stopping Aquarium in Docker
 
 To halt the Aquarium services, first type `ctrl-c` in the terminal to stop the running containers, then remove the containers by running
@@ -118,3 +127,4 @@ If Aquarium has been updated since the database dump was generated, it is a good
 > **Important**: If you swap in a large database dump, the database has to be reinitialized.
 > And the larger the database, the longer the initialization will take.
 > _Let the initialization finish._
+
