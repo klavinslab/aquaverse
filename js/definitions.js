@@ -23,7 +23,7 @@ var config = {
         {
           name: "Basic Concepts",
           type: "local-md",
-          path: "docs//concepts/index.md"
+          path: "docs/concepts/index.md"
         },
         {
           name: "Installation",
