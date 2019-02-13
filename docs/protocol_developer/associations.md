@@ -2,19 +2,14 @@
 # Data Association Documentation
 
 This is the documentation for how to successfully use data associations to store data related to `Items`, `Collections`, `Plans`, and `Operations`.
-
 See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
-
----
 
 ## Data Associations
 
 Data may be associated with `Item`, `Operation` and `Plan` objects.
 This data should either be serializable as JSON (e.g., a hash), or be an `Upload` object.
-
 Data associations are managed directly using the `DataAssociation` model.
 (The `AssociationMap` class is a wrapper for this model class, making associations easier to use, but hiding some details.)
-
 Using an `Item` reference `item` as an example, the following methods are available:
 
 ### Setting data

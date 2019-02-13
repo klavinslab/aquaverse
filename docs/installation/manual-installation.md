@@ -4,7 +4,8 @@ If your goal is to run Aquarium in production mode with many users, we recommend
 You can also install a personal instance manually if you prefer it over using the Docker configuration.
 
 A manual installation requires first installing Ruby, Rails, MySQL, and, depending on the deployment, a web server.
-The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org) and the MySQL database running on a separate RDS instance.
+The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org), a MySQL database running on a separate RDS instance,
+data stored in an AWS S3 bucket, and email handled through AWS SES.
 
 ## Installing Aquarium
 
@@ -16,7 +17,7 @@ Aquarium can be installed manually on a machine with a Unix&trade;-like environm
     - [npm](https://www.npmjs.com/get-npm)
       <br>
 
-2.  Also, make sure that you have a [MySQL](https://www.mysql.com) server installed.
+2.  Also, make sure that you have a [MySQL](https://www.mysql.com) server installed somewhere and an empty database created in it for use by Aquarium.
 
     When installing Aquarium on AWS you can use RDS, and, similarly, for another cloud service, you should be able to use the database service available there.
 
@@ -37,7 +38,7 @@ Aquarium can be installed manually on a machine with a Unix&trade;-like environm
     First, create the `aquarium/config/database.yml` file with
 
     ```bash
-    cd ..  # aquarium/config
+    cd aquarium/config
     cp database_template.yml database.yml
     ```
 

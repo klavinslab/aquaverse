@@ -1,10 +1,7 @@
 # Protocol Concepts: Locations
 
 This is the documentation for interacting with the location of items to facilitate effective retrieval and storage in Aquarium protocols.
-
 See <a href="#" onclick="select('Lab Management','Location Wizards')">Location Wizards</a> for details on configuring lab locations.
-
----
 
 For an item `plasmid`, the expression
 

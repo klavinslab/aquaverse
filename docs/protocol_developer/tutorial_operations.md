@@ -58,7 +58,7 @@ end
 
 ## Redesigning the protocol
 
-If you run a plan with more than one `StreakPlate` operation, you'll see that the way that we have written our protocol repeats some common work that doesn't have to be.
+If you run a plan with more than one `StreakPlate` operation, you'll see that the way that we have written our protocol repeats some common steps.
 The protocol we have now is essentially
 
     For each operation:
@@ -66,12 +66,12 @@ The protocol we have now is essentially
        2. Streak the plate
        3. Store the glycerol stock and the streaked plate.
 
-Imagine running this for several operations using the same glycerol stock.
+Imagine running this for several operations that happen to use same glycerol stock.
 The protocol would tell the technician to go get the glycerol stock, streak the plate, put the glycerol stock back, and then go get the glycerol stock again to do the next operation.
-The technician is going to very quickly start optimizing the steps, and not follow the protocol, which is something we want to avoid.
+The technician is going to very quickly start optimizing the steps, and not follow the protocol, a situation we want to avoid.
 
-The strategy to deal with this would be to group the operations by glycerol stock, so that the technician can get each glycerol stock and then streak all the plates requested for that stock.
-Another optimization would be to get all of the necessary plates before starting to avoid getting a single plate for each iteration.
+The strategy to deal with this is be to group the operations by glycerol stock, so that the technician can get each glycerol stock and then streak all the plates requested for that stock.
+Another optimization is to get all the necessary plates before starting to avoid getting a single plate for each iteration.
 
     1. Get one fresh agar plate for each operation
     2. For each glycerol stock
@@ -107,7 +107,7 @@ def streak_from_glycerol_stock(glycerol_stock, operations)
 end
 ```
 
-The main method is now empty, add comments for the top-level steps of our new protocol, so that we have placeholders to refine the protocol:
+With the main method is now empty, we add comments for the top-level steps of our new protocol, so that we have placeholders to refine the protocol:
 
 ```ruby
 def main
@@ -120,7 +120,7 @@ end
 As we saw in the first tutorial, we can define any of these steps in whatever order we want.
 
 Most the work is done in step 2, so let's start by figuring out how the protocol will use the new `streak_from_glycerol_stock` method.
-The method takes a glycerol stock and a list of operations that take the glycerol stock as an input.
+The method takes a glycerol stock and a list of operations that use the glycerol stock as an input.
 This means we need to reorganize the operations by the `glycerol_stock` input, which we can do with a call to `operations.group_by`:
 
 ```ruby
@@ -169,7 +169,7 @@ end
 ```
 
 For step 1, the technician just needs to get enough plates to complete all of the operations.
-We can do this with a simple show block, but we'll wrap it in a method like this
+We can do this with a simple show block, but we'll wrap it in a method like this:
 
 ```ruby
 # Provision a fresh agar plate for each operation in the given list.
@@ -200,8 +200,8 @@ def main
 end
 ```
 
-So, we only have step 3 that we haven't considered.
-We could do this with a call to `operations.store`, but let's try it and see if it is necessary.
+Now we only have step 3 that we haven't considered.
+We could do this step with a call to `operations.store`.
 All of the changes so far give us the protocol
 
 ```ruby
@@ -425,7 +425,7 @@ def streak_from_glycerol_stock(glycerol_stock, operations)
 end
 ```
 
-To figure out what we need to do to refine these new, let's look at the `operation_task` method.
+To figure out what we need to do to refine these version, let's look at the `operation_task` method.
 
 ```ruby
 # Perform the Streak Plate protocol for a single operation
@@ -693,9 +693,7 @@ end
 
 Now all of the required new plates are listed, and each has to be clicked before the technician can move on.
 Also, the glycerol stock is identified in the table just to be clear.
-
 Notice we no longer call `spot_plate(plate, glycerol_stock)` and can get rid of it.
-
 We can do the same with `streak_plates`
 
 ```ruby

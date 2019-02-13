@@ -35,13 +35,22 @@ var stack = [];
     $scope.select = function(section,content,push=true) {
 
       section.open = true;
+
       if ( $scope.state.section != section || $scope.state.active_content != content ) {
+
+        if ( typeof(gtag) != "undefined" ) {
+          gtag('event', 'select', {
+            'event_category': content.name,
+            'event_label': section.category,
+            'event_value': 1
+          });
+        }
 
         if ( content.type != "external-link" ) {
           $scope.state.section = section;
           $scope.state.active_content = content;
           if ( push ) {
-            history.pushState({section: $scope.state.section, active_content: $scope.active_content }, "State", "");
+            history.pushState({section: $scope.state.section, active_content: $scope.state.active_content }, "State", "");
           }
         }
 
@@ -79,6 +88,13 @@ var stack = [];
         $mdSidenav('sidenav').close();
       }
 
+    }
+
+    $scope.redraw = function() {
+      $("#main-container").hide();
+      setTimeout(() => {
+        $("#main-container").show();
+      }, 1);
     }
 
     function section_index(sec) {

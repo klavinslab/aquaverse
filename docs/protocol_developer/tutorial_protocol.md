@@ -1,17 +1,18 @@
 # Tutorial: Creating A Protocol
 
-This is an introduction to writing protocols for Aquarium in the Krill domain specific language.
-We try to introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
-See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
+This is an introduction to writing protocols for Aquarium in the Krill domain specific language,
+a subset of Ruby.
+We introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
+See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides. Before you get too far into writing protocols, we recommend that you run through a Ruby
+tutorial, several of which are available online.
 
 _This document is evolving, please share feedback._
-
----
 
 ## An Aquarium Protocol
 
 A protocol in Aquarium defines an action that can be planned by a researcher designing an experiment.
-In the lab, the protocol translates to a series of steps that are to be performed to complete the action.
+In the lab, the protocol translates to a series of steps that are to be performed
+by a technician to complete the action.
 
 If you are coming from a background where you have written or worked from a typical paper protocol, an Aquarium protocol is more detailed.
 The protocol may correspond to a single step of a paper protocol – such as streaking an agar plate with E. coli – but elaborates the details needed to ensure the protocol is performed as consistently as possible.
@@ -27,7 +28,7 @@ From this perspective, our protocol for streaking plate has the top-level steps:
     2. Streak the plate
     3. Store the glycerol stock and the streaked plate.
 
-For our initial protocol, we will just have a series of screens with these steps as titles:
+For our initial version of this protocol, we will just have a series of screens with these steps as titles:
 
 ```ruby
 # A simple Aquarium protocol for streaking an agar plate from an
@@ -52,7 +53,7 @@ class Protocol
 end
 ```
 
-Some of this is just Ruby boilerplate (code that is always used) including the Ruby class named `Protocol` with the method `main` method, but the `show` blocks define the screens that are displayed.
+Some of this is just Ruby boilerplate (code that is always used) including the Ruby class named `Protocol` with the method `main` method. The `show` blocks define the screens that are displayed.
 
 Let's try running this protocol in Aquarium to understand better how this works.
 
@@ -67,7 +68,7 @@ Our advice is that you **not** use your lab's server to learn.
 
 ### Creating a Protocol
 
-Start by using the <a href="#" onclick="select('Protocols', 'Developer Tools')">Aquarium developer tools</a> to create our protocol:
+Start by using the <a href="#" onclick="select('Protocols', 'Developer Tools')">Aquarium developer tools</a> to create a new protocol:
 
 1.  Starting from the developer tab, click the **New** button in the upper right corner.
 
@@ -122,8 +123,8 @@ Relevant documentation:
 
 ## Refining the protocol
 
-The initial protocol is not very detailed, but it shows the basic framework of what the protocol should ultimately do.
-To build the protocol, we can refine each of the steps individually, by adding detail.
+The initial version of this protocol is not very detailed, but it shows the basic framework of what the protocol should ultimately do.
+To build in more detail to the protocol, we can refine each of the steps individually, by adding detail.
 Refining the steps that _get_ and _store_ items requires that we make (or have made) decisions about how things are stored in the lab, so let's postpone those decisions.
 Instead, let's elaborate what we mean to streak the plate to these steps:
 
@@ -159,13 +160,13 @@ class Protocol
 end
 ```
 
-Because the new steps occur in the second show block preceded by `check`, the second page of the protocol now shows a check-list containing the new steps.
-For this page, the technician must check each box in order to be able to click **OK** to indicate they are done with the page.
+Because the new steps occur in the second show block preceded by the keyword `check`, the second page of the protocol now shows a check-list containing the new steps.
+The technician must check each box in order to be able to click **OK** to indicate they are done with the page.
 
-When creating a new protocol, we wont just refine individual steps that we had added before, but may realize that we've left out steps, or that what we've done only works in special cases and needs to be changed.
-For instance, we probably want to give instructions to setup and clean-up the workspace.
-However, we can postpone decisions until we absolutely need to make them, and should try to add or change one thing at a time to avoid mistakes.
-So, we can postpone making decisions about setup/clean-up until we know more about how the protocol will be performed and what resources are required.
+When creating a new protocol, we won't just refine individual steps that we had added before. Instead, we may realize that we've left out steps, or that what we've done only works in special cases and needs to be changed.
+For instance, we probably want to give instructions to set up and clean up the workspace.
+However, we can postpone decisions about what to add until we absolutely need to make them, and should try to add or change one thing at a time to avoid mistakes.
+So, we will postpone making decisions about setup/clean-up until we know more about how the protocol will be performed and what resources are required.
 
 ## How Aquarium Works: The Basics
 
@@ -195,7 +196,7 @@ operations.each do |operation|
 end
 ```
 
-So, let's refactor our code so that the `main` method does exactly this, and the `operation_task` method consists of the show blocks from before
+So, let's refactor our code so that the `main` method does exactly this, and the `operation_task` method consists of the show blocks from before. It allows us to display essentially the same steps to the technician for each operation batched into a job using this protocol.
 
 ```ruby
 class Protocol
@@ -233,6 +234,10 @@ end
 Now, if you run a plan with a single operation, it should behave as before.
 (But, what happens if you add two or more operations?)
 
+Note that this protocol assumes you will process each operation sequentially, which is often not
+very efficiently. Later, we will show how to direct the technician to process operations
+in parallel, for example by showing them a table of volumes to pipette into each well of a 96 well plate.
+
 ### Declaring Inputs and Outputs
 
 We are going to add an input named `glycerol_stock` and an output named `plate`.
@@ -258,7 +263,6 @@ class Protocol
   def main
     operations.retrieve  # locate required items and display instructions to get them
     operations.make      # create items for the outputs
-
     operations.each do |operation|
       operation_task(operation)
     end
@@ -306,7 +310,7 @@ check "Get the glycerol stock  #{input_stock.id}"
 ```
 
 Double-quotes are required for Ruby String interpolation.
-But, we use single-quotes unless String interpolation is used, which is a Ruby convention.
+We use single-quotes unless String interpolation is used, which is a Ruby convention.
 
 ### Adding Types and Items
 
@@ -339,7 +343,7 @@ We still need an example `Plasmid` sample to run our protocol.
 2. At the right of the newly created sample type, click **Actions**.
    Choose **New Item** and **Plasmid Glycerol Stock**.
 
-Now you should be able to run/test the protocol, and the input and output items should identified by a LIMS ID.
+Now you should be able to run/test the protocol, and the input and output items should identified by an Aquarium item id.
 
 ## Provisioning and storing
 
@@ -361,7 +365,7 @@ end
 ```
 
 The command `operations.make` creates the items for outputs of the operations, and must be run for a protocol that creates new items.
-But, The other two commands `operations.retrieve` and `operations.store` manage the tasks of getting and storing items that are used.
+The other two commands `operations.retrieve` and `operations.store` manage the tasks of getting and storing items that are used.
 
 If you generate and run a test for the protocol, the first two screens in the backtrace should show instructions to gather inputs.
 The first, which displays the text
@@ -378,7 +382,7 @@ And, the second, which shows the text
 
 is generated by the first show block in `operation_task`.
 
-There is duplicated information displayed here, but `operations.retrieve` also marks the items as in use, which helps avoid conflicts over resources in the lab.
+There is duplicated information displayed here, but `operations.retrieve` also marks the items as in-use, which helps avoid conflicts over resources in the lab.
 We want to use Aquarium item management where possible, so we will drop the instruction to get the glycerol stock from the show block.
 
 The `operations.store` command is similar, but here we actually have an omission in our protocol, because it is not clear what it means to "put back" an item that was created by the protocol.
@@ -387,7 +391,7 @@ So, for the output plate, we add a line `output_plate.move('incubator')` to the 
 Now, when `operations.store` is run, Aquarium will instruct the technician to move the plate to the incubator.
 As a result, we can remove the last show block with the title `Store the glycerol stock and the streaked plate`.
 
-All of these changes give the protocol
+All of these changes result in a new version of the protocol:
 
 ```ruby
 class Protocol
@@ -432,10 +436,10 @@ end
 ## Learning more
 
 The StreakPlate protocol we've constructed in this tutorial is pretty basic in that it follows the naive task list that we started with.
-But, Aquarium allows us to build protocols that help determine how efficiently the lab performs certain tasks, and we haven't yet considered how the protocol is used in the lab.
+In fact, Aquarium allows us to build protocols that help determine how efficiently the lab performs certain tasks, and we haven't yet considered how the protocol is used in the lab.
 To learn more, move on to the
 <a href="#" onclick="select('Protocols', 'Improving a Protocol')">tutorial on improving protocols</a>,
-which demonstrates how we would modify the StreakPlate protocol to interleave operations.
+which demonstrates how we might modify the StreakPlate protocol to interleave operations.
 
 You can also go deeper into topics covered in this tutorial with these pages:
 

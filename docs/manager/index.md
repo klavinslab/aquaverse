@@ -2,7 +2,7 @@
 
 _This document assumes that you have read the <a href="#" onclick="select('Getting Started', 'Basic Concepts')">Aquarium Concepts</a> document_.
 
-A manager uses Aquarium to determine which operations are run together as a job; to monitor and control jobs; and to help users with problematic plans.
+A manager uses Aquarium to select which operations are run together as a job; to monitor and control jobs; and to help users with problematic plans.
 
 ## The Manager Tab
 
@@ -38,9 +38,9 @@ It is also possible to display completed operations by clicking the slider at th
      hspace=20>
 
 The left panel of the manager tab has two parts.
-At the top are buttons that allows the manager to do common tasks they perform: switching to another user, displaying active jobs, and generating reports of activity.
+At the top are buttons that allow the manager to common tasks: switching to another user, displaying active jobs, and generating reports of activity.
 At the bottom are buttons that control which categories of jobs are displayed in the right panel.
-This example shows three categories _cloning_, _manager_ and _tutorial_neptune_ with the tutorial selected.
+This example shows three categories _cloning_, _manager_ and _tutorial\_neptune_ with the tutorial selected.
 (These are the categories from the protocol development tutorial; in practice, there will be many more.)
 
 Once the category is selected, operation types will be displayed in the panel to the right of the buttons.
@@ -62,7 +62,7 @@ These represent all of the jobs that can be selected and run as a job.
      alt="manager view of selected operation"
      width="100%">
 
-Selecting the operations to be part of a job, and then clicking **run** starts the job
+Selecting the operations to be part of a job, and then clicking **run** starts the job.
 
 <img src="docs/manager/images/scheduled-job.png"
      alt="manager view of selected operation"

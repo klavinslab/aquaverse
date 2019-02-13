@@ -1,9 +1,8 @@
 # The Aquarium LIMS
 
 This document describes how to use the Aquarium LIMS as a researcher.
-To learn how to set up the LIMS with your lab's sample and container types, see the
-<a href="#" onclick="select('Lab Management','Inventory Definitions')">Inventory Definitions</a>
-page.
+To learn how to set up the LIMS as a manager with your lab's sample and container types, see the
+<a href="#" onclick="select('Lab Management','Inventory Definitions')">Inventory Definitions</a> page.
 The examples below use the Widget sample type definition, which is available in the `test-workflow.aq` within the _Test Workflow_, found on the
 <a href="#" onclick="select('Community','Workflows')">Workflows</a> page.
 
@@ -21,8 +20,6 @@ For instance, we can add two new, unsaved Widget types so that the screen looks 
 <img src="docs/lims/images/new-sample.png"
      alt="clicking NEW twice creates forms for two new samples"
      width="100%">
-
-and would fill in the forms to define each sample.
 
 To create a sub-sample for the second widget, click the arrows next to the word **parent** and select Widget.
 When done, the forms should look something like
@@ -42,10 +39,10 @@ Find the sample you want to edit, click **Actions &gt; Edit** in the sample's he
 ## Searching for Samples
 
 To search for samples, enter a sample name or ID **Sample Name or ID** field in the left sidebar of the samples page, and click **SEARCH**.
-For a name search, you can search with a prefix that is at least three characters.
+For a name search, you can search with a substring that is at least three characters.
 Leaving the **Sample Name or ID** field blank will display all samples
 
-Restrict the search by adding a sample type name, project name or user name.
+Restrict the search by filtering by a sample type name, project name or user name.
 
 ## Creating New Items
 
@@ -77,7 +74,7 @@ To move an item, enter a new location and save it.
 If the location is managed by a wizard, it will check to make sure there isn't already an item in the new location.
 
 You can also delete an item, by clicking the trash can.
-Deleting the item does not remove the item from the system, and the item can be later restored if needed.
+Deleting the item does not remove the item information from the database, and the item can be later restored if needed.
 
 ## Managing Collections
 

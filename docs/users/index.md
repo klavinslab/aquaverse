@@ -2,7 +2,7 @@
 
 ## Create an Administrative Account
 
-If you are running Aquarium with Docker, the user `neptune` (password `aquarium`) has administrative privilege and can be used to create other accounts.
+If you are running Aquarium with Docker, the user `neptune` (with password initially set to `aquarium`) has administrative privilege and can be used to create other accounts.
 
 Otherwise, you will need to create an administrative user with the commands
 

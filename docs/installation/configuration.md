@@ -1,6 +1,6 @@
 # Configuring Your Instance
 
-There are several details that can be configured in Aquarium should you want.
+There are several details that can be configured in Aquarium should you so desire.
 These include such things as the name of your instance, the logo displayed on the Aquarium landing page, or the S3 service used to handle files.
 
 What files you change depends on how you installed Aquarium.
@@ -65,7 +65,7 @@ Alternatively, for a minio server set `config.paperclip_defaults` in `production
     storage: :s3,
     s3_protocol: 'http',
     s3_permissions: 'private',
-    s3_region: ENV.fetch('S3_REGION'), 
+    s3_region: ENV.fetch('S3_REGION'),
     s3_credentials: {
       bucket: ENV.fetch('S3_BUCKET_NAME'),
       access_key_id: ENV.fetch('S3_KEY'),
@@ -79,7 +79,8 @@ Alternatively, for a minio server set `config.paperclip_defaults` in `production
   }
   ```
 
-This assumes the environment variables used are set.
+This configuration assumes the environment variables `S3_REGION`, `S3_BUCKET_NAME`, `S3_KEY`,
+`S3_SECRET_ACCESS_KEY`, and `S3S3_HOSTNAME` used are set.
 
 For Docker configuration, modify `docker/aquarium/production.rb`, and set the environment variables in the `environment` clause of the `app` service in `docker-compose.override.yml`.
 See [Environment Variables in Compose](https://docs.docker.com/compose/environment-variables/) for more.
@@ -88,7 +89,7 @@ For manual configuration, modify `config/environments/production.rb` and the env
 ## Configuring the email service
 
 Aquarium is currently only able to use the AWS SES for email notifications.
-This ability is enabled by this configuration at the end of `production.rb`:
+This capability is enabled by this configuration at the end of `production.rb`:
 
 ```ruby
 AWS.config(
@@ -101,7 +102,7 @@ AWS.config(
 )
 ```
 
-which requires most of the same environment variables for AWS S3.
+which requires similar environment variables to AWS S3.
 
 The Docker configuration does _not_ provide an email server container, meaning that email notifications will not work unless explicitly configured in `docker/aquarium/production.rb`.
 For manual configuration, modify `config/environments/production.rb`.

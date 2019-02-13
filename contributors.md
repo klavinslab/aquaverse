@@ -1,4 +1,4 @@
-## Software Engineering
+# Software Engineering
 
 The core Aquarium code was written and is maintained by Eric Klavins.
 Benjamin Keller, Justin Vrana, Abraham Miller, and Garrett Newman contributed
@@ -6,7 +6,7 @@ new features, bug fixes, and documentation.
 Eric Klavins, Justin Vrana, and Benjamin Keller developed and maintained the
 Trident API.
 
-## Protocol Development
+# Protocol Development
 
 The UW BIOFAB protocols, only a fraction of which have yet been published,
 represent the work of dozens of people. They started as handwritten protocols,
@@ -34,10 +34,10 @@ Yaoyu Yang,
 and
 David Younger.
 
-## Laboratory Processes
+# Laboratory Processes
 
 Aquarium is used everyday in the UW BIOFAB, a cost center serving the University
-of Washington synthetic biology community. The Aquarium software in some
+of Washington synthetic biology community. The Aquarium software
 essentially codifies the processes that the UW BIOFAB uses to manage its work.
 The UW BIOFAB was started by Michelle Parks, who contributed to almost every
 laboratory process, many of which were encoded into UW BIOFAB protocols.
@@ -51,13 +51,17 @@ Orlando de Lange,
 Miles Gander,
 Kyle Havens,
 Seunghee Jang,
+Ben Keller,
+Abe Miller,
+Garrett Newman,
+Devin Strickland,
 Chris Takahashi,
 Yaoyu Yang,
 and
 David Younger
 all helped develop laboratory processes and protocols that eventually found their
 way into UW BIOFAB protocols, lab management methods, or business logic
-managed by Aquarium. In addition, most of the work the UW BIOFAB was done by the
+managed by Aquarium. In addition, most of the work the UW BIOFAB has been done over the years by the
 following technicians through the Aquarium Technician Interface:
 Lana Alabyeva,
 Aza Allen,
@@ -85,4 +89,15 @@ Sofia Shirley,
 Madeleine Strain,
 Marielle Summers,
 and
-Aria Tornabene
+Aria Tornabene.
+
+# Funding
+
+The development of Aquarium was funded in part by the
+[NSF](https://www.nsf.gov),
+[DARPA](https://www.darpa.mil/),
+[CoMotion](https://comotion.uw.edu/),
+the [UW ISTC](https://istc-pc.washington.edu/) on pervasive computing,
+the [Amazon Catalyst](https://catalyst.amazon.com/uw/) program,
+and a
+[UW Innovation award](https://www.washington.edu/research/resources/funding-opportunities/the-university-of-washington-innovation-awards/).

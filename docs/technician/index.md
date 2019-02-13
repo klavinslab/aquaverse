@@ -1,8 +1,7 @@
 # Technician
 
 When using Aquarium, a technicians primarily interacts with protocols, each of which will have their own details.
-
-Aquarium does track which users runs which jobs as a technician, so technicians should login separately to use this feature.
+Aquarium tracks which users run which jobs as technicians, so technicians should login separately to use this feature.
 
 ## Running a Job
 
@@ -55,7 +54,7 @@ This will take you through a dialog to select the files to be uploaded.
 ## Running a timer
 
 Protocols can start timers directly, but some may also simply say to start a timer.
-In this situation, click on the **timer** tab, set the duration for the timer, choose the alarm chime, and click the run button.
+In this situation, click on the **timer** tab, set the duration for the timer, choose the alarm chime (we highly recommend using "Chewbacca"), and click the run button.
 
 <img src="docs/technician/images/timer.png"
        alt="the technician timer tab allows timing a task or delay"

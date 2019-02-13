@@ -21,6 +21,11 @@ var config = {
       category: "Getting Started",
       contents: [
         {
+          name: "Basic Concepts",
+          type: "local-md",
+          path: "docs/concepts/index.md"
+        },
+        {
           name: "Installation",
           type: "local-md",
           path: "docs/installation/index.md"
@@ -44,11 +49,6 @@ var config = {
           name: "Configuration",
           type: "local-md",
           path: "docs/installation/configuration.md"
-        },
-        {
-          name: "Basic Concepts",
-          type: "local-md",
-          path: "docs//concepts/index.md"
         }
       ]
     },
@@ -113,16 +113,6 @@ var config = {
       category: "Protocols",
       contents: [
         {
-          name: "Getting Started",
-          type: "local-md",
-          path: "docs/protocol_developer/index.md"
-        },
-        {
-          name: "Developer Tools",
-          type: "local-md",
-          path: "docs/protocol_developer/tools.md"
-        },
-        {
           name: "Creating a Protocol",
           type: "local-md",
           path: "docs/protocol_developer/tutorial_protocol.md"
@@ -158,6 +148,11 @@ var config = {
           path: "docs/protocol_developer/table.md"
         },
         {
+          name: "Developer Tools",
+          type: "local-md",
+          path: "docs/protocol_developer/tools.md"
+        },
+        {
           name: "Detailed API Reference",
           type: "local-md",
           path: "api.md"
@@ -168,7 +163,7 @@ var config = {
     {
       category: "Power Users",
       contents: [
-        { name: "Python and Trident", type: "local-html", path: "trident.html" }
+        { name: "Python API", type: "local-html", path: "trident.html" }
       ]
     }
   ]

@@ -66,3 +66,6 @@ use a hyperlink of the following form:
   Inventory Definitions
 </a>
 ```
+## Serving these pages locally
+
+To work on a local copy of the website, use [ws](https://www.npmjs.com/package/ws) to serve it from your computer.

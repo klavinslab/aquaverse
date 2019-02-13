@@ -16,10 +16,10 @@
       <p>
         Have you ever wished your lab could jump into a using a new organism, a new method,
         or a new piece of equipment without worrying that it will take months to learn all of the
-        associated lore and superstitions associated?
+        associated lore and superstitions?
         <span ng-if="more.community">
         With Aquarium's <a href="#" ng-click="easy_select('Community', 'Workflows')">
-        community generated workflows</a>.
+        community generated workflows</a>,
         you can import the protocols you need and start using them immediately. Importing an
         Aquarium workflow adds new inventory definitions, unit operation types, and protocols to your
         instance. Plus, when you start building your own workflows, Aquarium can help you publish them,
@@ -39,17 +39,17 @@
     <div>
       <h2 class="md-headline">Executable Protocols</h2>
       <md-divider></md-divider>
-      <p>With Aquarium, your lab's protocols are expressed as executable code. Every formula,
+      <p>With Aquarium, your lab's protocols are represented as executable code. Every formula,
         every inventory interaction, and every step is computed on the fly, yielding
         easy to follow instructions for your laboratory technicians.
         <span ng-if="more.protocols">
         As a result,
-        Protocols built in Aquarium are easy to repeat and share, and they
+        protocols built in Aquarium are easy to repeat and share, and they
         generate chain of custory information for every item and datum in your lab.
         Furthermore, it is straightforward to completely automate protocols for which you
-        happen to have a robot, so can migrate to a 100% human-in-the-loop automated lab.
+        happen to have a robot, so you can migrate to a 100% human-in-the-loop automated lab.
         To learn more about authoring your own protocols, see the
-        <a href="#" ng-click="easy_select('Protocols', 'Protocol Tutorial')">
+        <a href="#" ng-click="easy_select('Protocols', 'Creating a Protocol')">
           protocol tutorial</a>.</span>
         <a href="#" ng-click="more.protocols = !more.protocols">
           [{{more.protocols ? 'less' : 'more'}}]
@@ -57,7 +57,6 @@
        </p>
     </div>
   </div>
-
 
   <div layout="row" layout-xs="column" class="about-row">
     <div>
@@ -69,16 +68,16 @@
       <p>
         At the core of Aquarium is a sophisticated Laboratory Information Management System,
         or
-        <a href="#" ng-click="easy_select('Researchers', 'Defining Samples')">
+        <a href="#" ng-click="easy_select('Researchers', 'Managing Inventory')">
           LIMS</a>. Whether your lab handles plasmid DNA or hamsters, you can define whatever information
         ought to be associated with your samples.
         <span ng-if="more.lims">
         Once you have built our your lab's sample type
-        and container definitions, you can start populating the inventory. Aquarium's programmable
+        and container definitions, you can start populating your inventory. Aquarium's programmable
         <a href="#" ng-click="easy_select('Lab Management', 'Location Wizards')">
           Location Wizards</a> manage your freezers, incubators, and instruments -- associating IDs
         and locations to every item. As workflows operate on your inventory, all the data your
-        lab produced is associated with your samples and stored in AWS S3, making it easy to find
+        lab produces is associated with your samples and stored in AWS S3, making it easy to find
         when it is time to write that paper.</span>
         <a href="#" ng-click="more.lims = !more.lims">
           [{{more.lims ? 'less' : 'more'}}]
@@ -97,10 +96,10 @@
       <p>
         Every Aquarium protocol is wrapped in a Unit Operation having a
         formally specified set of input and output sample types. By chaining
-        operations, you can build complex experimental worlflows, create modules and templates
+        operations, you can build complex experimental worlflows, create modules, define templates
         for common tasks, and edit your workflows as they are running.
         <span ng-if="more.workflow">
-        These workflows are executable. You can estimate and track their costs, monitor their progress,
+        Workflows are executable. You can estimate and track their costs, monitor their progress,
         view the data they produce, watch as inventory items are created and stored, and get detailed logs
         that describe every step of your workflow. To learn more about how to build
         workflows, see the

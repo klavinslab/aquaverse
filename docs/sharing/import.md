@@ -6,18 +6,18 @@ Importing workflows allows you to add capabilities to your instance of Aquarium.
 A workflow consists of a set of Operation Types, Protocols, Code Libraries, Sample Type definitions and Container definitions.
 Workflows are stored in files ending with .aq.
 You can find workflows to import on in the Community &gt; Workflows section of this website.
-When you import a workflow, Aquarium attempts to be conservative about changing existing workflows already installed.
-For example, Aquarium will not overwrite your Sample Type or Containers with Sample Types and/or Containers of the same name.
+When you import a workflow, Aquarium attempts to be conservative about changing existing workflows that are already installed.
+For example, Aquarium will not overwrite your Sample Type or Container definitions with new Sample Type and/or Container definitions having the same name.
 You can also configure what to do if there are existing Operation Types with the same names as the ones you are importing.
 
-**Good Practice:** Make a back up of your Aquarium database before importing a workflow.
-At this time, there is no easy un-import feature in Aquarium.
+> **Good Practice:** Make a back up of your Aquarium database before importing a workflow.
+> At this time, there is no easy un-import feature in Aquarium.
 
 ## Viewing Workflow Information
 
-To import a workflow, go to **Import Workflows** available in the drop down menu at the top left in the Aquarium tool bar.
+To import a workflow, go to **Import Workflows**, available in the drop down menu at the top left in the Aquarium tool bar.
 Next, click **LOAD** and choose a file ending in .aq from your local computer, which will load the workflow into the user interface.
-In particular, the operation types, libraries and inventory definitions that will be added to your instance of Aquarium will be shown.
+In particular, the operation types, libraries, and inventory definitions that will be added to your instance of Aquarium will be shown.
 
 ## Controlling the Import
 
@@ -27,7 +27,7 @@ On the left sidebar, choose how you want to import the workflow.
   If you do not choose this option, you will have to navigate to each new operation type in the Developer tab and
   click **Deploy** there.
 - Choose what you want to happen when Aquarium finds an operation type with the same name and in the same category
-  as one you are important. Aquarium can **Fail**, meaning the import does not occur. Aquarium cam **Skip** importing the
+  as one you are importing. Aquarium can **Fail**, meaning the import does not occur. Aquarium cam **Skip** importing the
   particular operation type. Or if you choose **Rename Existing**, Aquarium will rename and re-categorize existing operation types.
 
 ## Finalizing the Import
