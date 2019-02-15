@@ -94,7 +94,6 @@ a:visited {
 html, body {
   margin: 0;
   background: white;
-  overflow: hidden;
 }
 
 .main, .main-html, .main-md {
