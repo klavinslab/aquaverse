@@ -50,11 +50,20 @@ To run Aquarium in production with Docker on your computer:
     docker-compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.windows.yml up
     ```
 
-5. Check that everything is working. Once all of the services for Aquarium have started, visit `localhost` with the Chrome browser to find the Aquarium login page.
+5.  Check that everything is working. Once all of the services for Aquarium have started, visit `localhost` with the Chrome browser to find the Aquarium login page.
     If running Aquarium inside the Docker toolbox VM, the address will be instead be `192.168.99.100`.
     When started using the default database, aquarium has a single user with login `neptune` and password `aquarium`.
 
-## Stopping Aquarium with Docker
+    If you get errors during startup after doing a build, you may need to run
+
+    ```bash
+    docker-compose pull --ignore-pull-failures
+    docker-compose build --no-cache
+    ```
+
+    And, if that doesn't work, let us know.
+
+## Stopping Aquarium in Docker
 
 To halt the Aquarium services, first type `ctrl-c` in the terminal to stop the running containers, then remove the containers by running
 
@@ -118,5 +127,5 @@ and finally restarting Aquarium with `docker-compose` as before.
 If Aquarium has been updated since the database dump was generated, it is a good idea to run database migrations as described above.
 
 > **Important**: If you swap in a large database dump, the database has to be reinitialized.
-> The larger the database, the longer the initialization will take.
+> And the larger the database, the longer the initialization will take.
 > _Let the initialization finish._
