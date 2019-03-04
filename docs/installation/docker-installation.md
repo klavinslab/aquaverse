@@ -73,15 +73,29 @@ docker-compose down
 
 ## Updating/Migrating Aquarium
 
-Whenever a new version of Aquarium is released, run
+Whenever a new version of Aquarium is released, first run
+
+```bash
+docker-compose down --rmi all -v --remove-orphans
+```
+
+to remove existing Docker configuration.
+Then run
 
 ```bash
 git pull
 git checkout v2.5.1
-docker-compose build
 ```
 
 to get the latest code. Replace `v2.5.1` with whatever the tag of the latest release is.
+Then run
+
+```bash
+docker-compose build
+```
+
+to rebuild the Docker images.
+
 If there are any necessary `rake` tasks (see the release notes of the new version) run
 
 ```bash
