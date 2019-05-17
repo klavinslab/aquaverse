@@ -191,6 +191,9 @@ var stack = [];
       $http.get("https://api.github.com/repos/klavinslab/aquarium/releases")
            .then(response => {
              $scope.releases = response.data;
+             $scope.releases.sort(function(a,b) {
+                 return new Date(b.published_at) - new Date(a.published_at);
+             })
              for ( var n in $scope.releases ) {
                $scope.releases[n].md = $sce.trustAsHtml(conv.makeHtml($scope.releases[n].body));
                highlight_code();

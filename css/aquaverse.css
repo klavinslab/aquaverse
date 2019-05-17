@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   --logo-color: #003399;
   --heading-color: #006600;
@@ -94,6 +98,7 @@ a:visited {
 html, body {
   margin: 0;
   background: white;
+  -ms-overflow-style: none;  // IE 10+  
 }
 
 .main, .main-html, .main-md {
