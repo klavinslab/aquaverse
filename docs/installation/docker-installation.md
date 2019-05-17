@@ -84,10 +84,10 @@ Then run
 
 ```bash
 git pull
-git checkout v2.5.1
+git checkout v2.6.2
 ```
 
-to get the latest code. Replace `v2.5.1` with whatever the tag of the latest release is.
+to get the latest code. Replace `v2.6.2` with whatever the tag of the latest release is.
 Then run
 
 ```bash
