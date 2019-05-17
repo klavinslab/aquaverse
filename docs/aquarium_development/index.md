@@ -161,6 +161,18 @@ rm -rf docker/db/*
 
 ### Formatting Aquarium code
 
+The Aquarium repository is setup to use [RuboCop](https://rubocop.readthedocs.io).
+Settings are in the `.rubocop.yml` file in the repository directory.
+When the Rails or Ruby versions are changed the target versions in this file should also be changed.
+Otherwise, you probably wont need to change this file.
+
+When you make changes to Aquarium code, run the `rubocop` command to see if you have introduced any issues.
+This will check for several potential issues that occur in Rails apps.
+Note that it will always complain about the `JOB::NOT_STARTED` and `JOB::COMPLETED`, but, because of the `.rubocop_todo.yml` file, any other issues that are found should be things that you have introduced.
+You should fix them.
+If you only have `Layout` issues, use `rubocop -x` to do it automatically.
+RuboCop can do other auto-corrections, but don't use that feature unless your tests ensure that the behavior is not changed.
+
 ### Documenting Aquarium Ruby Code
 
 Aquarium Ruby methods and classes should be documented with [Yardoc](http://www.rubydoc.info/gems/yard/file/docs/GettingStarted.md) regardless of whether they are public.
