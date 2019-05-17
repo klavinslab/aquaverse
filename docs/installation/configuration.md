@@ -39,7 +39,7 @@ For manual installation, change `config/initializers/aquarium.rb`.
 The S3 service used by Aquarium is set in `production.rb` by assigning to `config.paperclip_defaults`.
 
 The Docker configuration of Aquarium uses a minio S3 service as configured in the `docker-compose` files, and files uploaded to Aquarium are directly accessible in the directory `docker/s3`.
-In addition, the minio console is available at `http:localhost:9000` using the minio credentials from the `docker-compose.yml` file.
+In addition, the minio console is available at `http://localhost:9000` using the minio credentials from the `docker-compose.yml` file.
 
 For a manual configuration, you will want to change these settings to an S3 service.
 To use AWS S3, you can change the assignment to `config.paperclip_defaults` in `production.rb` to
@@ -106,3 +106,12 @@ which requires similar environment variables to AWS S3.
 
 The Docker configuration does _not_ provide an email server container, meaning that email notifications will not work unless explicitly configured in `docker/aquarium/production.rb`.
 For manual configuration, modify `config/environments/production.rb`.
+
+## Configuring the image service
+
+Images included in protocols will be served using the value of 
+`Bioturk::Application.config.image_server_interface` set in the `config/initializers/aquarium.rb` file.
+This should be set to the base URL from which your images are served.
+
+The Docker configuration has this value set to point at the `minio` S3 service using the directory `docker/s3/data/images`.
+You can organize image files in this directory and use them in your protocols.
