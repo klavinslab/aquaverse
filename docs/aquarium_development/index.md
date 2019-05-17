@@ -155,6 +155,13 @@ rm -rf docker/db/*
 
 ## Testing Aquarium
 
+```bash
+./develop-compose.sh up -d
+./develop-compose.sh exec app /bin/sh
+rspec
+./develop-compose.sh down
+```
+
 ## Editing Aquarium
 
 ### Documenting changes
@@ -239,10 +246,10 @@ This file also limits the API to code used in Krill the protocol development lan
 
 1.  (make sure Rails tests pass)
 2.  Run `rubocop`, fix anything broken. Once done run `rubocop --auto-gen-config`.
-3.  Update API documentation by running `yard`
-4.  (make sure JS tests pass)
-5.  Make sure JS linting passes
-6.  Update the version number in `config/initializers/version.rb` to the new version number.
+3.  (make sure JS tests pass)
+4.  Make sure JS linting passes
+5.  Update the version number in `config/initializers/version.rb` to the new version number.
+6.  Update API documentation by running `yard`
 7.  (Update change log)
 8.  Create a tag for the new version:
     ```bash
