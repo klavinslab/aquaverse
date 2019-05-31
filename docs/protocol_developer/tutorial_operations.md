@@ -219,9 +219,9 @@ class Protocol
     # 3. Store the plates
   end
 
-  # Provision a fresh agar plate for each operation in the given list.
+  # Provision the indicated number of fresh agar plates
   #
-  # @param operations [OperationList] the list of operations
+  # @param count [Integer] the number of plates
   def get_plates(count)
     show do
       title "Get fresh agar plates"
@@ -766,21 +766,6 @@ class Protocol
     operations.store(interactive: true, io: 'input', method: 'boxes')
     # Move the plate to the incubator
     move_plates(operations)
-  end
-
-  # Spots the plate from the glycerol stock.
-  #
-  # Gets an agar plate and labels it as the given plate, and then spots the plate
-  # from the glycerol stock.
-  #
-  # @param plate [Item] the item for the plasmid plate
-  # @param glycerol_stock [Item] the item for the glycerol stock
-  def spot_plate(plate, glycerol_stock)
-    show do
-      title "Spot a plate from #{glycerol_stock}"
-      check "Get a fresh agar plate and label it #{plate.id}"
-      check "Spot the plate #{plate.id} from the glycerol stock #{glycerol_stock.id}"
-    end
   end
 
   # Spots all of the output plates with the glycerol stocks.
