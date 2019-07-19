@@ -13,8 +13,8 @@ Aquarium can be installed manually on a machine with a Unix&trade;-like environm
 
 1.  Ensure you have  on your machine and have installed
 
-    - [Ruby](https://www.ruby-lang.org/en/) version 2.3.7
-    - [npm](https://www.npmjs.com/get-npm)
+    - [Ruby](https://www.ruby-lang.org/) version 2.6.3
+    - [yarn](https://yarnpkg.com/)
       <br>
 
 2.  Also, make sure that you have a [MySQL](https://www.mysql.com) server installed somewhere and an empty database created in it for use by Aquarium.
@@ -32,7 +32,16 @@ Aquarium can be installed manually on a machine with a Unix&trade;-like environm
     cp aquarium_template.notrb aquarium.rb
     ```
 
-    and then editing `aquarium.rb` to set the URLs and email address.
+    and then editing `aquarium.rb` to set the following values
+
+    | Variable | Description |
+    |----------|-------------|
+    | `Bioturk::Application.config.instance_name` | The name that will appear on the navigation bar |
+    | `Bioturk::Application.config.logo_path` | The directory path for your logo (default is Aquarium logo) |
+    | `Bioturk::Application.config.image_server_interface` | The URL for your image server |
+    | `Bioturk::Application.config.krill_hostname` | The URL for the Krill server. Use `localhost` if on the same server. |
+    | `Bioturk::Application.config.email_from_address` | The sender email address for notifications |
+
 
 5.  Configure the Aquarium database settings.
     First, create the `aquarium/config/database.yml` file with
@@ -47,22 +56,21 @@ Aquarium can be installed manually on a machine with a Unix&trade;-like environm
 
 6.  If you are installing on a server, e.g., other than your computer, copy the `aquarium` directory to the server, and open a command-line shell in that directory.
 
-7.  In the `aquarium` directory, install the Ruby gems required by Aquarium with
+7. Install the Javascript libraries used by Aquarium with 
+
+   ```bash
+   yarn install --modules-folder public/node_modules && yarn cache clean
+   ```
+
+8.  Install the Ruby gems required by Aquarium with
 
     ```bash
     gem update --system
-    gem install bundler
-    bundle install --jobs 20 --retry 5
+    gem install bundler --version '< 2.0' && \
+        bundle install --jobs 20 --retry 5
     ```
 
     Note: if the MySQL database is not installed or not properly installed/configured, you may get errors during this step.
-
-8.  Install Javascript libraries used by Aquarium with the command
-
-    ```bash
-    npm install -g bower@latest
-    bower install --config.interactive=false --force
-    ```
 
 9.  Initialize the production database with
 
