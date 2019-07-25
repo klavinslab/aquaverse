@@ -1,5 +1,5 @@
+<!DOCTYPE html>
 <html ng-app='aquaverse' ng-controller="aquaverseCtrl" id="aquaverseCtrl" ng-cloak>
-
   <head>
 
     <title>Aquarium</title>
@@ -10,6 +10,7 @@
           content="Aquarium, Molecular Biology, Lab Automation, Protocols, Workflows, Reproducibility, LIMS, Synthetic Biology">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
 
     <script src="node_modules/angular/angular.min.js"></script>
     <script src="node_modules/angular-animate/angular-animate.min.js"></script>
@@ -20,6 +21,7 @@
 
     <script src="node_modules/showdown/dist/showdown.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+
 
     <script src="js/highlight.js"></script>
     <script src="js/definitions.js"></script>
@@ -52,7 +54,6 @@
   </head>
 
   <body style="position: relative">
-
     <header class="logo-container">
       <h1 class="logo md-display-4"><span class="aq">Aq</span></h1>
       <h2 class="tagline md-title" ng-bind-html="tagline"></h2>
@@ -96,7 +97,6 @@
         md-component-id="sidenav"
         md-is-locked-open="$mdMedia('gt-sm')"
         id="sidenav">
-
         <ul class="nav-list">
           <li ng-repeat="section in navigation">
             <div class="category-container"
