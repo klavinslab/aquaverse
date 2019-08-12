@@ -21,16 +21,15 @@ var stack = [];
                           
     var curr = location.href.split("?");
 
-      if (curr.length > 1) {
-        var url = curr[1].split("&");
-        if (url.length > 1) {
-          var category = url[0].split("=")[1];
-          category = decodeURI(category);
-          var content = url[1].split("=")[1];
-          content = decodeURI(content);
-        }
-
+    if (curr.length > 1) {
+      var url = curr[1].split("&");
+      if (url.length > 1) {
+        var category = url[0].split("=")[1];
+        category = decodeURI(category);
+        var content = url[1].split("=")[1];
+        content = decodeURI(content);
       }
+    }
 
     $scope.easy_select = function(category, name, push=true) {
       for ( var i=0; i<$scope.navigation.length; i++ ) {
