@@ -19,18 +19,16 @@
   "author": "Eric Klavins",
   "license": "MIT",
   "dependencies": {
-    "angular": "^1.7.5",
-    "angular-animate": "^1.7.5",
-    "angular-aria": "^1.7.5",
-    "angular-material": "^1.1.10",
-    "angular-messages": "^1.7.5",
+    "angular": "^1.7.8",
+    "angular-animate": "^1.7.8",
+    "angular-aria": "^1.7.8",
+    "angular-material": "^1.1.19",
+    "angular-messages": "^1.7.8",
+    "angular-route": "^1.7.8",
     "aria": "^0.2.1",
-    "github-markdown-css": "^2.10.0",
+    "github-markdown-css": "^3.0.1",
     "jquery": "^3.4.1",
-    "local-web-server": "^3.0.6",
-    "messages": "0.0.0",
-    "serve": "^11.1.0",
-    "showdown": "^1.9.0",
-    "ws": "^7.1.1"
+    "messages": "0.1.0",
+    "showdown": "^1.9.0"
   }
 }
