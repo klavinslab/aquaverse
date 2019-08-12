@@ -75,10 +75,10 @@ ws --spa
 ## External links
 
 Because a page is constructed on the fly, the page will not have a specific URL.
-However, it is possible to link to a page using URLs using the category and content name from the navigation configuration using the pattern `aquarium.bio/?section={category}&content={content}`.
+However, it is possible to link to a page using URLs using the category and content name from the navigation configuration using the pattern `aquarium.bio/?category={category}&content={content}`.
 (Substitute `%20` for spaces.)
 
 For instance, the following are valid links:
 
-- `http://aquarium.bio/?section=Overview&content=Contributors`
-- `http://aquarium.bio/?section=Protocols&content=Detailed%20API%20Reference`
+- `http://aquarium.bio/?category=Overview&content=Contributors`
+- `http://aquarium.bio/?category=Protocols&content=Detailed%20API%20Reference`
