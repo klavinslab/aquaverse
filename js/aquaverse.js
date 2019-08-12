@@ -18,6 +18,18 @@ var stack = [];
     $scope.state = {};
 
     let conv = new showdown.Converter({tables:true});
+                          
+    var curr = location.href.split("?");
+
+    if (curr.length > 1) {
+      var url = curr[1].split("&");
+      if (url.length > 1) {
+        var category = url[0].split("=")[1];
+        category = decodeURI(category);
+        var content = url[1].split("=")[1];
+        content = decodeURI(content);
+      }
+    }
 
     $scope.easy_select = function(category, name, push=true) {
       for ( var i=0; i<$scope.navigation.length; i++ ) {
@@ -33,7 +45,6 @@ var stack = [];
     }
 
     $scope.select = function(section,content,push=true) {
-
       section.open = true;
 
       if ( $scope.state.section != section || $scope.state.active_content != content ) {
@@ -53,7 +64,6 @@ var stack = [];
             history.pushState({section: $scope.state.section, active_content: $scope.state.active_content }, "State", "");
           }
         }
-
         switch(content.type) {
           case "local-md":
             $http.get(content.path)
@@ -173,8 +183,34 @@ var stack = [];
     }
 
     $(function() {
+      var valid = false;
       $scope.navigation[0].open = true;
-      $scope.select($scope.navigation[0],$scope.navigation[0].contents[0],false);
+      if (curr.length > 1) {
+        for (var i = 0; i < $scope.navigation.length; i++) {
+          if ($scope.navigation[i].category == category) {
+            category = $scope.navigation[i];
+            for (var j = 0; j < $scope.navigation[i].contents.length; j++) {
+              if ($scope.navigation[i].contents[j].name == content) {
+                content = $scope.navigation[i].contents[j];
+                valid = true
+              }
+            }
+          }
+        }
+
+        if (valid) {
+          $scope.select(category, content, false);
+        } else {
+          $('html').load('404.html').appendTo('html')
+        }
+      
+      } else {
+        $scope.select(
+          $scope.navigation[0],
+          $scope.navigation[0].contents[0],
+          false
+        );
+      }
       history.replaceState($scope.state, "State", "");
       $scope.$apply();
     });
