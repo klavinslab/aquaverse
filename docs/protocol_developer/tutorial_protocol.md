@@ -72,9 +72,9 @@ Start by using the <a href="#" onclick="select('Protocols', 'Developer Tools')">
 
 1.  Starting from the developer tab, click the **New** button in the upper right corner.
 
-2.  Change the operation type name to `StreakPlate`, the category to `tutorial`, and click the **Save** button.
+2.  Change the operation type name to `StreakPlate`, the category to `tutorial`, and click the **Save** button at the bottom right.
 
-3.  Click **Protocol**, replace the template code in our example, and click the **Save** button at the bottom right.
+3.  Click **Protocol**, replace the template code in our example, and click the **Save** button again.
 
 ### Running a Protocol from the Developer Test Tab
 
@@ -93,13 +93,13 @@ When the test finishes, you should see a backtrace – the execution history –
 
 To run the protocol so that it will show you the screens as the technician will see them:
 
-1.  In the Developer **Def** view, click the **Deployed** checkbox
+1.  In the Developer **Def** view, click the **Deployed** checkbox and then click **Update**.
 
-2.  Click the **Designer** tab at the top of the page, click _Design_, and then choose your category under _Operation Types_
+2.  Click the **Designer** tab at the top of the page, click the _Design_ button in the left sidebar, and then choose your category under _Operation Types_
 
 3.  Click the operation type name `StreakPlate` to add the operation to the plan
 
-4.  Save the plan, and then click **Launch**. You'll have to select and confirm your budget, and click _Submit_
+4.  Save the plan, and then click the **Launch** button in the left sidebar. You'll have to select and confirm your budget, and click _Submit_
 
 5.  Select the **Manager** tab, and click your category in the list on the left.
 
@@ -117,7 +117,7 @@ To run the protocol so that it will show you the screens as the technician will 
 Relevant documentation:
 
 - <a href="#" onclick="select('Protocols', 'Developer Tools')">Aquarium developer tools</a>
-- <a href="#" onclick="select('Researchers', 'Designing Plans')">Managing Jobs</a>
+- <a href="#" onclick="select('Researchers', 'Designing Plans')">Designing Plans</a>
 - <a href="#" onclick="select('Lab Management', 'Managing Jobs')">Managing Jobs</a>
 - <a href="#" onclick="select('Lab Management', 'Running Jobs')">Running Jobs</a>
 
@@ -132,7 +132,7 @@ Instead, let's elaborate what we mean to streak the plate to these steps:
 2. Allow the spots on the plate to dry
 3. Streak-out the spotted plate with the pipette
 
-Eventually, we will want to add even more detail about how to do each of these steps, but for now we can add these to `Streak the plate` show block:
+Eventually, we will want to add even more detail about how to do each of these steps, but for now we can add these to the `Streak the plate` show block:
 
 ```ruby
 # A simple Aquarium protocol for streaking a plate from an e. coli
@@ -328,20 +328,21 @@ Unfortunately, the protocol is now broken – you will get an error if you try t
 
 Return to the definition tab for the `StreakPlate` protocol, and add the types to the input and output.
 For both, set the sample type to `Plasmid`.
-For the input `glycerol_stock` set the "container" to the object type `Plasmid Glycerol Stock`.
-For the output `plate`, set the "container" to the object type `Plasmid Plate`.
+For the input `glycerol_stock` set the "container" (second box) to the object type `Plasmid Glycerol Stock`.
+For the output `plate`, set the "container" (second box) to the object type `Plasmid Plate`.
 Then click the **Update** button to make sure the changes are saved.
 
 We still need an example `Plasmid` sample to run our protocol.
 
 1. If we look at the page for the `Plasmid` sample type, there is a line that says `There are 0 Plasmids in the inventory`.
    Click on the `Plasmids` link to open the **Samples** page.
-   Click **New**, click `Plasmid`.
+   Click **Create Sample** and then click `Plasmid`.
    Then set the sample name to `dummy_plasmid`, the description to `dummy plasmid sample`, and project to `tutorial`.
    Finally, click **Save**.
 
 2. At the right of the newly created sample type, click **Actions**.
-   Choose **New Item** and **Plasmid Glycerol Stock**.
+   Choose **Inventory**
+   You will see a line that tells you there are no items in your inventory. Click **Actions** again. Choose **New Item** and **Plasmid Glycerol Stock**.
 
 Now you should be able to run/test the protocol, and the input and output items should identified by an Aquarium item id.
 
