@@ -1,7 +1,7 @@
 # Software Engineering
 
 The core Aquarium code was written and is maintained by Eric Klavins.
-Benjamin Keller, Justin Vrana, Abraham Miller, and Garrett Newman contributed
+Benjamin Keller, Phuong Le, Justin Vrana, Abraham Miller, and Garrett Newman contributed
 new features, bug fixes, and documentation.
 Eric Klavins, Justin Vrana, and Benjamin Keller developed and maintained the
 Trident API.
@@ -20,15 +20,19 @@ Nick Bolten,
 Leandra Brettner,
 Cameron Cordray,
 Miles Gander,
+Sarah Goldberg,
 Samer Halabiya,
 Seunghee Jang,
 Yokesh Jayakumar,
+Justin La,
+Erriberto Lopez,
 Jon Luntzel,
 Abe Miller,
 Garrett Newman,
 Michelle Parks,
 Sundipta Rao,
 Ayesha Saleem,
+Devin Strickland,
 Chris Takahashi,
 Yaoyu Yang,
 and
