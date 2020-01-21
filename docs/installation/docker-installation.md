@@ -1,6 +1,8 @@
-# Docker Installation
+# Local Installation
 
-The latest release provides Docker configuration scripts that enable you to run a self-contained instance of Aquarium.
+It is possible for you to run a self-contained instance of Aquarium.
+
+
 This configuration is intended to support protocol development or evaluation, and supports all Aquarium services except for email notifications.
 
 Just to be clear: _this configuration was developed for use by a single user on a single machine such as a laptop, and was not developed for deployments on a local server or the cloud_.
@@ -19,6 +21,8 @@ To run Aquarium in production with Docker on your computer:
 2.  <a href="#" onclick="select('Getting Started','Getting Aquarium')">
     Get the Aquarium source
     </a>
+     using the 
+     [aquarium-local](https://github.com/klavinslab/aquarium-local)
 
 3.  Build the docker images. Change into the `aquarium` directory
 

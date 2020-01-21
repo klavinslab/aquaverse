@@ -1,122 +1,109 @@
-# Manual Installation
+# Production Deployment
 
-If your goal is to run Aquarium in production mode with many users, we recommend that you install Aquarium manually.
-You can also install a personal instance manually if you prefer it over using the Docker configuration.
+These instructions are for you if your goal is to run Aquarium in production mode with many users.
 
-A manual installation requires first installing Ruby, Rails, MySQL, and, depending on the deployment, a web server.
-The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org), a MySQL database running on a separate RDS instance,
-data stored in an AWS S3 bucket, and email handled through AWS SES.
+## What else an Aquarium deployment needs
 
-## Installing Aquarium
+The Aquarium Docker image is not sufficient for a running deployment of Aquarium, which also needs a web server, a database, an S3 server, and (possibly) an email service.
+In addition, a Krill server is necessary.
 
-Aquarium can be installed manually on a machine with a Unix&trade;-like environment with the following steps.
+The UW BIOFAB, for example, runs Aquarium on an Amazon Web Services EC2 instance using the web server [nginx](http://nginx.org), a MySQL database running on a separate RDS instance, an AWS S3 bucket, an image server, and email handled through AWS SES.
+The [local deployment](http://klavinslab.org/aquarium-local/) creates a container with services for nginx, MySQL, and minio (for S3 and image server); no email service is provided.
 
-1.  Ensure you have  on your machine and have installed
+## Configuring Aquarium
 
-    - [Ruby](https://www.ruby-lang.org/) version 2.6.3
-    - [yarn](https://yarnpkg.com/)
-      <br>
+Details for related systems can be set using environment variables:
 
-2.  Also, make sure that you have a [MySQL](https://www.mysql.com) server installed somewhere and an empty database created in it for use by Aquarium.
+**Database**:
+The database is configured to use MySQL by default with the hostname configured for [local deployment](http://klavinslab.org/aquarium-local/).
 
-    When installing Aquarium on AWS you can use RDS, and, similarly, for another cloud service, you should be able to use the database service available there.
+| Variable | Description | Default |
+|----------|-------------|---------|
+| DB_NAME | the name of the database | –|
+| DB_USER | the database user | – |
+| DB_PASSWORD | the password of the user | – |
+| DB_ADAPTER | the database adapter name | mysql2 |
+| DB_HOST | the network address of the database | db |
+| DB_PORT | the network port of the database | 3306 |
 
-3.  <a href="#" onclick="select('Getting Started','Getting Aquarium')">
-    Get the Aquarium source
-    </a>
+**Email**:
+To use the AWS SES set the `EMAIL_SERVICE` to `AWS` along with 
 
-4.  Configure Aquarium by first creating the `aquarium/config/initializers/aquarium.rb` file
+| Variable | Description | Default |
+|----------|-------------|---------|
+| AWS_REGION | the region for the AWS server | – |
+| AWS_ACCESS_KEY_ID | the access key id for your account | – |
+| AWS_SECRET_ACCESS_KEY | the access key for your account | – |
 
-    ```bash
-    cd aquarium/config/initializers
-    cp aquarium_template.notrb aquarium.rb
-    ```
+**Krill**:
+Set the environment variable `KRILL_HOST`
 
-    and then editing `aquarium.rb` to set the following values
+| Variable | Description | Default |
+|----------|-------------|---------|
+| KRILL_HOST | the hostname for the krill server | `krill` |
+| KRILL_PORT | the port served by the krill server | 3500 |
 
-    | Variable | Description |
-    |----------|-------------|
-    | `Bioturk::Application.config.instance_name` | The name that will appear on the navigation bar |
-    | `Bioturk::Application.config.logo_path` | The directory path for your logo (default is Aquarium logo) |
-    | `Bioturk::Application.config.image_server_interface` | The URL for your image server |
-    | `Bioturk::Application.config.krill_hostname` | The URL for the Krill server. Use `localhost` if on the same server. |
-    | `Bioturk::Application.config.email_from_address` | The sender email address for notifications |
+**S3**:
+Aquarium is configured to use either AWS S3 or minio, and is set to use minio by default with the hostname configured for [local deployment](http://klavinslab.org/aquarium-local/).
 
+To use minio set the following variables
 
-5.  Configure the Aquarium database settings.
-    First, create the `aquarium/config/database.yml` file with
+| Variable | Description | Default |
+|----------|-------------|---------|
+| S3_HOST | network address of the S3 service | `localhost:9000` |
+| S3_REGION | name of S3 region | `us-west-1` |
+| S3_BUCKET_NAME | name of S3 bucket | `development` |
+| S3_ACCESS_KEY_ID | the access key id for the minio service | – |
+| S3_SECRET_ACCESS_KEY | the access key for the minio service | – |
 
-    ```bash
-    cd aquarium/config
-    cp database_template.yml database.yml
-    ```
+For the local deployment, the minio service is named `s3`, but it is necessary to redirect `localhost:9000` in order to use the minio docker image.
 
-    You should change the _production_ mode configuration to point to your database server.
-    And, in this case, you don't need to worry about the remainder of the `database.yml` file.
+To use AWS S3 set the variable `S3_SERVICE` to `AWS` along with the following variables
 
-6.  If you are installing on a server, e.g., other than your computer, copy the `aquarium` directory to the server, and open a command-line shell in that directory.
+| Variable | Description | Default |
+|----------|-------------|---------|
+| AWS_REGION | name of S3 region | – |
+| S3_BUCKET_NAME | name of S3 bucket | – |
+| AWS_ACCESS_KEY_ID | the access key id for your account | – |
+| AWS_SECRET_ACCESS_KEY | the access key for your account | – |
 
-7. Install the Javascript libraries used by Aquarium with 
+**Timezone**: 
+Set the variable `TZ` to the desired timezone for your instance.
+This should match the timezone for your database.
 
-   ```bash
-   yarn install --modules-folder public/node_modules && yarn cache clean
-   ```
+### Config file
 
-8.  Install the Ruby gems required by Aquarium with
+Some of configuration can be done using a file `instance.yml` with keys for the values you want to set.
+For instance, to change the name of the instance to `Wonder Lab` use the file
 
-    ```bash
-    gem update --system
-    gem install bundler --version '< 2.0' && \
-        bundle install --jobs 20 --retry 5
-    ```
+```yaml
+default: &default
+  instance_name: Wonder Lab
 
-    Note: if the MySQL database is not installed or not properly installed/configured, you may get errors during this step.
+production:
+  <<: *default
 
-9.  Initialize the production database with
-
-    ```bash
-    RAILS_ENV=production rake db:schema:load
-    ```
-
-10. Pre-compile the assets:
-
-    ```bash
-    RAILS_ENV=production bundle exec rake assets:precompile
-    ```
-
-## Running Aquarium Locally
-
-If you have installed Aquarium on your local computer, start Aquarium by running
-
-```bash
-RAILS_ENV=production rails s
+development:
+  <<: *default
 ```
 
-and start the Krill server with the command
+And, then map the Aquarium path `/aquarium/config/instance.yml` to this file.
+For instance, in the docker-compose.yml file, add the following line to the `volumes` for
+the aquarium service:
 
-```bash
-rails runner "Krill::Server.new.run(3500)"
+```
+  - ./instance.yml:/aquarium/config/instance.yml
 ```
 
-then go to `http://localhost:3000/` to find the login page.
+The following values can be set using this file or environment variables:
 
-## Running Aquarium on a Server
+| Config key | Environment Variable |  Default |
+|----------|-------------|---------|
+| lab_name | LAB_NAME | `Your Lab` |
+| lab_email_address | LAB_EMAIL_ADDRESS | – |
+| logo_path | LOGO_PATH | `aquarium-logo.png` |
+| image_uri | IMAGE_URI | `http://localhost:9000/images/` |
 
-Running on a server requires additional configuration that is not covered here, since there are many reasonable alternatives.
 
-As mentioned above, the UW BIOFAB runs Aquarium on an Amazon Web Services EC2 instance and uses AWS S3, RDS and SES services.
-Relevant configuration files to these details are `config/database.yml`, `config/initializers/aquarium.rb` and `config/environments/production.rb`.
 
-In addition, Aquarium is run using [puma](http://puma.io), but the web pages are served by [nginx](http://nginx.org) acting as a reverse proxy server that also serves static pages.
-These details are similar to the Docker production environment, and you may find it useful to refer to the files
-
-- `docker/aquarium/production_puma.rb`
-- `docker/nginx.production.conf`
-
-for puma and nginx configuration.
-Additionally, the entrypoint files
-
-- `docker/aquarium-entrypoint.sh`
-- `docker/krill-entrypoint.sh`
-
-illustrate how Aquarium and Krill are started.
+## Running Aquarium
