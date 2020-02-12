@@ -19,12 +19,12 @@ The database is configured to use MySQL by default with the hostname configured 
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| DB_NAME | the name of the database | –|
-| DB_USER | the database user | – |
+| DB_NAME | the name of the database | `production` |
+| DB_USER | the database user | `aquarium` |
 | DB_PASSWORD | the password of the user | – |
-| DB_ADAPTER | the database adapter name | mysql2 |
-| DB_HOST | the network address of the database | db |
-| DB_PORT | the network port of the database | 3306 |
+| DB_ADAPTER | the database adapter name | `mysql2` |
+| DB_HOST | the network address of the database | `db` |
+| DB_PORT | the network port of the database | `3306` |
 
 **Email**:
 To use the AWS SES set the `EMAIL_SERVICE` to `AWS` along with 
@@ -50,6 +50,7 @@ To use minio set the following variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
+| S3_PROTOCOL | network protocol for S3 service | `http` |
 | S3_HOST | network address of the S3 service | `localhost:9000` |
 | S3_REGION | name of S3 region | `us-west-1` |
 | S3_BUCKET_NAME | name of S3 bucket | `development` |
@@ -62,10 +63,10 @@ To use AWS S3 set the variable `S3_SERVICE` to `AWS` along with the following va
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| AWS_REGION | name of S3 region | – |
+| S3_REGION | name of S3 region | – |
 | S3_BUCKET_NAME | name of S3 bucket | – |
-| AWS_ACCESS_KEY_ID | the access key id for your account | – |
-| AWS_SECRET_ACCESS_KEY | the access key for your account | – |
+| S3_ACCESS_KEY_ID | the access key id for your account | – |
+| S3_SECRET_ACCESS_KEY | the access key for your account | – |
 
 **Timezone**: 
 Set the variable `TZ` to the desired timezone for your instance.
@@ -102,7 +103,7 @@ The following values can be set using this file or environment variables:
 | lab_name | LAB_NAME | `Your Lab` |
 | lab_email_address | LAB_EMAIL_ADDRESS | – |
 | logo_path | LOGO_PATH | `aquarium-logo.png` |
-| image_uri | IMAGE_URI | `http://localhost:9000/images/` |
+| image_uri | IMAGE_URI | *S3_PROTOCOL*`://`*S3_HOST*`/images/` |
 
 
 
