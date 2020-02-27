@@ -1,7 +1,7 @@
 var config = {
   tagline: "The Laboratory</br>Operating System",
   get_releases: true,
-  workflows: ["/klavinslab/test-workflow"],
+  workflows: ["/klavinslab/test-workflow","dvnstrcklnd/aq-sample-models"],
   copyright:
     "Aquarium Web Page and Documentation Copyright © 2018 University of Washington",
   nextprev: true,
