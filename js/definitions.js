@@ -4,8 +4,8 @@ var config = {
   workflows: [
     "/klavinslab/test-workflow",
     "/dvnstrcklnd/aq-sample-models",
-    "dvnstrcklnd/aq-pcr-models",
-    "dvnstrcklnd/aq-yeast-display"
+    "/dvnstrcklnd/aq-pcr-models",
+    "/dvnstrcklnd/aq-yeast-display"
   ],
   copyright:
     "Aquarium Web Page and Documentation Copyright © 2018 University of Washington",
