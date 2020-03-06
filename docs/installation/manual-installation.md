@@ -15,7 +15,7 @@ The third is for zealots who should feel free to use the Aquarium Dockerfile as 
 
 ## Deployment Alternatives
 
-An basic Aquarium deployment consists of the Aquarium service, a database, an object-store, an image server, and a web-server.
+A basic Aquarium deployment consists of the Aquarium service, a database, an object-store, an image server, and a web-server.
 A deployments may also have an email service.
 
 <img src="docs/installation/images/aquarium-config.png"
