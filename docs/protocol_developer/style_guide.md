@@ -1,8 +1,13 @@
 # Headings -- Create a record of who worked on what 
 
-* Name, date worked on, revision or original. 
-* If, when, and by whom it was revised. Keep the names of previous people who worked on it 
-* Short description of what it does
+* If you are writing a new protocol, include your name and the date at the top. 
+`Written by Grace Hopper -- Date`
+* If you are editing a protocol, please also note your name and the date.
+`Revised by Ada Lovelace -- Date`
+* If you are making a major revision, add a note about what was revised. 
+`Revised by Marie Tharp -- Date -- Added new section, Deleted xyz, Changed important thing`
+
+* Short description of what it does -- if this is lengthy -- add to docs instead. How are we meant to be using docs? 
 * Important notes. 
 
 # Best Practices for Comments and Titles 
