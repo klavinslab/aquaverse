@@ -1,0 +1,43 @@
+# Headings -- Create a record of who worked on what 
+
+* Name, date worked on, revision or original. 
+* If, when, and by whom it was revised. Keep the names of previous people who worked on it 
+* Short description of what it does
+* Important notes. 
+
+# Best Practices for Comments and Titles 
+
+* What is the purpose of comments? 
+    * Right now we have comments that say things like " # This method tells the technician to set up the power supply." followed by a show block with title "set up power supply". 
+* Can be useful for explaining details of a calculation, that kind of thing. 
+* Delete sections of commented out code -- if you might want it later you can always mark that you took it out at certain revision #.
+    * This is a readability issue in som of the protocols -- so much commented out code. 
+* Related -- What is the purpose of titles?
+    * Titles should not contain actual protocol steps (e.g. "prep thing" and then the steps, rather then "Add 20ml of x to y".)  
+
+# Dividing into methods
+
+* What can go in a method should (i.e. don't make a 250 line if statement).
+* Steps first, method definitions later (i.e. consistency in format) 
+
+# Calling methods 
+
+* Use parens even though Ruby says not to. 
+* Use them with parameters too (I find it hard to read when you have something like `def image_gel gel, image_name` as opposed to `def image_gel(gel, image_name)`
+* Arguments -- always use keyword arguments?
+
+# Repeat some points from the general Ruby style guide?
+
+* Also -- we can only use rubocop for changing the aquarium code -- not for protocols I assume? 
+* The most relevant things from that lengthy document. 
+* I know we have rubocop, and the ruby style guide, but pointing out the conventions we're sticking with could be useful. 
+`https://github.com/rubocop-hq/ruby-style-guide`
+
+# Libraries
+* Use ones we already have (e.g. Units library).
+* Use libraries rather than copy pasting code from libraries into protocol.
+* If you're pasting a lot from another protocol, make a library. 
+* Put libraries where they belong (i.e., if it's a general library, it shouldn't be in a specific section)
+* If you're largely referring to code from libraries in one category, your protocol should probably be in that category too.
+
+
