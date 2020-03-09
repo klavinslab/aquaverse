@@ -11,8 +11,10 @@
 * Important notes. 
 
 # Best Practices for Comments and Titles 
+* what is the doc section for -- it's not used a lot -- it should probably have the description of what the protocol is for, special notes, etc.
 
 * What is the purpose of comments? 
+Do we want to follow the yard/rdoc style we're already using within the aquarium code itself?
     * Right now we have comments that say things like " # This method tells the technician to set up the power supply." followed by a show block with title "set up power supply". 
 * Can be useful for explaining details of a calculation, that kind of thing. 
 * Delete sections of commented out code -- if you might want it later you can always mark that you took it out at certain revision #.
@@ -22,10 +24,19 @@
 
 # Dividing into methods
 
+* Ideally, the main method of the protocol will only call methods, either built in aquarium methods (`retrieve`, `store`) or else methods you define.
+* If the title of the method isn't self-explanatory, you might want to comment on what it does when you call it (though ideally, it'd be self explantory).
+* `prepare_stripwells` `save_order_data`
+* Good example: Cloning/Make Glycerol Stock 
+
 * What can go in a method should (i.e. don't make a 250 line if statement).
 * Steps first, method definitions later (i.e. consistency in format) 
 
 # Calling methods 
+
+* Ruby style is usually to leave out parentheses in method definitions/calls unless they are needed. 
+* For our purposes, it would be better if methods were called with parentheses regardless of whether or not they take arguements.
+`get_protocol_feedback()`
 
 * Use parens even though Ruby says not to. 
 * Use them with parameters too (I find it hard to read when you have something like `def image_gel gel, image_name` as opposed to `def image_gel(gel, image_name)`
