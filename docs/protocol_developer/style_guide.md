@@ -1,55 +1,70 @@
-# Headings -- Create a record of who worked on what 
+# Protocol Style Guide
 
+## Headings
+
+* Since we don't have a git like system for version control, we want to create a record of who worked on what 
 * If you are writing a new protocol, include your name and the date at the top. 
 `Written by Grace Hopper -- Date`
-* If you are editing a protocol, please also note your name and the date.
+* If you are making significant changes a protocol, please also note your name and the date.
 `Revised by Ada Lovelace -- Date`
 * If you are making a major revision, add a note about what was revised. 
 `Revised by Marie Tharp -- Date -- Added new section, Deleted xyz, Changed important thing`
 
-* Short description of what it does -- if this is lengthy -- add to docs instead. How are we meant to be using docs? 
-* Important notes. 
+## Docs 
+* Include a short description of what the protocol is for.
+* If it's part of a longer series, include what procedures generally come before or after. 
 
-# Best Practices for Comments and Titles 
-* what is the doc section for -- it's not used a lot -- it should probably have the description of what the protocol is for, special notes, etc.
+## Important notes. 
+* Not sure where to put these now -- don't really work in the docs, but it would be nice to not have huge commented out notes.
 
-* What is the purpose of comments? 
-Do we want to follow the yard/rdoc style we're already using within the aquarium code itself?
-    * Right now we have comments that say things like " # This method tells the technician to set up the power supply." followed by a show block with title "set up power supply". 
-* Can be useful for explaining details of a calculation, that kind of thing. 
-* Delete sections of commented out code -- if you might want it later you can always mark that you took it out at certain revision #.
-    * This is a readability issue in som of the protocols -- so much commented out code. 
-* Related -- What is the purpose of titles?
-    * Titles should not contain actual protocol steps (e.g. "prep thing" and then the steps, rather then "Add 20ml of x to y".)  
+## Cleaning up the Cruft 
+* Leaving in commented code can make protocols difficult to read/edit. 
+* If you are removing text, don't just comment it out. If you think someone might want to use it again, you can make a note at the top of the protocol withthe verison number in which you removed it.
 
-# Dividing into methods
+## Repeat some points from the general Ruby style guide?
 
-* Ideally, the main method of the protocol will only call methods, either built in aquarium methods (`retrieve`, `store`) or else methods you define.
-* If the title of the method isn't self-explanatory, you might want to comment on what it does when you call it (though ideally, it'd be self explantory).
-* `prepare_stripwells` `save_order_data`
-* Good example: Cloning/Make Glycerol Stock 
-
-* What can go in a method should (i.e. don't make a 250 line if statement).
-* Steps first, method definitions later (i.e. consistency in format) 
-
-# Calling methods 
-
-* Ruby style is usually to leave out parentheses in method definitions/calls unless they are needed. 
-* For our purposes, it would be better if methods were called with parentheses regardless of whether or not they take arguements.
-`get_protocol_feedback()`
-
-* Use parens even though Ruby says not to. 
-* Use them with parameters too (I find it hard to read when you have something like `def image_gel gel, image_name` as opposed to `def image_gel(gel, image_name)`
-* Arguments -- always use keyword arguments?
-
-# Repeat some points from the general Ruby style guide?
-
-* Also -- we can only use rubocop for changing the aquarium code -- not for protocols I assume? 
+* Also -- we can only use rubocop for changing the aquarium code -- not for protocols I assume? -- if you use Nemo?
 * The most relevant things from that lengthy document. 
 * I know we have rubocop, and the ruby style guide, but pointing out the conventions we're sticking with could be useful. 
 `https://github.com/rubocop-hq/ruby-style-guide`
 
-# Libraries
+## Best Practices for Comments and Titles 
+solograph can parse the yard documentation 
+* What is the purpose of comments? 
+    * Do we want to follow the yard/rdoc style we're already using within the aquarium code itself?
+    * Right now we have comments that say things like " # This method tells the technician to set up the power supply." followed by a show block with title "set up power supply". 
+
+* Can be useful for explaining details of a calculation, that kind of thing. 
+
+* Related -- What is the purpose of titles?
+    * Titles should not contain actual protocol steps 
+    * (e.g. "prep thing" and then the steps, rather then "Add 20ml of x to y".)  
+
+## Dividing into methods
+
+* Ideally, the main method of the protocol will only call methods, either built in aquarium methods (`retrieve`, `store`) or else methods you define.
+
+* If the title of the method isn't self-explanatory, you might want to comment on what it does when you call it (though ideally, it'd be self explantory).
+* The main method should be at the top of the class, defined methods underneath. 
+* `prepare_stripwells` `save_order_data`
+* Good example protocol: Cloning/Make Glycerol Stock 
+
+## Calling methods 
+
+* Ruby style is usually to leave out parentheses in method calls unless they're are arguments. 
+* For our purposes, it would be better if methods were called with parentheses regardless of whether or not they take arguements.
+`get_protocol_feedback()`
+`gather_enzymes(composition: composition)`
+* Ruby style (and our style) is to use parens in method definitions if you have parameters:  
+* `def image_gel gel, image_name` as opposed to `def image_gel(gel, image_name)`
+* Arguments -- always use keyword arguments?
+
+## Libraries
+* Ones that use units library -- well, ones that site it anyway!: 
+* Cloning/Run Gel', 'Cloning/Assemble Golden Gate','Cloning/Stitch by Overlap Extension',
+* Yeast/Streak Plate', 'Yeast/Fragment Analyzing', 'Yeast/Yeast Mating', Yeast/Y-PER DNA Extraction',
+* 'Next Gen Prep/Digest Genomic DNA', 'Next Gen Prep/Yeast Plasmid Extraction',  'Next Gen Prep/Run Pre-poured Gel',
+* 'Next Gen Prep/KAPA Pure Beads',  'High Throughput Culturing/Make Glycerol Stock Plates'] 
 * Use ones we already have (e.g. Units library).
 * Use libraries rather than copy pasting code from libraries into protocol.
 * If you're pasting a lot from another protocol, make a library. 
