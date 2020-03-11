@@ -15,18 +15,20 @@ Some of things Rubocop will check for:
 We will mainly (with a few exceptions) follow the guidelines described in the rubocop [Ruby Style Guide]
 `https://github.com/rubocop-hq/ruby-style-guide`, or, in a more readable [version]`https://rubystyle.guide/`
 
-* Naming: snake_case for method/function names: e.g. `sort_cells` instead of `sortCells` and 
-* Indentation: use spaces (not tabs). Two spaces per tab. 
-* One empty line between methods
-* Line Length: Keep under 80 characters in a line. 
-    - This issue shows up quite a bit for show blocks, where it is natural to make long strings for instructions.
-    - It is possible to write a string across multiple lines using a backslash to break up lines:
+### Naming
+    * snake_case for variable, method, and function names: e.g. `sort_cells` instead of `sortCells`  
+    * CamelCase for class and module names `module StripwellMethods` 
 
+### Spacing 
+    * Indentation: use spaces (not tabs). Two spaces per tab. 
+    * One empty line between methods
+    * Line Length: Keep under 80 characters in a line. 
+        - This issue shows up quite a bit for show blocks, where it is natural to make long strings for instructions.
+        - It is possible to write a string across multiple lines using a backslash to break up lines:
 ```
-check 'Put on new gloves and bring a new tip box (green: 10 - 100 µL), a pipettor (10 - 100 µL),'\
-       'and an Eppendorf tube rack to the M80 area.'
+check 'Put on new gloves and bring a new tip box (green: 10 - 100 µL), a pipettor (10 - 100 µL),' \
+      ' and an Eppendorf tube rack to the M80 area.'
 ```
-
 
 ## Headings
 
@@ -55,14 +57,13 @@ To that end, we'll want to add some information at the top of the page.
 ## Important notes. 
 * Not sure where to put these now -- don't really work in the docs, but it would be nice to not have huge commented out notes.
 
-
-
 ## Best Practices for Comments and Titles 
 solograph can parse the yard documentation 
 
 * What is the purpose of comments? 
     * Comments should do >>>>>
     * Comments should not just repeat what is in the title, or the name of the method. (Why not What).
+
     ```
     This method tells the technician to set up the power supply
     ``` 
@@ -101,14 +102,28 @@ end
 * `prepare_stripwells` `save_order_data`
 * Good example protocol: Cloning/Make Glycerol Stock 
 
-## Calling methods 
+## Defining and Calling methods 
 
-* Ruby style is usually to leave out parentheses in method calls unless they're are arguments. 
-* For our purposes, it would be better if methods were called with parentheses regardless of whether or not they take arguements.
-`get_protocol_feedback()`
+* Ruby style is usually to leave out parentheses in method calls unless there called with arguments. 
+* For our purposes, always use with parentheses regardless of whether or not they take arguements.
+`get_protocol_feedback()` instead of `get_protocol_feedback`
+
 `gather_enzymes(composition: composition)`
-* Ruby style (and our style) is to use parens in method definitions if you have parameters:  
-* `def image_gel gel, image_name` as opposed to `def image_gel(gel, image_name)`
+
+* Use parentheses in method definitions that take parameters:  
+ ```
+    def image_gel gel(gel, image_name)
+        do something with gel and image_name 
+    end 
+ ```
+
+* Ruby will let you set the paramenters without parentheses, but it's difficult to read, so always use the parentheses.
+``` 
+    def image_gel gel, image_name
+        do something with gel and image_name 
+    end
+```
+
 * Arguments -- always use keyword arguments?
 
 ## Libraries
