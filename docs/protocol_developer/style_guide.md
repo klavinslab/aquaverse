@@ -11,7 +11,9 @@ This will also allow you to use rubocop(with solograph), which will help with ke
 [Rubocop]https://rubocop.readthedocs.io/en/latest/
 
 Some of things Rubocop will check for:
+    
 
+For more information on Ruby style in general: `https://github.com/rubocop-hq/ruby-style-guide`
 
 ## Headings
 
@@ -40,30 +42,43 @@ To that end, we'll want to add some information at the top of the page.
 ## Important notes. 
 * Not sure where to put these now -- don't really work in the docs, but it would be nice to not have huge commented out notes.
 
-## Cleaning up the Cruft 
-* Leaving in commented code can make protocols difficult to read/edit. 
-* If you are removing text, don't just comment it out. If you think someone might want to use it again, you can make a note at the top of the protocol withthe verison number in which you removed it.
 
-## Repeat some points from the general Ruby style guide?
-
-* Also -- we can only use rubocop for changing the aquarium code -- not for protocols I assume? -- if you use Nemo?
-* The most relevant things from that lengthy document. 
-* I know we have rubocop, and the ruby style guide, but pointing out the conventions we're sticking with could be useful. 
-`https://github.com/rubocop-hq/ruby-style-guide`
 
 ## Best Practices for Comments and Titles 
 solograph can parse the yard documentation 
 
 * What is the purpose of comments? 
-    * Do we want to follow the yard/rdoc style we're already using within the aquarium code itself?
-    * Right now we have comments that say things like " # This method tells the technician to set up the power supply." followed by a show block with title "set up power supply". 
+    * Comments should do >>>>>
+    * Comments should not just repeat what is in the title, or the name of the method. (Why not What).
+    ```
+    This method tells the technician to set up the power supply
+    ``` 
+    * We'll follow the yard/rdoc style we're already using within the aquarium code 
+    * "# This method tells the technician to set up the power supply."
 
 * Can be useful for explaining details of a calculation, that kind of thing. 
 
-* Related -- What is the purpose of titles?
-    * Titles should not contain actual protocol steps 
-    * (e.g. "prep thing" and then the steps, rather then "Add 20ml of x to y".)  
+## Cleaning up the Cruft 
+* Leaving in commented code can make protocols difficult to read/edit. 
+* If you are removing text, don't just comment it out. If you think someone might want to use it again, you can make a note at the top of the protocol withthe verison number in which you removed it.
 
+## Show block titles 
+* Titles should describe the overall purpose of the block. They should not contain specific details. 
+``` 
+show do 
+    title   'Wash Columns' 
+    check   'Add 2ul PE buffer and wait 5 minutes' 
+end
+```
+not: 
+```
+show do 
+    title   'Wash columns with 2ul PE buffer' 
+    check   'Add buffer and wait five minutes' 
+end 
+```
+
+## Protocol Structure 
 ## Dividing into methods
 
 * Ideally, the main method of the protocol will only call methods, either built in aquarium methods (`retrieve`, `store`) or else methods you define.
