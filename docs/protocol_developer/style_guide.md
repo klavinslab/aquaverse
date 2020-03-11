@@ -11,9 +11,22 @@ This will also allow you to use rubocop(with solograph), which will help with ke
 [Rubocop]https://rubocop.readthedocs.io/en/latest/
 
 Some of things Rubocop will check for:
-    
 
-For more information on Ruby style in general: `https://github.com/rubocop-hq/ruby-style-guide`
+We will mainly (with a few exceptions) follow the guidelines described in the rubocop [Ruby Style Guide]
+`https://github.com/rubocop-hq/ruby-style-guide`, or, in a more readable [version]`https://rubystyle.guide/`
+
+* Naming: snake_case for method/function names: e.g. `sort_cells` instead of `sortCells` and 
+* Indentation: use spaces (not tabs). Two spaces per tab. 
+* One empty line between methods
+* Line Length: Keep under 80 characters in a line. 
+    - This issue shows up quite a bit for show blocks, where it is natural to make long strings for instructions.
+    - It is possible to write a string across multiple lines using a backslash to break up lines:
+
+```
+check 'Put on new gloves and bring a new tip box (green: 10 - 100 µL), a pipettor (10 - 100 µL),'\
+       'and an Eppendorf tube rack to the M80 area.'
+```
+
 
 ## Headings
 
