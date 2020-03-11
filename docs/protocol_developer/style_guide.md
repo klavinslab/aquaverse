@@ -1,18 +1,41 @@
 # Protocol Style Guide
 
+## The Audience 
+
+Protocols will be written (and possibly adapted by) other programmers; maintaining a consistent style will make it easier to read and adapt protocols. 
+
+## Nemo 
+
+Working on protocols will be a lot easier using the VS Code [Nemo Extension](https://github.com/klavinslab/nemo), which allows you to work in a regular text editor and then push the code to Aquarium 
+This will also allow you to use rubocop(with solograph), which will help with keeping a consistent style.
+[Rubocop]https://rubocop.readthedocs.io/en/latest/
+
+Some of things Rubocop will check for:
+
+
 ## Headings
 
-* Since we don't have a git like system for version control, we want to create a record of who worked on what 
-* If you are writing a new protocol, include your name and the date at the top. 
-`Written by Grace Hopper -- Date`
-* If you are making significant changes a protocol, please also note your name and the date.
-`Revised by Ada Lovelace -- Date`
-* If you are making a major revision, add a note about what was revised. 
-`Revised by Marie Tharp -- Date -- Added new section, Deleted xyz, Changed important thing`
+Since we don't have a git like system for version control, we want to create a record of who worked on a protocol. We also want a record of any major changes.
+To that end, we'll want to add some information at the top of the page. 
+* If you're starting a new protocol: 
+* Include your name and the date at the top. 
+```
+# Extract Fragment Protocol
+# Written By Ayesha Saleem 2018-01-12
+```
+* If you are making significant changes, note your name, the date, and what was changed.  
+```
+# Extract Fragment Protocol
+# Written By Ayesha Saleem 2018-01-12
+# Revision: Justin Vrana, 2018-07-21 (refactored collection removal proceedure, added plasimd stock dilution)
+# Revision: Orlando do Lange, 2019-09-12 (Added precondition for when an input is a Ligation product)
+``` 
 
 ## Docs 
 * Include a short description of what the protocol is for.
+* `Runs a selected gel through gel electrophoresis` 
 * If it's part of a longer series, include what procedures generally come before or after. 
+* e.g. `Runs after Pour Gel and is a precursor to Extract Fragment.`
 
 ## Important notes. 
 * Not sure where to put these now -- don't really work in the docs, but it would be nice to not have huge commented out notes.
@@ -30,6 +53,7 @@
 
 ## Best Practices for Comments and Titles 
 solograph can parse the yard documentation 
+
 * What is the purpose of comments? 
     * Do we want to follow the yard/rdoc style we're already using within the aquarium code itself?
     * Right now we have comments that say things like " # This method tells the technician to set up the power supply." followed by a show block with title "set up power supply". 
@@ -60,12 +84,16 @@ solograph can parse the yard documentation
 * Arguments -- always use keyword arguments?
 
 ## Libraries
+We have code in some protocols that can probably be used in another. However, we don't want to do to much copypasting.
+If you find you are going to copy paste quite a bit from an existing protocol, make a library instead and import it.
+
+* Use ones we already have (e.g. Units library). (Link to some other yet to exist document)
+
 * Ones that use units library -- well, ones that site it anyway!: 
 * Cloning/Run Gel', 'Cloning/Assemble Golden Gate','Cloning/Stitch by Overlap Extension',
 * Yeast/Streak Plate', 'Yeast/Fragment Analyzing', 'Yeast/Yeast Mating', Yeast/Y-PER DNA Extraction',
 * 'Next Gen Prep/Digest Genomic DNA', 'Next Gen Prep/Yeast Plasmid Extraction',  'Next Gen Prep/Run Pre-poured Gel',
 * 'Next Gen Prep/KAPA Pure Beads',  'High Throughput Culturing/Make Glycerol Stock Plates'] 
-* Use ones we already have (e.g. Units library).
 * Use libraries rather than copy pasting code from libraries into protocol.
 * If you're pasting a lot from another protocol, make a library. 
 * Put libraries where they belong (i.e., if it's a general library, it shouldn't be in a specific section)
