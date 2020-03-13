@@ -7,11 +7,11 @@ Protocols will be written (and possibly adapted by) other programmers; maintaini
 ## What is Nemo and why would I use it?
 
 The VS Code [Nemo Extension](https://github.com/klavinslab/nemo) allows you to work in a regular text editor and then push the code to Aquarium 
-This also allows you to use [Rubocop](https://rubocop.readthedocs.io/en/latest/), a linter and ruby style formatted. This will help with keeping a consistent style.
+This also allows you to use [Rubocop](https://rubocop.readthedocs.io/en/latest/), a linter and ruby style formatter. This will help with keeping a consistent style.
 
 ## Rubocop and Ruby Style
 
-We will mainly (with a few exceptions) follow the guidelines described in the rubocop [Ruby Style Guide](https://github.com/rubocop-hq/ruby-style-guide), or, in a [more readable version](https://rubystyle.guide/).
+We will mainly (with a few exceptions) follow the guidelines described in the rubocop [Ruby Style Guide](https://github.com/rubocop-hq/ruby-style-guide), or, [more readable version](https://rubystyle.guide/) here.
 
 ### Naming
 
@@ -51,9 +51,26 @@ check 'Put on new gloves and bring a new tip box (green: 10 - 100 µL), a pipett
     end
 ```
 
-* Arguments -- always use keyword arguments?
+* Keyword arguments are preferred. You can set them with or without defaults. 
 
-`gather_enzymes(composition: composition)`
+```
+    def set_primers(forward_primer:, reverse_primer:, samples: 1)
+      do something with forward_primer and reverse_primer  
+    end
+```
+
+* When you call the methods, you will assign values to the parameters like this: 
+```
+set_primers(forward_primer: 123, reverse_primer: 456) 
+```
+forward_primer will be set to 123, reverse_primer will be set to 456, samples will be set to 0) 
+
+or this: 
+```
+set_primers(forward_primer: 123, reverse_primer: 456, samples: 12) 
+```
+
+forward_primer will be set to 123, reverse_primer will be set to 456, samples will be set to 12) 
 
 ## Headings
 
@@ -72,6 +89,7 @@ Since we don't have a git like system for version control, we want to create and
 ``` 
 
 ## What to include in the Docs section of a protocol 
+
 * Include a short description of what the protocol is for.
 ```
 Runs a selected gel through gel electrophoresis
@@ -82,16 +100,13 @@ Runs a selected gel through gel electrophoresis
 Runs after Pour Gel and is a precursor to Extract Fragment.
 ```
 
-
 ## When to Comment (and when not to) 
 
 ### Documenting with Yarddoc 
 
-We use [Yarddoc](https://www.rubydoc.info/gems/yard/file/docs/GettingStarted.md) to generate documentation. 
+We use [YARD](https://www.rubydoc.info/gems/yard/file/docs/GettingStarted.md) to generate documentation. More often, though, people will be reading the comments along with your code, so readability is important.
 
-Though Yarddoc generates documentation automatically, most of the time, people will be reading them in your code. We want them to be easily readable.
-
-To document methods and classes for use with Yarddoc, the first line of the comment should briefly describe the purpose of the method and should be written in the third person. This should be followed by a blank line. If the method takes parameters, returns something, or raises exceptions, that line will be followed by information about those things.
+To document methods and classes for use with YARD, the first line of the comment should briefly describe the purpose of the method and should be written in the third person. This should be followed by a blank line. If the method takes parameters, returns something, or raises exceptions, that line will be followed by information about those things.
 
 ```
 # Perform the Streak Plate Protocol for a single operation
@@ -104,20 +119,22 @@ end
  
 ### Scientific Comments
 
-Since protocols are written for use by scientists, you will sometimes want to add comment that gives technical details about a procedure or calculation.
+You will sometimes want to add comment that gives technical details about a procedure or calculation.
 * Within a method
+
         ```
         # Set the masses of DNA to be used for each operation. 
         
         ratio = op.input("Insert:Backbone").val
         total_ng = op.input("Total_DNA_ng").val
-        insert_amount = ratio[0].to_i
 
         ... many more lines omitted here 
 
         op.output("Plasmid").item.associate :concentration, (total_ng / total_µl)
         ```
+
 * In line 
+
         ```
         BUFFER_VOL = 10 # vol of buffer in each ligase buffer aliquot
         (though in this case you could just call the variable BUFFER_VOL_PER_ALIQUOT
@@ -128,7 +145,8 @@ Since protocols are written for use by scientists, you will sometimes want to ad
 * If there is something you need to come back to later, or fix upon getting updated information, you can make a comment starting with #TODO
 
 ### Comments to Remove
-* Leaving in commented code can make protocols difficult to read/edit.
+
+* Leaving in commented code makes protocols difficult to read/edit.
 * If you are removing text, don't just comment it out. If you think someone might want to use it again, you can make a note at the top of the protocol with the version number from which you removed it. We keep records of all versions in our database.
 * If you are starting a new protocol, please delete the boilerplate at the top (the text that starts with "This is a default...")
 * If you made comments to help yourself while writing (e.g., marking which 'end' goes with what), please remove those as well. 
@@ -163,12 +181,7 @@ end
 ```
 
 ## Libraries
-We have code in some protocols that can probably be used in another. We would like to minimize duplicated code. One way we can do this is by using libraries. If you are going to reuse a substantial amount of code, either make a library for it, or add it to one of our existing libraries.
+We have code in some protocols that can probably be used in others. We would like to minimize duplicated code. One way we can do this is by using libraries. If you are going to reuse a substantial amount of code, either make a library for it, or add it to one of our existing libraries.
 
-* Use ones we already have (e.g. Units library). (Link to some other yet to exist document)
+* If you are creating a new library, put it in the correct category (i.e., if you're protocol is in plantwork, your library should probably be as well.)
 
-* Put libraries where they belong (i.e., if it's a general library, it shouldn't be in a specific section)
-* If you're largely referring to code from libraries in one category, your protocol should probably be in that category too.
-
-## Important notes. 
-* Not sure where to put these now -- don't really work in the docs, but it would be nice to not have huge commented out notes.
