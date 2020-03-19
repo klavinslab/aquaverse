@@ -4,10 +4,10 @@ Aquarium has a Developer tab that provides an integrated development environment
 
 ## Working in Aquarium
 
-The Developer tab provides the IDE for developing new operation types in Aquarium.
+The Developer tab provides an Integrated Development Environment (IDE) for developing new operation types in Aquarium.
 Clicking on the Developer tab in Aquarium brings you to a view similar to the one pictured below.
-On the left is a list of operation types and libraries in your instance of Aquarium organized by category,
-and the right pane is the operation type definition view.
+On the left is a list of operation types and libraries in your instance of Aquarium, organized by category.
+The right pane is the operation type definition view.
 When you open the tab, the definition for the first operation type in the first category is displayed; in this case, the `Make PCR Fragment` operation type from the UW BIOFAB's `Cloning` category.
 
 <img src="docs/protocol_developer/images/developer_tab.png"
@@ -53,7 +53,7 @@ A default precondition that always returns `true` is created for new operation t
 
 ### Adding Cost Information 
 
-The **Cost** tab shows the cost model for the operation type, which is function taking an `Operation`.
+The **Cost** tab shows the cost model for the operation type, which is a function taking an `Operation`.
 This function returns a hash with costs associated with the `labor` and `materials` keys.
 The default function added for new operation types returns zero for both.
 
@@ -64,7 +64,7 @@ The default function added for new operation types returns zero for both.
 ### Creating Documentation 
 
 The **Docs** tab shows another editor, but this time for documentation, written in Markdown, for the operation type.
-This documentation will be displayed to the user when the click on operations of this type in the Designer.
+This documentation will be displayed to the user when they click on operations of this type in the Designer.
 The documentation will also be used to generate workflow documentation if you publish your workflow
 with Aquarium's <a href="#" onclick="select('Community','Exporting')">Export</a> tool.
 
@@ -72,7 +72,7 @@ with Aquarium's <a href="#" onclick="select('Community','Exporting')">Export</a>
      alt="docs tab"
      style="max-width: 500px">
 
-### Setting a Time to Run operations of this Type 
+### Setting a Regular Time to Run the Operation  
 
 The **Timing** tab indicates when the operation type should be run in the lab.
 
