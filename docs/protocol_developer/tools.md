@@ -21,12 +21,16 @@ Clicking on the name of a library or operation type will open its definition in 
      alt="category list"
      style="max-width: 200px">
 
+### Creating a New Operation Type 
+
 Clicking on `New` creates a new operation type (`New Lib` creates a new library), and opens the definition view.
 This allows you to set the operation type and category type names.
 
 <img src="docs/protocol_developer/images/definition_tab.png"
      alt="definition tab"
      max-width="400px">
+
+### Editing an Operation Type 
 
 Clicking on the **Protocol** tab opens the protocol editor.
 For a new operation type, a default protocol is added to the editor when you first open it.
@@ -38,12 +42,16 @@ For a new operation type, a default protocol is added to the editor when you fir
 
 Be sure to click **Save** at the bottom of the page before switching from the Developer tab.
 
+### Setting Preconditions 
+
 Clicking on the **Pre** tab shows the precondition for the operation type in a new editor.
 A default precondition that always returns `true` is created for new operation types.
 
 <img src="docs/protocol_developer/images/pre_tab.png"
      alt="precondition tab"
      style="max-width: 500px">
+
+### Adding Cost Information 
 
 The **Cost** tab shows the cost model for the operation type, which is function taking an `Operation`.
 This function returns a hash with costs associated with the `labor` and `materials` keys.
@@ -52,6 +60,8 @@ The default function added for new operation types returns zero for both.
 <img src="docs/protocol_developer/images/cost_tab.png"
      alt="cost tab"
      style="max-width: 500px">
+
+### Creating Documentation 
 
 The **Docs** tab shows another editor, but this time for documentation, written in Markdown, for the operation type.
 This documentation will be displayed to the user when the click on operations of this type in the Designer.
@@ -62,11 +72,15 @@ with Aquarium's <a href="#" onclick="select('Community','Exporting')">Export</a>
      alt="docs tab"
      style="max-width: 500px">
 
+### Setting a Time to Run operations of this Type 
+
 The **Timing** tab indicates when the operation type should be run in the lab.
 
 <img src="docs/protocol_developer/images/timing_tab.png"
      alt="timing tab"
     style="max-width: 500px">
+
+### Testing the Protocol 
 
 The **Test** tab provides a way to run a quick test with the protocol.
 To run a test, specify the `Batch Size`, the number of operations to batch, click **Generate Operations** and then **Test**.
