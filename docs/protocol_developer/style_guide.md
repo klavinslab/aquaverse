@@ -3,10 +3,9 @@
 While we write protocols to run in the lab, protocol code should be written to be read and adapted by other programmers.
 Maintaining a consistent style will make it easier to read and adapt protocols.
 
-## What is Nemo and why would I use it?
+## What tools are availble for writing protocols?
 
-The VS Code Extension [Nemo](https://github.com/klavinslab/nemo) allows you to work in a regular text editor and then push the code to Aquarium.
-This also allows you to use [Rubocop](https://rubocop.readthedocs.io/en/latest/), a linter and ruby style formatter, which will help with keeping a consistent style.
+You can write protocols either directly within Aquarium or by using the VS Code Extension. Both tools are described <a href="#" onclick="select('Protocols', 'Developer Tools')">here</a>
 
 ## Rubocop and Ruby Style
 
@@ -202,4 +201,3 @@ Ideally, the main method of the protocol will only call methods, either built-in
 We have code in some protocols that can probably be used in others. We would like to minimize duplicated code. One way we can do this is by using libraries. If you are going to reuse a substantial amount of code, either make a library for it, or add it to one of our existing libraries.
 
 * If you are creating a new library, put it in the correct category (i.e., if you're protocol is in plantwork, your library should probably be as well.)
-

@@ -1,13 +1,13 @@
 # Developer Tools
 
-Aquarium has a Developer tab that provides an integrated development environment (IDE) for creating and editing new protocols. Specifically, to define a new protocol, a developers creates an _operation type_ that includes the code for the protocol along with several other components, described below.
+Aquarium has a Developer tab that provides an integrated development environment (IDE) for creating and editing new protocols. Specifically, to define a new protocol, a developer creates an _operation type_ that includes the code for the protocol along with several other components, described below.
 
 ## Working in Aquarium
 
-The Developer tab provides an Integrated Development Environment (IDE) for developing new operation types in Aquarium.
-Clicking on the Developer tab in Aquarium brings you to a view similar to the one pictured below.
-On the left is a list of operation types and libraries in your instance of Aquarium, organized by category.
-The right pane is the operation type definition view.
+The Developer tab provides an IDE for developing new operation types in Aquarium.
+Clicking on the Developer tab brings you to a view similar to the one pictured below.
+On the left is a list of the operation types and libraries in your instance of Aquarium, organized by category.
+On the right is the operation type definition view.
 When you open the tab, the definition for the first operation type in the first category is displayed; in this case, the `Make PCR Fragment` operation type from the UW BIOFAB's `Cloning` category.
 
 <img src="docs/protocol_developer/images/developer_tab.png"
@@ -30,7 +30,7 @@ This allows you to set the operation type and category type names.
      alt="definition tab"
      max-width="400px">
 
-### Editing an Operation Type 
+### Editing an Operation Type
 
 Clicking on the **Protocol** tab opens the protocol editor.
 For a new operation type, a default protocol is added to the editor when you first open it.
@@ -42,7 +42,7 @@ For a new operation type, a default protocol is added to the editor when you fir
 
 Be sure to click **Save** at the bottom of the page before switching from the Developer tab.
 
-### Setting Preconditions 
+### Setting Preconditions
 
 Clicking on the **Pre** tab shows the precondition for the operation type in a new editor.
 A default precondition that always returns `true` is created for new operation types.
@@ -51,7 +51,7 @@ A default precondition that always returns `true` is created for new operation t
      alt="precondition tab"
      style="max-width: 500px">
 
-### Adding Cost Information 
+### Adding Cost Information
 
 The **Cost** tab shows the cost model for the operation type, which is a function taking an `Operation`.
 This function returns a hash with costs associated with the `labor` and `materials` keys.
@@ -101,5 +101,3 @@ If you use the VS Code Extension, [Nemo](https://github.com/klavinslab/nemo), yo
 This allows you to use tools such as [Rubocop](https://rubocop.readthedocs.io/en/latest/) to check for issues in your protocol code.
 
 If you would like to use a different text editor, you will need to cut and paste the whole protocol or library code between the Aquarium developer's page and your text editor.
-
-
