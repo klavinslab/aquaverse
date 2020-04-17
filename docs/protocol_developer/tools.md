@@ -21,7 +21,7 @@ Clicking on the name of a library or operation type will open its definition in 
      alt="category list"
      style="max-width: 200px">
 
-### Creating a New Operation Type 
+### Creating a New Operation Type
 
 Clicking on `New` creates a new operation type (`New Lib` creates a new library), and opens the definition view.
 This allows you to set the operation type and category type names.
@@ -61,7 +61,7 @@ The default function added for new operation types returns zero for both.
      alt="cost tab"
      style="max-width: 500px">
 
-### Creating Documentation 
+### Creating Documentation
 
 The **Docs** tab shows another editor, but this time for documentation, written in Markdown, for the operation type.
 This documentation will be displayed to the user when they click on operations of this type in the Designer.
@@ -72,7 +72,7 @@ with Aquarium's <a href="#" onclick="select('Community','Exporting')">Export</a>
      alt="docs tab"
      style="max-width: 500px">
 
-### Setting a Regular Time to Run the Operation  
+### Setting a Regular Time to Run the Operation
 
 The **Timing** tab indicates when the operation type should be run in the lab.
 
@@ -80,7 +80,7 @@ The **Timing** tab indicates when the operation type should be run in the lab.
      alt="timing tab"
     style="max-width: 500px">
 
-### Testing the Protocol 
+### Testing the Protocol
 
 The **Test** tab provides a way to run a quick test with the protocol.
 To run a test, specify the `Batch Size`, the number of operations to batch, click **Generate Operations** and then **Test**.
