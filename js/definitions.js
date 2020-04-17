@@ -158,6 +158,11 @@ var config = {
           path: "docs/protocol_developer/tools.md"
         },
         {
+          name: "Protocol Style Guide",
+          type: "local-md",
+          path: "docs/protocol_developer/style_guide.md"
+        },
+        {
           name: "Detailed API Reference",
           type: "local-md",
           path: "api.md"
