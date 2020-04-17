@@ -3,7 +3,7 @@
 While we write protocols to run in the lab, protocol code should be written to be read and adapted by other programmers.
 Maintaining a consistent style will make it easier to read and adapt protocols.
 
-## What tools are availble for writing protocols?
+## What tools are available for writing protocols?
 
 You can write protocols either directly within Aquarium or by using the VS Code Extension. Both tools are described <a href="#" onclick="select('Protocols', 'Developer Tools')">here</a>
 
@@ -173,7 +173,7 @@ You will sometimes want to add comment that gives technical details about a proc
 Ideally, the main method of the protocol will only call methods, either built-in aquarium methods (`retrieve`, `store`) or else methods you define.
 
 - The main method should be at the top of the class, defined methods underneath.
-- If the title of a method isn't self-explanatory, you might want to comment on what it does when you call it (though ideally, it'd be self explantory, e.g. `prepare_stripwells`, `save_order_data`).
+- If the title of a method isn't self-explanatory, you might want to comment on what it does when you call it (though ideally, it'd be self explanatory, e.g. `prepare_stripwells`, `save_order_data`).
 
 ## Show Block Titles
 
