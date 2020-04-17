@@ -1,13 +1,13 @@
 # Developer Tools
 
-Aquarium has a Developer tab that provides an integrated development environment (IDE) for creating and editing new protocols. Specifically, to define a new protocol, a developers creates an _operation type_ that includes the code for the protocol along with several other components, described below.
+Aquarium has a Developer tab that provides an integrated development environment (IDE) for creating and editing new protocols. Specifically, to define a new protocol, a developer creates an _operation type_ that includes the code for the protocol along with several other components, described below.
 
 ## Working in Aquarium
 
-The Developer tab provides the IDE for developing new operation types in Aquarium.
-Clicking on the Developer tab in Aquarium brings you to a view similar to the one pictured below.
-On the left is a list of operation types and libraries in your instance of Aquarium organized by category,
-and the right pane is the operation type definition view.
+The Developer tab provides an IDE for developing new operation types in Aquarium.
+Clicking on the Developer tab brings you to a view similar to the one pictured below.
+On the left is a list of the operation types and libraries in your instance of Aquarium, organized by category.
+On the right is the operation type definition view.
 When you open the tab, the definition for the first operation type in the first category is displayed; in this case, the `Make PCR Fragment` operation type from the UW BIOFAB's `Cloning` category.
 
 <img src="docs/protocol_developer/images/developer_tab.png"
@@ -21,12 +21,16 @@ Clicking on the name of a library or operation type will open its definition in 
      alt="category list"
      style="max-width: 200px">
 
+### Creating a New Operation Type
+
 Clicking on `New` creates a new operation type (`New Lib` creates a new library), and opens the definition view.
 This allows you to set the operation type and category type names.
 
 <img src="docs/protocol_developer/images/definition_tab.png"
      alt="definition tab"
      max-width="400px">
+
+### Editing an Operation Type
 
 Clicking on the **Protocol** tab opens the protocol editor.
 For a new operation type, a default protocol is added to the editor when you first open it.
@@ -38,6 +42,8 @@ For a new operation type, a default protocol is added to the editor when you fir
 
 Be sure to click **Save** at the bottom of the page before switching from the Developer tab.
 
+### Setting Preconditions
+
 Clicking on the **Pre** tab shows the precondition for the operation type in a new editor.
 A default precondition that always returns `true` is created for new operation types.
 
@@ -45,7 +51,9 @@ A default precondition that always returns `true` is created for new operation t
      alt="precondition tab"
      style="max-width: 500px">
 
-The **Cost** tab shows the cost model for the operation type, which is function taking an `Operation`.
+### Adding Cost Information
+
+The **Cost** tab shows the cost model for the operation type, which is a function taking an `Operation`.
 This function returns a hash with costs associated with the `labor` and `materials` keys.
 The default function added for new operation types returns zero for both.
 
@@ -53,8 +61,10 @@ The default function added for new operation types returns zero for both.
      alt="cost tab"
      style="max-width: 500px">
 
+### Creating Documentation
+
 The **Docs** tab shows another editor, but this time for documentation, written in Markdown, for the operation type.
-This documentation will be displayed to the user when the click on operations of this type in the Designer.
+This documentation will be displayed to the user when they click on operations of this type in the Designer.
 The documentation will also be used to generate workflow documentation if you publish your workflow
 with Aquarium's <a href="#" onclick="select('Community','Exporting')">Export</a> tool.
 
@@ -62,11 +72,15 @@ with Aquarium's <a href="#" onclick="select('Community','Exporting')">Export</a>
      alt="docs tab"
      style="max-width: 500px">
 
+### Setting a Regular Time to Run the Operation
+
 The **Timing** tab indicates when the operation type should be run in the lab.
 
 <img src="docs/protocol_developer/images/timing_tab.png"
      alt="timing tab"
     style="max-width: 500px">
+
+### Testing the Protocol
 
 The **Test** tab provides a way to run a quick test with the protocol.
 To run a test, specify the `Batch Size`, the number of operations to batch, click **Generate Operations** and then **Test**.
@@ -82,8 +96,8 @@ and use up item numbers.
 ## Working with External Tools
 
 Because Aquarium protocols are written in a Ruby DSL, you can edit protocols outside of Aquarium and copy them in.
-This allows you to use an editor that you are comfortable with, and also use tools such as [Rubocop](https://rubocop.readthedocs.io/en/latest/) to check for issues in your protocol code.
-Some developers simply cut and paste the whole protocol or library code between the Aquarium and external editors.
 
-The [Parrotfish](https://github.com/klavinslab/parrotfish) tools currently being developed make this a little easier,
-allowing protocols to be pushed and pulled from an Aquarium instance using the command line.
+If you use the VS Code Extension, [Nemo](https://github.com/klavinslab/nemo), you can work in VS Code and pull and push protocols directly from/to aquarium.
+This allows you to use tools such as [Rubocop](https://rubocop.readthedocs.io/en/latest/) to check for issues in your protocol code.
+
+If you would like to use a different text editor, you will need to cut and paste the whole protocol or library code between the Aquarium developer's page and your text editor.

@@ -71,8 +71,8 @@ Many show blocks are composed mostly of a single `title` call, and one or more `
 
 ```ruby
     show do
-      title "Grab 1.5 mL tubes"
-      note "Grab #{operations.length} 1.5 mL tubes"
+      title "Retrieve 1.5 mL tubes"
+      note "Retrieve #{operations.length} 1.5 mL tubes"
     end
 ```
 
@@ -109,11 +109,11 @@ For instance, we could modify our earlier show block to give different instructi
 
 ```ruby
     show do
-      title "Grab 1.5 mL tubes"
+      title "Retrieve 1.5 mL tubes"
       if operations.length > 50
         note "Go to the storeroom and bring back #{operations.length} 1.5 mL tubes to bench"
       end
-      note "Grab #{operations.length} 1.5 mL tubes from bench"
+      note "Retrieve #{operations.length} 1.5 mL tubes from bench"
     end
 ```
 
@@ -123,9 +123,9 @@ We can achieve quite customized behavior by using Ruby code inside show blocks. 
 
 ```ruby
     show do
-      title "Grab 1.5 mL tubes"
+      title "Retrieve 1.5 mL tubes"
       operations.each do |op|
-        check "Grab a tube for operation: #{op.id}"
+        check "Retrieve a tube for operation: #{op.id}"
       end
     end
 ```
