@@ -26,7 +26,7 @@ The most definitive way to find the latest release is to check the
     Aquarium Releases
 </a>
 ,
-take note of the latest tag number (e.g., v2.7.2), and then checkout the branch for that patch level
+take note of the latest tag number (e.g., v2.7.2), and then checkout the branch for that patch level.
 For instance, if the desired tag is `v2.7.2` run the commands
 
 ```bash

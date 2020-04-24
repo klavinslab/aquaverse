@@ -18,11 +18,7 @@ To run Aquarium in production with Docker on your computer:
 
 1.  Install [Docker](https://www.docker.com/get-started) on your computer.
 
-2.  <a href="#" onclick="select('Getting Started','Getting Aquarium')">
-    Get the Aquarium source
-    </a>
-     using the 
-     [aquarium-local](https://github.com/klavinslab/aquarium-local)
+2.  Get  [aquarium-local](https://github.com/klavinslab/aquarium-local)
 
 3.  Build the docker images. Change into the `aquarium` directory
 

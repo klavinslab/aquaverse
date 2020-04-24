@@ -2,7 +2,7 @@
 
 These instructions are for you if your goal is to run Aquarium in production mode with many users.
 
-There are essentially three strategies for deploying Aquarium:
+There are three strategies for deploying Aquarium:
 
 1. use the Docker image [aquariumbio/aquarium](https://hub.docker.com/repository/docker/aquariumbio/aquarium),
 2. build your own Docker image from the [Aquarium repository](https://github.com/klavinslab/aquarium), and
@@ -16,7 +16,7 @@ The third is for zealots who should feel free to use the Aquarium Dockerfile as 
 ## Deployment Alternatives
 
 A basic Aquarium deployment consists of the Aquarium service, a database, an object-store, an image server, and a web-server.
-A deployments may also have an email service.
+A deployment may also have an email service.
 
 <img src="docs/installation/images/aquarium-config.png"
      alt="An Aquarium deployment also includes a database, object-store and web-server"
@@ -33,7 +33,7 @@ As an example, the UW BIOFAB runs Aquarium on Amazon Web Services using AWS RDS 
 
 This configuration takes advantage of existing AWS services with managed data backups.
 
-For protocol development, we want run Aquarium on our laptops.
+For protocol development, we run Aquarium on our laptops.
 For this purpose, the [local deployment](http://klavinslab.org/aquarium-local/) builds a fully-contained Docker container using nginx as the web-server, MySQL as the database service, and minio for both object-store and image server; but no email service.
 
 <img src="docs/installation/images/local-aquarium.png"
