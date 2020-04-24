@@ -15,4 +15,9 @@
 - <a href="#" onclick="select('Protocols', 'Show Blocks')">Show blocks</a>
 - <a href="#" onclick="select('Protocols', 'Building Tables')">Tables</a>
 
+## Tools
+
+- <a href="#" onclick="select('Protocols', 'Tools')">Development Tools</a>
+- <a href="#" onclick="select('Protocols', 'Style Guide')">Style Guide</a>
+
 ## <a href="#" onclick="select('Protocols', 'Detailed API Reference')">API Reference</a>

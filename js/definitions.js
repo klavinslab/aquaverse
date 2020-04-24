@@ -1,7 +1,12 @@
 var config = {
   tagline: "The Laboratory</br>Operating System",
   get_releases: true,
-  workflows: ["/klavinslab/test-workflow","/dvnstrcklnd/aq-sample-models"],
+  workflows: [
+    "/klavinslab/test-workflow",
+    "/dvnstrcklnd/aq-sample-models",
+    "/dvnstrcklnd/aq-pcr-models",
+    "/dvnstrcklnd/aq-yeast-display"
+  ],
   copyright:
     "Aquarium Web Page and Documentation Copyright © 2018 University of Washington",
   nextprev: true,
@@ -151,6 +156,11 @@ var config = {
           name: "Developer Tools",
           type: "local-md",
           path: "docs/protocol_developer/tools.md"
+        },
+        {
+          name: "Protocol Style Guide",
+          type: "local-md",
+          path: "docs/protocol_developer/style_guide.md"
         },
         {
           name: "Detailed API Reference",
