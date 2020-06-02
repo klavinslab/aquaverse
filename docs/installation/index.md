@@ -5,8 +5,7 @@
 Use a local deployment for protocol development and testing, or trying out the system.
 See [local deployment](https:github.com/klavinslab/aquarium-local) for instructions.
 
-If you are doing Aquarium development, see the developer documentation in the
-[Aquarium repository](https://github.com/klavinslab/aquarium) for instructions.
+If you are doing Aquarium development, see the <a href="http://klavinslab.org/aquarium/development/">developer documentation</a> for instructions.
 
 ## Production Deployment
 
@@ -18,8 +17,8 @@ There are three strategies for deploying Aquarium:
 3. run Aquarium without Docker.
 
 The first strategy should work in most scenarios, and is what is covered in this document.
-Choose the second if you need to modify Aquarium in ways that we haven't yet allowed through the interface; see the developer documentation in the [Aquarium repository](https://github.com/klavinslab/aquarium).
-The third is for people who want to bring Aquarium to life by the sweat of their brow –– the Dockerfile in the [Aquarium repository](https://github.com/klavinslab/aquarium) may be useful as a guide.
+Choose the second if you need to modify Aquarium in ways that we haven't yet allowed through the interface; see the <a href="http://klavinslab.org/aquarium/development/">developer documentation</a>.
+The third is for people who want to bring Aquarium to life by the sweat of their brow –– the commands for this are in the Dockerfile in the [Aquarium repository](https://github.com/klavinslab/aquarium).
 
 ### Deployment basics
 
@@ -40,7 +39,7 @@ And, so, in this case, the [local deployment](http://klavinslab.org/aquarium-loc
 
 ### Deployment with Local Services
 
-It is also possible to use these same local services for production deployment.
+It is also possible to use these same local services for a production deployment.
 The [multi-deployment](https://github.com/klavinslab/aquarium-multiple-deployment) configuration is similar to the local-deployment, but allows one or more instances of Aquarium to be run as named sites.
 
 <img src="docs/installation/images/multi-aquarium.png"
@@ -53,7 +52,7 @@ The nginx-proxy service also enables using https, which cannot be done with the 
 ### Deployment with External Services
 
 Another alternative is to use external services instead of local ones.
-For instance, the Aquarium deployments that inspired the multi-deployment configuration, use a single, separate minio service.
+For instance, the Aquarium deployments at TACC (UT Austin) that inspired the multi-deployment configuration, use a single, separate minio service.
 And, the UW BIOFAB runs Aquarium on Amazon Web Services using AWS RDS for the database service, AWS S3 as the object-store service, [nginx](http://nginx.org) as the web server, an image server, and AWS SES as the email service.
 
 <img src="docs/installation/images/aws-aquarium.png"
