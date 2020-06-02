@@ -34,26 +34,6 @@ var config = {
           name: "Installation",
           type: "local-md",
           path: "docs/installation/index.md"
-        },
-        {
-          name: "Getting Aquarium",
-          type: "local-md",
-          path: "docs/installation/getting-aquarium.md"
-        },
-        {
-          name: "Docker Installation",
-          type: "local-md",
-          path: "docs/installation/docker-installation.md"
-        },
-        {
-          name: "Manual Installation",
-          type: "local-md",
-          path: "docs/installation/manual-installation.md"
-        },
-        {
-          name: "Configuration",
-          type: "local-md",
-          path: "docs/installation/configuration.md"
         }
       ]
     },

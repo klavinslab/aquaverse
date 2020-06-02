@@ -8,7 +8,6 @@ See [local deployment](https:github.com/klavinslab/aquarium-local) for instructi
 If you are doing Aquarium development, see the developer documentation in the
 [Aquarium repository](https://github.com/klavinslab/aquarium) for instructions.
 
-
 ## Production Deployment
 
 Use a production deployment to run Aquarium for use by a lab.
@@ -20,19 +19,19 @@ There are three strategies for deploying Aquarium:
 
 The first strategy should work in most scenarios, and is what is covered in this document.
 Choose the second if you need to modify Aquarium in ways that we haven't yet allowed through the interface; see the developer documentation in the [Aquarium repository](https://github.com/klavinslab/aquarium).
-The third is for people who want to bring Aquarium to life by the sweat of their brow –– these people can use the Dockerfile in the [Aquarium repository](https://github.com/klavinslab/aquarium) as a guide.
+The third is for people who want to bring Aquarium to life by the sweat of their brow –– the Dockerfile in the [Aquarium repository](https://github.com/klavinslab/aquarium) may be useful as a guide.
 
 ### Deployment basics
 
 A basic Aquarium deployment consists of the Aquarium service, a database, an object-store, an image server, and a web-server.
-A deployments may also have an email service.
+A deployment may also have an email service.
 
 <img src="docs/installation/images/aquarium-config.png"
      alt="An Aquarium deployment also includes a database, object-store and web-server"
      width="30%">
 
 These services can be provided in different ways depending on your objectives and level of support.
-For instance, for protocol development, we want run Aquarium on our laptops.
+For instance, for protocol development, we run Aquarium on our laptops.
 And, so, in this case, the [local deployment](http://klavinslab.org/aquarium-local/) configuration builds a fully-contained Docker container using nginx as the web-server, MySQL as the database service, and minio for both object-store and image server; but without an email service.
 
 <img src="docs/installation/images/local-aquarium.png"
@@ -54,37 +53,11 @@ The nginx-proxy service also enables using https, which cannot be done with the 
 ### Deployment with External Services
 
 Another alternative is to use external services instead of local ones.
-For instance, the Aquarium deployments at TACC (UT Austin) that inspired the multi-deployment configuration, use a single, separate minio service.
-And, the UW BIOFAB runs Aquarium on Amazon Web Services using AWS RDS for the database service, AWS S3 as the object-store service,  [nginx](http://nginx.org) as the web server, an image server, and AWS SES as the email service.
+For instance, the Aquarium deployments that inspired the multi-deployment configuration, use a single, separate minio service.
+And, the UW BIOFAB runs Aquarium on Amazon Web Services using AWS RDS for the database service, AWS S3 as the object-store service, [nginx](http://nginx.org) as the web server, an image server, and AWS SES as the email service.
 
 <img src="docs/installation/images/aws-aquarium.png"
      alt="An Aquarium deployment on AWS can use S3 as the object-store, and RDS for the database service"
      width="50%">
 
 This configuration takes advantage of existing AWS services with managed data backups.
-
-## Recommendations
-
-We recommend that labs doing protocol development run at least two instances of Aquarium.
-The UW BIOFAB uses a staging server and a production server with each protocol developer running a local instance on a laptop.
-A _staging_ server is shared within the lab for the purposes of trying out protocols before shifting them to production, while the _production_ server actually controls the lab.
-We have traditionally used this arrangement in the Klavins lab to run the UW BIOFAB so that protocols can be evaluated without affecting the UW BIOFAB's inventory.
-It should also be possible to have the production server with individuals each using their own local instance for protocol development or evaluation.
-
-Using different instances of Aquarium is important because protocol testing can be disruptive.
-First, protocols may change the underlying database, which depending on the effects, could change the status of items that are in use in the lab.
-And, second, errors in protocols being tested can affect lab system performance and disrupt protocols underway.
-So, we highly recommend that protocol testing _not_ be done on a production server.
-
-Aquarium was developed to be used in a Unix&trade; environment.
-We have done just enough experimentation to know that the Windows Subsystem for Linux is sufficient to run Aquarium locally when used with the Docker Toolbox VM on Windows.
-We include instructions and scripts here based on that limited experience.
-
-Installation topics:
-- [Local Deployment](http://klavinslab.org/aquarium-local/)
-- <a href="#" onclick="select('Getting Started','Production Deployment')">
-    Production Deployment
-  </a>
-- <a href="#" onclick="select('Getting Started','Configuration')">
-    Configuration
-  </a>
