@@ -5,7 +5,7 @@
 Use a local deployment for protocol development and testing, or trying out the system.
 See [local deployment](https:github.com/klavinslab/aquarium-local) for instructions.
 
-If you are doing Aquarium development, see the <a href="http://klavinslab.org/aquarium/development/">developer documentation</a> for instructions.
+If you are doing Aquarium development, see the [developer documentation](http://klavinslab.org/aquarium/development/) for instructions.
 
 ## Production Deployment
 
@@ -17,7 +17,7 @@ There are three strategies for deploying Aquarium:
 3. run Aquarium without Docker.
 
 The first strategy should work in most scenarios, and is what is covered in this document.
-Choose the second if you need to modify Aquarium in ways that we haven't yet allowed through the interface; see the <a href="http://klavinslab.org/aquarium/development/">developer documentation</a>.
+Choose the second if you need to modify Aquarium in ways that we haven't yet allowed through the interface; see the [developer documentation](http://klavinslab.org/aquarium/development/).
 The third is for people who want to bring Aquarium to life by the sweat of their brow –– the commands for this are in the Dockerfile in the [Aquarium repository](https://github.com/klavinslab/aquarium).
 
 ### Deployment basics
