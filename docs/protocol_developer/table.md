@@ -2,7 +2,7 @@
 
 This is the documentation for generating and showing formatted `Tables`, for use in writing effective Aquarium protocols.
 This page will give examples and instructions on how to get started using `Tables`, but it is not a comprehensive reference for all `Table` related methods.
-See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
+See the [API documentation](http://aquariumbio.github.io/aquarium/api/) for more details on the functions that Krill provides.
 
 ---
 
@@ -233,7 +233,7 @@ See the <a href="#" onclick="select('Protocols', 'Show Blocks')">Show Block Docu
 When accepting any technician input, it can be useful to validate the input and make sure it is of an expected form. Most likely the workers of your own lab will not attempt to do a SQL injection attack from within a protocol (which would fail, by the way, due to Rails' protections against such attacks), but ensuring the input is valid before storing it or using it for calculations can resolve many potential errors caused by technician typos.
 
 Input validation is a more advanced concept, so we will not go into it here. See the
-[API documentation on `validate` and `validation_message` tabling methods](http://klavinslab.org/aquarium/api/Krill/OperationList.html#validate-instance_method)
+[API documentation on `validate` and `validation_message` tabling methods](http://aquariumbio.github.io/aquarium/api/Krill/OperationList.html#validate-instance_method)
 for information on how to validate inputted data in a `Table`.
 
 ## Standalone Tables

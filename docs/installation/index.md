@@ -3,9 +3,9 @@
 ## Local Deployment
 
 Use a local deployment for protocol development and testing, or trying out the system.
-See [local deployment](https:github.com/klavinslab/aquarium-local) for instructions.
+See [local deployment](https:github.com/aquariumbio/aquarium-local) for instructions.
 
-If you are doing Aquarium development, see the [developer documentation](http://klavinslab.org/aquarium/development/) for instructions.
+If you are doing Aquarium development, see the [developer documentation](http://aquariumbio.github.io/aquarium/development/) for instructions.
 
 ## Production Deployment
 
@@ -17,8 +17,8 @@ There are three strategies for deploying Aquarium:
 3. run Aquarium without Docker.
 
 The first strategy should work in most scenarios, and is what is covered in this document.
-Choose the second if you need to modify Aquarium in ways that we haven't yet allowed through the interface; see the [developer documentation](http://klavinslab.org/aquarium/development/).
-The third is for people who want to bring Aquarium to life by the sweat of their brow –– the commands for this are in the Dockerfile in the [Aquarium repository](https://github.com/klavinslab/aquarium).
+Choose the second if you need to modify Aquarium in ways that we haven't yet allowed through the interface; see the [developer documentation](http://aquariumbio.github.io/aquarium/development/).
+The third is for people who want to bring Aquarium to life by the sweat of their brow –– the commands for this are in the Dockerfile in the [Aquarium repository](https://github.com/aquariumbio/aquarium).
 
 ### Deployment basics
 
@@ -31,7 +31,7 @@ A deployment may also have an email service.
 
 These services can be provided in different ways depending on your objectives and level of support.
 For instance, for protocol development, we run Aquarium on our laptops.
-And, so, in this case, the [local deployment](http://klavinslab.org/aquarium-local/) configuration builds a fully-contained Docker container using nginx as the web-server, MySQL as the database service, and minio for both object-store and image server; but without an email service.
+And, so, in this case, the [local deployment](http://aquariumbio.github.io/aquarium-local/) configuration builds a fully-contained Docker container using nginx as the web-server, MySQL as the database service, and minio for both object-store and image server; but without an email service.
 
 <img src="docs/installation/images/local-aquarium.png"
      alt="The local Aquarium deployment uses minio for the object-store and mysql as the database"
@@ -40,7 +40,7 @@ And, so, in this case, the [local deployment](http://klavinslab.org/aquarium-loc
 ### Deployment with Local Services
 
 It is also possible to use these same local services for a production deployment.
-The [multi-deployment](https://github.com/klavinslab/aquarium-multiple-deployment) configuration is similar to the local-deployment, but allows one or more instances of Aquarium to be run as named sites.
+The [multi-deployment](https://github.com/aquariumbio/aquarium-multiple-deployment) configuration is similar to the local-deployment, but allows one or more instances of Aquarium to be run as named sites.
 
 <img src="docs/installation/images/multi-aquarium.png"
      alt="The multi-Aquarium deployment uses nginx-proxy to route traffic to named Aquarium instances paired with a minio service."

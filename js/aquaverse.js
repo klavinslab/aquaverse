@@ -224,7 +224,7 @@ var stack = [];
     };
 
     if ( config.get_releases ) {
-      $http.get("https://api.github.com/repos/klavinslab/aquarium/releases")
+      $http.get("https://api.github.com/repos/aquariumbio/aquarium/releases")
            .then(response => {
              $scope.releases = response.data;
              $scope.releases.sort(function(a,b) {

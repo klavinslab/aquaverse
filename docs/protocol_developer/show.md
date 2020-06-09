@@ -2,7 +2,7 @@
 
 A show block is used to display instructions for the technician.
 This document discusses the basic features of show blocks.
-Refer to the [API documentation](http://klavinslab.org/aquarium/api/Krill/ShowBlock.html) for more details.
+Refer to the [API documentation](http://aquariumbio.github.io/aquarium/api/Krill/ShowBlock.html) for more details.
 
 ## "Hello Technician"
 
@@ -86,7 +86,7 @@ When run in a protocol with 5 operations, the technician would see the following
 ## Show Block Methods
 
 For a comprehensive list of methods that are available for use in show blocks, see the
-[API documentation on show blocks](https://klavinslab.org/aquarium/api/Krill/ShowBlock.html).
+[API documentation on show blocks](https://aquariumbio.github.io/aquarium/api/Krill/ShowBlock.html).
 
 The most commonly used show block methods are the following:
 

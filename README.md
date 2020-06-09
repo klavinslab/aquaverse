@@ -17,7 +17,7 @@ Each entry in the navigation array looks something like
         { name: "License", type: "local-md", path: "license.md"  },
         { name: "Releases", type: "local-html", path: "releases.html"  },
         { name: "Contributors", type: "local-md", path: "contributors.md"  },
-        { name: "API", type: "external-link", path: "http://klavinslab.org/aquarium/api/" },
+        { name: "API", type: "external-link", path: "http://aquariumbio.github.io/aquarium/api/" },
       ]
     }
 ```

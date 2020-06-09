@@ -2,7 +2,7 @@
 # Data Association Documentation
 
 This is the documentation for how to successfully use data associations to store data related to `Items`, `Collections`, `Plans`, and `Operations`.
-See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides.
+See the [API documentation](http://aquariumbio.github.io/aquarium/api/) for more details on the functions that Krill provides.
 
 ## Data Associations
 

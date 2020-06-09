@@ -3,7 +3,7 @@
 This is an introduction to writing protocols for Aquarium in the Krill domain specific language,
 a subset of Ruby.
 We introduce the most common (and recommended) patterns in Krill, but this is not a comprehensive reference.
-See the [API documentation](http://klavinslab.org/aquarium/api/) for more details on the functions that Krill provides. Before you get too far into writing protocols, we recommend that you run through a Ruby
+See the [API documentation](http://aquariumbio.github.io/aquarium/api/) for more details on the functions that Krill provides. Before you get too far into writing protocols, we recommend that you run through a Ruby
 tutorial, several of which are available online.
 
 _This document is evolving, please share feedback._

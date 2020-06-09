@@ -97,7 +97,7 @@ and use up item numbers.
 
 Because Aquarium protocols are written in a Ruby DSL, you can edit protocols outside of Aquarium and copy them in.
 
-If you use the VS Code Extension, [Nemo](https://github.com/klavinslab/nemo), you can work in VS Code and pull and push protocols directly from/to aquarium.
+If you use the VS Code Extension, [Nemo](https://github.com/aquariumbio/nemo), you can work in VS Code and pull and push protocols directly from/to aquarium.
 This allows you to use tools such as [Rubocop](https://rubocop.readthedocs.io/en/latest/) to check for issues in your protocol code.
 
 If you would like to use a different text editor, you will need to cut and paste the whole protocol or library code between the Aquarium developer's page and your text editor.
