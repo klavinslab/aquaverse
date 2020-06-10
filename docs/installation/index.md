@@ -3,7 +3,7 @@
 ## Local Deployment
 
 Use a local deployment for protocol development and testing, or trying out the system.
-See [local deployment](https:github.com/aquariumbio/aquarium-local) for instructions.
+See [local deployment](https://github.com/aquariumbio/aquarium-local) for instructions.
 
 If you are doing Aquarium development, see the [developer documentation](http://aquariumbio.github.io/aquarium/development/) for instructions.
 
