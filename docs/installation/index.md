@@ -34,7 +34,7 @@ Most users should be using either the [local deployment](http://aquariumbio.gith
 For users who need a customized deployment, we suggest you adapt the Docker Compose scripts in these repositories to fit your configuration.
 These scripts use the Docker image [aquariumbio/aquarium](https://hub.docker.com/repository/docker/aquariumbio/aquarium) along with a set of images for supporting services.
 
-A basic Aquarium deployment consists of the Aquarium service, a database, an object-store, an image server, and a web-server.
+An Aquarium deployment consists of the Aquarium service, a database, an object-store, an image server, and a web-server.
 A deployment may also have an email service.
 
 <img src="docs/installation/images/aquarium-config.png"
