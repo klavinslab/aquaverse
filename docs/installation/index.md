@@ -7,25 +7,26 @@
 | Try out Aquarium                    | [local deployment](http://aquariumbio.github.io/aquarium-local/)                                  |
 | Develop and test Aquarium protocols | [local deployment](http://aquariumbio.github.io/aquarium-local/)                                  |
 | Run Aquarium on your own server     | [server-deployment](https://github.com/aquariumbio/aquarium-multiple-deployment) (also see below) |
-| Run Aquarium on a cloud service     | Contact us                                                                                        |
 | Do Aquarium development             | [developer documentation](http://aquariumbio.github.io/aquarium/development/)                     |
 
 ## About Deployment
 
 The best way to try out Aquarium is to start with a [local deployment](http://aquariumbio.github.io/aquarium-local/).
-We actually built these scripts so that we could do protocol development and testing on our personal machines rather than using a server.
+We built the local deployment scripts so that we could do protocol development and testing on our personal machines rather than using a server.
+They also use the Docker image that we maintain, so that you don't have to build the system.
+So, it is a good place to experience Aquarium for the first time.
 
 To run Aquarium for a lab, you need a production deployment.
-This requires a server connected to a network with ports open in the firewall so that Aquarium can be reached.
+A production deployment requires a server connected to a network with ports open in the firewall so that Aquarium can be reached.
 This server could be a computer that you control, it could be a virtual machine in a university computing center, or it could be a virtual machine in a cloud service.
-Depending on your scenario, you may need to involve the system administrator or consult and IT specialist.
+Depending on your scenario, you may need help to get the system setup and accessible to members of your lab.
 
 For users who want to install Aquarium on a locally controlled machine, we recommend using the [server-deployment](https://github.com/aquariumbio/aquarium-multiple-deployment).
-These instructions provide scripts that allow you to use a Docker image that we manage, and also allow you to use your own host name with https for more secure access.
+The server deployment scripts that allow you to use a Docker image that we manage, and also allow you to use your own host name with https for more secure access.
 _You need to be able to open ports in your system firewall for Aquarium to be accessible from other computers._
 
-Users who want to install Aquarium on a cloud service should contact us for guidance.
-We currently manage Aquarium deployments at AWS and TACC (UT Austin) for our own lab, and grant-funded collaborators.
+We can only provide limited support.
+We do currently manage Aquarium deployments at AWS and TACC (UT Austin) for our own lab, and grant-funded collaborators.
 
 ## Custom Deployments
 
