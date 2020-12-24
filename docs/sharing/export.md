@@ -41,7 +41,7 @@ Click **GO BACK** if you would like to change something. Select or deselect comp
 Click **PUBLISH** to complete the process. Aquarium will create a new Github repository for you, compile all the documentation, and push it to the repository.
 Once Aquarium is finished, it will show you a link to your repository, which will look something like the following:
 
-```
+```bash
 your-workflow
 |-- ABOUT.md
 |-- LICENSE.md
@@ -90,13 +90,12 @@ Do not choose a theme, as Aquarium does not require one (it does not use jekyll)
 Then click Save. Wait a little while and eventually the link to your newly published Aquarium workflow will go live.
 Note that Github takes its own time when publishing to Github pages. Usually it will do so after a commit and push, but not always.
 
-Get a DOI
----
-You can get a DOI for your workflow by integrating (Zenodo)[https://zenodo.org/].
+## Get a DOI
+
+You can get a DOI for your workflow by integrating [Zenodo](https://zenodo.org/).
 Read the documentation about Github integration before you tag your first release so Zenodo can pick it up.
 
-Tell Us About Your Workflow
----
+## Tell Us About Your Workflow
 
 Email Eric Klavins <klavins@uw.edu> with a link to the Github repository containing your workflow.
 He'll add it to the Community &gt; Workflows page of the Aquarium website!
