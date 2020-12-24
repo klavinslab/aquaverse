@@ -1,7 +1,5 @@
 # Exporting / Publishing Workflows
 
-_New in v2.5.0!_
-
 Exporting workflows allows you to package a set of Operation Types, Protocols, Libraries, Sample Type
 definitions and Container definitions in to an object that can be shared and imported by someone else.
 Aquarium supports two ways to share a workflow.
