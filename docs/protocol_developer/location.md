@@ -11,7 +11,7 @@ plasmid.location
 
 returns the location of the item.
 
-To move the item to an empty location `W.1.2.3` (`W` is a location wizard) do
+To move the item to an empty location `W.1.2.3` (`W` is a location wizard) do the following
 
 ```ruby
 plasmid.move_to('W.1.2.3')
