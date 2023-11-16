@@ -1,6 +1,6 @@
 # Aquaverse: Main Aquarium Web Page
 
-This web page renders through github pages at [http://www.aquarium.bio](http://www.aquarium.bio).
+This web page renders through github pages at [http://klavinslab.org/aquaverse/](http://klavinslab.org/aquaverse/)
 
 ## Customizing the menu
 
